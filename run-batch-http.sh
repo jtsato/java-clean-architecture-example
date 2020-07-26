@@ -9,10 +9,12 @@ http PUT :8080/books/1 title='Get Your Hands Dirty on Clean Architecture V2.' pr
 http POST :8080/books title='Get Your Hands Dirty on Clean Architecture V1.' price=33.33 authorId=2 Accept-Language:pt_BR
 
 http GET :8080/authors/1 Accept-Language:pt_BR
-http GET :8080/books/1 Accept-Language:pt_BR
-
 http GET :8080/authors Accept-Language:pt_BR
+http POST :8080/authors/findByIds ids:='[1,2]' Accept-Language:pt_BR
+
+http GET :8080/books/1 Accept-Language:pt_BR
 http GET :8080/books Accept-Language:pt_BR
+http POST :8080/books/findByIds ids:='[1,2]' Accept-Language:pt_BR
 
 http GET :8080/authors id==1 name=='Emma Williams' gender==FEMALE startBirthday==1981-09-04 endBirthday==1983-09-04 \
 page=0 size=1 sort=name,asc Accept-Language:pt_BR

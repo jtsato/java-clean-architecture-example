@@ -76,22 +76,42 @@ curl --request GET \
   --url 'http://localhost:8080/authors/1' | json_pp
 
 echo
-echo GET /books/1
-curl --request GET \
-  --header 'accept-language: pt_BR' \
-  --url 'http://localhost:8080/books/1' | json_pp
-
-echo
 echo GET /authors
 curl --request GET \
   --header 'accept-language: pt_BR' \
   --url 'http://localhost:8080/authors?page=0&size=1&sort=name%2Casc' | json_pp
 
 echo
+echo POST /authors/findByIds
+curl --request POST \
+  --url http://localhost:8080/authors/findByIds \
+  --header 'accept-language: pt_BR' \
+  --header 'content-type: application/json' \
+  --data '{ "ids": [1, 2] }'
+
+echo
+echo GET /books/1
+curl --request GET \
+  --header 'accept-language: pt_BR' \
+  --url 'http://localhost:8080/books/1' | json_pp
+
+echo
 echo GET /books
 curl --request GET \
   --header 'accept-language: pt_BR' \
   --url 'http://localhost:8080/books?page=0&size=1' | json_pp
+
+echo
+echo POST /books/findByIds
+curl --request POST \
+  --url http://localhost:8080/books/findByIds \
+  --header 'accept-language: pt_BR' \
+  --header 'content-type: application/json' \
+  --data '{
+  "ids": [
+    1, 2
+  ]
+}'
 
 echo
 echo DELETE /books
