@@ -1,0 +1,12 @@
+version: '3'
+
+services:
+  docker-bookstore-starter-container:
+    image: bookstore:1
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    volumes:
+      - /data/docker-bookstore-starter
+    ports:
+      - "8080:8080"

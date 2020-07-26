@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.3.1.RELEASE</version>
+		<relativePath />
+	</parent>
+
+	<groupId>io.github.jtsato</groupId>
+	<artifactId>bookstore-application</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
+
+	<name>Application</name>
+	<description>Application</description>
+
+	<properties>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<java.version>11</java.version>
+		<maven.compiler.source>11</maven.compiler.source>
+		<maven.compiler.target>11</maven.compiler.target>
+		<junit-jupiter-engine.version>5.6.1</junit-jupiter-engine.version>
+		<pitest-maven.version>1.5.2</pitest-maven.version>
+		<pitest-junit5-plugin.version>0.12</pitest-junit5-plugin.version>
+		<!--
+ 	    <sonar.projectName>bookstore-application</sonar.projectName>
+ 	    <sonar.projectVersion>1.0</sonar.projectVersion>
+ 	    <sonar.sourceEncoding>UTF-8</sonar.sourceEncoding>
+ 	    <sonar.verbose>false</sonar.verbose>
+ 	    <sonar.links.homepage>https://github.com/jtsato/java-clean-architecture-example</sonar.links.homepage>
+ 	    <sonar.links.scm>https://github.com/jtsato/java-clean-architecture-example</sonar.links.scm>
+		 -->
+	</properties>
+
+	<modules>
+		<module>core</module>
+		<module>/dataproviders/dataprovider-h2</module>
+		<module>/entrypoints/rest</module>
+		<module>configuration</module>
+	</modules>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-engine</artifactId>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-failsafe-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.pitest</groupId>
+				<artifactId>pitest-maven</artifactId>
+				<version>${pitest-maven.version}</version>
+				<configuration>
+					<verbose>false</verbose>
+					<failWhenNoMutations>false</failWhenNoMutations>
+					<skip>false</skip>
+					<skippedModules>
+						<param>configuration</param>
+					</skippedModules>
+				</configuration>
+				<dependencies>
+					<dependency>
+						<groupId>org.pitest</groupId>
+						<artifactId>pitest-junit5-plugin</artifactId>
+						<version>${pitest-junit5-plugin.version}</version>
+					</dependency>
+				</dependencies>
+			</plugin>
+		</plugins>
+	</build>
+</project>
+

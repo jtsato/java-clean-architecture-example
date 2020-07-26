@@ -1,0 +1,44 @@
+package io.github.jtsato.bookstore.core.author.usecase.impl;
+
+import java.util.Optional;
+
+import io.github.jtsato.bookstore.core.author.domain.Author;
+import io.github.jtsato.bookstore.core.author.gateway.GetAuthorByIdGateway;
+import io.github.jtsato.bookstore.core.author.usecase.GetAuthorByIdUseCase;
+import io.github.jtsato.bookstore.core.exception.InvalidParameterException;
+import io.github.jtsato.bookstore.core.exception.NotFoundException;
+import lombok.RequiredArgsConstructor;
+
+/*
+ * A Use Case follows these steps:
+ * - Takes input
+ * - Validates business rules
+ * - Manipulates the model state
+ * - Returns output
+ */
+
+/**
+ * @author Jorge Takeshi Sato  
+ */
+
+@RequiredArgsConstructor
+public class GetAuthorByIdUseCaseImpl implements GetAuthorByIdUseCase {
+
+	private final GetAuthorByIdGateway getAuthorByIdGateway;
+
+	@Override
+	public Author getAuthorById(final Long id) {
+	    
+        if (id == null) {
+            throw new InvalidParameterException("validation.author.id.null");
+        }
+
+        final Optional<Author> optional = getAuthorByIdGateway.getAuthorById(id);
+	    
+	    if (!optional.isPresent()) {
+            throw new NotFoundException("validation.author.id.notfound", id);
+	    }
+	    
+	    return optional.get();
+	}
+}

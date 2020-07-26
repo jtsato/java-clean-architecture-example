@@ -1,0 +1,430 @@
+_type: export
+__export_format: 4
+__export_date: 2020-07-15T15:12:23.630Z
+__export_source: insomnia.desktop.app:v2020.3.3
+resources:
+  - _id: req_6ad71556b5ba461989f3dd569164fed2
+    authentication: {}
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"name": "John Smith",
+        	"gender": "MALE",
+        	"birthday": "1980-04-23"
+        }
+    created: 1583267450245
+    description: ""
+    headers:
+      - id: pair_f1c15e0272af4fe1a682307768c4bff6
+        name: Content-Type
+        value: application/json
+      - description: ""
+        id: pair_9b5574e14b3f4f7e8e6723dec2df15f2
+        name: Accept-Language
+        value: en_US
+    isPrivate: false
+    metaSortKey: -1583381382892
+    method: POST
+    modified: 1587014448695
+    name: RegisterAuthorController
+    parameters: []
+    parentId: fld_75e19a6fc9044619b3f0ffce83b28413
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingFollowRedirects: global
+    settingRebuildPath: true
+    settingSendCookies: true
+    settingStoreCookies: true
+    url: "{{ schema  }}://{{ url  }}/authors"
+    _type: request
+  - _id: fld_75e19a6fc9044619b3f0ffce83b28413
+    created: 1583498195620
+    description: ""
+    environment: {}
+    environmentPropertyOrder: null
+    metaSortKey: -1583498218342
+    modified: 1583498619847
+    name: Author
+    parentId: wrk_5b3cee47ef4e47378f265ac30706ffdb
+    _type: request_group
+  - _id: wrk_5b3cee47ef4e47378f265ac30706ffdb
+    created: 1583264553238
+    description: ""
+    modified: 1583264553238
+    name: BookStore
+    parentId: null
+    scope: null
+    _type: workspace
+  - _id: req_afbbfa34703b44a784a164d40a1acff8
+    authentication: {}
+    body: {}
+    created: 1583498099857
+    description: ""
+    headers: []
+    isPrivate: false
+    metaSortKey: -1583381382842
+    method: GET
+    modified: 1587014464912
+    name: GetAuthorByIdController
+    parameters: []
+    parentId: fld_75e19a6fc9044619b3f0ffce83b28413
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingFollowRedirects: global
+    settingRebuildPath: true
+    settingSendCookies: true
+    settingStoreCookies: true
+    url: "{{ schema  }}://{{ url  }}/authors/1"
+    _type: request
+  - _id: req_c04be746884b42f38ab38378fc7758de
+    authentication: {}
+    body: {}
+    created: 1583498691879
+    description: ""
+    headers: []
+    isPrivate: false
+    metaSortKey: -1583381382829.5
+    method: GET
+    modified: 1594611451218
+    name: FindAuthorsController
+    parameters:
+      - description: ""
+        id: pair_0c33394ba443471b808c95e348bac500
+        name: page
+        value: "0"
+      - description: ""
+        id: pair_5f8ae54daa414d7c9804b7b23300a434
+        name: size
+        value: "1"
+      - description: ""
+        id: pair_329c0a11204244d8a12ccffd0741e847
+        name: sort
+        value: name,asc
+      - description: ""
+        disabled: true
+        id: pair_47d4f5ab9d0648cf81c970c5be4f8bc3
+        name: name
+        value: John
+      - description: ""
+        disabled: true
+        id: pair_c2be8ae894184c448ae3219f3fcbf2ce
+        name: gender
+        value: MALE
+      - description: ""
+        disabled: false
+        id: pair_30ef53cf93f64a1ebb2004ba26b85e75
+        name: startBirthday
+        value: 1980-04-23
+      - description: ""
+        disabled: false
+        id: pair_e0428b567c194c71b0fa19011628c9ab
+        name: endBirthday
+        value: 1980-04-23
+    parentId: fld_75e19a6fc9044619b3f0ffce83b28413
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingFollowRedirects: global
+    settingRebuildPath: true
+    settingSendCookies: true
+    settingStoreCookies: true
+    url: "{{ schema  }}://{{ url  }}/authors"
+    _type: request
+  - _id: req_d9b7c03e79a34c31af9267cf56dbef65
+    authentication: {}
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"name": "Emma Williams",
+        	"gender": "FEMALE",
+        	"birthday": "1982-09-04"
+        }
+    created: 1583498586190
+    description: ""
+    headers:
+      - id: pair_f1c15e0272af4fe1a682307768c4bff6
+        name: Content-Type
+        value: application/json
+    isPrivate: false
+    metaSortKey: -1583381382817
+    method: PUT
+    modified: 1587014479984
+    name: UpdateAuthorController
+    parameters: []
+    parentId: fld_75e19a6fc9044619b3f0ffce83b28413
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingFollowRedirects: global
+    settingRebuildPath: true
+    settingSendCookies: true
+    settingStoreCookies: true
+    url: "{{ schema  }}://{{ url  }}/authors/1"
+    _type: request
+  - _id: req_99d74da5bb9748028945460e02cf4b1f
+    authentication: {}
+    body: {}
+    created: 1583442874296
+    description: ""
+    headers: []
+    isPrivate: false
+    metaSortKey: -1583381382792
+    method: DELETE
+    modified: 1588028828316
+    name: RemoveAuthorByIdController
+    parameters:
+      - description: ""
+        id: pair_ad6cc8e60619478b8920cfde6fa9c3e2
+        name: ""
+        value: ""
+    parentId: fld_75e19a6fc9044619b3f0ffce83b28413
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingFollowRedirects: global
+    settingRebuildPath: true
+    settingSendCookies: true
+    settingStoreCookies: true
+    url: "{{ schema  }}://{{ url  }}/authors/2"
+    _type: request
+  - _id: req_5d27a192ef0543899cce008aa4c89a43
+    authentication: {}
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"title": "Get Your Hands Dirty on Clean Architecture V1.",
+        	"authorId": 1
+        }
+    created: 1583264570164
+    description: ""
+    headers:
+      - id: pair_f1c15e0272af4fe1a682307768c4bff6
+        name: Content-Type
+        value: application/json
+      - description: ""
+        id: pair_e36e8866328f4f2e97c31d128ad20d70
+        name: Accept-Language
+        value: pt_BR
+      - description: ""
+        id: pair_2cd45c0470cb434880ed5c8db3ff813d
+        name: ""
+        value: ""
+    isPrivate: false
+    metaSortKey: -1583264570164
+    method: POST
+    modified: 1587014491604
+    name: RegisterBookController
+    parameters: []
+    parentId: fld_219d10e141cc4a0c95fd44f29107872f
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingFollowRedirects: global
+    settingRebuildPath: true
+    settingSendCookies: true
+    settingStoreCookies: true
+    url: "{{ schema  }}://{{ url  }}/books"
+    _type: request
+  - _id: fld_219d10e141cc4a0c95fd44f29107872f
+    created: 1583498218292
+    description: ""
+    environment: {}
+    environmentPropertyOrder: null
+    metaSortKey: -1583498218292
+    modified: 1583498218292
+    name: Book
+    parentId: wrk_5b3cee47ef4e47378f265ac30706ffdb
+    _type: request_group
+  - _id: req_63e21f342f924125bdc0d5b6bf94cc03
+    authentication: {}
+    body: {}
+    created: 1583498548788
+    description: ""
+    headers: []
+    isPrivate: false
+    metaSortKey: -1583264570160.875
+    method: GET
+    modified: 1587014498277
+    name: GetBookByIdController
+    parameters: []
+    parentId: fld_219d10e141cc4a0c95fd44f29107872f
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingFollowRedirects: global
+    settingRebuildPath: true
+    settingSendCookies: true
+    settingStoreCookies: true
+    url: "{{ schema  }}://{{ url  }}/books/1"
+    _type: request
+  - _id: req_f295117110f34095833540ed6479d12c
+    authentication: {}
+    body: {}
+    created: 1583270513150
+    description: ""
+    headers: []
+    isPrivate: false
+    metaSortKey: -1583264570157.75
+    method: GET
+    modified: 1594622421490
+    name: FindBooksController
+    parameters:
+      - description: ""
+        disabled: false
+        id: pair_045355259bb944c888781414d9a49e6c
+        name: title
+        value: Get Your Hands Dirty
+      - description: ""
+        disabled: false
+        id: pair_cb4bdb1e096541e4b28d941121d69ca0
+        name: author.id
+        value: "1"
+      - description: ""
+        disabled: false
+        id: pair_abc019c3cf144380a0fca3c7d91714a2
+        name: startCreationDate
+        value: 2020-01-01T00:00:00.000Z
+      - description: ""
+        disabled: false
+        id: pair_6967cb26309a486a84f326dbb754a71b
+        name: endCreationDate
+        value: 2020-12-31T00:00:00.000Z
+      - description: ""
+        disabled: false
+        id: pair_e1a77515d2be43b88557089c6888b36a
+        name: author.name
+        value: Emma Williams
+      - description: ""
+        disabled: false
+        id: pair_f4f477ad072849e88b03891251476ff0
+        name: author.gender
+        value: FEMALE
+      - description: ""
+        disabled: false
+        id: pair_fd339560ec46477ca91de0af46ecbc1a
+        name: author.startBirthday
+        value: 1979-09-04
+      - description: ""
+        disabled: false
+        id: pair_da4838e2d10b4380b9a8305fce790cf7
+        name: author.endBirthday
+        value: 1983-09-04
+      - description: ""
+        id: pair_0c33394ba443471b808c95e348bac500
+        name: page
+        value: "0"
+      - description: ""
+        disabled: false
+        id: pair_5f8ae54daa414d7c9804b7b23300a434
+        name: size
+        value: "10"
+      - description: ""
+        disabled: false
+        id: pair_329c0a11204244d8a12ccffd0741e847
+        name: sort
+        value: title
+      - description: ""
+        disabled: false
+        id: pair_112ab0b236f548ccb4c2ecb210fe1bcb
+        name: sort
+        value: creationDate,desc
+    parentId: fld_219d10e141cc4a0c95fd44f29107872f
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingFollowRedirects: global
+    settingRebuildPath: true
+    settingSendCookies: true
+    settingStoreCookies: true
+    url: "{{ schema  }}://{{ url  }}/books"
+    _type: request
+  - _id: req_bad7772d2af9471eafff2a4afeaf5e7c
+    authentication: {}
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"title": "Get Your Hands Dirty on Clean Architecture V2.",
+        	"authorId": 2
+        }
+    created: 1583498042990
+    description: ""
+    headers:
+      - id: pair_f1c15e0272af4fe1a682307768c4bff6
+        name: Content-Type
+        value: application/json
+    isPrivate: false
+    metaSortKey: -1583264570151.5
+    method: PUT
+    modified: 1587014510663
+    name: UpdateBookController
+    parameters: []
+    parentId: fld_219d10e141cc4a0c95fd44f29107872f
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingFollowRedirects: global
+    settingRebuildPath: true
+    settingSendCookies: true
+    settingStoreCookies: true
+    url: "{{ schema  }}://{{ url  }}/books/1"
+    _type: request
+  - _id: req_ee281aa182f847ed94b97bec0b750e8e
+    authentication: {}
+    body: {}
+    created: 1583498660320
+    description: ""
+    headers: []
+    isPrivate: false
+    metaSortKey: -1582347658946.75
+    method: DELETE
+    modified: 1588028822424
+    name: RemoveBookController
+    parameters: []
+    parentId: fld_219d10e141cc4a0c95fd44f29107872f
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingFollowRedirects: global
+    settingRebuildPath: true
+    settingSendCookies: true
+    settingStoreCookies: true
+    url: "{{ schema  }}://{{ url  }}/books/2"
+    _type: request
+  - _id: env_fbe5fa266529d5dcb5443519573441b3af6b51a2
+    color: null
+    created: 1583264553389
+    data: {}
+    dataPropertyOrder: {}
+    isPrivate: false
+    metaSortKey: 1583264553390
+    modified: 1587014262135
+    name: Base Environment
+    parentId: wrk_5b3cee47ef4e47378f265ac30706ffdb
+    _type: environment
+  - _id: jar_fbe5fa266529d5dcb5443519573441b3af6b51a2
+    cookies: []
+    created: 1583264553397
+    modified: 1594825868116
+    name: Default Jar
+    parentId: wrk_5b3cee47ef4e47378f265ac30706ffdb
+    _type: cookie_jar
+  - _id: spc_03d77326985b4dfdadb2a213ecef5085
+    contentType: yaml
+    contents: ""
+    created: 1593292255486
+    fileName: BookStore
+    modified: 1593292255486
+    parentId: wrk_5b3cee47ef4e47378f265ac30706ffdb
+    _type: api_spec
+  - _id: env_700e202c06e44b1fbfb25b984132fea3
+    color: "#000000"
+    created: 1587014264306
+    data:
+      schema: http
+      url: localhost:8080
+    dataPropertyOrder:
+      "&":
+        - schema
+        - url
+    isPrivate: false
+    metaSortKey: 1587014264306
+    modified: 1587014343415
+    name: Local
+    parentId: env_fbe5fa266529d5dcb5443519573441b3af6b51a2
+    _type: environment

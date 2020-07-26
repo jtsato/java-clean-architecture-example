@@ -1,0 +1,30 @@
+spring:
+   rabbitmq:
+      host: localhost
+      port: 5672
+      password: guest
+      username: guest
+
+bookstore:
+   rabbitmq:
+      exchange:
+         register-author: register-author-exchange
+         register-book: register-book-exchange
+         update-author-by-id: update-author-by-id-exchange
+         update-book-by-id: update-book-by-id-exchange
+         remove-author-by-id: remove-author-by-id-exchange
+         remove-book-by-id: remove-book-by-id-exchange
+      queue:
+         register-author: register-author-queue
+         register-book: register-book-queue
+         update-author-by-id: update-author-by-id-queue
+         update-book-by-id: update-book-by-id-queue
+         remove-author-by-id: remove-author-by-id-queue
+         remove-book-by-id: remove-book-by-id-queue
+      routingkey:
+         register-author: register-author-routingkey
+         register-book: register-book-routingkey
+         update-author-by-id: update-author-by-author-routingkey
+         update-book-by-id: update-book-by-author-routingkey
+         remove-author-by-id: remove-author-by-id-routingkey
+         remove-book-by-id: remove-book-by-id-routingkey
