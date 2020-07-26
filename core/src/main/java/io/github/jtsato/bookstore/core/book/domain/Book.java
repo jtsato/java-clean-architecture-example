@@ -22,13 +22,13 @@ public class Book implements Serializable {
 
     private static final long serialVersionUID = -7752353718019242738L;
 
-    private Long id;
+    private final Long id;
 
-	private String title;
+	private final String title;
     
-    private LocalDateTime creationDate;
+    private final LocalDateTime creationDate;
     
-    private BigDecimal price;
+    private final BigDecimal price;
     
-    private Author author;
+    private final Author author;
 }

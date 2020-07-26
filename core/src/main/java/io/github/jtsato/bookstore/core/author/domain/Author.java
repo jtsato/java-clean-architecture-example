@@ -20,11 +20,11 @@ public class Author implements Serializable {
 
     private static final long serialVersionUID = 1989818798210228136L;
 
-    private Long id;
+    private final Long id;
 
-    private String name;
+    private final String name;
 
-    private Gender gender;
+    private final Gender gender;
     
-    private LocalDate birthday;
+    private final LocalDate birthday;
 }

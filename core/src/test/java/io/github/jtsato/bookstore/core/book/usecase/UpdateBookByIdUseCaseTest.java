@@ -43,7 +43,7 @@ class UpdateBookByIdUseCaseTest {
 
     @Mock
     private GetBookByTitleGateway getBookByTitleGateway = Mockito.mock(GetBookByTitleGateway.class);
-
+    
     @InjectMocks
     private UpdateBookByIdUseCase updateBookByIdUseCase = new UpdateBookByIdUseCaseImpl(updateBookByIdGateway, getAuthorByIdGateway, getBookByTitleGateway);
 
