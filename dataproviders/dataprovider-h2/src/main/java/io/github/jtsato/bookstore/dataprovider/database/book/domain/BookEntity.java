@@ -1,6 +1,7 @@
 package io.github.jtsato.bookstore.dataprovider.database.book.domain;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 import javax.persistence.Access;
@@ -51,8 +52,10 @@ public class BookEntity implements Serializable {
     @Column(name = "CREATION_DATE", nullable = false)
     private LocalDateTime creationDate;
     
+    @Column(name = "PRICE", nullable = false)
+    private BigDecimal price;
+
     @JoinColumn(name = "AUTHOR_ID", foreignKey = @ForeignKey(name = "FK_BOOK_AUTHOR_ID"))
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private AuthorEntity author;    
-
 }

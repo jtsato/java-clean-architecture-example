@@ -2,6 +2,7 @@ package io.github.jtsato.bookstore.dataprovider.database.book;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.Optional;
 
@@ -39,16 +40,14 @@ class UpdateBookByIdDataProviderTest {
     @Test
     void successfulToUpdateBookById() {
 
-        final Author author = getAuthor(2L);
+        final Book update = new Book(4L, "Effective Java (3rd Edition)", LocalDateTime.parse("2020-03-12T22:04:59.123"), BigDecimal.valueOf(50.55), getAuthor(2L));
 
-        final Book book1 = new Book(4L, "Effective Java (3rd Edition)", LocalDateTime.parse("2020-03-12T22:04:59.123"), author);
+        final Book result = updateBookById(update);
 
-        final Book book2 = updateBookById(book1);
-
-        assertThat(book2.getId()).isEqualTo(book1.getId());
-        assertThat(book2.getTitle()).isEqualTo(book1.getTitle());
-        assertThat(book2.getCreationDate()).isEqualTo(book1.getCreationDate());
-        assertThat(book2).isEqualToComparingFieldByField(book1);
+        assertThat(result.getId()).isEqualTo(update.getId());
+        assertThat(result.getTitle()).isEqualTo(update.getTitle());
+        assertThat(result.getCreationDate()).isEqualTo(update.getCreationDate());
+        assertThat(result).isEqualToComparingFieldByField(update);
 
         assertThat(bookRepository.count()).isEqualTo(4L);
     }
@@ -57,13 +56,11 @@ class UpdateBookByIdDataProviderTest {
     @Test
     void successfulToUpdateBookByIdWithNewAuthor() {
 
-        final Author author = getAuthor(1L);
+        final Book update = new Book(4L, "Effective Java (2nd Edition)", LocalDateTime.parse("2020-03-12T22:04:59.123"), BigDecimal.valueOf(40.44), getAuthor(1L));
 
-        final Book book1 = new Book(4L, "Effective Java (3rd Edition)", LocalDateTime.parse("2020-03-12T22:04:59.123"), author);
+        final Book result = updateBookById(update);
 
-        final Book book2 = updateBookById(book1);
-
-        assertThat(book2).isEqualToComparingFieldByField(book1);
+        assertThat(result).isEqualToComparingFieldByField(update);
 
         assertThat(bookRepository.count()).isEqualTo(4L);
     }
@@ -90,7 +87,7 @@ class UpdateBookByIdDataProviderTest {
     @Test
     void failToUpdateBookByIdIfNotFound() {
 
-        final Optional<Book> optional = updateBookByIdDataProvider.updateBookById(new Book(5L, null, null, getAuthor(2L)));
+        final Optional<Book> optional = updateBookByIdDataProvider.updateBookById(new Book(5L, null, null, null, getAuthor(2L)));
 
         assertThat(optional).isNotPresent();
     }

@@ -4,6 +4,7 @@ package io.github.jtsato.bookstore.core.book.usecase;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -94,7 +95,7 @@ class FindBooksByIdsUseCaseTest {
         final Author author = new Author(1L, "Joshua Bloch", Gender.MALE, LocalDate.parse("1961-08-28"));
 
         final List<Book> content = new ArrayList<>(1);
-        content.add(new Book(1L, "Effective Java (2nd Edition)", LocalDateTime.parse("2020-03-12T22:04:59.123"), author));
+        content.add(new Book(1L, "Effective Java (2nd Edition)", LocalDateTime.parse("2020-03-12T22:04:59.123"), BigDecimal.valueOf(10.00), author));
 
         return new PageImpl<Book>(content, new Pageable(0, 1, 1, 1L, 1));
     }

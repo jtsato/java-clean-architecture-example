@@ -2,6 +2,7 @@ package io.github.jtsato.bookstore.dataprovider.database.book;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.Optional;
 
@@ -43,7 +44,8 @@ class RegisterBookDataProviderTest {
 
         final Author author = getAuthor();
 
-        final Book book = registerBookDataProvider.registerBook(new Book(null, "Effective Java (2nd Edition)", LocalDateTime.parse("2020-03-12T22:04:59.123"), author));
+        final Book newBook = new Book(null, "Effective Java (2nd Edition)", LocalDateTime.parse("2020-03-12T22:04:59.123"), BigDecimal.valueOf(10.00), author);
+		final Book book = registerBookDataProvider.registerBook(newBook );
 
         assertThat(book.getId()).isNotNull();
         assertThat(book.getTitle()).isEqualTo("Effective Java (2nd Edition)");
@@ -66,7 +68,7 @@ class RegisterBookDataProviderTest {
     @Test
     void failToRegisterBookIfParametersAreNotValid() {
 
-        final Book book = new Book(null, null, null, getAuthor());
+        final Book book = new Book(null, null, null, null, getAuthor());
         
         final Exception exception = Assertions.assertThrows(Exception.class, () -> registerBookDataProvider.registerBook(book));
 

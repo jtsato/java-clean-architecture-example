@@ -35,11 +35,11 @@ class UpdateAuthorByIdDataProviderTest {
     @Test
     void successfulToUpdateAuthorByIdIfFound() {
 
-        final Author author1 = new Author(4L, "Kathy Sierra", Gender.FEMALE, LocalDate.parse("1957-01-01"));
+        final Author update = new Author(4L, "Kathy Sierra", Gender.FEMALE, LocalDate.parse("1957-01-01"));
         
-        final Author author2 = updateAuthorById(author1);
+        final Author result = updateAuthorById(update);
         
-        assertThat(author2).isEqualToComparingFieldByField(author1);
+        assertThat(result).isEqualToComparingFieldByField(update);
 
         assertThat(authorRepository.count()).isEqualTo(4L);
     }

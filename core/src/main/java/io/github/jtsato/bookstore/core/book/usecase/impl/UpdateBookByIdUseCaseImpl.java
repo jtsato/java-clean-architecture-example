@@ -41,7 +41,7 @@ public class UpdateBookByIdUseCaseImpl implements UpdateBookByIdUseCase {
 
         checkDuplicatedTitleViolation(parameters.getId(), parameters.getTitle());
 
-        final Book book = new Book(parameters.getId(), parameters.getTitle(), null, author);
+        final Book book = new Book(parameters.getId(), parameters.getTitle(), null, parameters.getPrice(), author);
 
         final Optional<Book> optional = updateBookGateway.updateBookById(book);
 

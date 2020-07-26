@@ -39,8 +39,8 @@ class SearchBooksDataProviderTest {
 
         final String title = "Core Java SE 9 for the Impatient, 2nd Edition";
         final Long authorId = 1L;
-        final String startCreationDate = "2020-03-12T21:04:59";
-        final String endCreationDate = "2020-03-12T21:04:59";
+        final String startCreationDate = "2020-03-12T21:04:59.000";
+        final String endCreationDate = "2020-03-12T21:05:00.000";
 
         final SearchAuthorsParameters authorParameters = new SearchAuthorsParameters(authorId, null, null, null, null);
         final SearchBooksParameters parameters = new SearchBooksParameters(title, authorParameters, startCreationDate, endCreationDate);

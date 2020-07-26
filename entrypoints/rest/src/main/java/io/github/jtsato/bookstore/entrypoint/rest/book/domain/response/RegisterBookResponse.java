@@ -1,6 +1,7 @@
 package io.github.jtsato.bookstore.entrypoint.rest.book.domain.response;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 import lombok.AllArgsConstructor;
@@ -21,6 +22,8 @@ public class RegisterBookResponse implements Serializable {
     private String title;
     
     private LocalDateTime creationDate;
+    
+    private BigDecimal price;
 
     private RegisterBookAuthorResponse author;
 }

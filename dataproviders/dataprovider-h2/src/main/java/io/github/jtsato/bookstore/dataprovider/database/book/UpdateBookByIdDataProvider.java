@@ -56,6 +56,7 @@ public class UpdateBookByIdDataProvider implements UpdateBookByIdGateway {
 
     private BookEntity updateBookEntity(final BookEntity bookEntity, final Book book) {
         bookEntity.setTitle(book.getTitle());
+        bookEntity.setPrice(book.getPrice());
         return bookEntity;
     }
 }

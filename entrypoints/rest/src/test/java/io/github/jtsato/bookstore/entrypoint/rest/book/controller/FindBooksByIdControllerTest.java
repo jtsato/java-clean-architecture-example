@@ -11,6 +11,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -95,7 +96,7 @@ class FindBooksByIdControllerTest {
     private Page<Book> mockFindBooksByIdsUseCaseReturn() {
         final Author author = new Author(1L, "Joshua Bloch", Gender.MALE, LocalDate.parse("1961-08-28"));
         final List<Book> content = new ArrayList<>(1);
-        content.add(new Book(1L, "Effective Java (2nd Edition)", LocalDateTime.parse("2020-02-29T12:00:00"), author));
+        content.add(new Book(1L, "Effective Java (2nd Edition)", LocalDateTime.parse("2020-02-29T12:00:00"), BigDecimal.valueOf(10.00), author));
         return new PageImpl<>(content, new Pageable(1, 3, 1, 4L, 2));
     }
 }

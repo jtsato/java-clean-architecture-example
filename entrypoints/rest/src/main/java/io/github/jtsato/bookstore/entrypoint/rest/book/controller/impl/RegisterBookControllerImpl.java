@@ -49,7 +49,7 @@ public class RegisterBookControllerImpl implements RegisterBookController {
 
         log.debug("Starting Controller -> RegisterBookController with {}", JsonConverter.convert(request));
 
-        final RegisterBookParameters parameters = new RegisterBookParameters(request.getTitle(), request.getAuthorId());
+        final RegisterBookParameters parameters = new RegisterBookParameters(request.getTitle(), request.getAuthorId(), request.getPrice());
 
         final Book book = registerBookUseCase.registerBook(parameters);
 

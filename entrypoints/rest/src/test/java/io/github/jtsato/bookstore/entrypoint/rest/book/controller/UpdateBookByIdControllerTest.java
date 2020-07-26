@@ -11,6 +11,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
@@ -65,6 +66,7 @@ class UpdateBookByIdControllerTest {
                .andExpect(jsonPath("$.id", is(1)))
                .andExpect(jsonPath("$.title", is("Effective Java (2nd Edition)")))
                .andExpect(jsonPath("$.creationDate", is("2020-03-12T22:04:59.123")))
+               .andExpect(jsonPath("$.price", is(10.00)))
                .andExpect(jsonPath("$.author.id", is(1)))
                .andExpect(jsonPath("$.author.name", is("Joshua Bloch")))
                .andExpect(jsonPath("$.author.gender", is("MALE")))
@@ -75,17 +77,17 @@ class UpdateBookByIdControllerTest {
     }
 
     private UpdateBookByIdParameters mockUpdateBookByIdUseCaseParameters() {
-        return new UpdateBookByIdParameters(1L, "Effective Java (2nd Edition)", 1L);
+        return new UpdateBookByIdParameters(1L, "Effective Java (2nd Edition)", 1L, BigDecimal.valueOf(10.00));
     }
 
     private Book mockUpdateBookByIdUseCaseReturn() {
         final Author author = new Author(1L, "Joshua Bloch", Gender.MALE, LocalDate.parse("1961-08-28"));
-        return new Book(1L, "Effective Java (2nd Edition)", LocalDateTime.parse("2020-03-12T22:04:59.123"), author);
+        return new Book(1L, "Effective Java (2nd Edition)", LocalDateTime.parse("2020-03-12T22:04:59.123"), BigDecimal.valueOf(10.00), author);
     }
 
     private String buildRequestBody()
         throws JsonProcessingException {
-        final UpdateBookByIdRequest request = new UpdateBookByIdRequest("Effective Java (2nd Edition)", 1L);
+        final UpdateBookByIdRequest request = new UpdateBookByIdRequest("Effective Java (2nd Edition)", BigDecimal.valueOf(10.00), 1L);
         return new ObjectMapper().writeValueAsString(request);
     }
 }

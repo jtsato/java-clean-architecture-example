@@ -41,6 +41,7 @@ curl --request POST \
   --url 'http://localhost:8080/books' \
   --data '{
 	"title": "Get Your Hands Dirty on Clean Architecture V1.",
+  "price:" 11.11,
 	"authorId": 2
 }' | json_pp
 
@@ -52,6 +53,7 @@ curl --request PUT \
   --url 'http://localhost:8080/books/1' \
   --data '{
 	"title": "Get Your Hands Dirty on Clean Architecture V2.",
+  "price:" 22.22,
 	"authorId": 1
 }' | json_pp
 
@@ -63,6 +65,7 @@ curl --request POST \
   --url 'http://localhost:8080/books' \
   --data '{
 	"title": "Get Your Hands Dirty on Clean Architecture V1.",
+  "price:" 33.33,
 	"authorId": 2
 }' | json_pp
 

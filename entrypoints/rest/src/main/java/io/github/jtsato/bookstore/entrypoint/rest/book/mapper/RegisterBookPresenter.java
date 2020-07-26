@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 public class RegisterBookPresenter {
 
     public static RegisterBookResponse of(final Book book) {
-        return new RegisterBookResponse(book.getId(), book.getTitle(), book.getCreationDate(), of(book.getAuthor()));
+        return new RegisterBookResponse(book.getId(), book.getTitle(), book.getCreationDate(), book.getPrice(), of(book.getAuthor()));
     }
 
     public static RegisterBookAuthorResponse of(final Author author) {

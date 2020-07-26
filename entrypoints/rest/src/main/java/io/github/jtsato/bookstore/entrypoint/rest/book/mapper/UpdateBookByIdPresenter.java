@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 public class UpdateBookByIdPresenter {
 
     public static UpdateBookByIdResponse of(final Book book) {
-        return new UpdateBookByIdResponse(book.getId(), book.getTitle(), book.getCreationDate(), of(book.getAuthor()));
+        return new UpdateBookByIdResponse(book.getId(), book.getTitle(), book.getCreationDate(), book.getPrice(), of(book.getAuthor()));
     }
 
     private static UpdateBookByIdAuthorResponse of(final Author author) {

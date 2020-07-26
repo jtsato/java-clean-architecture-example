@@ -1,6 +1,7 @@
 package io.github.jtsato.bookstore.core.book.domain;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 import io.github.jtsato.bookstore.core.author.domain.Author;
@@ -27,5 +28,7 @@ public class Book implements Serializable {
     
     private LocalDateTime creationDate;
     
-    private Author author; 
+    private BigDecimal price;
+    
+    private Author author;
 }
