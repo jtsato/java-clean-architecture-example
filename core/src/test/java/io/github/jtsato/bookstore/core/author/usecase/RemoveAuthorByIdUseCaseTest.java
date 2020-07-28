@@ -132,7 +132,8 @@ class RemoveAuthorByIdUseCaseTest {
         final List<Book> content = new ArrayList<>(1);
 
         final Author author = new Author(1L, "Joshua Bloch", Gender.MALE, LocalDate.parse("1961-08-28"));
-        content.add(new Book(1L, "Effective Java (2nd Edition)", LocalDateTime.parse("2020-03-12T22:04:59.123"), BigDecimal.valueOf(10.00), author));
+        
+		content.add(new Book(1L, author, "Effective Java (2nd Edition)", BigDecimal.valueOf(10.00), Boolean.TRUE,LocalDateTime.parse("2020-03-12T22:04:59.123"), LocalDateTime.parse("2020-03-12T22:04:59.123")));
         
         return new PageImpl<Book>(content, new Pageable(0, 1, 1, 1L, 1));
     }

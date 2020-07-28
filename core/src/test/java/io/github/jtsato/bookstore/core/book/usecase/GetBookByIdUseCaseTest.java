@@ -61,7 +61,10 @@ class GetBookByIdUseCaseTest {
 
         assertThat(book.getId()).isEqualTo(1L);
         assertThat(book.getTitle()).isEqualTo("Effective Java (2nd Edition)");
+        assertThat(book.getPrice()).isEqualTo(BigDecimal.valueOf(10.00));
+        assertThat(book.getAvailable()).isEqualTo(Boolean.TRUE);
         assertThat(book.getCreationDate()).isEqualTo(LocalDateTime.parse("2020-03-12T22:04:59.123"));
+        assertThat(book.getUpdateDate()).isEqualTo(LocalDateTime.parse("2020-04-12T22:04:59.123"));
         
         final Author author = book.getAuthor();
         
@@ -74,7 +77,7 @@ class GetBookByIdUseCaseTest {
     
     private Optional<Book> mockGetBookByIdGatewayReturn() {
         final Author author = new Author(1L, "Joshua Bloch", Gender.MALE, LocalDate.parse("1961-08-28"));
-        return Optional.of(new Book(1L, "Effective Java (2nd Edition)", LocalDateTime.parse("2020-03-12T22:04:59.123"), BigDecimal.valueOf(10.00), author));
+		return Optional.of(new Book(1L, author, "Effective Java (2nd Edition)", BigDecimal.valueOf(10.00), Boolean.TRUE, LocalDateTime.parse("2020-03-12T22:04:59.123"), LocalDateTime.parse("2020-04-12T22:04:59.123")));
     }
     
     @DisplayName("Fail to get book by id if not found")

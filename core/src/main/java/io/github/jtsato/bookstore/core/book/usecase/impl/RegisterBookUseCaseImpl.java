@@ -44,7 +44,7 @@ public class RegisterBookUseCaseImpl implements RegisterBookUseCase {
 
         checkDuplicatedTitleViolation(parameters.getTitle());
 
-        final Book book = new Book(null, parameters.getTitle(), getLocalDateTime.now(), parameters.getPrice(), author);
+        final Book book = new Book(null, author, parameters.getTitle(), parameters.getPrice(), parameters.getAvailable(), getLocalDateTime.now(), getLocalDateTime.now());
 
         return registerBookGateway.registerBook(book);
     }

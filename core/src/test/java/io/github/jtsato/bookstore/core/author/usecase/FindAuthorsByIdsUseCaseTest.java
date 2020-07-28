@@ -138,7 +138,6 @@ class FindAuthorsByIdsUseCaseTest {
         assertThat(invalidParameterException.getMessage()).isEqualTo("validation.get.by.ids.limit");        
     }
     
-    
     @DisplayName("Successful to find authors by IDs if the limit is exceeded")
     @Test
     void  successfulToFindAuthorsByIdsIfTheLimitIsNotExceeded() {

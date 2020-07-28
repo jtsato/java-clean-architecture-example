@@ -24,21 +24,25 @@ public class UpdateBookByIdParameters extends SelfValidating<UpdateBookByIdParam
     @NotNull(message = "validation.book.id.null")
     private final Long id;        
     
-    @NotBlank(message = "validation.book.title.blank")
-    private final String title;
-    
     @NotNull(message = "validation.author.id.null")
     private final Long authorId;
     
+    @NotBlank(message = "validation.book.title.blank")
+    private final String title;
+    
     @NotNull(message = "validation.book.price.null")    
     @PositiveOrZero(message = "validation.book.price.negative")
-    private final BigDecimal price;    
+    private final BigDecimal price;
+    
+    @NotNull(message = "validation.book.available.null")
+    private final Boolean available;    
 
-    public UpdateBookByIdParameters(final Long id, final String title, final Long authorId, final BigDecimal price) {
+    public UpdateBookByIdParameters(final Long id, final Long authorId, final String title, final BigDecimal price, final Boolean available) {
         this.id = id;
+        this.authorId = authorId;
         this.title = title;
         this.price = price;
-        this.authorId = authorId;
+        this.available = available;
         this.validateSelf();
     }
 }

@@ -17,11 +17,11 @@ public class BookMapper {
 
     public static Book of(final BookEntity bookEntity) {
         final Author author = AuthorMapper.of(bookEntity.getAuthor());
-        return new Book(bookEntity.getId(), bookEntity.getTitle(), bookEntity.getCreationDate(), bookEntity.getPrice(), author);
+		return new Book(bookEntity.getId(), author, bookEntity.getTitle(), bookEntity.getPrice(), bookEntity.getAvailable(), bookEntity.getCreationDate(), bookEntity.getUpdateDate());
     }
 
     public static BookEntity of(final Book book) {
         final AuthorEntity authorEntity = AuthorMapper.of(book.getAuthor());
-        return new BookEntity(book.getId(), book.getTitle(), book.getCreationDate(), book.getPrice(), authorEntity);
+		return new BookEntity(book.getId(), authorEntity, book.getTitle(), book.getPrice(), book.getAvailable(), book.getCreationDate(), book.getUpdateDate(), null);
     }
 }

@@ -18,12 +18,9 @@ import lombok.NoArgsConstructor;
 public class SearchAuthorsPresenter {
 
     public static SearchAuthorsResponse of(final Page<Author> page) {
-
         final List<Author> authors = page.getContent();
-        
         final List<SearchAuthorsInnerResponse> content = new ArrayList<>(authors.size());
         authors.forEach(author -> content.add(of(author)));
-        
         return new SearchAuthorsResponse(content, page.getPageable());
     }
 

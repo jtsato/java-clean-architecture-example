@@ -45,17 +45,26 @@ public class BookEntity implements Serializable {
     @Column(name = "BOOK_ID", updatable = false, insertable = false)
     private Long id;
 
+    @JoinColumn(name = "AUTHOR_ID", foreignKey = @ForeignKey(name = "FK_BOOK_AUTHOR_ID"))
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    private AuthorEntity author;    
+
     @Column(name = "TITLE", nullable = false)
     private String title;
-    
-    @Setter(value = AccessLevel.NONE)
-    @Column(name = "CREATION_DATE", nullable = false)
-    private LocalDateTime creationDate;
     
     @Column(name = "PRICE", nullable = false)
     private BigDecimal price;
 
-    @JoinColumn(name = "AUTHOR_ID", foreignKey = @ForeignKey(name = "FK_BOOK_AUTHOR_ID"))
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    private AuthorEntity author;    
+    @Column(name = "AVAILABLE", nullable = false)
+    private Boolean available;
+
+    @Setter(value = AccessLevel.NONE)
+    @Column(name = "CREATION_DATE", nullable = false)
+    private LocalDateTime creationDate;
+    
+    @Column(name = "UPDATE_DATE", nullable = false)
+    private LocalDateTime updateDate;
+    
+    @Column(name = "CONTENT", nullable = false)
+    private String content;
 }

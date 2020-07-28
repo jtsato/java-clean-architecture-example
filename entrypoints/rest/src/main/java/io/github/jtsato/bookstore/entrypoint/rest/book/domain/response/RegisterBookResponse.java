@@ -19,11 +19,15 @@ public class RegisterBookResponse implements Serializable {
 
     private Long id;
 
+    private RegisterBookAuthorResponse author;
+
     private String title;
-    
-    private LocalDateTime creationDate;
     
     private BigDecimal price;
 
-    private RegisterBookAuthorResponse author;
+    private Boolean available;
+
+    private LocalDateTime creationDate;
+    
+    private LocalDateTime updateDate;
 }

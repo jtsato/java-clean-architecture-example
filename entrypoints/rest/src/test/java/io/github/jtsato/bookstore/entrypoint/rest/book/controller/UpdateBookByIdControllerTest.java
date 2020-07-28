@@ -57,37 +57,40 @@ class UpdateBookByIdControllerTest {
 
         when(updateBookByIdUseCase.updateBookById(mockUpdateBookByIdUseCaseParameters())).thenReturn(mockUpdateBookByIdUseCaseReturn());
 
-        mockMvc.perform(put("/books/{id}", 1L).content(buildRequestBody())
-                                              .contentType(MediaType.APPLICATION_JSON_VALUE)
-                                              .accept(MediaType.APPLICATION_JSON_VALUE))
+        mockMvc.perform(put("/books/{id}", 1L)
+        	   .content(buildRequestBody())
+               .contentType(MediaType.APPLICATION_JSON_VALUE)
+               .accept(MediaType.APPLICATION_JSON_VALUE))
                .andDo(print())
                .andExpect(status().isOk())
                .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
                .andExpect(jsonPath("$.id", is(1)))
-               .andExpect(jsonPath("$.title", is("Effective Java (2nd Edition)")))
-               .andExpect(jsonPath("$.creationDate", is("2020-03-12T22:04:59.123")))
-               .andExpect(jsonPath("$.price", is(10.00)))
                .andExpect(jsonPath("$.author.id", is(1)))
                .andExpect(jsonPath("$.author.name", is("Joshua Bloch")))
                .andExpect(jsonPath("$.author.gender", is("MALE")))
-               .andExpect(jsonPath("$.author.birthday", is("1961-08-28")));
+               .andExpect(jsonPath("$.author.birthday", is("1961-08-28")))
+               .andExpect(jsonPath("$.title", is("Effective Java (2nd Edition)")))
+               .andExpect(jsonPath("$.price", is(10.00)))
+               .andExpect(jsonPath("$.available", is(Boolean.TRUE)))
+               .andExpect(jsonPath("$.creationDate", is("2020-02-29T12:00:00")))
+               .andExpect(jsonPath("$.updateDate", is("2020-04-29T12:00:00")));
 
         verify(updateBookByIdUseCase, times(1)).updateBookById(mockUpdateBookByIdUseCaseParameters());
         verifyNoMoreInteractions(updateBookByIdUseCase);
     }
 
     private UpdateBookByIdParameters mockUpdateBookByIdUseCaseParameters() {
-        return new UpdateBookByIdParameters(1L, "Effective Java (2nd Edition)", 1L, BigDecimal.valueOf(10.00));
+        return new UpdateBookByIdParameters(1L, 1L, "Effective Java (2nd Edition)", BigDecimal.valueOf(10.00), Boolean.TRUE);
     }
 
     private Book mockUpdateBookByIdUseCaseReturn() {
         final Author author = new Author(1L, "Joshua Bloch", Gender.MALE, LocalDate.parse("1961-08-28"));
-        return new Book(1L, "Effective Java (2nd Edition)", LocalDateTime.parse("2020-03-12T22:04:59.123"), BigDecimal.valueOf(10.00), author);
+        return new Book(1L, author, "Effective Java (2nd Edition)", BigDecimal.valueOf(10.00), Boolean.TRUE, LocalDateTime.parse("2020-03-12T22:04:59.123"), LocalDateTime.parse("2020-04-12T22:04:59.123"), null);
     }
 
     private String buildRequestBody()
         throws JsonProcessingException {
-        final UpdateBookByIdRequest request = new UpdateBookByIdRequest("Effective Java (2nd Edition)", BigDecimal.valueOf(10.00), 1L);
+        final UpdateBookByIdRequest request = new UpdateBookByIdRequest( 1L, "Effective Java (2nd Edition)", BigDecimal.valueOf(10.00), Boolean.TRUE);
         return new ObjectMapper().writeValueAsString(request);
     }
 }

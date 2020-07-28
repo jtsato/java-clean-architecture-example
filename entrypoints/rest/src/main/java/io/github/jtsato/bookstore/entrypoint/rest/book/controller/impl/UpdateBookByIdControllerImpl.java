@@ -50,7 +50,7 @@ public class UpdateBookByIdControllerImpl implements UpdateBookByIdController {
 
         log.debug("Starting Controller -> UpdateBookByIdController with {}", JsonConverter.convert(request));
 
-        final UpdateBookByIdParameters parameters = new UpdateBookByIdParameters(id, request.getTitle(), request.getAuthorId(), request.getPrice());
+        final UpdateBookByIdParameters parameters = new UpdateBookByIdParameters(id, request.getAuthorId(), request.getTitle(), request.getPrice(), request.getAvailable());
 
         final Book book = updateBookByIdUseCase.updateBookById(parameters);
 

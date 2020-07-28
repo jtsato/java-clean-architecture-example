@@ -9,6 +9,7 @@ import io.github.jtsato.bookstore.core.book.gateway.GetBookByTitleGateway;
 import io.github.jtsato.bookstore.core.book.gateway.UpdateBookByIdGateway;
 import io.github.jtsato.bookstore.core.book.usecase.UpdateBookByIdUseCase;
 import io.github.jtsato.bookstore.core.book.usecase.parameter.UpdateBookByIdParameters;
+import io.github.jtsato.bookstore.core.common.GetLocalDateTime;
 import io.github.jtsato.bookstore.core.exception.NotFoundException;
 import io.github.jtsato.bookstore.core.exception.UniqueConstraintException;
 import lombok.RequiredArgsConstructor;
@@ -34,6 +35,8 @@ public class UpdateBookByIdUseCaseImpl implements UpdateBookByIdUseCase {
 
     private final GetBookByTitleGateway getBookByTitleGateway;
 
+    private final GetLocalDateTime getLocalDateTime;
+
     @Override
     public Book updateBookById(final UpdateBookByIdParameters parameters) {
 
@@ -41,7 +44,7 @@ public class UpdateBookByIdUseCaseImpl implements UpdateBookByIdUseCase {
 
         checkDuplicatedTitleViolation(parameters.getId(), parameters.getTitle());
 
-        final Book book = new Book(parameters.getId(), parameters.getTitle(), null, parameters.getPrice(), author);
+        final Book book = new Book(parameters.getId(), author, parameters.getTitle(), parameters.getPrice(), parameters.getAvailable(), null, getLocalDateTime.now());
 
         final Optional<Book> optional = updateBookGateway.updateBookById(book);
 

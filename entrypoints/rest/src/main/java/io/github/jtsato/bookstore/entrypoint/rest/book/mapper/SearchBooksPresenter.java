@@ -20,12 +20,9 @@ import lombok.NoArgsConstructor;
 public class SearchBooksPresenter {
 
     public static SearchBooksResponse of(final Page<Book> page) {
-
         final List<Book> books = page.getContent();
-
         final List<SearchBooksInnerResponse> content = new ArrayList<>(books.size());
         books.forEach(element -> content.add(of(element)));
-
         return new SearchBooksResponse(content, page.getPageable());
     }
 

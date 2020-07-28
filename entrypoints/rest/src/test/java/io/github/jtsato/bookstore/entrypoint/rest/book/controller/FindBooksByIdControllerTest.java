@@ -67,12 +67,15 @@ class FindBooksByIdControllerTest {
                .andExpect(status().isOk())
                .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
                .andExpect(jsonPath("$.content[0].id", is(1)))
-               .andExpect(jsonPath("$.content[0].title", is("Effective Java (2nd Edition)")))
-               .andExpect(jsonPath("$.content[0].creationDate", is("2020-02-29T12:00:00")))
                .andExpect(jsonPath("$.content[0].author.id", is(1)))
                .andExpect(jsonPath("$.content[0].author.name", is("Joshua Bloch")))
                .andExpect(jsonPath("$.content[0].author.gender", is("MALE")))
                .andExpect(jsonPath("$.content[0].author.birthday", is("1961-08-28")))
+               .andExpect(jsonPath("$.content[0].title", is("Effective Java (2nd Edition)")))
+               .andExpect(jsonPath("$.content[0].price", is(10.00)))
+               .andExpect(jsonPath("$.content[0].available", is(Boolean.TRUE)))
+               .andExpect(jsonPath("$.content[0].creationDate", is("2020-02-29T12:00:00")))
+               .andExpect(jsonPath("$.content[0].updateDate", is("2020-02-29T12:00:00")))
                .andExpect(jsonPath("$.pageable.page", is(1)))
                .andExpect(jsonPath("$.pageable.size", is(3)))
                .andExpect(jsonPath("$.pageable.numberOfElements", is(1)))
@@ -96,7 +99,7 @@ class FindBooksByIdControllerTest {
     private Page<Book> mockFindBooksByIdsUseCaseReturn() {
         final Author author = new Author(1L, "Joshua Bloch", Gender.MALE, LocalDate.parse("1961-08-28"));
         final List<Book> content = new ArrayList<>(1);
-        content.add(new Book(1L, "Effective Java (2nd Edition)", LocalDateTime.parse("2020-02-29T12:00:00"), BigDecimal.valueOf(10.00), author));
+        content.add(new Book(1L, author, "Effective Java (2nd Edition)", BigDecimal.valueOf(10.00), Boolean.TRUE, LocalDateTime.parse("2020-02-29T12:00:00"), LocalDateTime.parse("2020-02-29T12:00:00"), null));
         return new PageImpl<>(content, new Pageable(1, 3, 1, 4L, 2));
     }
 }
