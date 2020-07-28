@@ -75,6 +75,6 @@ class GetBookByIdControllerTest {
 
     private Book mockGetBookByIdUseCaseReturn() {
         final Author author = new Author(1L, "Joshua Bloch", Gender.MALE, LocalDate.parse("1961-08-28"));
-        return new Book(1L, author, "Effective Java (2nd Edition)", BigDecimal.valueOf(10.00), Boolean.TRUE, LocalDateTime.parse("2020-02-29T12:00:00"), LocalDateTime.parse("2020-02-29T12:00:00"), null);
+        return new Book(1L, author, "Effective Java (2nd Edition)", BigDecimal.valueOf(10.00), Boolean.TRUE, LocalDateTime.parse("2020-02-29T12:00:00"), LocalDateTime.parse("2020-02-29T12:00:00"));
     }
 }

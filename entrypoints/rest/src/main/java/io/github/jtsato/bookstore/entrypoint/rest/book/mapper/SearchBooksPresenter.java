@@ -27,7 +27,7 @@ public class SearchBooksPresenter {
     }
 
     private static SearchBooksInnerResponse of(final Book book) {
-        return new SearchBooksInnerResponse(book.getId(), book.getTitle(), book.getCreationDate(), of(book.getAuthor()));
+        return new SearchBooksInnerResponse(book.getId(), of(book.getAuthor()), book.getTitle(), book.getPrice(), book.getAvailable(), book.getCreationDate(),  book.getUpdateDate());
     }
 
     private static SearchBooksAuthorResponse of(final Author author) {

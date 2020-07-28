@@ -1,5 +1,7 @@
 package io.github.jtsato.bookstore.core.book.gateway;
 
+import java.util.Optional;
+
 import io.github.jtsato.bookstore.core.book.domain.BookContent;
 
 /**
@@ -7,7 +9,7 @@ import io.github.jtsato.bookstore.core.book.domain.BookContent;
  */
 
 @FunctionalInterface
-public interface RegisterBookContentGateway {
+public interface GetBookContentByBookIdGateway {
 
-	BookContent registerBookContent(final BookContent bookContent);
+	Optional<BookContent> getBookContentByBookId(final Long bookId);
 }

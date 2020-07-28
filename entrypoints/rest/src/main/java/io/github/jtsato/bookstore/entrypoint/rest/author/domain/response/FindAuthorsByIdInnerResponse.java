@@ -16,11 +16,11 @@ public class FindAuthorsByIdInnerResponse implements Serializable {
     
     private static final long serialVersionUID = -8133045476467957735L;
 
-    private Long id;
+    private final Long id;
     
-    private String name;
+    private final String name;
     
-    private String gender;
+    private final String gender;
     
-    private LocalDate birthday;
+    private final LocalDate birthday;
 }

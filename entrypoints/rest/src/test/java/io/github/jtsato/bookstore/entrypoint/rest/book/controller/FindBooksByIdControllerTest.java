@@ -99,7 +99,7 @@ class FindBooksByIdControllerTest {
     private Page<Book> mockFindBooksByIdsUseCaseReturn() {
         final Author author = new Author(1L, "Joshua Bloch", Gender.MALE, LocalDate.parse("1961-08-28"));
         final List<Book> content = new ArrayList<>(1);
-        content.add(new Book(1L, author, "Effective Java (2nd Edition)", BigDecimal.valueOf(10.00), Boolean.TRUE, LocalDateTime.parse("2020-02-29T12:00:00"), LocalDateTime.parse("2020-02-29T12:00:00"), null));
+		content.add(new Book(1L, author, "Effective Java (2nd Edition)", BigDecimal.valueOf(10.00), Boolean.TRUE, LocalDateTime.parse("2020-02-29T12:00:00"), LocalDateTime.parse("2020-02-29T12:00:00")));
         return new PageImpl<>(content, new Pageable(1, 3, 1, 4L, 2));
     }
 }

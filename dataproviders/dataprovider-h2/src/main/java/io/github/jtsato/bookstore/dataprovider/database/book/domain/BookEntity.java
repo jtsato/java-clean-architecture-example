@@ -65,6 +65,6 @@ public class BookEntity implements Serializable {
     @Column(name = "UPDATE_DATE", nullable = false)
     private LocalDateTime updateDate;
     
-    @Column(name = "CONTENT", nullable = false)
+    @Column(name = "CONTENT", nullable = true)
     private String content;
 }

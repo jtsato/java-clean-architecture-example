@@ -16,11 +16,11 @@ public class UpdateBookByIdAuthorResponse implements Serializable {
     
     private static final long serialVersionUID = -3276628263255913110L;
 
-    private Long id;
+    private final Long id;
     
-    private String name;
+    private final String name;
     
-    private String gender;
+    private final String gender;
     
-    private LocalDate birthday;
+    private final LocalDate birthday;
 }

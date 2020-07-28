@@ -16,7 +16,7 @@ import lombok.experimental.FieldDefaults;
 @Getter 
 @FieldDefaults(makeFinal=true, level=AccessLevel.PRIVATE) 
 @EqualsAndHashCode(callSuper = false)
-public class RegisterBookContentParameters extends SelfValidating<RegisterBookContentParameters> {
+public class SaveBookContentParameters extends SelfValidating<SaveBookContentParameters> {
 
 	@NotNull(message = "validation.book.id.null")
     private final Long bookId;
@@ -24,7 +24,7 @@ public class RegisterBookContentParameters extends SelfValidating<RegisterBookCo
     @NotBlank(message = "validation.book.content.blank")
     private final String content;
     
-    public RegisterBookContentParameters(final Long bookId, final String content) {
+    public SaveBookContentParameters(final Long bookId, final String content) {
         this.bookId = bookId;
         this.content = content;
         this.validateSelf();

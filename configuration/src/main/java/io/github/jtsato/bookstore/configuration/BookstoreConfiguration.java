@@ -114,8 +114,9 @@ public class BookstoreConfiguration {
     @Bean
     public UpdateBookByIdUseCase updateBookByIdUseCase(@Autowired final UpdateBookByIdGateway updateBookByIdGateway,
                                                        @Autowired final GetAuthorByIdGateway getAuthorByIdGateway,
-                                                       @Autowired final GetBookByTitleGateway getBookByTitleGateway) {
-        return new UpdateBookByIdUseCaseImpl(updateBookByIdGateway, getAuthorByIdGateway, getBookByTitleGateway);
+                                                       @Autowired final GetBookByTitleGateway getBookByTitleGateway,
+                                                       @Autowired final GetLocalDateTime getLocalDateTime) {
+        return new UpdateBookByIdUseCaseImpl(updateBookByIdGateway, getAuthorByIdGateway, getBookByTitleGateway, getLocalDateTime);
     }
 
     @Bean
@@ -127,4 +128,5 @@ public class BookstoreConfiguration {
     public GetLocalDateTime getLocalDateTime() {
         return new GetLocalDateTimeImpl();
     } 
+
 }

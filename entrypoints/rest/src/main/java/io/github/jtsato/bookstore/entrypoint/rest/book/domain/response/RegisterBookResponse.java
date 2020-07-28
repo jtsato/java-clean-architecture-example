@@ -17,17 +17,17 @@ public class RegisterBookResponse implements Serializable {
 
     private static final long serialVersionUID = 8114419514719050282L;
 
-    private Long id;
+    private final Long id;
 
-    private RegisterBookAuthorResponse author;
+    private final RegisterBookAuthorResponse author;
 
-    private String title;
+    private final String title;
     
-    private BigDecimal price;
+    private final BigDecimal price;
 
-    private Boolean available;
+    private final Boolean available;
 
-    private LocalDateTime creationDate;
+    private final LocalDateTime creationDate;
     
-    private LocalDateTime updateDate;
+    private final LocalDateTime updateDate;
 }

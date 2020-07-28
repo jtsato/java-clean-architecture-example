@@ -44,13 +44,14 @@ class RegisterBookDataProviderTest {
 
         final Author author = getAuthor();
 
-        final Book newBook = new Book(null, "Effective Java (2nd Edition)", LocalDateTime.parse("2020-03-12T22:04:59.123"), BigDecimal.valueOf(10.00), author);
-		final Book book = registerBookDataProvider.registerBook(newBook );
+		final Book newBook = new Book(null, author, "Effective Java (2nd Edition)", BigDecimal.valueOf(10.00), Boolean.TRUE, LocalDateTime.parse("2020-03-12T22:04:59.123"), LocalDateTime.parse("2020-04-12T22:04:59.123"));
+		final Book result = registerBookDataProvider.registerBook(newBook );
 
-        assertThat(book.getId()).isNotNull();
-        assertThat(book.getTitle()).isEqualTo("Effective Java (2nd Edition)");
-        assertThat(book.getCreationDate()).isEqualTo(LocalDateTime.parse("2020-03-12T22:04:59.123"));
-        assertThat(book.getAuthor()).isEqualTo(author);
+        assertThat(result.getId()).isNotNull();
+        assertThat(result.getTitle()).isEqualTo(newBook.getTitle());
+        assertThat(result.getCreationDate()).isEqualTo(newBook.getCreationDate());
+        assertThat(result.getUpdateDate()).isEqualTo(newBook.getUpdateDate());
+        assertThat(result.getAuthor()).isEqualTo(newBook.getAuthor());
 
         assertThat(bookRepository.count()).isOne();
     }
@@ -68,7 +69,7 @@ class RegisterBookDataProviderTest {
     @Test
     void failToRegisterBookIfParametersAreNotValid() {
 
-        final Book book = new Book(null, null, null, null, getAuthor());
+        final Book book = new Book(null, getAuthor(), null, null, null, null, null);
         
         final Exception exception = Assertions.assertThrows(Exception.class, () -> registerBookDataProvider.registerBook(book));
 

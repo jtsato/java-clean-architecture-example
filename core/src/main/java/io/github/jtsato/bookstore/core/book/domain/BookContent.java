@@ -6,6 +6,7 @@ import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.Setter;
 import lombok.ToString;
 
 /**
@@ -24,9 +25,11 @@ public class BookContent implements Serializable {
 
 	private final Long bookId;
 
-    private final String content;
-    
-    private final LocalDateTime creationDate;
+	@Setter
+	private String content;
 
-    private final LocalDateTime updateDate;
+	private final LocalDateTime creationDate;
+
+	@Setter
+	private LocalDateTime updateDate;
 }

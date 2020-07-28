@@ -34,11 +34,14 @@ class RegisterAuthorDataProviderTest {
     @Test
     void successfulToRegisterAuthorIfParametersAreValid () {
 
-        final Author author = registerAuthorDataProvider.registerAuthor(new Author(null, "Joshua Bloch", Gender.MALE, LocalDate.parse("1961-08-28")));
+        final Author newAuthor = new Author(null, "Joshua Bloch", Gender.MALE, LocalDate.parse("1961-08-28"));
+		
+        final Author result = registerAuthorDataProvider.registerAuthor(newAuthor);
 
-        assertThat(author.getName()).isEqualTo("Joshua Bloch");
-        assertThat(author.getGender()).isEqualTo(Gender.MALE);
-        assertThat(author.getBirthday()).isEqualTo(LocalDate.parse("1961-08-28"));
+        assertThat(result.getId()).isNotNull();
+        assertThat(result.getName()).isEqualTo(newAuthor.getName());
+        assertThat(result.getGender()).isEqualTo(newAuthor.getGender());
+        assertThat(result.getBirthday()).isEqualTo(newAuthor.getBirthday());
         
         assertThat(authorRepository.count()).isOne();
     }
@@ -48,7 +51,8 @@ class RegisterAuthorDataProviderTest {
     void failToRegisterAuthorIfParametersAreNotValid() {
         
         final Exception exception = Assertions.assertThrows(Exception.class, () -> {
-            registerAuthorDataProvider.registerAuthor(new Author(null, null, Gender.MALE, null));
+            final Author newAuthor = new Author(null, null, Gender.MALE, null);
+			registerAuthorDataProvider.registerAuthor(newAuthor);
         });   
         
         assertThat(exception).isInstanceOf(DataIntegrityViolationException.class);
