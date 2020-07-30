@@ -22,12 +22,12 @@ import org.mockito.Mockito;
 import io.github.jtsato.bookstore.core.author.domain.Author;
 import io.github.jtsato.bookstore.core.author.domain.Gender;
 import io.github.jtsato.bookstore.core.book.domain.Book;
-import io.github.jtsato.bookstore.core.book.domain.BookContent;
+import io.github.jtsato.bookstore.core.book.domain.BookDocument;
 import io.github.jtsato.bookstore.core.book.gateway.GetBookByIdGateway;
-import io.github.jtsato.bookstore.core.book.gateway.GetBookContentByBookIdGateway;
-import io.github.jtsato.bookstore.core.book.gateway.SaveBookContentGateway;
-import io.github.jtsato.bookstore.core.book.usecase.impl.SaveBookContentUseCaseImpl;
-import io.github.jtsato.bookstore.core.book.usecase.parameter.SaveBookContentParameters;
+import io.github.jtsato.bookstore.core.book.gateway.GetBookDocumentByBookIdGateway;
+import io.github.jtsato.bookstore.core.book.gateway.SaveBookDocumentGateway;
+import io.github.jtsato.bookstore.core.book.usecase.impl.SaveBookDocumentUseCaseImpl;
+import io.github.jtsato.bookstore.core.book.usecase.parameter.SaveBookDocumentParameters;
 import io.github.jtsato.bookstore.core.common.GetLocalDateTime;
 import io.github.jtsato.bookstore.core.exception.NotFoundException;
 
@@ -35,29 +35,29 @@ import io.github.jtsato.bookstore.core.exception.NotFoundException;
  * @author Jorge Takeshi Sato  
  */
 
-class SaveBookContentUseCaseTest {
+class SaveBookDocumentUseCaseTest {
 
     @Mock
-    private SaveBookContentGateway saveBookContentGateway = Mockito.mock(SaveBookContentGateway.class);
+    private SaveBookDocumentGateway saveBookDocumentGateway = Mockito.mock(SaveBookDocumentGateway.class);
     
     @Mock
     private GetBookByIdGateway getBookByIdGateway = Mockito.mock(GetBookByIdGateway.class);
     
     @Mock
-    private GetBookContentByBookIdGateway getBookContentByBookIdGateway = Mockito.mock(GetBookContentByBookIdGateway.class);
+    private GetBookDocumentByBookIdGateway getBookDocumentByBookIdGateway = Mockito.mock(GetBookDocumentByBookIdGateway.class);
 
     @Mock
     private GetLocalDateTime getLocalDateTime = Mockito.mock(GetLocalDateTime.class);
     
     @InjectMocks
-    private SaveBookContentUseCase getBookContentByBookIdUseCase = new SaveBookContentUseCaseImpl(saveBookContentGateway, getBookByIdGateway, getBookContentByBookIdGateway, getLocalDateTime);
+    private SaveBookDocumentUseCase getBookDocumentByBookIdUseCase = new SaveBookDocumentUseCaseImpl(saveBookDocumentGateway, getBookByIdGateway, getBookDocumentByBookIdGateway, getLocalDateTime);
 
     @DisplayName("Fail to register a book content if parameters are not valid")
     @Test
-    void failToRegisterABookContentIfParametersAreNotValid() {
+    void failToRegisterABookDocumentIfParametersAreNotValid() {
         
         final Exception exception = Assertions.assertThrows(Exception.class, () -> {
-            new SaveBookContentParameters(null, StringUtils.SPACE);
+            new SaveBookDocumentParameters(null, null, null, StringUtils.SPACE, 0L, null);
         });
 
         assertThat(exception).isInstanceOf(ConstraintViolationException.class);
@@ -69,15 +69,15 @@ class SaveBookContentUseCaseTest {
     
     @DisplayName("Successful to register book content if not registered")
     @Test
-    void successfulToSaveBookContentIfNotRegistered() {
+    void successfulToSaveBookDocumentIfNotRegistered() {
 
         when(getBookByIdGateway.getBookById(1L)).thenReturn(mockGetBookByIdGatewayReturn());
-        when(getBookContentByBookIdGateway.getBookContentByBookId(1L)).thenReturn(Optional.empty());
+        when(getBookDocumentByBookIdGateway.getBookDocumentByBookId(1L)).thenReturn(Optional.empty());
         when(getLocalDateTime.now()).thenReturn(LocalDateTime.parse("2020-03-12T22:04:59.123"));
-        when(saveBookContentGateway.saveBookContent(mockSaveBookContentGatewayParameters())).thenReturn(mockSaveBookContentGatewayReturn());
+        when(saveBookDocumentGateway.saveBookDocument(mockSaveBookDocumentGatewayParameters())).thenReturn(mockSaveBookDocumentGatewayReturn());
 
-        final SaveBookContentParameters saveBookContentParameters = new SaveBookContentParameters(1L, "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
-        final BookContent bookContent = getBookContentByBookIdUseCase.saveBookContent(saveBookContentParameters);
+        final SaveBookDocumentParameters saveBookDocumentParameters = new SaveBookDocumentParameters(1L, "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
+        final BookDocument bookContent = getBookDocumentByBookIdUseCase.saveBookDocument(saveBookDocumentParameters);
 
         assertThat(bookContent.getId()).isEqualTo(1L);
         assertThat(bookContent.getBookId()).isEqualTo(1L);
@@ -91,25 +91,29 @@ class SaveBookContentUseCaseTest {
 		return Optional.of(new Book(1L, author, "Effective Java (2nd Edition)", BigDecimal.valueOf(10.00), Boolean.TRUE, LocalDateTime.parse("2020-03-12T22:04:59.123"), LocalDateTime.parse("2020-04-12T22:04:59.123")));
     }
     
-    private BookContent mockSaveBookContentGatewayParameters() {
-        return new BookContent(null, 1L, "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", LocalDateTime.parse("2020-03-12T22:04:59.123"), LocalDateTime.parse("2020-03-12T22:04:59.123"));
+    private BookDocument mockSaveBookDocumentGatewayParameters() {
+		return new BookDocument(null, 1L, "text/plain", "txt", "Document", 123L,
+				"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+				LocalDateTime.parse("2020-03-12T22:04:59.123"), LocalDateTime.parse("2020-03-12T22:04:59.123"));
     }
 
-    private BookContent mockSaveBookContentGatewayReturn() {
-        return new BookContent(1L, 1L, "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", LocalDateTime.parse("2020-03-12T22:04:59.123"), LocalDateTime.parse("2020-04-12T22:04:59.123"));
+    private BookDocument mockSaveBookDocumentGatewayReturn() {
+		return new BookDocument(1L, 1L, "text/plain", "txt", "Document", 123L,
+				"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+				LocalDateTime.parse("2020-03-12T22:04:59.123"), LocalDateTime.parse("2020-04-12T22:04:59.123"));
     }
 
     @DisplayName("Successful to update book content if already registered")
     @Test
-    void successfulToUpdateBookContentIfAlreadyRegistered() {
+    void successfulToUpdateBookDocumentIfAlreadyRegistered() {
 
         when(getBookByIdGateway.getBookById(1L)).thenReturn(mockGetBookByIdGatewayReturn());
-        when(getBookContentByBookIdGateway.getBookContentByBookId(1L)).thenReturn(GetBookContentByBookIdGatewayReturn());
+        when(getBookDocumentByBookIdGateway.getBookDocumentByBookId(1L)).thenReturn(GetBookDocumentByBookIdGatewayReturn());
         when(getLocalDateTime.now()).thenReturn(LocalDateTime.parse("2020-03-12T22:04:59.123"));
-        when(saveBookContentGateway.saveBookContent(mockSaveBookContentGatewayParameters())).thenReturn(mockSaveBookContentGatewayReturn());
+        when(saveBookDocumentGateway.saveBookDocument(mockSaveBookDocumentGatewayParameters())).thenReturn(mockSaveBookDocumentGatewayReturn());
         
-        final SaveBookContentParameters saveBookContentParameters = new SaveBookContentParameters(1L, "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
-        final BookContent bookContent = getBookContentByBookIdUseCase.saveBookContent(saveBookContentParameters);
+        final SaveBookDocumentParameters saveBookDocumentParameters = new SaveBookDocumentParameters(1L, "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
+        final BookDocument bookContent = getBookDocumentByBookIdUseCase.saveBookDocument(saveBookDocumentParameters);
 
         assertThat(bookContent.getId()).isEqualTo(1L);
         assertThat(bookContent.getBookId()).isEqualTo(1L);
@@ -118,23 +122,25 @@ class SaveBookContentUseCaseTest {
         assertThat(bookContent.getUpdateDate()).isEqualTo(LocalDateTime.parse("2020-04-12T22:04:59.123"));
     }
 
-    private Optional<BookContent> GetBookContentByBookIdGatewayReturn() {
-        return Optional.of(new BookContent(null, 1L, "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", LocalDateTime.parse("2020-03-12T22:04:59.123"), LocalDateTime.parse("2020-03-12T22:04:59.123")));
+    private Optional<BookDocument> GetBookDocumentByBookIdGatewayReturn() {
+		return Optional.of(new BookDocument(null, 1L, "text/plain", "txt", "Document", 123L,
+				"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+				LocalDateTime.parse("2020-03-12T22:04:59.123"), LocalDateTime.parse("2020-03-12T22:04:59.123")));
 	}
 
 	@DisplayName("Fail to save book content if book not found")
     @Test
-    void failToSaveBookContentIfBookNotFound() {
+    void failToSaveBookDocumentIfBookNotFound() {
 
         when(getBookByIdGateway.getBookById(1L)).thenReturn(Optional.empty());
-        when(getBookContentByBookIdGateway.getBookContentByBookId(1L)).thenReturn(Optional.empty());
+        when(getBookDocumentByBookIdGateway.getBookDocumentByBookId(1L)).thenReturn(Optional.empty());
         when(getLocalDateTime.now()).thenReturn(LocalDateTime.parse("2020-03-12T22:04:59.123"));
-        when(saveBookContentGateway.saveBookContent(mockSaveBookContentGatewayParameters())).thenReturn(mockSaveBookContentGatewayReturn());
+        when(saveBookDocumentGateway.saveBookDocument(mockSaveBookDocumentGatewayParameters())).thenReturn(mockSaveBookDocumentGatewayReturn());
 
-        final SaveBookContentParameters saveBookContentParameters = new SaveBookContentParameters(1L, "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
+        final SaveBookDocumentParameters saveBookDocumentParameters = new SaveBookDocumentParameters(1L, "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
 
         final Exception exception = Assertions.assertThrows(Exception.class, () -> {
-            getBookContentByBookIdUseCase.saveBookContent(saveBookContentParameters);
+            getBookDocumentByBookIdUseCase.saveBookDocument(saveBookDocumentParameters);
         });
 
         assertThat(exception).isInstanceOf(NotFoundException.class);

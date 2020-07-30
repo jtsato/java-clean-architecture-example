@@ -17,13 +17,25 @@ import lombok.ToString;
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = false)
 @ToString
-public class BookContent implements Serializable {
+public class BookDocument implements Serializable {
 
 	private static final long serialVersionUID = 8678192311370127564L;
 
 	private final Long id;
 
 	private final Long bookId;
+	
+	@Setter
+	private String contentType;
+	
+	@Setter
+	private String extension;
+	
+	@Setter
+	private String name;
+	
+	@Setter
+	private Long size;
 
 	@Setter
 	private String content;
@@ -32,4 +44,5 @@ public class BookContent implements Serializable {
 
 	@Setter
 	private LocalDateTime updateDate;
+
 }
