@@ -76,7 +76,12 @@ class SaveBookDocumentUseCaseTest {
         when(getLocalDateTime.now()).thenReturn(LocalDateTime.parse("2020-03-12T22:04:59.123"));
         when(saveBookDocumentGateway.saveBookDocument(mockSaveBookDocumentGatewayParameters())).thenReturn(mockSaveBookDocumentGatewayReturn());
 
-        final SaveBookDocumentParameters saveBookDocumentParameters = new SaveBookDocumentParameters(1L, "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
+        final SaveBookDocumentParameters saveBookDocumentParameters = new SaveBookDocumentParameters(
+        		1L, 
+        		""
+        		"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+        		
+        		);
         final BookDocument bookContent = getBookDocumentByBookIdUseCase.saveBookDocument(saveBookDocumentParameters);
 
         assertThat(bookContent.getId()).isEqualTo(1L);
