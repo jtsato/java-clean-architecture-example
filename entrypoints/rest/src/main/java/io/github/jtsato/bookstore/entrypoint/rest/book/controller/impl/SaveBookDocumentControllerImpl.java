@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.Base64;
 import java.util.Base64.Encoder;
 
+import org.apache.commons.io.FilenameUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -49,22 +50,22 @@ public class SaveBookDocumentControllerImpl implements SaveBookDocumentControlle
 
     @LogExecutionTime    
     @ResponseStatus(HttpStatus.OK)
-    @PostMapping
+    @PostMapping("/{id}/upload")
 	public SaveBookDocumentResponse saveBookDocument(@RequestParam final Long bookId, @RequestPart final MultipartFile file) {
     	
         log.debug("Starting Controller -> SaveBookDocumentController with {}", JsonConverter.convert(bookId));
 
-        final String content = getFileContent(file);
+        final SaveBookDocumentParameters parameters = buildSaveBookDocumentParameters(bookId, file);
         
-		final SaveBookDocumentParameters parameters = new SaveBookDocumentParameters(bookId, content);
+        final BookDocument bookDocument = saveBookDocumentUseCase.saveBookDocument(parameters);
 
-        final BookDocument bookContent = saveBookDocumentUseCase.saveBookDocument(parameters);
-
-        return SaveBookDocumentPresenter.of(bookContent);	
+        return SaveBookDocumentPresenter.of(bookDocument);	
    }
 
-	private String getFileContent(final MultipartFile file) {
-
+	private SaveBookDocumentParameters buildSaveBookDocumentParameters(final Long bookId, final MultipartFile file) {
+		
+		String fileContent = null;
+		
 		try {
 			
 			if (file == null) {
@@ -79,7 +80,7 @@ public class SaveBookDocumentControllerImpl implements SaveBookDocumentControlle
 			
 			final Encoder encoder = Base64.getEncoder();        
 
-			return encoder.encodeToString(content);
+			fileContent = encoder.encodeToString(content);
 
 		} catch (IOException ioException) {
 			
@@ -87,5 +88,8 @@ public class SaveBookDocumentControllerImpl implements SaveBookDocumentControlle
 
 			throw new InvalidParameterException("validation.book.document.content.invalid");
 		}
+		
+		return new SaveBookDocumentParameters(bookId, file.getContentType(),
+				FilenameUtils.getExtension(file.getOriginalFilename()), file.getName(), file.getSize(), fileContent);
 	}
 }

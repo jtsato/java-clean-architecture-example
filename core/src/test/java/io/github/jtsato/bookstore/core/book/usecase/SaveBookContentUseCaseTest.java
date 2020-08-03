@@ -81,13 +81,13 @@ class SaveBookDocumentUseCaseTest {
 				"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
 		);
 		
-        final BookDocument bookContent = getBookDocumentByBookIdUseCase.saveBookDocument(saveBookDocumentParameters);
+        final BookDocument bookDocument = getBookDocumentByBookIdUseCase.saveBookDocument(saveBookDocumentParameters);
 
-        assertThat(bookContent.getId()).isEqualTo(1L);
-        assertThat(bookContent.getBookId()).isEqualTo(1L);
-        assertThat(bookContent.getContent()).isEqualTo("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
-        assertThat(bookContent.getCreationDate()).isEqualTo(LocalDateTime.parse("2020-03-12T22:04:59.123"));
-        assertThat(bookContent.getUpdateDate()).isEqualTo(LocalDateTime.parse("2020-04-12T22:04:59.123"));
+        assertThat(bookDocument.getId()).isEqualTo(1L);
+        assertThat(bookDocument.getBookId()).isEqualTo(1L);
+        assertThat(bookDocument.getContent()).isEqualTo("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
+        assertThat(bookDocument.getCreationDate()).isEqualTo(LocalDateTime.parse("2020-03-12T22:04:59.123"));
+        assertThat(bookDocument.getUpdateDate()).isEqualTo(LocalDateTime.parse("2020-04-12T22:04:59.123"));
     }
 
     private Optional<Book> mockGetBookByIdGatewayReturn() {
@@ -120,13 +120,13 @@ class SaveBookDocumentUseCaseTest {
 				"txt", "Document", 123L,
 				"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
 		
-        final BookDocument bookContent = getBookDocumentByBookIdUseCase.saveBookDocument(saveBookDocumentParameters);
+        final BookDocument bookDocument = getBookDocumentByBookIdUseCase.saveBookDocument(saveBookDocumentParameters);
 
-        assertThat(bookContent.getId()).isEqualTo(1L);
-        assertThat(bookContent.getBookId()).isEqualTo(1L);
-        assertThat(bookContent.getContent()).isEqualTo("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
-        assertThat(bookContent.getCreationDate()).isEqualTo(LocalDateTime.parse("2020-03-12T22:04:59.123"));
-        assertThat(bookContent.getUpdateDate()).isEqualTo(LocalDateTime.parse("2020-04-12T22:04:59.123"));
+        assertThat(bookDocument.getId()).isEqualTo(1L);
+        assertThat(bookDocument.getBookId()).isEqualTo(1L);
+        assertThat(bookDocument.getContent()).isEqualTo("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
+        assertThat(bookDocument.getCreationDate()).isEqualTo(LocalDateTime.parse("2020-03-12T22:04:59.123"));
+        assertThat(bookDocument.getUpdateDate()).isEqualTo(LocalDateTime.parse("2020-04-12T22:04:59.123"));
     }
 
     private Optional<BookDocument> GetBookDocumentByBookIdGatewayReturn() {

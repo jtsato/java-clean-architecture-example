@@ -28,20 +28,24 @@ import io.github.jtsato.bookstore.core.author.usecase.impl.UpdateAuthorByIdUseCa
 import io.github.jtsato.bookstore.core.book.gateway.FindBooksByIdsGateway;
 import io.github.jtsato.bookstore.core.book.gateway.GetBookByIdGateway;
 import io.github.jtsato.bookstore.core.book.gateway.GetBookByTitleGateway;
+import io.github.jtsato.bookstore.core.book.gateway.GetBookDocumentByBookIdGateway;
 import io.github.jtsato.bookstore.core.book.gateway.RegisterBookGateway;
 import io.github.jtsato.bookstore.core.book.gateway.RemoveBookByIdGateway;
+import io.github.jtsato.bookstore.core.book.gateway.SaveBookDocumentGateway;
 import io.github.jtsato.bookstore.core.book.gateway.SearchBooksGateway;
 import io.github.jtsato.bookstore.core.book.gateway.UpdateBookByIdGateway;
 import io.github.jtsato.bookstore.core.book.usecase.FindBooksByIdsUseCase;
 import io.github.jtsato.bookstore.core.book.usecase.GetBookByIdUseCase;
 import io.github.jtsato.bookstore.core.book.usecase.RegisterBookUseCase;
 import io.github.jtsato.bookstore.core.book.usecase.RemoveBookByIdUseCase;
+import io.github.jtsato.bookstore.core.book.usecase.SaveBookDocumentUseCase;
 import io.github.jtsato.bookstore.core.book.usecase.SearchBooksUseCase;
 import io.github.jtsato.bookstore.core.book.usecase.UpdateBookByIdUseCase;
 import io.github.jtsato.bookstore.core.book.usecase.impl.FindBooksByIdsUseCaseImpl;
 import io.github.jtsato.bookstore.core.book.usecase.impl.GetBookByIdUseCaseImpl;
 import io.github.jtsato.bookstore.core.book.usecase.impl.RegisterBookUseCaseImpl;
 import io.github.jtsato.bookstore.core.book.usecase.impl.RemoveBookByIdUseCaseImpl;
+import io.github.jtsato.bookstore.core.book.usecase.impl.SaveBookDocumentUseCaseImpl;
 import io.github.jtsato.bookstore.core.book.usecase.impl.SearchBooksUseCaseImpl;
 import io.github.jtsato.bookstore.core.book.usecase.impl.UpdateBookByIdUseCaseImpl;
 import io.github.jtsato.bookstore.core.common.GetLocalDateTime;
@@ -95,6 +99,14 @@ public class BookstoreConfiguration {
                                                    @Autowired final GetLocalDateTime getLocalDateTime) {
         return new RegisterBookUseCaseImpl(registerBookGateway, getAuthorByIdGateway, getBookByTitleGateway, getLocalDateTime);
     }
+    
+	@Bean
+	public SaveBookDocumentUseCase saveBookDocumentUseCase(@Autowired final SaveBookDocumentGateway saveBookDocumentGateway,
+														   @Autowired final GetBookByIdGateway getBookByIdGateway,
+														   @Autowired final GetBookDocumentByBookIdGateway getBookDocumentByBookIdGateway, 
+														   @Autowired final GetLocalDateTime getLocalDateTime) {
+		return new SaveBookDocumentUseCaseImpl(saveBookDocumentGateway, getBookByIdGateway, getBookDocumentByBookIdGateway, getLocalDateTime);
+	}
     
     @Bean
     public GetBookByIdUseCase getBookByIdUseCase(@Autowired final GetBookByIdGateway getBookByIdGateway) {

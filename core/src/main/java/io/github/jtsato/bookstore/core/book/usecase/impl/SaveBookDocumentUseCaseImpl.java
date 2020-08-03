@@ -46,17 +46,17 @@ public class SaveBookDocumentUseCaseImpl implements SaveBookDocumentUseCase {
     	final Optional<BookDocument> optional = getBookDocumentByBookIdGateway.getBookDocumentByBookId(bookId);
     	
     	if (optional.isPresent()) {
-    		final BookDocument bookContent = optional.get();
-			bookContent.setContent(parameters.getContent());
-    		bookContent.setUpdateDate(getLocalDateTime.now());
-    		return saveBookDocumentGateway.saveBookDocument(bookContent);
+    		final BookDocument bookDocument = optional.get();
+			bookDocument.setContent(parameters.getContent());
+    		bookDocument.setUpdateDate(getLocalDateTime.now());
+    		return saveBookDocumentGateway.saveBookDocument(bookDocument);
     	}
     	
-		final BookDocument bookContent = new BookDocument(null, bookId, parameters.getContentType(),
+		final BookDocument bookDocument = new BookDocument(null, bookId, parameters.getContentType(),
 				parameters.getExtension(), parameters.getName(), parameters.getSize(), parameters.getContent(),
 				getLocalDateTime.now(), getLocalDateTime.now());
     	
-    	return saveBookDocumentGateway.saveBookDocument(bookContent);
+    	return saveBookDocumentGateway.saveBookDocument(bookDocument);
     }
 
 	private void checkIfBookExists(final Long bookId) {

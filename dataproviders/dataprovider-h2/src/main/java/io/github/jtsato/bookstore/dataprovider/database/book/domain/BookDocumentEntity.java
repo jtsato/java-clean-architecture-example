@@ -1,24 +1,18 @@
 package io.github.jtsato.bookstore.dataprovider.database.book.domain;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
-import io.github.jtsato.bookstore.dataprovider.database.author.domain.AuthorEntity;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -34,7 +28,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "BOOK_DOCUMENTS", uniqueConstraints = {@UniqueConstraint(columnNames = {"TITLE"}, name = "UN_BOOKS_TITLE"),})
+@Table(name = "BOOK_DOCUMENTS", uniqueConstraints = {@UniqueConstraint(columnNames = {"NAME"}, name = "UN_BOOK_DOCUMENTS_NAME"),})
 public class BookDocumentEntity implements Serializable {
 
     private static final long serialVersionUID = -8837692706666523585L;
@@ -42,21 +36,26 @@ public class BookDocumentEntity implements Serializable {
     @Access(AccessType.PROPERTY)
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "BOOK_ID", updatable = false, insertable = false)
+    @Column(name = "BOOK_DOCUMENT_ID", updatable = false, insertable = false)
     private Long id;
 
-    @JoinColumn(name = "AUTHOR_ID", foreignKey = @ForeignKey(name = "FK_BOOK_AUTHOR_ID"))
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    private AuthorEntity author;    
+    @Column(name = "BOOK_ID", updatable = false, insertable = false)
+    private Long bookId;
 
-    @Column(name = "TITLE", nullable = false)
-    private String title;
+    @Column(name = "CONTENT_TYPE", nullable = false)
+    private String contentType;
     
-    @Column(name = "PRICE", nullable = false)
-    private BigDecimal price;
-
-    @Column(name = "AVAILABLE", nullable = false)
-    private Boolean available;
+    @Column(name = "EXTENSION", nullable = false)
+    private String extension;
+    
+    @Column(name = "NAME", nullable = false)
+    private String name;
+    
+    @Column(name = "SIZE", nullable = false)
+    private Long size;
+    
+    @Column(name = "CONTENT", nullable = true)
+    private String content;
 
     @Setter(value = AccessLevel.NONE)
     @Column(name = "CREATION_DATE", nullable = false)
@@ -64,7 +63,4 @@ public class BookDocumentEntity implements Serializable {
     
     @Column(name = "UPDATE_DATE", nullable = false)
     private LocalDateTime updateDate;
-    
-    @Column(name = "CONTENT", nullable = true)
-    private String content;
 }

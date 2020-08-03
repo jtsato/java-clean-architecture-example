@@ -21,9 +21,9 @@ public class BookDocument implements Serializable {
 
 	private static final long serialVersionUID = 8678192311370127564L;
 
-	private final Long id;
+	private Long id;
 
-	private final Long bookId;
+	private Long bookId;
 	
 	@Setter
 	private String contentType;
@@ -40,9 +40,8 @@ public class BookDocument implements Serializable {
 	@Setter
 	private String content;
 
-	private final LocalDateTime creationDate;
+	private LocalDateTime creationDate;
 
 	@Setter
 	private LocalDateTime updateDate;
-
 }
