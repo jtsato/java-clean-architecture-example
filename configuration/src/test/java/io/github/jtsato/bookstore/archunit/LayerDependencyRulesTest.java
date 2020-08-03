@@ -25,7 +25,8 @@ public class LayerDependencyRulesTest {
     static final ArchRule controllers_should_only_access_specific_packages =
             classes().that().resideInAPackage("..controller..")
                     .should().onlyAccessClassesThat()
-                    .resideInAnyPackage("..controller..", "..usecase..", "..mapper..", "..rest..", "org.springframework..", "org.slf4j", "java..");
+                    .resideInAnyPackage("..controller..", "..usecase..", "..core.exception..", "..mapper..", "..rest..", 
+                    				    "org.springframework..", "org.slf4j", "org.apache.commons..", "java..");
 
     @ArchTest
     static final ArchRule usecases_should_only_access_specific_packages =
@@ -85,8 +86,9 @@ public class LayerDependencyRulesTest {
     @ArchTest
     static final ArchRule controllers_should_only_depend_on_specific_packages =
             classes().that().resideInAPackage("..controller..")
-                    .should().onlyDependOnClassesThat().resideInAnyPackage("..controller..", "..rest..", "..usecase..", "io.swagger.v3.oas.annotations..", "org.springdoc..", 
-                                                                           "org.springframework..", "org.slf4j", "lombok..", "..java..");
+                    .should().onlyDependOnClassesThat().resideInAnyPackage("..controller..", "..rest..", "..usecase..", "..core.exception..", 
+                    													   "io.swagger.v3.oas.annotations..", "org.springdoc..", "org.springframework..", 
+                    													   "org.slf4j", "org.apache.commons..", "lombok..", "..java..");
 
     @ArchTest
     static final ArchRule gateways_should_only_have_dependents_on_specific_packages =
