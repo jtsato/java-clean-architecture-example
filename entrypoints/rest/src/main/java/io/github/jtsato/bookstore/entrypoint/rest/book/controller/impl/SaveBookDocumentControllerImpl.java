@@ -6,9 +6,10 @@ import java.util.Base64.Encoder;
 
 import org.apache.commons.io.FilenameUtils;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
@@ -50,8 +51,8 @@ public class SaveBookDocumentControllerImpl implements SaveBookDocumentControlle
 
     @LogExecutionTime    
     @ResponseStatus(HttpStatus.OK)
-    @PostMapping("/{id}/upload")
-	public SaveBookDocumentResponse saveBookDocument(@RequestParam final Long bookId, @RequestPart final MultipartFile file) {
+	@PostMapping(value = "/{id}/content", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+	public SaveBookDocumentResponse saveBookDocument(@PathVariable final Long bookId, @RequestPart final MultipartFile file) {
     	
         log.debug("Starting Controller -> SaveBookDocumentController with {}", JsonConverter.convert(bookId));
 
