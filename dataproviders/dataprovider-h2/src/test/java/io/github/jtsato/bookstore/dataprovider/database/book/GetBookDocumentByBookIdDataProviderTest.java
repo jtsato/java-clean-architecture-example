@@ -11,7 +11,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.context.jdbc.Sql;
 
-import io.github.jtsato.bookstore.core.book.domain.Book;
+import io.github.jtsato.bookstore.core.book.domain.BookDocument;
 import io.github.jtsato.bookstore.dataprovider.database.book.repository.BookRepository;
 
 /**
@@ -19,33 +19,33 @@ import io.github.jtsato.bookstore.dataprovider.database.book.repository.BookRepo
  */
 
 @DataJpaTest
-@Import({GetBookByTitleDataProvider.class})
-@Sql("GetBookByTitleDataProviderTest.sql")
-class GetBookByTitleDataProviderTest {
+@Import({GetBookDocumentByBookIdDataProvider.class})
+@Sql("GetBookDocumentByBookIdDataProviderTest.sql")
+class GetBookDocumentByBookIdDataProviderTest {
     
     @Autowired
-    private GetBookByTitleDataProvider getBookByTitleDataProvider;
+    private GetBookDocumentByBookIdDataProvider getBookDocumentByBookIdDataProvider;
     
     @Autowired
     private BookRepository authorRepository;
     
-    @DisplayName("Successful to get book by title if found")    
+    @DisplayName("Successful to get book document by id if found")    
     @Test
-    void successfulToGetBookByTitleIfFound() {
+    void successfulToGetBookDocumentByBookIdIfFound() {
         
-        final Optional<Book> optional = getBookByTitleDataProvider.getBookByTitle("Effective Java");
+        final Optional<BookDocument> optional = getBookDocumentByBookIdDataProvider.getBookDocumentByBookId(1L);
         
         assertThat(optional).isPresent();
-        assertThat(authorRepository.count()).isEqualTo(3);
+        assertThat(authorRepository.count()).isEqualTo(1);
     }
     
-    @DisplayName("Fail to get book by title if not found")    
+    @DisplayName("Fail to get book document by id if not found")    
     @Test
     void failToGetAuthorByTitleIfNotFound() {
         
-        final Optional<Book> optional = getBookByTitleDataProvider.getBookByTitle("Effective Java (2nd Edition)");
+        final Optional<BookDocument> optional = getBookDocumentByBookIdDataProvider.getBookDocumentByBookId(2L);
         
         assertThat(optional).isNotPresent();
-        assertThat(authorRepository.count()).isEqualTo(3);
+        assertThat(authorRepository.count()).isEqualTo(1);
     }
 }

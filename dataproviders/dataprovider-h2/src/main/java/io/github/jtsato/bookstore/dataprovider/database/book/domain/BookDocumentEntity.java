@@ -28,7 +28,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "BOOK_DOCUMENTS", uniqueConstraints = {@UniqueConstraint(columnNames = {"NAME"}, name = "UN_BOOK_DOCUMENTS_NAME"),})
+@Table(name = "BOOK_DOCUMENTS", uniqueConstraints = {@UniqueConstraint(columnNames = {"BOOK_ID"}, name = "UN_BOOK_DOCUMENTS_BOOK_ID"),})
 public class BookDocumentEntity implements Serializable {
 
     private static final long serialVersionUID = -8837692706666523585L;

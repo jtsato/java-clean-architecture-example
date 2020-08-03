@@ -52,7 +52,7 @@ class SaveBookDocumentUseCaseTest {
     @InjectMocks
     private SaveBookDocumentUseCase getBookDocumentByBookIdUseCase = new SaveBookDocumentUseCaseImpl(saveBookDocumentGateway, getBookByIdGateway, getBookDocumentByBookIdGateway, getLocalDateTime);
 
-    @DisplayName("Fail to register a book content if parameters are not valid")
+    @DisplayName("Fail to register a book document if parameters are not valid")
     @Test
     void failToRegisterABookDocumentIfParametersAreNotValid() {
         
@@ -67,7 +67,7 @@ class SaveBookDocumentUseCaseTest {
         assertThat(constraintViolationException.getMessage()).contains("content: validation.book.content.blank");
     }
     
-    @DisplayName("Successful to register book content if not registered")
+    @DisplayName("Successful to register book document if not registered")
     @Test
     void successfulToSaveBookDocumentIfNotRegistered() {
 
@@ -78,13 +78,16 @@ class SaveBookDocumentUseCaseTest {
 
 		final SaveBookDocumentParameters saveBookDocumentParameters = new SaveBookDocumentParameters(1L, "text/plain",
 				"txt", "Document", 123L,
-				"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-		);
+				"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
 		
         final BookDocument bookDocument = getBookDocumentByBookIdUseCase.saveBookDocument(saveBookDocumentParameters);
 
         assertThat(bookDocument.getId()).isEqualTo(1L);
         assertThat(bookDocument.getBookId()).isEqualTo(1L);
+        assertThat(bookDocument.getContentType()).isEqualTo("text/plain");
+        assertThat(bookDocument.getExtension()).isEqualTo("txt");
+        assertThat(bookDocument.getName()).isEqualTo("Document");
+        assertThat(bookDocument.getSize()).isEqualTo(123L);
         assertThat(bookDocument.getContent()).isEqualTo("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
         assertThat(bookDocument.getCreationDate()).isEqualTo(LocalDateTime.parse("2020-03-12T22:04:59.123"));
         assertThat(bookDocument.getUpdateDate()).isEqualTo(LocalDateTime.parse("2020-04-12T22:04:59.123"));
@@ -107,7 +110,7 @@ class SaveBookDocumentUseCaseTest {
 				LocalDateTime.parse("2020-03-12T22:04:59.123"), LocalDateTime.parse("2020-04-12T22:04:59.123"));
     }
 
-    @DisplayName("Successful to update book content if already registered")
+    @DisplayName("Successful to update book document if already registered")
     @Test
     void successfulToUpdateBookDocumentIfAlreadyRegistered() {
 
@@ -124,6 +127,10 @@ class SaveBookDocumentUseCaseTest {
 
         assertThat(bookDocument.getId()).isEqualTo(1L);
         assertThat(bookDocument.getBookId()).isEqualTo(1L);
+        assertThat(bookDocument.getContentType()).isEqualTo("text/plain");
+        assertThat(bookDocument.getExtension()).isEqualTo("txt");
+        assertThat(bookDocument.getName()).isEqualTo("Document");
+        assertThat(bookDocument.getSize()).isEqualTo(123L);
         assertThat(bookDocument.getContent()).isEqualTo("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
         assertThat(bookDocument.getCreationDate()).isEqualTo(LocalDateTime.parse("2020-03-12T22:04:59.123"));
         assertThat(bookDocument.getUpdateDate()).isEqualTo(LocalDateTime.parse("2020-04-12T22:04:59.123"));
@@ -135,7 +142,7 @@ class SaveBookDocumentUseCaseTest {
 				LocalDateTime.parse("2020-03-12T22:04:59.123"), LocalDateTime.parse("2020-03-12T22:04:59.123")));
 	}
 
-	@DisplayName("Fail to save book content if book not found")
+	@DisplayName("Fail to save book document if book not found")
     @Test
     void failToSaveBookDocumentIfBookNotFound() {
 

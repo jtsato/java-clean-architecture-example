@@ -25,54 +25,57 @@ import io.github.jtsato.bookstore.dataprovider.database.book.repository.BookRepo
  */
 
 @DataJpaTest
-@Import({RegisterBookDataProvider.class, GetAuthorByIdDataProvider.class})
+@Import({ RegisterBookDataProvider.class, GetAuthorByIdDataProvider.class })
 @Sql("GetAuthorByIdDataProviderTest.sql")
 class RegisterBookDataProviderTest {
 
-    @Autowired
-    private RegisterBookDataProvider registerBookDataProvider;
+	@Autowired
+	private RegisterBookDataProvider registerBookDataProvider;
 
-    @Autowired
-    private GetAuthorByIdDataProvider getAuthorByIdDataProvider;
+	@Autowired
+	private GetAuthorByIdDataProvider getAuthorByIdDataProvider;
 
-    @Autowired
-    private BookRepository bookRepository;
+	@Autowired
+	private BookRepository bookRepository;
 
-    @DisplayName("Successful to register book if parameters are valid")
-    @Test
-    void successfulToRegisterBookIfParametersAreValid() {
+	@DisplayName("Successful to register book if parameters are valid")
+	@Test
+	void successfulToRegisterBookIfParametersAreValid() {
 
-        final Author author = getAuthor();
+		final Author author = getAuthor();
 
-		final Book newBook = new Book(null, author, "Effective Java (2nd Edition)", BigDecimal.valueOf(10.00), Boolean.TRUE, LocalDateTime.parse("2020-03-12T22:04:59.123"), LocalDateTime.parse("2020-04-12T22:04:59.123"));
-		final Book result = registerBookDataProvider.registerBook(newBook );
+		final Book newBook = new Book(null, author, "Effective Java (2nd Edition)", BigDecimal.valueOf(10.00),
+				Boolean.TRUE, LocalDateTime.parse("2020-03-12T22:04:59.123"),
+				LocalDateTime.parse("2020-04-12T22:04:59.123"));
+		
+		final Book result = registerBookDataProvider.registerBook(newBook);
 
-        assertThat(result.getId()).isNotNull();
-        assertThat(result.getTitle()).isEqualTo(newBook.getTitle());
-        assertThat(result.getCreationDate()).isEqualTo(newBook.getCreationDate());
-        assertThat(result.getUpdateDate()).isEqualTo(newBook.getUpdateDate());
-        assertThat(result.getAuthor()).isEqualTo(newBook.getAuthor());
+		assertThat(result.getId()).isNotNull();
+		assertThat(result.getTitle()).isEqualTo(newBook.getTitle());
+		assertThat(result.getCreationDate()).isEqualTo(newBook.getCreationDate());
+		assertThat(result.getUpdateDate()).isEqualTo(newBook.getUpdateDate());
+		assertThat(result.getAuthor()).isEqualTo(newBook.getAuthor());
 
-        assertThat(bookRepository.count()).isOne();
-    }
+		assertThat(bookRepository.count()).isOne();
+	}
 
-    private Author getAuthor() {
+	private Author getAuthor() {
 
-        final Optional<Author> optional = getAuthorByIdDataProvider.getAuthorById(1L);
+		final Optional<Author> optional = getAuthorByIdDataProvider.getAuthorById(1L);
 
-        assertThat(optional).isPresent();
+		assertThat(optional).isPresent();
 
-        return optional.get();
-    }
+		return optional.get();
+	}
 
-    @DisplayName("Fail to register book if parameters are not valid")
-    @Test
-    void failToRegisterBookIfParametersAreNotValid() {
+	@DisplayName("Fail to register book if parameters are not valid")
+	@Test
+	void failToRegisterBookIfParametersAreNotValid() {
 
-        final Book book = new Book(null, getAuthor(), null, null, null, null, null);
-        
-        final Exception exception = Assertions.assertThrows(Exception.class, () -> registerBookDataProvider.registerBook(book));
+		final Book book = new Book(null, getAuthor(), null, null, null, null, null);
 
-        assertThat(exception).isInstanceOf(DataIntegrityViolationException.class);
-    }
+		final Exception exception = Assertions.assertThrows(Exception.class, () -> registerBookDataProvider.registerBook(book));
+
+		assertThat(exception).isInstanceOf(DataIntegrityViolationException.class);
+	}
 }
