@@ -1,6 +1,7 @@
 package io.github.jtsato.bookstore.entrypoint.rest.book.controller.impl;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.Base64;
 import java.util.Base64.Encoder;
 
@@ -15,16 +16,21 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import io.github.jtsato.bookstore.core.book.domain.BookDocument;
 import io.github.jtsato.bookstore.core.book.usecase.SaveBookDocumentUseCase;
 import io.github.jtsato.bookstore.core.book.usecase.parameter.SaveBookDocumentParameters;
-import io.github.jtsato.bookstore.core.exception.InvalidParameterException;
 import io.github.jtsato.bookstore.entrypoint.rest.book.controller.SaveBookDocumentController;
 import io.github.jtsato.bookstore.entrypoint.rest.book.domain.response.SaveBookDocumentResponse;
 import io.github.jtsato.bookstore.entrypoint.rest.book.mapper.SaveBookDocumentPresenter;
 import io.github.jtsato.bookstore.entrypoint.rest.common.JsonConverter;
 import io.github.jtsato.bookstore.entrypoint.rest.common.metric.LogExecutionTime;
+import lombok.AccessLevel;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
 
 /*
@@ -51,46 +57,58 @@ public class SaveBookDocumentControllerImpl implements SaveBookDocumentControlle
 
     @LogExecutionTime    
     @ResponseStatus(HttpStatus.OK)
-	@PostMapping(value = "/{id}/content", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-	public SaveBookDocumentResponse saveBookDocument(@PathVariable final Long bookId, @RequestPart final MultipartFile file) {
+	@PostMapping(value = "/{bookId}/content", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+	public SaveBookDocumentResponse saveBookDocument(@PathVariable final Long bookId, @RequestPart final MultipartFile file) throws IOException {
     	
-        log.debug("Starting Controller -> SaveBookDocumentController with {}", JsonConverter.convert(bookId));
-
-        final SaveBookDocumentParameters parameters = buildSaveBookDocumentParameters(bookId, file);
+        final SaveBookDocumentRequest saveBookDocumentRequest = buildSaveBookDocumentRequest(bookId, file);
         
-        final BookDocument bookDocument = saveBookDocumentUseCase.saveBookDocument(parameters);
+        log.debug("Starting Controller -> SaveBookDocumentController with {}", JsonConverter.convert(saveBookDocumentRequest));
+
+        final SaveBookDocumentParameters saveBookDocumentParameters = buildSaveBookDocumentParameters(saveBookDocumentRequest);
+        
+		final BookDocument bookDocument = saveBookDocumentUseCase.saveBookDocument(saveBookDocumentParameters);
 
         return SaveBookDocumentPresenter.of(bookDocument);	
    }
 
-	private SaveBookDocumentParameters buildSaveBookDocumentParameters(final Long bookId, final MultipartFile file) {
+	private SaveBookDocumentRequest buildSaveBookDocumentRequest(final Long bookId, final MultipartFile file) throws IOException {
+		final byte[] content = file.getBytes();
+		final Encoder encoder = Base64.getEncoder();        
+		final String fileContent = encoder.encodeToString(content);
+		return new SaveBookDocumentRequest(bookId, file.getContentType(), FilenameUtils.getExtension(file.getOriginalFilename()), file.getName(), file.getSize(), fileContent);
+	}
+	
+	private SaveBookDocumentParameters buildSaveBookDocumentParameters(final SaveBookDocumentRequest request) {
+		return new SaveBookDocumentParameters(request.getBookId(), request.getContentType(), request.getExtension(), request.getName(), request.getSize(), request.getContent());
+	}	
+	
+	@Getter 
+	@FieldDefaults(makeFinal=true, level=AccessLevel.PRIVATE) 
+	@EqualsAndHashCode(callSuper = false)
+	private static class SaveBookDocumentRequest implements Serializable {
+
+		private static final long serialVersionUID = -4808628565665588269L;
+
+		private final Long bookId;
 		
-		String fileContent = null;
+		private final String contentType;
 		
-		try {
-			
-			if (file == null) {
-				throw new InvalidParameterException("validation.book.document.content.null");
-			}
-			
-			final byte[] content = file.getBytes();
-
-			if (content.length == 0) {
-				throw new InvalidParameterException("validation.book.document.content.blank");
-			}
-			
-			final Encoder encoder = Base64.getEncoder();        
-
-			fileContent = encoder.encodeToString(content);
-
-		} catch (IOException ioException) {
-			
-			log.error("It was not possible to read the file content. ", ioException);
-
-			throw new InvalidParameterException("validation.book.document.content.invalid");
-		}
+		private final String extension;
 		
-		return new SaveBookDocumentParameters(bookId, file.getContentType(),
-				FilenameUtils.getExtension(file.getOriginalFilename()), file.getName(), file.getSize(), fileContent);
+		private final String name;
+		
+		private final Long size;
+
+		@JsonIgnore
+	    private final String content;
+	    
+	    public SaveBookDocumentRequest(final Long bookId, final String contentType, final String extension, final String name, final Long size, final String content) {  
+	        this.bookId = bookId;
+	        this.contentType = contentType;
+	        this.extension = extension;
+	        this.name = name;
+	        this.size = size;
+	        this.content = content;
+	    }
 	}
 }

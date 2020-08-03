@@ -1,5 +1,7 @@
 package io.github.jtsato.bookstore.core.book.usecase.parameter;
 
+import java.io.Serializable;
+
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
@@ -16,7 +18,9 @@ import lombok.experimental.FieldDefaults;
 @Getter 
 @FieldDefaults(makeFinal=true, level=AccessLevel.PRIVATE) 
 @EqualsAndHashCode(callSuper = false)
-public class SaveBookDocumentParameters extends SelfValidating<SaveBookDocumentParameters> {
+public class SaveBookDocumentParameters extends SelfValidating<SaveBookDocumentParameters> implements Serializable {
+
+	private static final long serialVersionUID = 6255672516286855379L;
 
 	@NotNull(message = "validation.book.id.null")
     private final Long bookId;
@@ -31,7 +35,7 @@ public class SaveBookDocumentParameters extends SelfValidating<SaveBookDocumentP
 	@NotNull(message = "validation.book.document.size.empty")
 	private final Long size;
 	
-    @NotBlank(message = "validation.book.content.blank")
+	@NotBlank(message = "validation.book.content.blank")
     private final String content;
     
     public SaveBookDocumentParameters(final Long bookId, final String contentType, final String extension, final String name, final Long size, final String content) {  
@@ -43,5 +47,4 @@ public class SaveBookDocumentParameters extends SelfValidating<SaveBookDocumentP
         this.content = content;
         this.validateSelf();
     }
-
 }
