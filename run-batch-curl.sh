@@ -40,9 +40,10 @@ curl --request POST \
   --header 'content-type: application/json' \
   --url 'http://localhost:8080/books' \
   --data '{
+	"authorId": 2,
 	"title": "Get Your Hands Dirty on Clean Architecture V1.",
-  "price:" 11.11,
-	"authorId": 2
+    "price": 11.11,
+	"available": true
 }' | json_pp
 
 echo
@@ -52,9 +53,10 @@ curl --request PUT \
   --header 'content-type: application/json' \
   --url 'http://localhost:8080/books/1' \
   --data '{
+	"authorId": 1,
 	"title": "Get Your Hands Dirty on Clean Architecture V2.",
-  "price:" 22.22,
-	"authorId": 1
+    "price": 22.22,
+    "available": true
 }' | json_pp
 
 echo
@@ -64,9 +66,10 @@ curl --request POST \
   --header 'content-type: application/json' \
   --url 'http://localhost:8080/books' \
   --data '{
+	"authorId": 2,
 	"title": "Get Your Hands Dirty on Clean Architecture V1.",
-  "price:" 33.33,
-	"authorId": 2
+    "price": 33.33,
+    "available": true
 }' | json_pp
 
 echo

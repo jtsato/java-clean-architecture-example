@@ -22,6 +22,6 @@ public class BookMapper {
 
     public static BookEntity of(final Book book) {
         final AuthorEntity authorEntity = AuthorMapper.of(book.getAuthor());
-		return new BookEntity(book.getId(), authorEntity, book.getTitle(), book.getPrice(), book.getAvailable(), book.getCreationDate(), book.getUpdateDate(), null);
+		return new BookEntity(book.getId(), authorEntity, book.getTitle(), book.getPrice(), book.getAvailable(), book.getCreationDate(), book.getUpdateDate());
     }
 }

@@ -13,6 +13,14 @@ import lombok.NoArgsConstructor;
 public class SaveBookDocumentPresenter {
 
 	public static SaveBookDocumentResponse of(final BookDocument bookDocument) {
-		return new SaveBookDocumentResponse(bookDocument.getId(), bookDocument.getBookId(), bookDocument.getCreationDate(), bookDocument.getUpdateDate());
+		return new SaveBookDocumentResponse(bookDocument.getId(), 
+											bookDocument.getBookId(),
+											bookDocument.getContentType(), 
+											bookDocument.getExtension(), 
+											bookDocument.getName(),
+											bookDocument.getSize(), 
+											bookDocument.getContent(),
+											bookDocument.getCreationDate(), 
+											bookDocument.getUpdateDate());
 	}
 }

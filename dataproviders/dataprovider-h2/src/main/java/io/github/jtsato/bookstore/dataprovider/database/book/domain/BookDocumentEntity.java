@@ -10,6 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
@@ -54,6 +55,7 @@ public class BookDocumentEntity implements Serializable {
     @Column(name = "SIZE", nullable = false)
     private Long size;
     
+    @Lob
     @Column(name = "CONTENT", nullable = true)
     private String content;
 

@@ -19,6 +19,16 @@ public class SaveBookDocumentResponse implements Serializable {
 	private final Long id;
 
 	private final Long bookId;
+	
+	private final String contentType;
+	
+	private final String extension;
+	
+	private final String name;
+	
+	private final Long size;
+
+	private final String content;	
 
     private final LocalDateTime creationDate;
 
