@@ -28,8 +28,6 @@ public class SaveBookDocumentResponse implements Serializable {
 	
 	private final Long size;
 
-	private final String content;	
-
     private final LocalDateTime creationDate;
 
     private final LocalDateTime updateDate;

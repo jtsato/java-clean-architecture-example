@@ -19,7 +19,6 @@ public class SaveBookDocumentPresenter {
 											bookDocument.getExtension(), 
 											bookDocument.getName(),
 											bookDocument.getSize(), 
-											bookDocument.getContent(),
 											bookDocument.getCreationDate(), 
 											bookDocument.getUpdateDate());
 	}

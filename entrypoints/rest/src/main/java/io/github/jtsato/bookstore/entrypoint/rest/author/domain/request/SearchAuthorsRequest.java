@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
@@ -12,18 +13,19 @@ import lombok.Setter;
 
 @Getter
 @Setter
+@NoArgsConstructor
 @AllArgsConstructor
 public final class SearchAuthorsRequest implements Serializable {
     
     private static final long serialVersionUID = 6528126199921883953L;
 
-    private final Long id;
+    private Long id;
     
-    private final String name;
+    private String name;
     
-    private final String gender;
+    private String gender;
     
-    private final String startBirthday;
+    private String startBirthday;
     
-    private final String endBirthday;
+    private String endBirthday;
 }

@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
@@ -13,11 +14,12 @@ import lombok.ToString;
 
 @Getter
 @Setter
+@NoArgsConstructor 
 @AllArgsConstructor
 @ToString
 public class WebRequest implements Serializable {
 
     private static final long serialVersionUID = 8255224016531189463L;
     
-    protected final String path;
+    protected String path;
 }

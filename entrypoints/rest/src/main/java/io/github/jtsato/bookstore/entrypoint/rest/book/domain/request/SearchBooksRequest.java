@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
@@ -12,16 +13,17 @@ import lombok.Setter;
 
 @Getter
 @Setter
+@NoArgsConstructor
 @AllArgsConstructor
 public final class SearchBooksRequest implements Serializable {
     
     private static final long serialVersionUID = 7019480436873286085L;
 
-    private final SearchBooksAuthorRequest author = new SearchBooksAuthorRequest();
+    private SearchBooksAuthorRequest author = new SearchBooksAuthorRequest();
     
-    private final String title;
+    private String title;
     
-    private final String startCreationDate;
+    private String startCreationDate;
     
-    private final String endCreationDate;
+    private String endCreationDate;
 }

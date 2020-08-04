@@ -4,20 +4,22 @@ import java.io.Serializable;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 /**
  * @author Jorge Takeshi Sato  
  */
 
 @Getter
+@NoArgsConstructor
 @AllArgsConstructor
 public class RegisterAuthorRequest implements Serializable {
 
     private static final long serialVersionUID = -3128994081332681868L;
 
-    private final String name;
+    private String name;
 
-    private final String gender;
+    private String gender;
     
-    private final String birthday;
+    private String birthday;
 }

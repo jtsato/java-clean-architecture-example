@@ -5,6 +5,7 @@ import java.util.List;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
@@ -13,10 +14,11 @@ import lombok.Setter;
 
 @Getter
 @Setter
+@NoArgsConstructor
 @AllArgsConstructor
 public final class FindAuthorsByIdsRequest implements Serializable {
     
 	private static final long serialVersionUID = 7832871097344659884L;
 
-	private final List<Long> ids;
+	private List<Long> ids;
 }

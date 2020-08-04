@@ -6,27 +6,29 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 /**
  * @author Jorge Takeshi Sato  
  */
 
 @Getter
+@NoArgsConstructor
 @AllArgsConstructor
 public class SaveBookDocumentRequest implements Serializable {
 
     private static final long serialVersionUID = -2642365523322205913L;
 
-	private final Long bookId;
+	private Long bookId;
 	
-	private final String contentType;
+	private String contentType;
 	
-	private final String extension;
+	private String extension;
 	
-	private final String name;
+	private String name;
 	
-	private final Long size;
+	private Long size;
 
 	@JsonIgnore
-    private final String content;
+    private String content;
 }

@@ -72,6 +72,7 @@ bookstore:
          update-book-by-id: update-book-by-id-exchange
          remove-author-by-id: remove-author-by-id-exchange
          remove-book-by-id: remove-book-by-id-exchange
+         save-book-document: save-book-document-exchange 
       queue:
          register-author: register-author-queue
          register-book: register-book-queue
@@ -79,10 +80,12 @@ bookstore:
          update-book-by-id: update-book-by-id-queue
          remove-author-by-id: remove-author-by-id-queue
          remove-book-by-id: remove-book-by-id-queue
+         save-book-document: save-book-document-queue 
       routingkey:
          register-author: register-author-routingkey
          register-book: register-book-routingkey
-         update-author-by-id: update-author-by-author-routingkey
-         update-book-by-id: update-book-by-author-routingkey
+         update-author-by-id: update-author-by-id-routingkey
+         update-book-by-id: update-book-by-id-routingkey
          remove-author-by-id: remove-author-by-id-routingkey
          remove-book-by-id: remove-book-by-id-routingkey
+         save-book-document: save-book-document-routingkey
