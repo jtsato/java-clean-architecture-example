@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class RegisterBookMessageConverter {
 
-    public static RegisterBookMessage of(final Book book) {
-        return new RegisterBookMessage(book.getTitle(), book.getAuthor().getId());
-    }
+	public static RegisterBookMessage of(final Book book) {
+		return new RegisterBookMessage(book.getAuthor().getId(), book.getTitle(), book.getPrice(), book.getAvailable());
+	}
 }

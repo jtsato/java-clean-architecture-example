@@ -15,9 +15,9 @@ public class RegisterAuthorRequest implements Serializable {
 
     private static final long serialVersionUID = -3128994081332681868L;
 
-    private String name;
+    private final String name;
 
-    private String gender;
+    private final String gender;
     
-    private String birthday;
+    private final String birthday;
 }

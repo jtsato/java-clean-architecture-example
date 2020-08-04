@@ -16,11 +16,11 @@ public class UpdateBookByIdRequest implements Serializable {
 
     private static final long serialVersionUID = -2642365523322205913L;
     
-    private Long authorId;
+    private final Long authorId;
     
-    private String title;
+    private final String title;
 
-    private BigDecimal price;
+    private final BigDecimal price;
     
-    private Boolean available;
+    private final Boolean available;
 }

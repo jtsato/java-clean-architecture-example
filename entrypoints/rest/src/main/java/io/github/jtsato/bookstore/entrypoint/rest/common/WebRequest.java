@@ -19,5 +19,5 @@ public class WebRequest implements Serializable {
 
     private static final long serialVersionUID = 8255224016531189463L;
     
-    protected String path;
+    protected final String path;
 }

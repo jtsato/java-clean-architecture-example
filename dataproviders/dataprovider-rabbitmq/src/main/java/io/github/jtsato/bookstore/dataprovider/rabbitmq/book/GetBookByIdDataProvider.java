@@ -20,6 +20,6 @@ public class GetBookByIdDataProvider implements GetBookByIdGateway {
 
     @Override
     public Optional<Book> getBookById(final Long id) {
-        return Optional.of(new Book(id, null, LocalDateTime.now(), new Author(1L, null, Gender.FEMALE, LocalDate.MIN)));
+		return Optional.of(new Book(id, new Author(1L, null, Gender.FEMALE, LocalDate.MIN), null, null, Boolean.FALSE, LocalDateTime.now(), LocalDateTime.now()));
     }
 }

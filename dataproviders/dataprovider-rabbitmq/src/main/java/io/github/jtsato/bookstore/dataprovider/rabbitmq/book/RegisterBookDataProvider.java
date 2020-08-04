@@ -3,7 +3,6 @@ package io.github.jtsato.bookstore.dataprovider.rabbitmq.book;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import io.github.jtsato.bookstore.core.book.domain.Book;
 import io.github.jtsato.bookstore.core.book.gateway.RegisterBookGateway;
@@ -15,7 +14,6 @@ import io.github.jtsato.bookstore.dataprovider.rabbitmq.service.DispatcherAmqpPr
  * @author Jorge Takeshi Sato  
  */
 
-@Transactional
 @Service
 public class RegisterBookDataProvider implements RegisterBookGateway {
 

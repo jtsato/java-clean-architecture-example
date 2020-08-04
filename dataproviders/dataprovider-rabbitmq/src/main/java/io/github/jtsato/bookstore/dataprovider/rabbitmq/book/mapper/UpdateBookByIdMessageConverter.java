@@ -12,7 +12,12 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class UpdateBookByIdMessageConverter {
 
-    public static UpdateBookByIdMessage of(final Book book) {
-        return new UpdateBookByIdMessage(book.getId(), book.getTitle(), book.getAuthor().getId());
-    }
+	public static UpdateBookByIdMessage of(final Book book) {
+		return new UpdateBookByIdMessage(
+				book.getId(), 
+				book.getAuthor().getId(), 
+				book.getTitle(), 
+				book.getPrice(),
+				book.getAvailable());
+	}
 }

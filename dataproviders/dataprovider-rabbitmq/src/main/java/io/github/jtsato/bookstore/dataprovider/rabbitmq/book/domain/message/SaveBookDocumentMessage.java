@@ -1,7 +1,6 @@
 package io.github.jtsato.bookstore.dataprovider.rabbitmq.book.domain.message;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -12,15 +11,21 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public class RegisterBookMessage implements Serializable {
+public class SaveBookDocumentMessage implements Serializable {
 
     private static final long serialVersionUID = -1401793357376446399L;
 
-    private final Long authorId;
-    
-    private final String title;
-    
-    private final BigDecimal price;
-    
-    private final Boolean available;
+	private final Long id;
+
+	private final Long bookId;
+	
+	private final String contentType;
+	
+	private final String extension;
+	
+	private final String name;
+	
+	private final Long size;
+
+    private final String content;
 }
