@@ -65,7 +65,6 @@ class SaveBookDocumentControllerTest {
                .andExpect(jsonPath("$.extension", is("txt")))
                .andExpect(jsonPath("$.name", is("file")))
                .andExpect(jsonPath("$.size", is(123)))
-               .andExpect(jsonPath("$.content", is("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.")))
                .andExpect(jsonPath("$.creationDate", is("2020-03-12T22:04:59.123")))
                .andExpect(jsonPath("$.updateDate", is("2020-03-12T22:04:59.123")));
 
