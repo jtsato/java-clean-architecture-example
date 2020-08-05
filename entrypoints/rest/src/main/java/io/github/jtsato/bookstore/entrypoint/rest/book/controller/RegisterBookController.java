@@ -29,5 +29,6 @@ public interface RegisterBookController {
                            @ApiResponse(responseCode = HttpStatusConstants.BAD_REQUEST_400, description = HttpStatusConstants.BAD_REQUEST_400_MESSAGE),
                            @ApiResponse(responseCode = HttpStatusConstants.INTERNAL_SERVER_ERROR_500,
                                         description = HttpStatusConstants.INTERNAL_SERVER_ERROR_500_MESSAGE),})
+    
     RegisterBookResponse registerBook(final RegisterBookRequest request);
 }

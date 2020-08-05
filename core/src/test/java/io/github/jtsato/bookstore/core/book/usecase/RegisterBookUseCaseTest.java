@@ -51,7 +51,7 @@ class RegisterBookUseCaseTest {
     private final GetLocalDateTime getLocalDateTime = Mockito.mock(GetLocalDateTime.class);
 
     @InjectMocks
-    private final RegisterBookUseCase getBookByIdUseCase = new RegisterBookUseCaseImpl(registerBookGateway,
+    private final RegisterBookUseCase registerBookUseCase = new RegisterBookUseCaseImpl(registerBookGateway,
                                                                                        getAuthorByIdGateway,
                                                                                        getBookByTitleGateway,
                                                                                        getLocalDateTime);
@@ -100,7 +100,7 @@ class RegisterBookUseCaseTest {
                                                                                          "Effective Java (2nd Edition)",
                                                                                          BigDecimal.valueOf(10.00),
                                                                                          Boolean.TRUE);
-        final Book book = getBookByIdUseCase.registerBook(registerBookParameters);
+        final Book book = registerBookUseCase.registerBook(registerBookParameters);
 
         assertThat(book.getId()).isEqualTo(1L);
         assertThat(book.getTitle()).isEqualTo("Effective Java (2nd Edition)");
@@ -159,7 +159,7 @@ class RegisterBookUseCaseTest {
                                                                                          Boolean.TRUE);
 
         final Exception exception = Assertions.assertThrows(Exception.class, () -> {
-            getBookByIdUseCase.registerBook(registerBookParameters);
+            registerBookUseCase.registerBook(registerBookParameters);
         });
 
         assertThat(exception).isInstanceOf(UniqueConstraintException.class);
@@ -195,7 +195,7 @@ class RegisterBookUseCaseTest {
                                                                                          Boolean.TRUE);
 
         final Exception exception = Assertions.assertThrows(Exception.class, () -> {
-            getBookByIdUseCase.registerBook(registerBookParameters);
+            registerBookUseCase.registerBook(registerBookParameters);
         });
 
         assertThat(exception).isInstanceOf(NotFoundException.class);
