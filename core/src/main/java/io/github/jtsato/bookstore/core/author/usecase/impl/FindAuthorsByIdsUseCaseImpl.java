@@ -26,19 +26,19 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class FindAuthorsByIdsUseCaseImpl implements FindAuthorsByIdsUseCase {
 
-	private final FindAuthorsByIdsGateway findAuthorsByIdsGateway;
+    private final FindAuthorsByIdsGateway findAuthorsByIdsGateway;
 
-	@Override
-	public Page<Author> findAuthorsByIds(final List<Long> ids) {
+    @Override
+    public Page<Author> findAuthorsByIds(final List<Long> ids) {
 
-		if (CollectionUtils.isEmpty(ids)) {
-			throw new InvalidParameterException("validation.authors.ids.null");
-		}
+        if (CollectionUtils.isEmpty(ids)) {
+            throw new InvalidParameterException("validation.authors.ids.null");
+        }
 
-		if (ids.size() > 1000) {
-			throw new InvalidParameterException("validation.get.by.ids.limit");
-		}
+        if (ids.size() > 1000) {
+            throw new InvalidParameterException("validation.get.by.ids.limit");
+        }
 
-		return findAuthorsByIdsGateway.findAuthorsByIds(ids);
-	}
+        return findAuthorsByIdsGateway.findAuthorsByIds(ids);
+    }
 }

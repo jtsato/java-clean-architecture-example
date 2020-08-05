@@ -24,17 +24,17 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class RemoveBookByIdUseCaseImpl implements RemoveBookByIdUseCase {
 
-	private final RemoveBookByIdGateway removeBookByIdGateway;
+    private final RemoveBookByIdGateway removeBookByIdGateway;
 
     @Override
     public Book removeBookById(final Long id) {
-        
+
         if (id == null) {
             throw new InvalidParameterException("validation.book.id.null");
         }
-        
+
         final Optional<Book> optional = removeBookByIdGateway.removeBookById(id);
-        
+
         if (!optional.isPresent()) {
             throw new NotFoundException("validation.book.id.notfound", id);
         }

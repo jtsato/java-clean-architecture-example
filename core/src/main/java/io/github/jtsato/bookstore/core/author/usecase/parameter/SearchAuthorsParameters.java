@@ -17,7 +17,7 @@ import lombok.experimental.FieldDefaults;
 public class SearchAuthorsParameters extends SelfValidating<SearchAuthorsParameters> {
 
     private Long id;
-    
+
     private String name;
 
     private String gender;

@@ -123,7 +123,7 @@ public class HttpStatusConstants {
 
     public static final String REQUESTED_RANGE_NOT_SATISFIABLE_416 = "416";
     public static final String REQUESTED_RANGE_NOT_SATISFIABLE_416_MESSAGE = "Requested range not satisfiable";
-    
+
     public static final String EXPECTATION_FAILED_417 = "417";
     public static final String EXPECTATION_FAILED_417_MESSAGE = "Expectation Failed";
 
@@ -156,7 +156,7 @@ public class HttpStatusConstants {
 
     public static final String UNAVAILABLE_FOR_LEGAL_REASONS_451 = "451";
     public static final String UNAVAILABLE_FOR_LEGAL_REASONS_451_MESSAGE = "Unavailable For Legal Reasons";
-    
+
     public static final String INTERNAL_SERVER_ERROR_500 = "500";
     public static final String INTERNAL_SERVER_ERROR_500_MESSAGE = "Internal Server Error";
 

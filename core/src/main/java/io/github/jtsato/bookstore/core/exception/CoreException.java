@@ -18,7 +18,7 @@ public class CoreException extends RuntimeException {
 
     @Getter
     private final transient Object[] args;
-    
+
     public CoreException(final String message) {
         super();
         this.message = message;

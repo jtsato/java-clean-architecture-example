@@ -22,7 +22,7 @@ public class JsonConverter {
     public static String convert(final Serializable serializable) {
         try {
             return new ObjectMapper().writeValueAsString(serializable);
-        } catch (JsonProcessingException jsonProcessingException) {
+        } catch (final JsonProcessingException jsonProcessingException) {
             return StringUtils.EMPTY;
         }
     }

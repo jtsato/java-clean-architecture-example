@@ -138,12 +138,12 @@
 					<siteReportDescription>Bookstore dataprovider mutation report</siteReportDescription>
 					<siteReportDirectory>bookstore-dataprovider-rabbitmq</siteReportDirectory>
 					<targetClasses>
-						<param>io.github.jtsato.bookstore.dataprovider.rabbitmq.author.*DataProvider</param>
-						<param>io.github.jtsato.bookstore.dataprovider.rabbitmq.book.*DataProvider</param>
+						<param>io.github.jtsato.bookstore.dataprovider.author.*DataProvider</param>
+						<param>io.github.jtsato.bookstore.dataprovider.book.*DataProvider</param>
 					</targetClasses>
 					<targetTests>
-						<param>io.github.jtsato.bookstore.dataprovider.rabbitmq.author.*DataProviderTest</param>
-						<param>io.github.jtsato.bookstore.dataprovider.rabbitmq.book.*DataProviderTest</param>
+						<param>io.github.jtsato.bookstore.dataprovider.author.*DataProviderTest</param>
+						<param>io.github.jtsato.bookstore.dataprovider.book.*DataProviderTest</param>
 					</targetTests>
 				</configuration>
 				<dependencies>

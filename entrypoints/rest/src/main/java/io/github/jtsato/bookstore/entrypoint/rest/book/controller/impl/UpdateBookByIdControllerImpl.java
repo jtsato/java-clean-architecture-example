@@ -23,7 +23,7 @@ import lombok.extern.slf4j.Slf4j;
 
 /*
  * A EntryPoint follows these steps:
- * 
+ *
  * - Maps HTTP requests to Java objects
  * - Performs authorization checks
  * - Maps input to the input model of the use case
@@ -43,14 +43,19 @@ public class UpdateBookByIdControllerImpl implements UpdateBookByIdController {
 
     private final UpdateBookByIdUseCase updateBookByIdUseCase;
 
-    @LogExecutionTime    
+    @Override
+    @LogExecutionTime
     @ResponseStatus(HttpStatus.OK)
     @PutMapping
     public UpdateBookByIdResponse updateBookById(@PathVariable final Long id, @RequestBody @DefaultValue final UpdateBookByIdRequest request) {
 
         log.debug("Starting Controller -> UpdateBookByIdController with {}", JsonConverter.convert(request));
 
-        final UpdateBookByIdParameters parameters = new UpdateBookByIdParameters(id, request.getAuthorId(), request.getTitle(), request.getPrice(), request.getAvailable());
+        final UpdateBookByIdParameters parameters = new UpdateBookByIdParameters(id,
+                                                                                 request.getAuthorId(),
+                                                                                 request.getTitle(),
+                                                                                 request.getPrice(),
+                                                                                 request.getAvailable());
 
         final Book book = updateBookByIdUseCase.updateBookById(parameters);
 

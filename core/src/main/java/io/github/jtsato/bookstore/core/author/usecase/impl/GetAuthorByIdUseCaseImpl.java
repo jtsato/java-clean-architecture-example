@@ -24,21 +24,21 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class GetAuthorByIdUseCaseImpl implements GetAuthorByIdUseCase {
 
-	private final GetAuthorByIdGateway getAuthorByIdGateway;
+    private final GetAuthorByIdGateway getAuthorByIdGateway;
 
-	@Override
-	public Author getAuthorById(final Long id) {
-	    
+    @Override
+    public Author getAuthorById(final Long id) {
+
         if (id == null) {
             throw new InvalidParameterException("validation.author.id.null");
         }
 
         final Optional<Author> optional = getAuthorByIdGateway.getAuthorById(id);
-	    
-	    if (!optional.isPresent()) {
+
+        if (!optional.isPresent()) {
             throw new NotFoundException("validation.author.id.notfound", id);
-	    }
-	    
-	    return optional.get();
-	}
+        }
+
+        return optional.get();
+    }
 }

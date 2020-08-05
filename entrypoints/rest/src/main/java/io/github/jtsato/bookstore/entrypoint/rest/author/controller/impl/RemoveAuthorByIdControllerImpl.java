@@ -15,7 +15,7 @@ import lombok.extern.slf4j.Slf4j;
 
 /*
  * A EntryPoint follows these steps:
- * 
+ *
  * - Maps HTTP requests to Java objects
  * - Performs authorization checks
  * - Maps input to the input model of the use case
@@ -35,7 +35,8 @@ public class RemoveAuthorByIdControllerImpl implements RemoveAuthorByIdControlle
 
     private final RemoveAuthorByIdUseCase removeAuthorByIdUseCase;
 
-    @LogExecutionTime    
+    @Override
+    @LogExecutionTime
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("/{id}")
     public void removeAuthorById(@PathVariable final Long id) {

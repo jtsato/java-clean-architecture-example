@@ -99,24 +99,24 @@ public class BookstoreConfiguration {
                                                    @Autowired final GetLocalDateTime getLocalDateTime) {
         return new RegisterBookUseCaseImpl(registerBookGateway, getAuthorByIdGateway, getBookByTitleGateway, getLocalDateTime);
     }
-    
-	@Bean
-	public SaveBookDocumentUseCase saveBookDocumentUseCase(@Autowired final SaveBookDocumentGateway saveBookDocumentGateway,
-														   @Autowired final GetBookByIdGateway getBookByIdGateway,
-														   @Autowired final GetBookDocumentByBookIdGateway getBookDocumentByBookIdGateway, 
-														   @Autowired final GetLocalDateTime getLocalDateTime) {
-		return new SaveBookDocumentUseCaseImpl(saveBookDocumentGateway, getBookByIdGateway, getBookDocumentByBookIdGateway, getLocalDateTime);
-	}
-    
+
+    @Bean
+    public SaveBookDocumentUseCase saveBookDocumentUseCase(@Autowired final SaveBookDocumentGateway saveBookDocumentGateway,
+                                                           @Autowired final GetBookByIdGateway getBookByIdGateway,
+                                                           @Autowired final GetBookDocumentByBookIdGateway getBookDocumentByBookIdGateway,
+                                                           @Autowired final GetLocalDateTime getLocalDateTime) {
+        return new SaveBookDocumentUseCaseImpl(saveBookDocumentGateway, getBookByIdGateway, getBookDocumentByBookIdGateway, getLocalDateTime);
+    }
+
     @Bean
     public GetBookByIdUseCase getBookByIdUseCase(@Autowired final GetBookByIdGateway getBookByIdGateway) {
         return new GetBookByIdUseCaseImpl(getBookByIdGateway);
     }
-    
+
     @Bean
     public FindBooksByIdsUseCase findBooksByIdsUseCase(@Autowired final FindBooksByIdsGateway findBooksByIdsGateway) {
         return new FindBooksByIdsUseCaseImpl(findBooksByIdsGateway);
-    }    
+    }
 
     @Bean
     public SearchBooksUseCase searchBooksUseCase(@Autowired final SearchBooksGateway searchBooksGateway) {
@@ -135,10 +135,10 @@ public class BookstoreConfiguration {
     public RemoveBookByIdUseCase removeBookByIdUseCase(@Autowired final RemoveBookByIdGateway removeBookByIdGateway) {
         return new RemoveBookByIdUseCaseImpl(removeBookByIdGateway);
     }
-    
+
     @Bean
     public GetLocalDateTime getLocalDateTime() {
         return new GetLocalDateTimeImpl();
-    } 
+    }
 
 }

@@ -9,5 +9,5 @@ import io.github.jtsato.bookstore.core.book.domain.Book;
 @FunctionalInterface
 public interface RemoveBookByIdUseCase {
 
-	Book removeBookById(final Long id);
+    Book removeBookById(final Long id);
 }

@@ -9,7 +9,7 @@ import lombok.Getter;
 import lombok.ToString;
 
 /**
- * @author Jorge Takeshi Sato  
+ * @author Jorge Takeshi Sato
  */
 
 @Getter
@@ -25,6 +25,6 @@ public class Author implements Serializable {
     private final String name;
 
     private final Gender gender;
-    
+
     private final LocalDate birthday;
 }

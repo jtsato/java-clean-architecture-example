@@ -30,7 +30,9 @@ public class EnumUtils {
         return values.stream().map(T::toString).collect(Collectors.toList());
     }
 
-    private static Supplier<? extends InvalidParameterException> throwIllegalArgumentException(final String enumClass, final String actual, final List<String> values) {
+    private static Supplier<? extends InvalidParameterException> throwIllegalArgumentException(final String enumClass,
+                                                                                               final String actual,
+                                                                                               final List<String> values) {
         final String message = String.format("The value %s is not valid for %s. Valid values are: %s.", actual, enumClass, String.join(", ", values));
         return () -> new InvalidParameterException(message);
     }

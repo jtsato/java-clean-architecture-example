@@ -18,7 +18,7 @@ import lombok.extern.slf4j.Slf4j;
 
 /*
  * A EntryPoint follows these steps:
- * 
+ *
  * - Maps HTTP requests to Java objects
  * - Performs authorization checks
  * - Maps input to the input model of the use case
@@ -38,7 +38,8 @@ public class GetBookByIdControllerImpl implements GetBookByIdController {
 
     private final GetBookByIdUseCase getBookByIdUseCase;
 
-    @LogExecutionTime    
+    @Override
+    @LogExecutionTime
     @ResponseStatus(HttpStatus.OK)
     @GetMapping("/{id}")
     public GetBookByIdResponse getBookById(@PathVariable final Long id) {

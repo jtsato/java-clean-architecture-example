@@ -22,7 +22,7 @@ import lombok.extern.slf4j.Slf4j;
 
 /*
  * A EntryPoint follows these steps:
- * 
+ *
  * - Maps HTTP requests to Java objects
  * - Performs authorization checks
  * - Maps input to the input model of the use case
@@ -42,14 +42,18 @@ public class RegisterBookControllerImpl implements RegisterBookController {
 
     private final RegisterBookUseCase registerBookUseCase;
 
-    @LogExecutionTime    
+    @Override
+    @LogExecutionTime
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
     public RegisterBookResponse registerBook(@RequestBody @DefaultValue final RegisterBookRequest request) {
 
         log.debug("Starting Controller -> RegisterBookController with {}", JsonConverter.convert(request));
 
-        final RegisterBookParameters parameters = new RegisterBookParameters(request.getAuthorId(), request.getTitle(), request.getPrice(), request.getAvailable());
+        final RegisterBookParameters parameters = new RegisterBookParameters(request.getAuthorId(),
+                                                                             request.getTitle(),
+                                                                             request.getPrice(),
+                                                                             request.getAvailable());
 
         final Book book = registerBookUseCase.registerBook(parameters);
 

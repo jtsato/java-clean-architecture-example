@@ -20,6 +20,6 @@ public class RegisterAuthorRequest implements Serializable {
     private String name;
 
     private String gender;
-    
+
     private String birthday;
 }

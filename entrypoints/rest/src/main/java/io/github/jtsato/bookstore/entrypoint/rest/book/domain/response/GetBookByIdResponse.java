@@ -20,13 +20,13 @@ public class GetBookByIdResponse implements Serializable {
     private final Long id;
 
     private final GetBookByIdAuthorResponse author;
-    
+
     private final String title;
-    
+
     private final BigDecimal price;
 
     private final Boolean available;
-    
+
     private final LocalDateTime creationDate;
 
     private final LocalDateTime updateDate;

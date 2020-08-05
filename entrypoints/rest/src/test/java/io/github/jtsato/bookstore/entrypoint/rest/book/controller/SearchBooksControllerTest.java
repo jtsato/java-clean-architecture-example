@@ -63,7 +63,8 @@ class SearchBooksControllerTest {
 
         final String queryParameters = "page=1&size=3&sort=title,asc&title=Effective Java&author.id=1&startCreationDate=2020-02-29T00:00:00&endCreationDate=2020-02-29T23:59:59";
 
-        mockMvc.perform(get(String.format("/books/?%s", queryParameters)).contentType(MediaType.APPLICATION_JSON_VALUE).accept(MediaType.APPLICATION_JSON_VALUE))
+        mockMvc.perform(get(String.format("/books/?%s", queryParameters)).contentType(MediaType.APPLICATION_JSON_VALUE)
+                                                                         .accept(MediaType.APPLICATION_JSON_VALUE))
                .andDo(print())
                .andExpect(status().isOk())
                .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
@@ -82,7 +83,7 @@ class SearchBooksControllerTest {
                .andExpect(jsonPath("$.pageable.numberOfElements", is(1)))
                .andExpect(jsonPath("$.pageable.totalOfElements", is(4)))
                .andExpect(jsonPath("$.pageable.totalPages", is(2)));
-        
+
         verify(searchBooksUseCase, times(1)).searchBooks(parameters, 1, 3, "title: ASC");
         verifyNoMoreInteractions(searchBooksUseCase);
     }
@@ -90,9 +91,15 @@ class SearchBooksControllerTest {
     private Page<Book> mockSearchBooksUseCaseReturn() {
 
         final Author author = new Author(1L, "Joshua Bloch", Gender.MALE, LocalDate.parse("1961-08-28"));
-        
+
         final List<Book> content = new ArrayList<>(1);
-        content.add(new Book(1L, author, "Effective Java (2nd Edition)", BigDecimal.valueOf(10.00), Boolean.TRUE, LocalDateTime.parse("2020-02-29T12:00:00"), LocalDateTime.parse("2020-02-29T12:00:00")));
+        content.add(new Book(1L,
+                             author,
+                             "Effective Java (2nd Edition)",
+                             BigDecimal.valueOf(10.00),
+                             Boolean.TRUE,
+                             LocalDateTime.parse("2020-02-29T12:00:00"),
+                             LocalDateTime.parse("2020-02-29T12:00:00")));
 
         return new PageImpl<>(content, new Pageable(1, 3, 1, 4L, 2));
     }

@@ -22,12 +22,12 @@ public class RegisterBookResponse implements Serializable {
     private final RegisterBookAuthorResponse author;
 
     private final String title;
-    
+
     private final BigDecimal price;
 
     private final Boolean available;
 
     private final LocalDateTime creationDate;
-    
+
     private final LocalDateTime updateDate;
 }

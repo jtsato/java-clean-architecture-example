@@ -17,7 +17,7 @@ import lombok.ToString;
 @ToString
 public class PageImpl<T> implements Page<T> {
 
-    private List<T> content;
+    private final List<T> content;
 
-    private Pageable pageable;
+    private final Pageable pageable;
 }

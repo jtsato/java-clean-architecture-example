@@ -35,25 +35,25 @@ import io.github.jtsato.bookstore.core.common.paging.Pageable;
 class SearchAuthorsUseCaseTest {
 
     @Mock
-    private SearchAuthorsGateway searchAuthorsGateway = Mockito.mock(SearchAuthorsGateway.class);
+    private final SearchAuthorsGateway searchAuthorsGateway = Mockito.mock(SearchAuthorsGateway.class);
 
     @InjectMocks
-    private SearchAuthorsUseCase searchAuthorsUseCase = new SearchAuthorsUseCaseImpl(searchAuthorsGateway);
-    
+    private final SearchAuthorsUseCase searchAuthorsUseCase = new SearchAuthorsUseCaseImpl(searchAuthorsGateway);
+
 
     @DisplayName("Fail to search authors with inconsistent parameters")
     @Test
     void failToSearchAuthorsWithInconsistentParameters() {
-        
+
         final Exception exception = Assertions.assertThrows(Exception.class, () -> {
             new SearchAuthorsParameters(null, StringUtils.SPACE, StringUtils.SPACE, "2019-02-29", "2019-02-29");
         });
-        
+
         assertThat(exception).isInstanceOf(ConstraintViolationException.class);
         final ConstraintViolationException constraintViolationException = (ConstraintViolationException) exception;
         assertThat(constraintViolationException.getMessage()).contains("startBirthdayDate: validation.author.start.birthday.date.notvalid");
         assertThat(constraintViolationException.getMessage()).contains("endBirthdayDate: validation.author.end.birthday.date.notvalid");
-    }    
+    }
 
     @DisplayName("Successful to search authors if found")
     @Test
@@ -61,15 +61,15 @@ class SearchAuthorsUseCaseTest {
 
         final SearchAuthorsParameters parameters = new SearchAuthorsParameters(null, null, null, null, null);
         final Page<Author> pageWithOneAuthor = mockPageWithOneAuthor();
-        
+
         when(searchAuthorsGateway.searchAuthors(parameters, 0, 1, "id:asc")).thenReturn(pageWithOneAuthor);
 
         final Page<Author> pageOfAuthors = searchAuthorsUseCase.searchAuthors(parameters, 0, 1, "id:asc");
 
         assertThat(pageOfAuthors).isNotNull();
-        
+
         final Pageable pageable = pageOfAuthors.getPageable();
-        
+
         assertThat(pageable).isNotNull();
         assertThat(pageable.getPage()).isZero();
         assertThat(pageable.getSize()).isOne();
@@ -81,7 +81,7 @@ class SearchAuthorsUseCaseTest {
 
         assertThat(authors).isNotNull().isNotEmpty();
         assertThat(authors.size()).isOne();
-        
+
         final Author author = authors.get(0);
 
         assertThat(author.getId()).isEqualTo(1L);
@@ -109,21 +109,21 @@ class SearchAuthorsUseCaseTest {
         final Page<Author> pageOfAuthors = searchAuthorsUseCase.searchAuthors(parameters, 0, 1, "id:asc");
 
         assertThat(pageOfAuthors).isNotNull();
-        
+
         final List<Author> authors = pageOfAuthors.getContent();
 
         assertThat(authors).isNotNull().isEmpty();
-        
+
         assertThat(pageOfAuthors.getPageable()).isNotNull();
-        
+
         final Pageable pageable = pageOfAuthors.getPageable();
-        
+
         assertThat(pageable).isNotNull();
         assertThat(pageable.getPage()).isZero();
         assertThat(pageable.getSize()).isOne();
         assertThat(pageable.getNumberOfElements()).isZero();
         assertThat(pageable.getTotalOfElements()).isZero();
-        assertThat(pageable.getTotalPages()).isZero();        
+        assertThat(pageable.getTotalPages()).isZero();
     }
 
     private Page<Author> mockEmptyAuthorsPage() {

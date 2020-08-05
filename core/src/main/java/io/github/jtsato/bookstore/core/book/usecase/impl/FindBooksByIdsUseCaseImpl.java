@@ -30,15 +30,15 @@ public class FindBooksByIdsUseCaseImpl implements FindBooksByIdsUseCase {
 
     @Override
     public Page<Book> findBooksByIds(final List<Long> ids) {
-        
+
         if (CollectionUtils.isEmpty(ids)) {
             throw new InvalidParameterException("validation.books.ids.null");
         }
-        
-		if (ids.size() > 1000) {
-			throw new InvalidParameterException("validation.get.by.ids.limit");
-		}        
-        
+
+        if (ids.size() > 1000) {
+            throw new InvalidParameterException("validation.get.by.ids.limit");
+        }
+
         return findBooksByIdsGateway.findBooksByIds(ids);
     }
 }

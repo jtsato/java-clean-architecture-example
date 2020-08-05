@@ -9,6 +9,6 @@ import io.github.jtsato.bookstore.core.book.domain.Book;
 @FunctionalInterface
 public interface RegisterBookGateway {
 
-	Book registerBook(final Book book);
+    Book registerBook(final Book book);
 
 }

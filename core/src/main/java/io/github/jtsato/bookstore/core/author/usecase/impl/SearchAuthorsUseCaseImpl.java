@@ -22,7 +22,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class SearchAuthorsUseCaseImpl implements SearchAuthorsUseCase {
 
-	private final SearchAuthorsGateway searchAuthorsGateway;
+    private final SearchAuthorsGateway searchAuthorsGateway;
 
     @Override
     public Page<Author> searchAuthors(final SearchAuthorsParameters parameters, final Integer page, final Integer size, final String orderBy) {

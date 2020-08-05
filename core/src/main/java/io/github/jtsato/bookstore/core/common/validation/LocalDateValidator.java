@@ -16,7 +16,7 @@ public class LocalDateValidator implements ConstraintValidator<LocalDateConstrai
     public boolean isValid(final String candidate, final ConstraintValidatorContext constraintContext) {
 
         if (candidate != null) {
-            
+
             try {
                 LocalDate.parse(candidate, DateTimeFormatter.ISO_DATE);
             } catch (final Exception exception) {

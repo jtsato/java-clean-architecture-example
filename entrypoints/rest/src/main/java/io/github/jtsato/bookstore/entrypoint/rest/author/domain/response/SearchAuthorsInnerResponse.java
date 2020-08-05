@@ -19,13 +19,13 @@ import lombok.ToString;
 @ToString
 public class SearchAuthorsInnerResponse implements Serializable {
 
-	private static final long serialVersionUID = -8133045476467957735L;
+    private static final long serialVersionUID = -8133045476467957735L;
 
-	private final Long id;
+    private final Long id;
 
-	private final String name;
+    private final String name;
 
-	private final String gender;
+    private final String gender;
 
-	private final LocalDate birthday;
+    private final LocalDate birthday;
 }

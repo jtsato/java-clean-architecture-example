@@ -23,20 +23,20 @@ import io.github.jtsato.bookstore.exception.handler.BookstoreExceptionHandler;
 
 /**
  * @author Jorge Takeshi Sato  
- * 
- * This class was based on the example available in the archunit repository in 
- * https://github.com/TNG/ArchUnit-Examples/tree/master/example-junit5 
+ *
+ * This class was based on the example available in the archunit repository in
+ * https://github.com/TNG/ArchUnit-Examples/tree/master/example-junit5
  */
 
 @AnalyzeClasses(packagesOf = BookstoreApplication.class)
 public class FrozenRulesTest {
 
     @ArchTest
-    static final ArchRule no_classes_should_depend_on_configuration =
-            freeze(noClasses().should().dependOnClassesThat().resideInAPackage("..configuration.."));
+    static final ArchRule no_classes_should_depend_on_configuration = freeze(noClasses().should().dependOnClassesThat().resideInAPackage("..configuration.."));
 
     @ArchTest
-    static final ArchRule no_classes_should_use_the_exception_handler =
-            freeze(noClasses().should().dependOnClassesThat().areAssignableTo(BookstoreExceptionHandler.class));
+    static final ArchRule no_classes_should_use_the_exception_handler = freeze(noClasses().should()
+                                                                                          .dependOnClassesThat()
+                                                                                          .areAssignableTo(BookstoreExceptionHandler.class));
 }
 

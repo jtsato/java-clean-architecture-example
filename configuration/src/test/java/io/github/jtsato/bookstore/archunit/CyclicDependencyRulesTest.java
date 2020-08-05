@@ -13,9 +13,9 @@ import io.github.jtsato.bookstore.BookstoreApplication;
 
 /**
  * @author Jorge Takeshi Sato  
- * 
- * This class was based on the example available in the archunit repository in 
- * https://github.com/TNG/ArchUnit-Examples/tree/master/example-junit5 
+ *
+ * This class was based on the example available in the archunit repository in
+ * https://github.com/TNG/ArchUnit-Examples/tree/master/example-junit5
  */
 
 @AnalyzeClasses(packagesOf = BookstoreApplication.class)
@@ -23,33 +23,33 @@ public class CyclicDependencyRulesTest {
 
     @ArchTest
     static final ArchRule no_cycles_by_method_calls_between_slices = slices().matching("..(simplecycle).(*)..")
-        .namingSlices("$2 of $1")
-        .should()
-        .beFreeOfCycles();
+                                                                             .namingSlices("$2 of $1")
+                                                                             .should()
+                                                                             .beFreeOfCycles();
 
     @ArchTest
     static final ArchRule no_cycles_by_constructor_calls_between_slices = slices().matching("..(constructorcycle).(*)..")
-        .namingSlices("$2 of $1")
-        .should()
-        .beFreeOfCycles();
+                                                                                  .namingSlices("$2 of $1")
+                                                                                  .should()
+                                                                                  .beFreeOfCycles();
 
     @ArchTest
     static final ArchRule no_cycles_by_inheritance_between_slices = slices().matching("..(inheritancecycle).(*)..")
-        .namingSlices("$2 of $1")
-        .should()
-        .beFreeOfCycles();
+                                                                            .namingSlices("$2 of $1")
+                                                                            .should()
+                                                                            .beFreeOfCycles();
 
     @ArchTest
     static final ArchRule no_cycles_by_field_access_between_slices = slices().matching("..(fieldaccesscycle).(*)..")
-        .namingSlices("$2 of $1")
-        .should()
-        .beFreeOfCycles();
+                                                                             .namingSlices("$2 of $1")
+                                                                             .should()
+                                                                             .beFreeOfCycles();
 
     @ArchTest
     static final ArchRule no_cycles_by_member_dependencies_between_slices = slices().matching("..(membercycle).(*)..")
-        .namingSlices("$2 of $1")
-        .should()
-        .beFreeOfCycles();
+                                                                                    .namingSlices("$2 of $1")
+                                                                                    .should()
+                                                                                    .beFreeOfCycles();
 
     @ArchTest
     static final ArchRule no_cycles_in_simple_scenario = slices().matching("..simplescenario.(*)..").namingSlices("$1").should().beFreeOfCycles();
@@ -72,7 +72,7 @@ public class CyclicDependencyRulesTest {
             }
 
             @Override
-            public SliceIdentifier getIdentifierOf(JavaClass javaClass) {
+            public SliceIdentifier getIdentifierOf(final JavaClass javaClass) {
                 if (javaClass.getPackageName().contains("complexcycles.slice1")) {
                     return SliceIdentifier.of("Complex-Cycle", "One");
                 }

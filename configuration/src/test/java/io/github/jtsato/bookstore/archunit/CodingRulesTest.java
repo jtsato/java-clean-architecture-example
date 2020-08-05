@@ -20,9 +20,9 @@ import io.github.jtsato.bookstore.BookstoreApplication;
 
 /**
  * @author Jorge Takeshi Sato  
- * 
- * This class was based on the example available in the archunit repository in 
- * https://github.com/TNG/ArchUnit-Examples/tree/master/example-junit5 
+ *
+ * This class was based on the example available in the archunit repository in
+ * https://github.com/TNG/ArchUnit-Examples/tree/master/example-junit5
  */
 
 @AnalyzeClasses(packagesOf = BookstoreApplication.class)
@@ -32,7 +32,7 @@ public class CodingRulesTest {
     private final ArchRule no_access_to_standard_streams = NO_CLASSES_SHOULD_ACCESS_STANDARD_STREAMS;
 
     @ArchTest
-    private void no_access_to_standard_streams_as_method(JavaClasses classes) {
+    private void no_access_to_standard_streams_as_method(final JavaClasses classes) {
         noClasses().should(ACCESS_STANDARD_STREAMS).check(classes);
     }
 
@@ -43,21 +43,20 @@ public class CodingRulesTest {
     private final ArchRule no_java_util_logging = NO_CLASSES_SHOULD_USE_JAVA_UTIL_LOGGING;
 
     @ArchTest
-    private final ArchRule loggers_should_be_private_static_final = fields()
-            .that()
-            .haveRawType(Logger.class)
-            .should()
-            .bePrivate()
-            .andShould()
-            .beStatic()
-            .andShould()
-            .beFinal()
-            .because("we agreed on this convention");
+    private final ArchRule loggers_should_be_private_static_final = fields().that()
+                                                                            .haveRawType(Logger.class)
+                                                                            .should()
+                                                                            .bePrivate()
+                                                                            .andShould()
+                                                                            .beStatic()
+                                                                            .andShould()
+                                                                            .beFinal()
+                                                                            .because("we agreed on this convention");
 
     @ArchTest
     private final ArchRule no_jodatime = NO_CLASSES_SHOULD_USE_JODATIME;
 
     @ArchTest
-    static final ArchRule no_classes_should_access_standard_streams_or_throw_generic_exceptions = 
-            CompositeArchRule.of(NO_CLASSES_SHOULD_ACCESS_STANDARD_STREAMS).and(NO_CLASSES_SHOULD_THROW_GENERIC_EXCEPTIONS);
+    static final ArchRule no_classes_should_access_standard_streams_or_throw_generic_exceptions = CompositeArchRule.of(NO_CLASSES_SHOULD_ACCESS_STANDARD_STREAMS)
+                                                                                                                   .and(NO_CLASSES_SHOULD_THROW_GENERIC_EXCEPTIONS);
 }

@@ -11,5 +11,5 @@ import io.github.jtsato.bookstore.core.book.domain.Book;
 @FunctionalInterface
 public interface GetBookByIdGateway {
 
-	Optional<Book> getBookById(final Long id);
+    Optional<Book> getBookById(final Long id);
 }

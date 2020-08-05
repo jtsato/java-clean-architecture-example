@@ -14,8 +14,8 @@ import lombok.experimental.FieldDefaults;
  * @author Jorge Takeshi Sato  
  */
 
-@Getter 
-@FieldDefaults(makeFinal=true, level=AccessLevel.PRIVATE) 
+@Getter
+@FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
 @EqualsAndHashCode(callSuper = false)
 public class UpdateAuthorByIdParameters extends SelfValidating<UpdateAuthorByIdParameters> {
 
@@ -24,13 +24,13 @@ public class UpdateAuthorByIdParameters extends SelfValidating<UpdateAuthorByIdP
 
     @NotBlank(message = "validation.author.name.blank")
     private final String name;
-    
+
     @NotBlank(message = "validation.author.gender.blank")
     private final String gender;
-    
+
     @NotNull(message = "validation.author.birthday.blank")
     @LocalDateConstraint(message = "validation.author.birthday.notvalid")
-    private final String birthday;         
+    private final String birthday;
 
     public UpdateAuthorByIdParameters(final Long id, final String name, final String gender, final String birthday) {
         this.id = id;

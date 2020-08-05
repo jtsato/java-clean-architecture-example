@@ -25,11 +25,11 @@ public class Book implements Serializable {
     private final Long id;
 
     private final Author author;
-    
-	private final String title;
-    
+
+    private final String title;
+
     private final BigDecimal price;
-    
+
     private final Boolean available;
 
     private final LocalDateTime creationDate;

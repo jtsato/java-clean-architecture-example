@@ -29,7 +29,7 @@ import lombok.extern.slf4j.Slf4j;
 
 /*
  * A EntryPoint follows these steps:
- * 
+ *
  * - Maps HTTP requests to Java objects
  * - Performs authorization checks
  * - Maps input to the input model of the use case
@@ -49,30 +49,43 @@ public class SaveBookDocumentControllerImpl implements SaveBookDocumentControlle
 
     private final SaveBookDocumentUseCase saveBookDocumentUseCase;
 
-    @LogExecutionTime    
+    @Override
+    @LogExecutionTime
     @ResponseStatus(HttpStatus.OK)
-	@PostMapping(value = "/{bookId}/content", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-	public SaveBookDocumentResponse saveBookDocument(@PathVariable final Long bookId, @RequestPart final MultipartFile file) throws IOException {
-    	
+    @PostMapping(value = "/{bookId}/content", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public SaveBookDocumentResponse saveBookDocument(@PathVariable final Long bookId, @RequestPart final MultipartFile file)
+        throws IOException {
+
         final SaveBookDocumentRequest saveBookDocumentRequest = buildSaveBookDocumentRequest(bookId, file);
-        
+
         log.debug("Starting Controller -> SaveBookDocumentController with {}", JsonConverter.convert(saveBookDocumentRequest));
 
         final SaveBookDocumentParameters saveBookDocumentParameters = buildSaveBookDocumentParameters(saveBookDocumentRequest);
-        
-		final BookDocument bookDocument = saveBookDocumentUseCase.saveBookDocument(saveBookDocumentParameters);
 
-        return SaveBookDocumentPresenter.of(bookDocument);	
-   }
+        final BookDocument bookDocument = saveBookDocumentUseCase.saveBookDocument(saveBookDocumentParameters);
 
-	private SaveBookDocumentRequest buildSaveBookDocumentRequest(final Long bookId, final MultipartFile file) throws IOException {
-		final byte[] content = file.getBytes();
-		final Encoder encoder = Base64.getEncoder();        
-		final String fileContent = encoder.encodeToString(content);
-		return new SaveBookDocumentRequest(bookId, file.getContentType(), FilenameUtils.getExtension(file.getOriginalFilename()), file.getName(), file.getSize(), fileContent);
-	}
-	
-	private SaveBookDocumentParameters buildSaveBookDocumentParameters(final SaveBookDocumentRequest request) {
-		return new SaveBookDocumentParameters(request.getBookId(), request.getContentType(), request.getExtension(), request.getName(), request.getSize(), request.getContent());
-	}	
+        return SaveBookDocumentPresenter.of(bookDocument);
+    }
+
+    private SaveBookDocumentRequest buildSaveBookDocumentRequest(final Long bookId, final MultipartFile file)
+        throws IOException {
+        final byte[] content = file.getBytes();
+        final Encoder encoder = Base64.getEncoder();
+        final String fileContent = encoder.encodeToString(content);
+        return new SaveBookDocumentRequest(bookId,
+                                           file.getContentType(),
+                                           FilenameUtils.getExtension(file.getOriginalFilename()),
+                                           file.getName(),
+                                           file.getSize(),
+                                           fileContent);
+    }
+
+    private SaveBookDocumentParameters buildSaveBookDocumentParameters(final SaveBookDocumentRequest request) {
+        return new SaveBookDocumentParameters(request.getBookId(),
+                                              request.getContentType(),
+                                              request.getExtension(),
+                                              request.getName(),
+                                              request.getSize(),
+                                              request.getContent());
+    }
 }

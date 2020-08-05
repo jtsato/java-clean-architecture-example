@@ -16,16 +16,16 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public final class SearchBooksAuthorRequest implements Serializable {
-    
+
     private static final long serialVersionUID = 6528126199921883953L;
 
     private Long id;
-    
+
     private String name;
-    
+
     private String gender;
-    
+
     private String startBirthday;
-    
+
     private String endBirthday;
 }

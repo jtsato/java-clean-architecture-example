@@ -78,6 +78,6 @@ class RegisterAuthorControllerTest {
     private String buildRequestBody()
         throws JsonProcessingException {
         final RegisterAuthorRequest request = new RegisterAuthorRequest("Joshua Bloch", "MALE", "1961-08-28");
-		return new ObjectMapper().writeValueAsString(request);
-	}
+        return new ObjectMapper().writeValueAsString(request);
+    }
 }

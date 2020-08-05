@@ -18,11 +18,15 @@ public interface RemoveAuthorByIdController {
 
     @Operation(summary = "Remove Author by Id")
 
-    @Parameter(name =  "Accept-Language", example = "pt_BR", in = ParameterIn.HEADER, description = "Represents a specific geographical, political, or cultural region. Language & Country.")
+    @Parameter(name = "Accept-Language",
+               example = "pt_BR",
+               in = ParameterIn.HEADER,
+               description = "Represents a specific geographical, political, or cultural region. Language & Country.")
 
     @ApiResponses(value = {@ApiResponse(responseCode = HttpStatusConstants.NO_CONTENT_204, description = HttpStatusConstants.NO_CONTENT_204_MESSAGE),
-                           @ApiResponse(responseCode = HttpStatusConstants.BAD_REQUEST_400, description  = HttpStatusConstants.BAD_REQUEST_400_MESSAGE),
-                           @ApiResponse(responseCode = HttpStatusConstants.INTERNAL_SERVER_ERROR_500, description  = HttpStatusConstants.INTERNAL_SERVER_ERROR_500_MESSAGE),})
+                           @ApiResponse(responseCode = HttpStatusConstants.BAD_REQUEST_400, description = HttpStatusConstants.BAD_REQUEST_400_MESSAGE),
+                           @ApiResponse(responseCode = HttpStatusConstants.INTERNAL_SERVER_ERROR_500,
+                                        description = HttpStatusConstants.INTERNAL_SERVER_ERROR_500_MESSAGE),})
 
     void removeAuthorById(@Parameter(description = "Author Id") final Long id);
 }

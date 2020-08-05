@@ -26,7 +26,7 @@ import lombok.extern.slf4j.Slf4j;
 
 /*
  * A EntryPoint follows these steps:
- * 
+ *
  * - Maps HTTP requests to Java objects
  * - Performs authorization checks
  * - Maps input to the input model of the use case
@@ -46,20 +46,27 @@ public class SearchAuthorsControllerImpl implements SearchAuthorsController {
 
     private final SearchAuthorsUseCase searchAuthorsUseCase;
 
-    @LogExecutionTime    
+    @Override
+    @LogExecutionTime
     @ResponseStatus(HttpStatus.OK)
     @GetMapping
-    public SearchAuthorsResponse searchAuthors(@PageableDefault(page = 0, size = 20) @SortDefault.SortDefaults({@SortDefault(sort = "name", direction = Sort.Direction.ASC)}) final Pageable pageable,
+    public SearchAuthorsResponse searchAuthors(@PageableDefault(page = 0,
+                                                                size = 20) @SortDefault.SortDefaults({@SortDefault(sort = "name",
+                                                                                                                   direction = Sort.Direction.ASC)}) final Pageable pageable,
                                                @DefaultValue final SearchAuthorsRequest searchAuthorsRequest) {
 
         log.debug("Starting Controller -> SearchAuthorsController with {}", JsonConverter.convert(searchAuthorsRequest));
 
-        final SearchAuthorsParameters parameters = new SearchAuthorsParameters(searchAuthorsRequest.getId(), searchAuthorsRequest.getName(), searchAuthorsRequest.getGender(), searchAuthorsRequest.getStartBirthday(), searchAuthorsRequest.getEndBirthday());
+        final SearchAuthorsParameters parameters = new SearchAuthorsParameters(searchAuthorsRequest.getId(),
+                                                                               searchAuthorsRequest.getName(),
+                                                                               searchAuthorsRequest.getGender(),
+                                                                               searchAuthorsRequest.getStartBirthday(),
+                                                                               searchAuthorsRequest.getEndBirthday());
 
         final Page<Author> authors = searchAuthorsUseCase.searchAuthors(parameters,
-                                                            pageable.getPageNumber(),
-                                                            pageable.getPageSize(),
-                                                            pageable.getSort().toString());
+                                                                        pageable.getPageNumber(),
+                                                                        pageable.getPageSize(),
+                                                                        pageable.getSort().toString());
 
         return SearchAuthorsPresenter.of(authors);
     }

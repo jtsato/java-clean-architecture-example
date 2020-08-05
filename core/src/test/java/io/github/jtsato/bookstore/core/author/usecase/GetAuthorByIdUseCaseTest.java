@@ -28,33 +28,33 @@ import io.github.jtsato.bookstore.core.exception.NotFoundException;
 class GetAuthorByIdUseCaseTest {
 
     @Mock
-    private GetAuthorByIdGateway getAuthorByIdGateway = Mockito.mock(GetAuthorByIdGateway.class);
+    private final GetAuthorByIdGateway getAuthorByIdGateway = Mockito.mock(GetAuthorByIdGateway.class);
 
     @InjectMocks
-    private GetAuthorByIdUseCase getAuthorByIdUseCase = new GetAuthorByIdUseCaseImpl(getAuthorByIdGateway);
+    private final GetAuthorByIdUseCase getAuthorByIdUseCase = new GetAuthorByIdUseCaseImpl(getAuthorByIdGateway);
 
     @DisplayName("Fail to get an author by id if parameters are not valid")
     @Test
     void failToGetAuthorByIdIfParametersAreNotValid() {
-        
+
         when(getAuthorByIdGateway.getAuthorById(null)).thenReturn(null);
 
         final Exception exception = Assertions.assertThrows(Exception.class, () -> {
             getAuthorByIdUseCase.getAuthorById(null);
         });
-        
+
         assertThat(exception).isInstanceOf(InvalidParameterException.class);
-        
+
         final InvalidParameterException invalidParameterException = (InvalidParameterException) exception;
         assertThat(invalidParameterException.getMessage()).isEqualTo("validation.author.id.null");
-    }    
-    
+    }
+
     @DisplayName("Successful to get author by id if found")
     @Test
     void successfulToGetAuthorByIdIfFound() {
 
-        when(getAuthorByIdGateway.getAuthorById(1L)).thenReturn(mockGetAuthorByIdGatewayReturn());
-        
+        when(getAuthorByIdGateway.getAuthorById(1L)).thenReturn(mockGetAuthorByIdGatewayOut());
+
         final Author author = getAuthorByIdUseCase.getAuthorById(1L);
 
         assertThat(author.getId()).isEqualTo(1L);
@@ -63,20 +63,20 @@ class GetAuthorByIdUseCaseTest {
         assertThat(author.getBirthday()).isEqualTo(LocalDate.parse("1961-08-28"));
     }
 
-    private Optional<Author> mockGetAuthorByIdGatewayReturn() {
+    private Optional<Author> mockGetAuthorByIdGatewayOut() {
         return Optional.of(new Author(1L, "Joshua Bloch", Gender.MALE, LocalDate.parse("1961-08-28")));
     }
 
     @DisplayName("Fail to get author by id if not found")
     @Test
     void failToGetAuthorByIdIfNotFound() {
-        
+
         when(getAuthorByIdGateway.getAuthorById(1L)).thenReturn(Optional.empty());
 
         final Exception exception = Assertions.assertThrows(Exception.class, () -> {
             getAuthorByIdUseCase.getAuthorById(1L);
-        });   
-        
+        });
+
         assertThat(exception).isInstanceOf(NotFoundException.class);
         final NotFoundException notFoundException = (NotFoundException) exception;
         assertThat(notFoundException.getArgs()).isNotEmpty();

@@ -14,21 +14,21 @@ import io.github.jtsato.bookstore.core.exception.InvalidParameterException;
 
 class EnumUtilsTest {
 
-	enum Semaphore {
-		GREEN, YELLOW, RED
-	};
+    enum Semaphore {
+            GREEN, YELLOW, RED
+    };
 
-	@DisplayName("Fail to get value if not found")
-	@Test
-	void failToGetValueIfNotFound() {
+    @DisplayName("Fail to get value if not found")
+    @Test
+    void failToGetValueIfNotFound() {
 
-		final Exception exception = Assertions.assertThrows(Exception.class, () -> {
-			EnumUtils.valueOf("BLUE", Semaphore.class);
-		});
+        final Exception exception = Assertions.assertThrows(Exception.class, () -> {
+            EnumUtils.valueOf("BLUE", Semaphore.class);
+        });
 
-		assertThat(exception).isInstanceOf(InvalidParameterException.class);
+        assertThat(exception).isInstanceOf(InvalidParameterException.class);
 
-		assertThat(exception.getMessage()).isNotNull();
-		assertThat(exception.getMessage()).isEqualTo("The value BLUE is not valid for Semaphore. Valid values are: GREEN, YELLOW, RED.");
-	}
+        assertThat(exception.getMessage()).isNotNull();
+        assertThat(exception.getMessage()).isEqualTo("The value BLUE is not valid for Semaphore. Valid values are: GREEN, YELLOW, RED.");
+    }
 }

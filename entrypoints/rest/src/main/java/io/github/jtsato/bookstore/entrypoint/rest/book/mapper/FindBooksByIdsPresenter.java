@@ -30,7 +30,13 @@ public class FindBooksByIdsPresenter {
     }
 
     private static FindBooksByIdsInnerResponse of(final Book book) {
-        return new FindBooksByIdsInnerResponse(book.getId(), of(book.getAuthor()), book.getTitle(), book.getPrice(), book.getAvailable(), book.getCreationDate(), book.getUpdateDate());
+        return new FindBooksByIdsInnerResponse(book.getId(),
+                                               of(book.getAuthor()),
+                                               book.getTitle(),
+                                               book.getPrice(),
+                                               book.getAvailable(),
+                                               book.getCreationDate(),
+                                               book.getUpdateDate());
     }
 
     private static FindBooksByIdsAuthorResponse of(final Author author) {

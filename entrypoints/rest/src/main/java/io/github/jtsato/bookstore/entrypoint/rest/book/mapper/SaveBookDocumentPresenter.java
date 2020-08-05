@@ -12,14 +12,14 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class SaveBookDocumentPresenter {
 
-	public static SaveBookDocumentResponse of(final BookDocument bookDocument) {
-		return new SaveBookDocumentResponse(bookDocument.getId(), 
-											bookDocument.getBookId(),
-											bookDocument.getContentType(), 
-											bookDocument.getExtension(), 
-											bookDocument.getName(),
-											bookDocument.getSize(), 
-											bookDocument.getCreationDate(), 
-											bookDocument.getUpdateDate());
-	}
+    public static SaveBookDocumentResponse of(final BookDocument bookDocument) {
+        return new SaveBookDocumentResponse(bookDocument.getId(),
+                                            bookDocument.getBookId(),
+                                            bookDocument.getContentType(),
+                                            bookDocument.getExtension(),
+                                            bookDocument.getName(),
+                                            bookDocument.getSize(),
+                                            bookDocument.getCreationDate(),
+                                            bookDocument.getUpdateDate());
+    }
 }

@@ -11,5 +11,5 @@ import io.github.jtsato.bookstore.core.common.paging.Page;
 @FunctionalInterface
 public interface SearchBooksGateway {
 
-	Page<Book> searchBooks(final SearchBooksParameters parameters, final Integer page, final Integer size, final String orderBy);
+    Page<Book> searchBooks(final SearchBooksParameters parameters, final Integer page, final Integer size, final String orderBy);
 }

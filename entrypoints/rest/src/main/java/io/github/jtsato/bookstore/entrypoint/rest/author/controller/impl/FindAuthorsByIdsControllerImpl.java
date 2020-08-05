@@ -22,7 +22,7 @@ import lombok.extern.slf4j.Slf4j;
 
 /*
  * A EntryPoint follows these steps:
- * 
+ *
  * - Maps HTTP requests to Java objects
  * - Performs authorization checks
  * - Maps input to the input model of the use case
@@ -42,7 +42,8 @@ public class FindAuthorsByIdsControllerImpl implements FindAuthorsByIdsControlle
 
     private final FindAuthorsByIdsUseCase findAuthorsByIdsUseCase;
 
-    @LogExecutionTime    
+    @Override
+    @LogExecutionTime
     @ResponseStatus(HttpStatus.OK)
     @PostMapping("/findByIds")
     public FindAuthorsByIdsResponse findAuthorsByIds(@RequestBody @DefaultValue final FindAuthorsByIdsRequest findAuthorsByIdsRequest) {

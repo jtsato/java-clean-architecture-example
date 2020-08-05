@@ -34,7 +34,7 @@ public class RegisterBookUseCaseImpl implements RegisterBookUseCase {
     private final GetAuthorByIdGateway getAuthorByIdGateway;
 
     private final GetBookByTitleGateway getBookByTitleGateway;
-    
+
     private final GetLocalDateTime getLocalDateTime;
 
     @Override
@@ -44,7 +44,13 @@ public class RegisterBookUseCaseImpl implements RegisterBookUseCase {
 
         checkDuplicatedTitleViolation(parameters.getTitle());
 
-        final Book book = new Book(null, author, parameters.getTitle(), parameters.getPrice(), parameters.getAvailable(), getLocalDateTime.now(), getLocalDateTime.now());
+        final Book book = new Book(null,
+                                   author,
+                                   parameters.getTitle(),
+                                   parameters.getPrice(),
+                                   parameters.getAvailable(),
+                                   getLocalDateTime.now(),
+                                   getLocalDateTime.now());
 
         return registerBookGateway.registerBook(book);
     }

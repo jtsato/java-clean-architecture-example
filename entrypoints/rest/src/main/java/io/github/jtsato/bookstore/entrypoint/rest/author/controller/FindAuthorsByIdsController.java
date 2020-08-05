@@ -19,13 +19,16 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 public interface FindAuthorsByIdsController {
 
     @Operation(summary = "Find Authors by IDs")
-    
-    @Parameter(name =  "Accept-Language", example = "pt_BR", in = ParameterIn.HEADER, description = "Represents a specific geographical, political, or cultural region. Language & Country.")
+
+    @Parameter(name = "Accept-Language",
+               example = "pt_BR",
+               in = ParameterIn.HEADER,
+               description = "Represents a specific geographical, political, or cultural region. Language & Country.")
 
     @ApiResponses(value = {@ApiResponse(responseCode = HttpStatusConstants.OK_200, description = HttpStatusConstants.OK_200_MESSAGE),
-                           @ApiResponse(responseCode = HttpStatusConstants.BAD_REQUEST_400, description  = HttpStatusConstants.BAD_REQUEST_400_MESSAGE),
-                           @ApiResponse(responseCode = HttpStatusConstants.NOT_FOUND_404, description  = HttpStatusConstants.NOT_FOUND_404_MESSAGE),
-                           @ApiResponse(responseCode = HttpStatusConstants.INTERNAL_SERVER_ERROR_500, description  = HttpStatusConstants.INTERNAL_SERVER_ERROR_500_MESSAGE),})
-
-    public FindAuthorsByIdsResponse findAuthorsByIds(@Parameter(description = "Authors Ids") final FindAuthorsByIdsRequest findAuthorsByIdsRequest);
+                           @ApiResponse(responseCode = HttpStatusConstants.BAD_REQUEST_400, description = HttpStatusConstants.BAD_REQUEST_400_MESSAGE),
+                           @ApiResponse(responseCode = HttpStatusConstants.NOT_FOUND_404, description = HttpStatusConstants.NOT_FOUND_404_MESSAGE),
+                           @ApiResponse(responseCode = HttpStatusConstants.INTERNAL_SERVER_ERROR_500,
+                                        description = HttpStatusConstants.INTERNAL_SERVER_ERROR_500_MESSAGE),})
+    FindAuthorsByIdsResponse findAuthorsByIds(@Parameter(description = "Authors Ids") final FindAuthorsByIdsRequest findAuthorsByIdsRequest);
 }

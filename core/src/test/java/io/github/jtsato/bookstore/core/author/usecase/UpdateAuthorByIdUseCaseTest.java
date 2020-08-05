@@ -33,22 +33,22 @@ import io.github.jtsato.bookstore.core.exception.UniqueConstraintException;
 class UpdateAuthorByIdUseCaseTest {
 
     @Mock
-    private UpdateAuthorByIdGateway updateAuthorByIdGateway = Mockito.mock(UpdateAuthorByIdGateway.class);
+    private final UpdateAuthorByIdGateway updateAuthorByIdGateway = Mockito.mock(UpdateAuthorByIdGateway.class);
 
     @Mock
-    private GetAuthorByNameGateway getAuthorByNameGateway = Mockito.mock(GetAuthorByNameGateway.class);
+    private final GetAuthorByNameGateway getAuthorByNameGateway = Mockito.mock(GetAuthorByNameGateway.class);
 
     @InjectMocks
-    private UpdateAuthorByIdUseCase updateAuthorByIdUseCase = new UpdateAuthorByIdUseCaseImpl(updateAuthorByIdGateway, getAuthorByNameGateway);
+    private final UpdateAuthorByIdUseCase updateAuthorByIdUseCase = new UpdateAuthorByIdUseCaseImpl(updateAuthorByIdGateway, getAuthorByNameGateway);
 
     @DisplayName("Fail to update an author if parameters are not valid")
     @Test
     void failToUpdateAnAuthorIfParametersAreNotValid() {
-        
+
         final Exception exception = Assertions.assertThrows(Exception.class, () -> {
             new UpdateAuthorByIdParameters(null, StringUtils.SPACE, null, "1979-02-29");
         });
-        
+
         assertThat(exception).isInstanceOf(ConstraintViolationException.class);
         final ConstraintViolationException constraintViolationException = (ConstraintViolationException) exception;
         assertThat(constraintViolationException.getMessage()).contains("id: validation.author.id.null");
@@ -56,32 +56,32 @@ class UpdateAuthorByIdUseCaseTest {
         assertThat(constraintViolationException.getMessage()).contains("gender: validation.author.gender.blank");
         assertThat(constraintViolationException.getMessage()).contains("birthday: validation.author.birthday.notvalid");
     }
-    
+
     @DisplayName("Successful to update author by id if found")
     @Test
     void successfulToUpdateAuthorByIdIfFound() {
 
-        when(updateAuthorByIdGateway.updateAuthorById(mockUpdateAuthorByIdGatewayParameters())).thenReturn(mockUpdateAuthorByIdGatewayReturn());
+        when(updateAuthorByIdGateway.updateAuthorById(mockUpdateAuthorByIdGatewayIn())).thenReturn(mockUpdateAuthorByIdGatewayOut());
         when(getAuthorByNameGateway.getAuthorByName("Joshua Bloch")).thenReturn(Optional.empty());
 
         updateAuthorById();
-        
-        when(updateAuthorByIdGateway.updateAuthorById(mockUpdateAuthorByIdGatewayParameters())).thenReturn(mockUpdateAuthorByIdGatewayReturn());
+
+        when(updateAuthorByIdGateway.updateAuthorById(mockUpdateAuthorByIdGatewayIn())).thenReturn(mockUpdateAuthorByIdGatewayOut());
         when(getAuthorByNameGateway.getAuthorByName("Joshua Bloch")).thenReturn(mockGetAuthorByNameGatewayWithSameId());
 
         updateAuthorById();
     }
 
-    private Author mockUpdateAuthorByIdGatewayParameters() {
+    private Author mockUpdateAuthorByIdGatewayIn() {
         return new Author(1L, "Joshua Bloch", Gender.MALE, LocalDate.parse("1961-08-28"));
-    }    
-    
-    private Optional<Author> mockUpdateAuthorByIdGatewayReturn() {
+    }
+
+    private Optional<Author> mockUpdateAuthorByIdGatewayOut() {
         return Optional.of(new Author(1L, "Joshua Bloch", Gender.MALE, LocalDate.parse("1961-08-28")));
     }
-    
+
     private void updateAuthorById() {
-        
+
         final UpdateAuthorByIdParameters parameters = new UpdateAuthorByIdParameters(1L, "Joshua Bloch", "MALE", "1961-08-28");
         final Author author = updateAuthorByIdUseCase.updateAuthorById(parameters);
 
@@ -95,11 +95,11 @@ class UpdateAuthorByIdUseCaseTest {
     @Test
     void failToUpdateAuthorByIdIfFoundAndNameIsDuplicated() {
 
-        when(updateAuthorByIdGateway.updateAuthorById(mockUpdateAuthorByIdGatewayParameters())).thenReturn(Optional.empty());
+        when(updateAuthorByIdGateway.updateAuthorById(mockUpdateAuthorByIdGatewayIn())).thenReturn(Optional.empty());
         when(getAuthorByNameGateway.getAuthorByName("Joshua Bloch")).thenReturn(mockGetAuthorByNameGatewayWithOtherId());
 
         final UpdateAuthorByIdParameters parameters = new UpdateAuthorByIdParameters(1L, "Joshua Bloch", "MALE", "1961-08-28");
-        
+
         final Exception exception = Assertions.assertThrows(Exception.class, () -> {
             updateAuthorByIdUseCase.updateAuthorById(parameters);
         });
@@ -113,17 +113,17 @@ class UpdateAuthorByIdUseCaseTest {
     private Optional<Author> mockGetAuthorByNameGatewayWithSameId() {
         return Optional.of(new Author(1L, "Joshua Bloch", Gender.MALE, LocalDate.parse("1961-08-28")));
     }
-    
+
     private Optional<Author> mockGetAuthorByNameGatewayWithOtherId() {
         return Optional.of(new Author(2L, "Joshua Bloch", Gender.MALE, LocalDate.parse("1961-08-28")));
     }
-    
+
     @DisplayName("Fail to update author by id if not found")
     @Test
     void failToUpdateAuthorByIdIfNotFound() {
 
-        when(updateAuthorByIdGateway.updateAuthorById(mockUpdateAuthorByIdGatewayParameters())).thenReturn(Optional.empty());
-        when(getAuthorByNameGateway.getAuthorByName("Joshua Bloch")).thenReturn(Optional.empty());        
+        when(updateAuthorByIdGateway.updateAuthorById(mockUpdateAuthorByIdGatewayIn())).thenReturn(Optional.empty());
+        when(getAuthorByNameGateway.getAuthorByName("Joshua Bloch")).thenReturn(Optional.empty());
 
         final UpdateAuthorByIdParameters parameters = new UpdateAuthorByIdParameters(1L, "Joshua Bloch", "MALE", "1961-08-28");
 
@@ -141,8 +141,8 @@ class UpdateAuthorByIdUseCaseTest {
     @Test
     void failToUpdateAuthorByIdIfHasAnAuthorWithSameName() {
 
-        when(updateAuthorByIdGateway.updateAuthorById(mockUpdateAuthorByIdGatewayParameters())).thenReturn(Optional.empty());
-        when(getAuthorByNameGateway.getAuthorByName("Joshua Bloch")).thenReturn(mockGetAuthorByNameWithOtherIdGateway());        
+        when(updateAuthorByIdGateway.updateAuthorById(mockUpdateAuthorByIdGatewayIn())).thenReturn(Optional.empty());
+        when(getAuthorByNameGateway.getAuthorByName("Joshua Bloch")).thenReturn(mockGetAuthorByNameWithOtherIdGateway());
 
         final UpdateAuthorByIdParameters parameters = new UpdateAuthorByIdParameters(1L, "Joshua Bloch", "MALE", "1961-08-28");
 

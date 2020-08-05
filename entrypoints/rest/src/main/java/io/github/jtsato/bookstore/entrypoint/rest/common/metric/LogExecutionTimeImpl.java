@@ -19,18 +19,19 @@ import lombok.extern.slf4j.Slf4j;
 @Aspect
 @Component
 public class LogExecutionTimeImpl {
-    
+
     @Around("@annotation(io.github.jtsato.bookstore.entrypoint.rest.common.metric.LogExecutionTime)")
-    public Object logExecutionTime(final ProceedingJoinPoint joinPoint) throws Throwable {
-        
+    public Object logExecutionTime(final ProceedingJoinPoint joinPoint)
+        throws Throwable {
+
         final StopWatch stopWatch = new StopWatch();
-        
+
         stopWatch.start();
-        
+
         final Object proceed = joinPoint.proceed();
 
         stopWatch.stop();
-        
+
         final String clazzName = StringUtils.substringAfterLast(joinPoint.getSignature().getDeclaringTypeName(), ".");
 
         log.debug("LogExecutionTime -> {} executed in {} miliseconds.", clazzName, stopWatch.getTime());

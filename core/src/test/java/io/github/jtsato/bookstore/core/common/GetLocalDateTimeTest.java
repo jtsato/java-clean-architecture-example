@@ -14,10 +14,10 @@ import org.junit.jupiter.api.Test;
  */
 
 class GetLocalDateTimeTest {
-    
-    private GetLocalDateTime getLocalDateTime = new GetLocalDateTimeImpl();
 
-    @DisplayName("Sucessful to run gender functions")  
+    private final GetLocalDateTime getLocalDateTime = new GetLocalDateTimeImpl();
+
+    @DisplayName("Sucessful to run gender functions")
     @Test
     void sucessfulToRunGenderFunctions() {
         assertThat(getLocalDateTime.now()).isNotNull();

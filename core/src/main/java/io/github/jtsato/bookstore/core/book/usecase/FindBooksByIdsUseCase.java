@@ -12,5 +12,5 @@ import io.github.jtsato.bookstore.core.common.paging.Page;
 @FunctionalInterface
 public interface FindBooksByIdsUseCase {
 
-	Page<Book> findBooksByIds(final List<Long> id);
+    Page<Book> findBooksByIds(final List<Long> id);
 }

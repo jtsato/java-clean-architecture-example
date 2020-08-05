@@ -6,7 +6,7 @@ import java.util.Arrays;
 import lombok.Generated;
 
 /**
- * @author Jorge Takeshi Sato  
+ * @author Jorge Takeshi Sato
  */
 
 public enum Gender {

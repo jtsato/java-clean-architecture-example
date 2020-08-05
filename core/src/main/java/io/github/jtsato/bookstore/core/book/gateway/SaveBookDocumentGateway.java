@@ -9,5 +9,5 @@ import io.github.jtsato.bookstore.core.book.domain.BookDocument;
 @FunctionalInterface
 public interface SaveBookDocumentGateway {
 
-	BookDocument saveBookDocument(final BookDocument bookDocument);
+    BookDocument saveBookDocument(final BookDocument bookDocument);
 }

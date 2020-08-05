@@ -9,5 +9,5 @@ import io.github.jtsato.bookstore.core.book.domain.Book;
 @FunctionalInterface
 public interface GetBookByIdUseCase {
 
-	Book getBookById(final Long id);
+    Book getBookById(final Long id);
 }

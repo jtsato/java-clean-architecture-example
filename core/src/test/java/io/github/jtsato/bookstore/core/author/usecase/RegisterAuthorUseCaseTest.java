@@ -33,40 +33,40 @@ import io.github.jtsato.bookstore.core.exception.UniqueConstraintException;
 class RegisterAuthorUseCaseTest {
 
     @Mock
-    private RegisterAuthorGateway registerAuthorGateway = Mockito.mock(RegisterAuthorGateway.class);
+    private final RegisterAuthorGateway registerAuthorGateway = Mockito.mock(RegisterAuthorGateway.class);
 
     @Mock
-    private GetAuthorByNameGateway getAuthorByNameGateway = Mockito.mock(GetAuthorByNameGateway.class);
+    private final GetAuthorByNameGateway getAuthorByNameGateway = Mockito.mock(GetAuthorByNameGateway.class);
 
     @InjectMocks
-    private RegisterAuthorUseCase getAuthorByIdUseCase = new RegisterAuthorUseCaseImpl(registerAuthorGateway, getAuthorByNameGateway);
+    private final RegisterAuthorUseCase getAuthorByIdUseCase = new RegisterAuthorUseCaseImpl(registerAuthorGateway, getAuthorByNameGateway);
 
     @DisplayName("Fail to register an author if parameters are not valid")
     @Test
     void failToRegisterAnAuthorIfParametersAreNotValid() {
-        
+
         final Exception exception = Assertions.assertThrows(Exception.class, () -> {
             new RegisterAuthorParameters(StringUtils.SPACE, null, null);
         });
-        
+
         assertThat(exception).isInstanceOf(ConstraintViolationException.class);
         final ConstraintViolationException constraintViolationException = (ConstraintViolationException) exception;
         assertThat(constraintViolationException.getMessage()).contains("name: validation.author.name.blank");
         assertThat(constraintViolationException.getMessage()).contains("gender: validation.author.gender.blank");
-        assertThat(constraintViolationException.getMessage()).contains("birthday: validation.author.birthday.blank");        
+        assertThat(constraintViolationException.getMessage()).contains("birthday: validation.author.birthday.blank");
     }
-    
+
     @DisplayName("Successful to register author if not registered")
     @Test
     void successfulToRegisterAuthorIfNotRegistered() {
 
-        when(registerAuthorGateway.registerAuthor(mockRegisterAuthorGatewayParameters())).thenReturn(mockRegisterAuthorGatewayReturn());
+        when(registerAuthorGateway.registerAuthor(mockRegisterAuthorGatewayIn())).thenReturn(mockRegisterAuthorGatewayOut());
         when(getAuthorByNameGateway.getAuthorByName("Joshua Bloch")).thenReturn(Optional.empty());
 
         final RegisterAuthorParameters registerAuthorParameters = new RegisterAuthorParameters("Joshua Bloch", "MALE", "1961-08-28");
         final Author author = getAuthorByIdUseCase.registerAuthor(registerAuthorParameters);
-        
-        assertThat(author).isEqualTo(mockRegisterAuthorGatewayReturn());
+
+        assertThat(author).isEqualTo(mockRegisterAuthorGatewayOut());
 
         assertThat(author.getId()).isEqualTo(1L);
         assertThat(author.getName()).isEqualTo("Joshua Bloch");
@@ -74,11 +74,11 @@ class RegisterAuthorUseCaseTest {
         assertThat(author.getBirthday()).isEqualTo(LocalDate.parse("1961-08-28"));
     }
 
-    private Author mockRegisterAuthorGatewayParameters() {
+    private Author mockRegisterAuthorGatewayIn() {
         return new Author(null, "Joshua Bloch", Gender.MALE, LocalDate.parse("1961-08-28"));
     }
 
-    private Author mockRegisterAuthorGatewayReturn() {
+    private Author mockRegisterAuthorGatewayOut() {
         return new Author(1L, "Joshua Bloch", Gender.MALE, LocalDate.parse("1961-08-28"));
     }
 
@@ -86,7 +86,7 @@ class RegisterAuthorUseCaseTest {
     @Test
     void failToRegisterAuthorIfAlreadyRegistered() {
 
-        when(registerAuthorGateway.registerAuthor(mockRegisterAuthorGatewayParameters())).thenReturn(mockRegisterAuthorGatewayReturn());
+        when(registerAuthorGateway.registerAuthor(mockRegisterAuthorGatewayIn())).thenReturn(mockRegisterAuthorGatewayOut());
         when(getAuthorByNameGateway.getAuthorByName("Joshua Bloch")).thenReturn(mockGetAuthorByNameGateway());
 
         final RegisterAuthorParameters registerAuthorParameters = new RegisterAuthorParameters("Joshua Bloch", "MALE", "1961-08-28");

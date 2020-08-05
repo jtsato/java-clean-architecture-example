@@ -17,25 +17,25 @@ import lombok.experimental.FieldDefaults;
  */
 
 @Getter
-@FieldDefaults(makeFinal=true, level=AccessLevel.PRIVATE)
+@FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
 @EqualsAndHashCode(callSuper = false)
 public class UpdateBookByIdParameters extends SelfValidating<UpdateBookByIdParameters> {
 
     @NotNull(message = "validation.book.id.null")
-    private final Long id;        
-    
+    private final Long id;
+
     @NotNull(message = "validation.author.id.null")
     private final Long authorId;
-    
+
     @NotBlank(message = "validation.book.title.blank")
     private final String title;
-    
-    @NotNull(message = "validation.book.price.null")    
+
+    @NotNull(message = "validation.book.price.null")
     @PositiveOrZero(message = "validation.book.price.negative")
     private final BigDecimal price;
-    
+
     @NotNull(message = "validation.book.available.null")
-    private final Boolean available;    
+    private final Boolean available;
 
     public UpdateBookByIdParameters(final Long id, final Long authorId, final String title, final BigDecimal price, final Boolean available) {
         this.id = id;

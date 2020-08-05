@@ -19,16 +19,16 @@ public class SaveBookDocumentRequest implements Serializable {
 
     private static final long serialVersionUID = -2642365523322205913L;
 
-	private Long bookId;
-	
-	private String contentType;
-	
-	private String extension;
-	
-	private String name;
-	
-	private Long size;
+    private Long bookId;
 
-	@JsonIgnore
+    private String contentType;
+
+    private String extension;
+
+    private String name;
+
+    private Long size;
+
+    @JsonIgnore
     private String content;
 }

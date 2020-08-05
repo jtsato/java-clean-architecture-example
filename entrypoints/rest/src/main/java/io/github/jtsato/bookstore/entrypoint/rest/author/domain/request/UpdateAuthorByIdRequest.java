@@ -20,6 +20,6 @@ public class UpdateAuthorByIdRequest implements Serializable {
     private String name;
 
     private String gender;
-    
-    private String birthday;    
+
+    private String birthday;
 }

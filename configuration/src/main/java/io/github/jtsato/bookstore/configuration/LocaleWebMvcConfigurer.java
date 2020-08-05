@@ -34,7 +34,7 @@ public class LocaleWebMvcConfigurer implements WebMvcConfigurer {
     public void configureContentNegotiation(final ContentNegotiationConfigurer configurer) {
         configurer.defaultContentType(MediaType.APPLICATION_JSON);
     }
-    
+
     @Override
     public void addInterceptors(final InterceptorRegistry interceptorRegistry) {
         interceptorRegistry.addInterceptor(localeChangeInterceptor());

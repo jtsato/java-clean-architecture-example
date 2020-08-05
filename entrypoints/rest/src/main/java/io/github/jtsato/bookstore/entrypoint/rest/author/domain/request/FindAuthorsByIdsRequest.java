@@ -17,8 +17,8 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public final class FindAuthorsByIdsRequest implements Serializable {
-    
-	private static final long serialVersionUID = 7832871097344659884L;
 
-	private List<Long> ids;
+    private static final long serialVersionUID = 7832871097344659884L;
+
+    private List<Long> ids;
 }

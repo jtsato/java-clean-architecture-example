@@ -33,63 +33,63 @@ import io.github.jtsato.bookstore.core.exception.InvalidParameterException;
 class FindAuthorsByIdsUseCaseTest {
 
     @Mock
-    private FindAuthorsByIdsGateway findAuthorsByIdsGateway = Mockito.mock(FindAuthorsByIdsGateway.class);
+    private final FindAuthorsByIdsGateway findAuthorsByIdsGateway = Mockito.mock(FindAuthorsByIdsGateway.class);
 
     @InjectMocks
-    private FindAuthorsByIdsUseCase findAuthorsByIdsUseCase = new FindAuthorsByIdsUseCaseImpl(findAuthorsByIdsGateway);
+    private final FindAuthorsByIdsUseCase findAuthorsByIdsUseCase = new FindAuthorsByIdsUseCaseImpl(findAuthorsByIdsGateway);
 
     @DisplayName("Fail to find authors by IDs if parameters are not valid")
     @Test
     void failToFindAuthorsByIdsIfParametersAreNotValid() {
-        
+
         when(findAuthorsByIdsGateway.findAuthorsByIds(null)).thenReturn(null);
 
         final Exception exception = Assertions.assertThrows(Exception.class, () -> {
             findAuthorsByIdsUseCase.findAuthorsByIds(null);
         });
-        
+
         assertThat(exception).isInstanceOf(InvalidParameterException.class);
-        
+
         final InvalidParameterException invalidParameterException = (InvalidParameterException) exception;
         assertThat(invalidParameterException.getMessage()).isEqualTo("validation.authors.ids.null");
-    }    
-    
+    }
+
     @DisplayName("Successful to find authors by IDs, when at least one is found")
     @Test
     void successfulToFindAuthorsByIdsIfFound() {
 
-    	final List<Long> ids = Arrays.asList(new Long[] {1L, 2L});
-    	
-        when(findAuthorsByIdsGateway.findAuthorsByIds(ids)).thenReturn(mockFindAuthorsByIdsGatewayReturn());
-        
+        final List<Long> ids = Arrays.asList(new Long[] {1L, 2L});
+
+        when(findAuthorsByIdsGateway.findAuthorsByIds(ids)).thenReturn(mockFindAuthorsByIdsGatewayOut());
+
         final Page<Author> pageOfAuthors = findAuthorsByIdsUseCase.findAuthorsByIds(ids);
-        
+
         assertThat(pageOfAuthors).isNotNull();
-        
+
         final Pageable pageable = pageOfAuthors.getPageable();
-        
+
         assertThat(pageable).isNotNull();
         assertThat(pageable.getPage()).isZero();
         assertThat(pageable.getSize()).isOne();
         assertThat(pageable.getNumberOfElements()).isOne();
         assertThat(pageable.getTotalOfElements()).isOne();
         assertThat(pageable.getTotalPages()).isOne();
-        
+
         final List<Author> authors = pageOfAuthors.getContent();
 
         assertThat(authors).isNotNull().isNotEmpty();
-        assertThat(authors.size()).isOne();        
-        
+        assertThat(authors.size()).isOne();
+
         final Author author = authors.get(0);
-       
+
         assertThat(author.getId()).isEqualTo(1L);
         assertThat(author.getName()).isEqualTo("Joshua Bloch");
         assertThat(author.getGender()).isEqualTo(Gender.MALE);
         assertThat(author.getBirthday()).isEqualTo(LocalDate.parse("1961-08-28"));
     }
 
-    private Page<Author> mockFindAuthorsByIdsGatewayReturn() {
-    	
+    private Page<Author> mockFindAuthorsByIdsGatewayOut() {
+
         final List<Author> content = new ArrayList<>(1);
         content.add(new Author(1L, "Joshua Bloch", Gender.MALE, LocalDate.parse("1961-08-28")));
 
@@ -99,15 +99,15 @@ class FindAuthorsByIdsUseCaseTest {
     @DisplayName("Fail to find authors by IDs if not found")
     @Test
     void failToFindAuthorsByIdsIfNotFound() {
-    	
-    	final List<Long> ids = Arrays.asList(new Long[] {1L, 2L});    	
 
-    	final Page<Author> pageOfAuthors = new PageImpl<Author>(Collections.emptyList(), new Pageable(0, 1, 0, 0L, 0));
-        
-		when(findAuthorsByIdsGateway.findAuthorsByIds(ids)).thenReturn(pageOfAuthors);
+        final List<Long> ids = Arrays.asList(new Long[] {1L, 2L});
+
+        final Page<Author> pageOfAuthors = new PageImpl<Author>(Collections.emptyList(), new Pageable(0, 1, 0, 0L, 0));
+
+        when(findAuthorsByIdsGateway.findAuthorsByIds(ids)).thenReturn(pageOfAuthors);
 
         final Pageable pageable = pageOfAuthors.getPageable();
-        
+
         assertThat(pageable).isNotNull();
         assertThat(pageable.getPage()).isZero();
         assertThat(pageable.getSize()).isOne();
@@ -115,64 +115,64 @@ class FindAuthorsByIdsUseCaseTest {
         assertThat(pageable.getTotalOfElements()).isZero();
         assertThat(pageable.getTotalPages()).isZero();
     }
-    
+
     @DisplayName("Fail to find authors by IDs if the limit is exceeded")
     @Test
     void failToFindAuthorsByIdsIfTheLimitIsExceeded() {
-    	
-    	final List<Long> ids = new ArrayList<Long>(1001);
-    	
-    	for (int index = 1; index <= 1001; index++) {
-			ids.add((long) index);
-		}
-    	
-        when(findAuthorsByIdsGateway.findAuthorsByIds(ids)).thenReturn(mockFindAuthorsByIdsGatewayReturn());
-        
+
+        final List<Long> ids = new ArrayList<Long>(1001);
+
+        for (int index = 1; index <= 1001; index++) {
+            ids.add((long) index);
+        }
+
+        when(findAuthorsByIdsGateway.findAuthorsByIds(ids)).thenReturn(mockFindAuthorsByIdsGatewayOut());
+
         final Exception exception = Assertions.assertThrows(Exception.class, () -> {
             findAuthorsByIdsUseCase.findAuthorsByIds(ids);
         });
-        
+
         assertThat(exception).isInstanceOf(InvalidParameterException.class);
-        
+
         final InvalidParameterException invalidParameterException = (InvalidParameterException) exception;
-        assertThat(invalidParameterException.getMessage()).isEqualTo("validation.get.by.ids.limit");        
+        assertThat(invalidParameterException.getMessage()).isEqualTo("validation.get.by.ids.limit");
     }
-    
+
     @DisplayName("Successful to find authors by IDs if the limit is exceeded")
     @Test
-    void  successfulToFindAuthorsByIdsIfTheLimitIsNotExceeded() {
-    	
-    	final List<Long> ids = new ArrayList<Long>(1000);
-    	
-    	for (int index = 1; index <= 1000; index++) {
-			ids.add((long) index);
-		}
-    	
-        when(findAuthorsByIdsGateway.findAuthorsByIds(ids)).thenReturn(mockFindAuthorsByIdsGatewayReturn());
+    void successfulToFindAuthorsByIdsIfTheLimitIsNotExceeded() {
+
+        final List<Long> ids = new ArrayList<Long>(1000);
+
+        for (int index = 1; index <= 1000; index++) {
+            ids.add((long) index);
+        }
+
+        when(findAuthorsByIdsGateway.findAuthorsByIds(ids)).thenReturn(mockFindAuthorsByIdsGatewayOut());
 
         final Page<Author> pageOfAuthors = findAuthorsByIdsUseCase.findAuthorsByIds(ids);
-        
+
         assertThat(pageOfAuthors).isNotNull();
-        
+
         final Pageable pageable = pageOfAuthors.getPageable();
-        
+
         assertThat(pageable).isNotNull();
         assertThat(pageable.getPage()).isZero();
         assertThat(pageable.getSize()).isOne();
         assertThat(pageable.getNumberOfElements()).isOne();
         assertThat(pageable.getTotalOfElements()).isOne();
         assertThat(pageable.getTotalPages()).isOne();
-        
+
         final List<Author> authors = pageOfAuthors.getContent();
 
         assertThat(authors).isNotNull().isNotEmpty();
-        assertThat(authors.size()).isOne();        
-        
+        assertThat(authors.size()).isOne();
+
         final Author author = authors.get(0);
-       
+
         assertThat(author.getId()).isEqualTo(1L);
         assertThat(author.getName()).isEqualTo("Joshua Bloch");
         assertThat(author.getGender()).isEqualTo(Gender.MALE);
-        assertThat(author.getBirthday()).isEqualTo(LocalDate.parse("1961-08-28")); 
+        assertThat(author.getBirthday()).isEqualTo(LocalDate.parse("1961-08-28"));
     }
 }

@@ -62,7 +62,9 @@ class FindBooksByIdControllerTest {
 
         when(findBooksByIdsUseCase.findBooksByIds(mockFindBooksByIdsUseCaseParameters())).thenReturn(mockFindBooksByIdsUseCaseReturn());
 
-        mockMvc.perform(post("/books/findByIds").content(buildRequestBody()).contentType(MediaType.APPLICATION_JSON_VALUE).accept(MediaType.APPLICATION_JSON_VALUE))
+        mockMvc.perform(post("/books/findByIds").content(buildRequestBody())
+                                                .contentType(MediaType.APPLICATION_JSON_VALUE)
+                                                .accept(MediaType.APPLICATION_JSON_VALUE))
                .andDo(print())
                .andExpect(status().isOk())
                .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
@@ -86,20 +88,27 @@ class FindBooksByIdControllerTest {
         verifyNoMoreInteractions(findBooksByIdsUseCase);
     }
 
-	private String buildRequestBody() throws JsonProcessingException {
-		final List<Long> ids = Arrays.asList(new Long[] { 1L, 2L });
-		final FindAuthorsByIdsRequest request = new FindAuthorsByIdsRequest(ids);
-		return new ObjectMapper().writeValueAsString(request);
-	}
-    
-	private List<Long> mockFindBooksByIdsUseCaseParameters() {
-		return Arrays.asList(new Long[] { 1L, 2L });
-	}
+    private String buildRequestBody()
+        throws JsonProcessingException {
+        final List<Long> ids = Arrays.asList(1L, 2L);
+        final FindAuthorsByIdsRequest request = new FindAuthorsByIdsRequest(ids);
+        return new ObjectMapper().writeValueAsString(request);
+    }
+
+    private List<Long> mockFindBooksByIdsUseCaseParameters() {
+        return Arrays.asList(1L, 2L);
+    }
 
     private Page<Book> mockFindBooksByIdsUseCaseReturn() {
         final Author author = new Author(1L, "Joshua Bloch", Gender.MALE, LocalDate.parse("1961-08-28"));
         final List<Book> content = new ArrayList<>(1);
-		content.add(new Book(1L, author, "Effective Java (2nd Edition)", BigDecimal.valueOf(10.00), Boolean.TRUE, LocalDateTime.parse("2020-02-29T12:00:00"), LocalDateTime.parse("2020-02-29T12:00:00")));
+        content.add(new Book(1L,
+                             author,
+                             "Effective Java (2nd Edition)",
+                             BigDecimal.valueOf(10.00),
+                             Boolean.TRUE,
+                             LocalDateTime.parse("2020-02-29T12:00:00"),
+                             LocalDateTime.parse("2020-02-29T12:00:00")));
         return new PageImpl<>(content, new Pageable(1, 3, 1, 4L, 2));
     }
 }

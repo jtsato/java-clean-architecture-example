@@ -12,5 +12,5 @@ import io.github.jtsato.bookstore.core.common.paging.Page;
 @FunctionalInterface
 public interface GetBooksByIdsGateway {
 
-	Page<Book> getBooksByIds(final List<Long> id);
+    Page<Book> getBooksByIds(final List<Long> id);
 }

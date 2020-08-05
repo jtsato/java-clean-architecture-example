@@ -28,7 +28,7 @@ import lombok.extern.slf4j.Slf4j;
 
 /*
  * A EntryPoint follows these steps:
- * 
+ *
  * - Maps HTTP requests to Java objects
  * - Performs authorization checks
  * - Maps input to the input model of the use case
@@ -48,23 +48,29 @@ public class SearchBooksControllerImpl implements SearchBooksController {
 
     private final SearchBooksUseCase searchBooksUseCase;
 
+    @Override
     @LogExecutionTime
     @ResponseStatus(HttpStatus.OK)
     @GetMapping
-    public SearchBooksResponse searchBooks(@PageableDefault(page = 0, size = 20) @SortDefault.SortDefaults({@SortDefault(sort = "title", direction = Sort.Direction.ASC)}) final Pageable pageable, 
-    									   @DefaultValue final SearchBooksRequest searchBooksRequest) {
+    public SearchBooksResponse searchBooks(@PageableDefault(page = 0,
+                                                            size = 20) @SortDefault.SortDefaults({@SortDefault(sort = "title",
+                                                                                                               direction = Sort.Direction.ASC)}) final Pageable pageable,
+                                           @DefaultValue final SearchBooksRequest searchBooksRequest) {
 
         log.debug("Starting Controller -> SearchBooksController with {}", JsonConverter.convert(searchBooksRequest));
 
-        final SearchBooksParameters parameters = new SearchBooksParameters(searchBooksRequest.getTitle(), getSearchAuthorsParameters(searchBooksRequest), searchBooksRequest.getStartCreationDate(), searchBooksRequest.getEndCreationDate());
+        final SearchBooksParameters parameters = new SearchBooksParameters(searchBooksRequest.getTitle(),
+                                                                           getSearchAuthorsParameters(searchBooksRequest),
+                                                                           searchBooksRequest.getStartCreationDate(),
+                                                                           searchBooksRequest.getEndCreationDate());
 
         final Page<Book> books = searchBooksUseCase.searchBooks(parameters, pageable.getPageNumber(), pageable.getPageSize(), pageable.getSort().toString());
 
         return SearchBooksPresenter.of(books);
     }
 
-	private SearchAuthorsParameters getSearchAuthorsParameters(final SearchBooksRequest searchBooksRequest) {
-		final SearchBooksAuthorRequest author = searchBooksRequest.getAuthor();
-		return new SearchAuthorsParameters(author.getId(), author.getName(), author.getGender(), author.getStartBirthday(), author.getEndBirthday());
-	}
+    private SearchAuthorsParameters getSearchAuthorsParameters(final SearchBooksRequest searchBooksRequest) {
+        final SearchBooksAuthorRequest author = searchBooksRequest.getAuthor();
+        return new SearchAuthorsParameters(author.getId(), author.getName(), author.getGender(), author.getStartBirthday(), author.getEndBirthday());
+    }
 }

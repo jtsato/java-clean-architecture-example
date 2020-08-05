@@ -13,13 +13,13 @@ import lombok.ToString;
 @ToString
 public class Pageable {
 
-    private Integer page;
+    private final Integer page;
 
-    private Integer size;
+    private final Integer size;
 
-    private Integer numberOfElements;
+    private final Integer numberOfElements;
 
-    private Long totalOfElements;
+    private final Long totalOfElements;
 
-    private Integer totalPages;
+    private final Integer totalPages;
 }

@@ -44,7 +44,13 @@ public class UpdateBookByIdUseCaseImpl implements UpdateBookByIdUseCase {
 
         checkDuplicatedTitleViolation(parameters.getId(), parameters.getTitle());
 
-        final Book book = new Book(parameters.getId(), author, parameters.getTitle(), parameters.getPrice(), parameters.getAvailable(), null, getLocalDateTime.now());
+        final Book book = new Book(parameters.getId(),
+                                   author,
+                                   parameters.getTitle(),
+                                   parameters.getPrice(),
+                                   parameters.getAvailable(),
+                                   null,
+                                   getLocalDateTime.now());
 
         final Optional<Book> optional = updateBookGateway.updateBookById(book);
 
@@ -67,7 +73,7 @@ public class UpdateBookByIdUseCaseImpl implements UpdateBookByIdUseCase {
         }
 
         final Book book = optional.get();
-        
+
         if (!book.getId().equals(bookId)) {
             throw new UniqueConstraintException("validation.book.title.already.exists", bookTitle);
         }

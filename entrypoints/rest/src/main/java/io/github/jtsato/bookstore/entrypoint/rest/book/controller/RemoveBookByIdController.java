@@ -18,7 +18,10 @@ public interface RemoveBookByIdController {
 
     @Operation(summary = "Remove Book by Id")
 
-    @Parameter(name =  "Accept-Language", example = "pt_BR", in = ParameterIn.HEADER, description = "Represents a specific geographical, political, or cultural region. Language & Country.")
+    @Parameter(name = "Accept-Language",
+               example = "pt_BR",
+               in = ParameterIn.HEADER,
+               description = "Represents a specific geographical, political, or cultural region. Language & Country.")
 
     @ApiResponses(value = {@ApiResponse(responseCode = HttpStatusConstants.NO_CONTENT_204, description = HttpStatusConstants.NO_CONTENT_204_MESSAGE),
                            @ApiResponse(responseCode = HttpStatusConstants.BAD_REQUEST_400, description = HttpStatusConstants.BAD_REQUEST_400_MESSAGE),

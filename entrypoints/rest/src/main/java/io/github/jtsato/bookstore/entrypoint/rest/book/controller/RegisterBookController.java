@@ -20,11 +20,14 @@ public interface RegisterBookController {
 
     @Operation(summary = "Register new Book")
 
-    @Parameter(name =  "Accept-Language", example = "pt_BR", in = ParameterIn.HEADER, description = "Represents a specific geographical, political, or cultural region. Language & Country.")
+    @Parameter(name = "Accept-Language",
+               example = "pt_BR",
+               in = ParameterIn.HEADER,
+               description = "Represents a specific geographical, political, or cultural region. Language & Country.")
 
     @ApiResponses(value = {@ApiResponse(responseCode = HttpStatusConstants.CREATED_201, description = HttpStatusConstants.CREATED_201_MESSAGE),
-                           @ApiResponse(responseCode = HttpStatusConstants.BAD_REQUEST_400, description  = HttpStatusConstants.BAD_REQUEST_400_MESSAGE),
-                           @ApiResponse(responseCode = HttpStatusConstants.INTERNAL_SERVER_ERROR_500, description  = HttpStatusConstants.INTERNAL_SERVER_ERROR_500_MESSAGE),})
-    
-    public RegisterBookResponse registerBook(final RegisterBookRequest request);
+                           @ApiResponse(responseCode = HttpStatusConstants.BAD_REQUEST_400, description = HttpStatusConstants.BAD_REQUEST_400_MESSAGE),
+                           @ApiResponse(responseCode = HttpStatusConstants.INTERNAL_SERVER_ERROR_500,
+                                        description = HttpStatusConstants.INTERNAL_SERVER_ERROR_500_MESSAGE),})
+    RegisterBookResponse registerBook(final RegisterBookRequest request);
 }

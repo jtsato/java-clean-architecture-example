@@ -22,16 +22,16 @@ import lombok.RequiredArgsConstructor;
 public class UpdateAuthorByIdUseCaseImpl implements UpdateAuthorByIdUseCase {
 
     private final UpdateAuthorByIdGateway updateAuthorGateway;
-    
+
     private final GetAuthorByNameGateway getAuthorByNameGateway;
 
     @Override
     public Author updateAuthorById(final UpdateAuthorByIdParameters parameters) {
 
         checkDuplicatedNameViolation(parameters.getId(), parameters.getName());
-        
+
         final LocalDate birthday = LocalDate.parse(parameters.getBirthday());
-        
+
         final Gender gender = EnumUtils.valueOf(parameters.getGender(), Gender.class);
 
         final Author author = new Author(parameters.getId(), parameters.getName(), gender, birthday);
@@ -40,7 +40,7 @@ public class UpdateAuthorByIdUseCaseImpl implements UpdateAuthorByIdUseCase {
 
         return optional.orElseThrow(() -> new NotFoundException("validation.author.id.notfound", author.getId()));
     }
-    
+
     private void checkDuplicatedNameViolation(final Long authorId, final String authorName) {
 
         final Optional<Author> optional = getAuthorByNameGateway.getAuthorByName(authorName);
@@ -50,7 +50,7 @@ public class UpdateAuthorByIdUseCaseImpl implements UpdateAuthorByIdUseCase {
         }
 
         final Author author = optional.get();
-        
+
         if (!author.getId().equals(authorId)) {
             throw new UniqueConstraintException("validation.author.name.already.exists", authorName);
         }

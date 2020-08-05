@@ -14,7 +14,7 @@ import org.springframework.web.servlet.support.RequestContextUtils;
  */
 
 public class LocaleChangeHeaderInterceptor extends LocaleChangeInterceptor {
-    
+
     @Override
     public boolean preHandle(final HttpServletRequest request, final HttpServletResponse response, final Object handler)
         throws ServletException {

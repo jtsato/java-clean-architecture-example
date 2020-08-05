@@ -19,13 +19,17 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 public interface UpdateAuthorByIdController {
 
     @Operation(summary = "Update Author by Id")
-    
-    @Parameter(name =  "Accept-Language", example = "pt_BR", in = ParameterIn.HEADER, description = "Represents a specific geographical, political, or cultural region. Language & Country.")
+
+    @Parameter(name = "Accept-Language",
+               example = "pt_BR",
+               in = ParameterIn.HEADER,
+               description = "Represents a specific geographical, political, or cultural region. Language & Country.")
 
     @ApiResponses(value = {@ApiResponse(responseCode = HttpStatusConstants.OK_200, description = HttpStatusConstants.OK_200_MESSAGE),
                            @ApiResponse(responseCode = HttpStatusConstants.BAD_REQUEST_400, description = HttpStatusConstants.BAD_REQUEST_400_MESSAGE),
                            @ApiResponse(responseCode = HttpStatusConstants.NOT_FOUND_404, description = HttpStatusConstants.NOT_FOUND_404_MESSAGE),
-                           @ApiResponse(responseCode = HttpStatusConstants.INTERNAL_SERVER_ERROR_500, description = HttpStatusConstants.INTERNAL_SERVER_ERROR_500_MESSAGE),})
-    
+                           @ApiResponse(responseCode = HttpStatusConstants.INTERNAL_SERVER_ERROR_500,
+                                        description = HttpStatusConstants.INTERNAL_SERVER_ERROR_500_MESSAGE),})
+
     UpdateAuthorByIdResponse updateAuthorById(@Parameter(description = "Author Id") final Long id, final UpdateAuthorByIdRequest request);
 }

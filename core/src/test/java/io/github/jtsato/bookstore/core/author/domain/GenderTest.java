@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 
 class GenderTest {
 
-    @DisplayName("Sucessful to run gender functions")  
+    @DisplayName("Sucessful to run gender functions")
     @Test
     void sucessfulToRunGenderFunctions() {
         assertThat(Gender.MALE.is(Gender.MALE)).isTrue();

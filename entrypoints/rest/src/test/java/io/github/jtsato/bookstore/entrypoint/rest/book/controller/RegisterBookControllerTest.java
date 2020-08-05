@@ -77,17 +77,23 @@ class RegisterBookControllerTest {
     }
 
     private RegisterBookParameters mockRegisterBookUseCaseParameters() {
-        return new RegisterBookParameters(1L , "Effective Java (2nd Edition)", BigDecimal.valueOf(10.00), Boolean.TRUE);
+        return new RegisterBookParameters(1L, "Effective Java (2nd Edition)", BigDecimal.valueOf(10.00), Boolean.TRUE);
     }
 
     private Book mockRegisterBookUseCaseReturn() {
         final Author author = new Author(1L, "Joshua Bloch", Gender.MALE, LocalDate.parse("1961-08-28"));
-        return new Book(1L, author, "Effective Java (2nd Edition)", BigDecimal.valueOf(10.00), Boolean.TRUE, LocalDateTime.parse("2020-03-12T22:04:59.123"), LocalDateTime.parse("2020-03-12T22:04:59.123"));
+        return new Book(1L,
+                        author,
+                        "Effective Java (2nd Edition)",
+                        BigDecimal.valueOf(10.00),
+                        Boolean.TRUE,
+                        LocalDateTime.parse("2020-03-12T22:04:59.123"),
+                        LocalDateTime.parse("2020-03-12T22:04:59.123"));
     }
 
     private String buildRequestBody()
         throws JsonProcessingException {
-        final RegisterBookRequest request = new RegisterBookRequest(1l, "Effective Java (2nd Edition)", BigDecimal.valueOf(10.00), Boolean.TRUE);
+        final RegisterBookRequest request = new RegisterBookRequest(1L, "Effective Java (2nd Edition)", BigDecimal.valueOf(10.00), Boolean.TRUE);
         return new ObjectMapper().writeValueAsString(request);
     }
 }

@@ -15,7 +15,13 @@ import lombok.NoArgsConstructor;
 public class GetBookByIdPresenter {
 
     public static GetBookByIdResponse of(final Book book) {
-        return new GetBookByIdResponse(book.getId(), of(book.getAuthor()), book.getTitle(), book.getPrice(), book.getAvailable(), book.getCreationDate(), book.getUpdateDate());
+        return new GetBookByIdResponse(book.getId(),
+                                       of(book.getAuthor()),
+                                       book.getTitle(),
+                                       book.getPrice(),
+                                       book.getAvailable(),
+                                       book.getCreationDate(),
+                                       book.getUpdateDate());
     }
 
     private static GetBookByIdAuthorResponse of(final Author author) {

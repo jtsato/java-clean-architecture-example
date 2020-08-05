@@ -9,5 +9,5 @@ import java.time.LocalDateTime;
 @FunctionalInterface
 public interface GetLocalDateTime {
 
-    public LocalDateTime now();
+    LocalDateTime now();
 }

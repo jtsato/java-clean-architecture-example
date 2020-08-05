@@ -32,32 +32,32 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class RemoveAuthorByIdUseCaseImpl implements RemoveAuthorByIdUseCase {
 
-	private final RemoveAuthorByIdGateway removeAuthorByIdGateway;
-	
-	private final SearchBooksGateway searchBooksGateway;
+    private final RemoveAuthorByIdGateway removeAuthorByIdGateway;
 
-	@Override
-	public Author removeAuthorById(final Long id) {
-	    
+    private final SearchBooksGateway searchBooksGateway;
+
+    @Override
+    public Author removeAuthorById(final Long id) {
+
         if (id == null) {
             throw new InvalidParameterException("validation.author.id.null");
         }
-        
-	    final SearchAuthorsParameters authorsParameters = new SearchAuthorsParameters(id, null, null, null, null);
+
+        final SearchAuthorsParameters authorsParameters = new SearchAuthorsParameters(id, null, null, null, null);
         final SearchBooksParameters parameters = new SearchBooksParameters(null, authorsParameters, null, null);
-	    
-        final Page<Book> pageOfBook = searchBooksGateway.searchBooks(parameters , 0, 1, null);
-	    
-        if (CollectionUtils.isNotEmpty(pageOfBook.getContent())){
+
+        final Page<Book> pageOfBook = searchBooksGateway.searchBooks(parameters, 0, 1, null);
+
+        if (CollectionUtils.isNotEmpty(pageOfBook.getContent())) {
             throw new ParentConstraintException("validation.author.with.books.removal");
         }
-        
+
         final Optional<Author> optional = removeAuthorByIdGateway.removeAuthorById(id);
-        
+
         if (!optional.isPresent()) {
             throw new NotFoundException("validation.author.id.notfound", id);
         }
-        
-		return optional.get();
-	}
+
+        return optional.get();
+    }
 }

@@ -37,15 +37,15 @@ import io.github.jtsato.bookstore.core.common.paging.Pageable;
 class SearchBooksUseCaseTest {
 
     @Mock
-    private SearchBooksGateway searchBooksGateway = Mockito.mock(SearchBooksGateway.class);
+    private final SearchBooksGateway searchBooksGateway = Mockito.mock(SearchBooksGateway.class);
 
     @InjectMocks
-    private SearchBooksUseCase searchBooksUseCase = new SearchBooksUseCaseImpl(searchBooksGateway);
+    private final SearchBooksUseCase searchBooksUseCase = new SearchBooksUseCaseImpl(searchBooksGateway);
 
     @DisplayName("Fail to search books with inconsistent parameters")
     @Test
     void failToSearchBooksWithInconsistentParameters() {
-        
+
         final Exception exception = Assertions.assertThrows(Exception.class, () -> {
             new SearchBooksParameters(null, null, "2019-02-29T00:00:00", "2019-02-29T23:59:59");
         });
@@ -55,20 +55,20 @@ class SearchBooksUseCaseTest {
         assertThat(constraintViolationException.getMessage()).contains("startCreationDate: validation.book.start.creation.date.notvalid");
         assertThat(constraintViolationException.getMessage()).contains("endCreationDate: validation.book.end.creation.date.notvalid");
     }
-    
+
     @DisplayName("Successful to search books if found")
     @Test
     void successfulToSearchBooksIfFound() {
 
         final SearchBooksParameters parameters = new SearchBooksParameters(null, null, "2020-02-29T00:00:00", "2020-02-29T23:59:59");
         final Page<Book> pageWithOneBook = mockPageWithOneBook();
-        
+
         when(searchBooksGateway.searchBooks(parameters, 0, 1, "id:asc")).thenReturn(pageWithOneBook);
 
         final Page<Book> pageOfBooks = searchBooksUseCase.searchBooks(parameters, 0, 1, "id:asc");
-        
+
         final Pageable pageable = pageOfBooks.getPageable();
-        
+
         assertThat(pageable).isNotNull();
         assertThat(pageable.getPage()).isZero();
         assertThat(pageable.getSize()).isOne();
@@ -77,12 +77,12 @@ class SearchBooksUseCaseTest {
         assertThat(pageable.getTotalPages()).isOne();
 
         assertThat(pageOfBooks).isNotNull();
-        
+
         final List<Book> books = pageOfBooks.getContent();
 
         assertThat(books).isNotNull().isNotEmpty();
         assertThat(books.size()).isOne();
-        
+
         final Book book = books.get(0);
 
         assertThat(book.getId()).isEqualTo(1L);
@@ -91,11 +91,17 @@ class SearchBooksUseCaseTest {
     }
 
     private Page<Book> mockPageWithOneBook() {
-        
+
         final Author author = new Author(1L, "Joshua Bloch", Gender.MALE, LocalDate.parse("1961-08-28"));
 
         final List<Book> content = new ArrayList<>(1);
-		content.add(new Book(1L, author, "Effective Java (2nd Edition)", BigDecimal.valueOf(10.00), Boolean.TRUE, LocalDateTime.parse("2020-03-12T22:04:59.123"), LocalDateTime.parse("2020-03-12T22:04:59.123")));
+        content.add(new Book(1L,
+                             author,
+                             "Effective Java (2nd Edition)",
+                             BigDecimal.valueOf(10.00),
+                             Boolean.TRUE,
+                             LocalDateTime.parse("2020-03-12T22:04:59.123"),
+                             LocalDateTime.parse("2020-03-12T22:04:59.123")));
 
         return new PageImpl<Book>(content, new Pageable(0, 1, 1, 1L, 1));
     }
@@ -111,21 +117,21 @@ class SearchBooksUseCaseTest {
         final Page<Book> pageOfBooks = searchBooksUseCase.searchBooks(parameters, 0, 1, "id:asc");
 
         assertThat(pageOfBooks).isNotNull();
-        
+
         final List<Book> books = pageOfBooks.getContent();
 
         assertThat(books).isNotNull().isEmpty();
-        
+
         assertThat(pageOfBooks.getPageable()).isNotNull();
-        
+
         final Pageable pageable = pageOfBooks.getPageable();
-        
+
         assertThat(pageable).isNotNull();
         assertThat(pageable.getPage()).isZero();
         assertThat(pageable.getSize()).isOne();
         assertThat(pageable.getNumberOfElements()).isZero();
         assertThat(pageable.getTotalOfElements()).isZero();
-        assertThat(pageable.getTotalPages()).isZero();        
+        assertThat(pageable.getTotalPages()).isZero();
     }
 
     private Page<Book> mockEmptyBooksPage() {

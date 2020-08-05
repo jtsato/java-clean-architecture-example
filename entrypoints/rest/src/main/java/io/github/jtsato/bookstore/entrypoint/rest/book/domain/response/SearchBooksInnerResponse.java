@@ -20,13 +20,13 @@ public class SearchBooksInnerResponse implements Serializable {
     private final Long id;
 
     private final SearchBooksAuthorResponse author;
-    
+
     private final String title;
-    
+
     private final BigDecimal price;
 
     private final Boolean available;
-    
+
     private final LocalDateTime creationDate;
 
     private final LocalDateTime updateDate;

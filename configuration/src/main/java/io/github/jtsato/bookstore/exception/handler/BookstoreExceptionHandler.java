@@ -35,7 +35,7 @@ import io.github.jtsato.bookstore.entrypoint.rest.common.WebRequest;
 
 @RestControllerAdvice
 public class BookstoreExceptionHandler {
-    
+
     private static final Logger LOGGER = LogManager.getLogger(BookstoreExceptionHandler.class);
 
     @Autowired
@@ -56,7 +56,9 @@ public class BookstoreExceptionHandler {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(HttpMessageNotReadableException.class)
     public HttpResponseStatus handleHttpMessageNotReadableException(final HttpMessageNotReadableException exception, final Locale locale) {
-        return buildHttpResponseStatus(HttpStatus.BAD_REQUEST, messageSource.getMessage("exception.required.request.body.is.missing", null, locale), webRequest.getPath());
+        return buildHttpResponseStatus(HttpStatus.BAD_REQUEST,
+                                       messageSource.getMessage("exception.required.request.body.is.missing", null, locale),
+                                       webRequest.getPath());
     }
 
     @ResponseBody
@@ -96,10 +98,12 @@ public class BookstoreExceptionHandler {
     @ExceptionHandler(ConstraintViolationException.class)
     public HttpResponseStatus handleConstraintViolationException(final ConstraintViolationException exception, final Locale locale) {
         final Set<ConstraintViolation<?>> violations = exception.getConstraintViolations();
-        final String message = violations.stream().map(violation -> messageSource.getMessage(violation.getMessage(), null, locale)).collect(Collectors.joining(", "));
+        final String message = violations.stream()
+                                         .map(violation -> messageSource.getMessage(violation.getMessage(), null, locale))
+                                         .collect(Collectors.joining(", "));
         return buildHttpResponseStatus(HttpStatus.BAD_REQUEST, message, webRequest.getPath());
     }
-    
+
     @ResponseBody
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     @ExceptionHandler(Exception.class)
@@ -107,7 +111,7 @@ public class BookstoreExceptionHandler {
         LOGGER.error("Exception: {}", exception.getMessage());
         final String message = messageSource.getMessage("exception.unexpected", null, locale);
         return buildHttpResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR, message, webRequest.getPath());
-    }    
+    }
 
     public static HttpResponseStatus buildHttpResponseStatus(final HttpStatus httpStatus, final String message, final String path) {
         return new HttpResponseStatus(LocalDateTime.now(), httpStatus.value(), httpStatus.getReasonPhrase(), message, path);

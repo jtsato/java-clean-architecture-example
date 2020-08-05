@@ -46,20 +46,22 @@ import io.github.jtsato.bookstore.entrypoint.rest.author.domain.request.FindAuth
 @WebMvcTest(controllers = FindAuthorsByIdsControllerImpl.class)
 class FindAuthorsByIdsControllerTest {
 
-	@Autowired
-	private MockMvc mockMvc;
+    @Autowired
+    private MockMvc mockMvc;
 
-	@MockBean
-	private FindAuthorsByIdsUseCase findAuthorsByIdsUseCase;
+    @MockBean
+    private FindAuthorsByIdsUseCase findAuthorsByIdsUseCase;
 
-	@DisplayName("Successful find authors by IDs if found")
+    @DisplayName("Successful find authors by IDs if found")
     @Test
     void successfulFindAuthorsByIdsIfFound()
         throws Exception {
 
         when(findAuthorsByIdsUseCase.findAuthorsByIds(mockFindAuthorsByIdsUseCaseParameters())).thenReturn(mockFindAuthorsByIdsUseCaseReturn());
 
-        mockMvc.perform(post("/authors/findByIds").content(buildRequestBody()).contentType(MediaType.APPLICATION_JSON_VALUE).accept(MediaType.APPLICATION_JSON_VALUE))
+        mockMvc.perform(post("/authors/findByIds").content(buildRequestBody())
+                                                  .contentType(MediaType.APPLICATION_JSON_VALUE)
+                                                  .accept(MediaType.APPLICATION_JSON_VALUE))
                .andDo(print())
                .andExpect(status().isOk())
                .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
@@ -77,19 +79,20 @@ class FindAuthorsByIdsControllerTest {
         verifyNoMoreInteractions(findAuthorsByIdsUseCase);
     }
 
-	private String buildRequestBody() throws JsonProcessingException {
-		final List<Long> ids = Arrays.asList(new Long[] { 1L, 2L });
-		final FindAuthorsByIdsRequest request = new FindAuthorsByIdsRequest(ids);
-		return new ObjectMapper().writeValueAsString(request);
-	}
+    private String buildRequestBody()
+        throws JsonProcessingException {
+        final List<Long> ids = Arrays.asList(1L, 2L);
+        final FindAuthorsByIdsRequest request = new FindAuthorsByIdsRequest(ids);
+        return new ObjectMapper().writeValueAsString(request);
+    }
 
-	private List<Long> mockFindAuthorsByIdsUseCaseParameters() {
-		return Arrays.asList(new Long[] { 1L, 2L });
-	}
+    private List<Long> mockFindAuthorsByIdsUseCaseParameters() {
+        return Arrays.asList(1L, 2L);
+    }
 
-	private Page<Author> mockFindAuthorsByIdsUseCaseReturn() {
-		final List<Author> content = new ArrayList<>(1);
-		content.add(new Author(1L, "Joshua Bloch", Gender.MALE, LocalDate.parse("1961-08-28")));
-		return new PageImpl<>(content, new Pageable(0, 2, 1, 1L, 1));
-	}
+    private Page<Author> mockFindAuthorsByIdsUseCaseReturn() {
+        final List<Author> content = new ArrayList<>(1);
+        content.add(new Author(1L, "Joshua Bloch", Gender.MALE, LocalDate.parse("1961-08-28")));
+        return new PageImpl<>(content, new Pageable(0, 2, 1, 1L, 1));
+    }
 }

@@ -53,8 +53,8 @@ class SaveBookDocumentControllerTest {
 
         when(saveBookDocumentUseCase.saveBookDocument(mockSaveBookDocumentUseCaseParameters())).thenReturn(mockSaveBookDocumentUseCaseReturn());
 
-		final MockHttpServletRequestBuilder builder = MockMvcRequestBuilders.multipart("/books/{bookId}/content", 1L).file(buildRequestBody());
-        
+        final MockHttpServletRequestBuilder builder = MockMvcRequestBuilders.multipart("/books/{bookId}/content", 1L).file(buildRequestBody());
+
         mockMvc.perform(builder)
                .andDo(print())
                .andExpect(status().isOk())
@@ -64,7 +64,7 @@ class SaveBookDocumentControllerTest {
                .andExpect(jsonPath("$.contentType", is("text/plain")))
                .andExpect(jsonPath("$.extension", is("txt")))
                .andExpect(jsonPath("$.name", is("file")))
-               .andExpect(jsonPath("$.size", is(123)))
+               .andExpect(jsonPath("$.size", is(27)))
                .andExpect(jsonPath("$.creationDate", is("2020-03-12T22:04:59.123")))
                .andExpect(jsonPath("$.updateDate", is("2020-03-12T22:04:59.123")));
 
@@ -73,19 +73,28 @@ class SaveBookDocumentControllerTest {
     }
 
     private SaveBookDocumentParameters mockSaveBookDocumentUseCaseParameters() {
-		return new SaveBookDocumentParameters(1L, "text/plain", "txt", "file", 123L,
-				Base64.getEncoder().encodeToString("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.".getBytes()));
-	}
-
-    private BookDocument mockSaveBookDocumentUseCaseReturn() {
-		return new BookDocument(1L, 1L, "text/plain", "txt", "file", 123L,
-				"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-				LocalDateTime.parse("2020-03-12T22:04:59.123"), LocalDateTime.parse("2020-03-12T22:04:59.123"));
+        return new SaveBookDocumentParameters(1L,
+                                              "text/plain",
+                                              "txt",
+                                              "file",
+                                              27L,
+                                              Base64.getEncoder().encodeToString("Lorem ipsum dolor sit amet.".getBytes()));
     }
 
-	private MockMultipartFile buildRequestBody() throws IOException {
-		return new MockMultipartFile("file", "Document.txt", "text/plain",
-				"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-						.getBytes());
-	}
+    private BookDocument mockSaveBookDocumentUseCaseReturn() {
+        return new BookDocument(1L,
+                                1L,
+                                "text/plain",
+                                "txt",
+                                "file",
+                                27L,
+                                "Lorem ipsum dolor sit amet.",
+                                LocalDateTime.parse("2020-03-12T22:04:59.123"),
+                                LocalDateTime.parse("2020-03-12T22:04:59.123"));
+    }
+
+    private MockMultipartFile buildRequestBody()
+        throws IOException {
+        return new MockMultipartFile("file", "Document.txt", "text/plain", "Lorem ipsum dolor sit amet.".getBytes());
+    }
 }

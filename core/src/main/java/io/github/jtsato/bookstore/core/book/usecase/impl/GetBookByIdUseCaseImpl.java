@@ -28,11 +28,11 @@ public class GetBookByIdUseCaseImpl implements GetBookByIdUseCase {
 
     @Override
     public Book getBookById(final Long id) {
-        
+
         if (id == null) {
             throw new InvalidParameterException("validation.book.id.null");
         }
-        
+
         final Optional<Book> optional = getBookByIdGateway.getBookById(id);
 
         if (!optional.isPresent()) {

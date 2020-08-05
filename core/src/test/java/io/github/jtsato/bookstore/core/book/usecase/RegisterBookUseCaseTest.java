@@ -39,61 +39,67 @@ import io.github.jtsato.bookstore.core.exception.UniqueConstraintException;
 class RegisterBookUseCaseTest {
 
     @Mock
-    private RegisterBookGateway registerBookGateway = Mockito.mock(RegisterBookGateway.class);
+    private final RegisterBookGateway registerBookGateway = Mockito.mock(RegisterBookGateway.class);
 
     @Mock
-    private GetAuthorByIdGateway getAuthorByIdGateway = Mockito.mock(GetAuthorByIdGateway.class);
+    private final GetAuthorByIdGateway getAuthorByIdGateway = Mockito.mock(GetAuthorByIdGateway.class);
 
     @Mock
-    private GetBookByTitleGateway getBookByTitleGateway = Mockito.mock(GetBookByTitleGateway.class);
+    private final GetBookByTitleGateway getBookByTitleGateway = Mockito.mock(GetBookByTitleGateway.class);
 
     @Mock
-    private GetLocalDateTime getLocalDateTime = Mockito.mock(GetLocalDateTime.class);
+    private final GetLocalDateTime getLocalDateTime = Mockito.mock(GetLocalDateTime.class);
 
     @InjectMocks
-    private RegisterBookUseCase getBookByIdUseCase = new RegisterBookUseCaseImpl(registerBookGateway, getAuthorByIdGateway, getBookByTitleGateway, getLocalDateTime);
+    private final RegisterBookUseCase getBookByIdUseCase = new RegisterBookUseCaseImpl(registerBookGateway,
+                                                                                       getAuthorByIdGateway,
+                                                                                       getBookByTitleGateway,
+                                                                                       getLocalDateTime);
 
     @DisplayName("Fail to register a book if parameters are not valid")
     @Test
     void failToRegisterABookIfParametersAreNotValid() {
-        
+
         final Exception exception = Assertions.assertThrows(Exception.class, () -> {
             new RegisterBookParameters(null, StringUtils.SPACE, null, null);
         });
 
         assertThat(exception).isInstanceOf(ConstraintViolationException.class);
-        
+
         final ConstraintViolationException constraintViolationException = (ConstraintViolationException) exception;
         assertThat(constraintViolationException.getMessage()).contains("title: validation.book.title.blank");
         assertThat(constraintViolationException.getMessage()).contains("authorId: validation.author.id.null");
         assertThat(constraintViolationException.getMessage()).contains("price: validation.book.price.null");
         assertThat(constraintViolationException.getMessage()).contains("available: validation.book.available.null");
     }
-    
+
     @DisplayName("Fail to register a book if price is negative")
     @Test
     void failToRegisterABookIfPriceIsNegative() {
-        
+
         final Exception exception = Assertions.assertThrows(Exception.class, () -> {
             new RegisterBookParameters(1L, "Effective Java (2nd Edition)", BigDecimal.valueOf(-1.00), Boolean.TRUE);
         });
 
         assertThat(exception).isInstanceOf(ConstraintViolationException.class);
-        
+
         final ConstraintViolationException constraintViolationException = (ConstraintViolationException) exception;
         assertThat(constraintViolationException.getMessage()).contains("price: validation.book.price.negative");
-    }    
-    
+    }
+
     @DisplayName("Successful to register book if not registered")
     @Test
     void successfulToRegisterBookIfNotRegistered() {
 
-        when(registerBookGateway.registerBook(mockRegisterBookGatewayParameters())).thenReturn(mockRegisterBookGatewayReturn());
+        when(registerBookGateway.registerBook(mockRegisterBookGatewayIn())).thenReturn(mockRegisterBookGatewayOut());
         when(getAuthorByIdGateway.getAuthorById(1L)).thenReturn(mockGetAuthorByIdGateway());
         when(getBookByTitleGateway.getBookByTitle("Effective Java (2nd Edition)")).thenReturn(Optional.empty());
         when(getLocalDateTime.now()).thenReturn(LocalDateTime.parse("2020-03-12T22:04:59.123"));
 
-        final RegisterBookParameters registerBookParameters = new RegisterBookParameters(1L, "Effective Java (2nd Edition)", BigDecimal.valueOf(10.00), Boolean.TRUE);
+        final RegisterBookParameters registerBookParameters = new RegisterBookParameters(1L,
+                                                                                         "Effective Java (2nd Edition)",
+                                                                                         BigDecimal.valueOf(10.00),
+                                                                                         Boolean.TRUE);
         final Book book = getBookByIdUseCase.registerBook(registerBookParameters);
 
         assertThat(book.getId()).isEqualTo(1L);
@@ -102,9 +108,9 @@ class RegisterBookUseCaseTest {
         assertThat(book.getAvailable()).isEqualTo(Boolean.TRUE);
         assertThat(book.getCreationDate()).isEqualTo(LocalDateTime.parse("2020-03-12T22:04:59.123"));
         assertThat(book.getUpdateDate()).isEqualTo(LocalDateTime.parse("2020-03-12T22:04:59.123"));
-        
+
         final Author author = book.getAuthor();
-        
+
         assertThat(author).isNotNull();
         assertThat(author.getId()).isEqualTo(1L);
         assertThat(author.getName()).isEqualTo("Joshua Bloch");
@@ -112,14 +118,26 @@ class RegisterBookUseCaseTest {
         assertThat(author.getBirthday()).isEqualTo(LocalDate.parse("1961-08-28"));
     }
 
-    private Book mockRegisterBookGatewayParameters() {
+    private Book mockRegisterBookGatewayIn() {
         final Author author = new Author(1L, "Joshua Bloch", Gender.MALE, LocalDate.parse("1961-08-28"));
-		return new Book(null, author, "Effective Java (2nd Edition)", BigDecimal.valueOf(10.00), Boolean.TRUE, LocalDateTime.parse("2020-03-12T22:04:59.123"), LocalDateTime.parse("2020-03-12T22:04:59.123"));
+        return new Book(null,
+                        author,
+                        "Effective Java (2nd Edition)",
+                        BigDecimal.valueOf(10.00),
+                        Boolean.TRUE,
+                        LocalDateTime.parse("2020-03-12T22:04:59.123"),
+                        LocalDateTime.parse("2020-03-12T22:04:59.123"));
     }
 
-    private Book mockRegisterBookGatewayReturn() {
+    private Book mockRegisterBookGatewayOut() {
         final Author author = new Author(1L, "Joshua Bloch", Gender.MALE, LocalDate.parse("1961-08-28"));
-        return new Book(1L, author, "Effective Java (2nd Edition)", BigDecimal.valueOf(10.00), Boolean.TRUE, LocalDateTime.parse("2020-03-12T22:04:59.123"), LocalDateTime.parse("2020-03-12T22:04:59.123"));
+        return new Book(1L,
+                        author,
+                        "Effective Java (2nd Edition)",
+                        BigDecimal.valueOf(10.00),
+                        Boolean.TRUE,
+                        LocalDateTime.parse("2020-03-12T22:04:59.123"),
+                        LocalDateTime.parse("2020-03-12T22:04:59.123"));
     }
 
     private Optional<Author> mockGetAuthorByIdGateway() {
@@ -130,39 +148,51 @@ class RegisterBookUseCaseTest {
     @Test
     void failToRegisterBookIfAlreadyRegistered() {
 
-        when(registerBookGateway.registerBook(mockRegisterBookGatewayParameters())).thenReturn(mockRegisterBookGatewayReturn());
+        when(registerBookGateway.registerBook(mockRegisterBookGatewayIn())).thenReturn(mockRegisterBookGatewayOut());
         when(getAuthorByIdGateway.getAuthorById(1L)).thenReturn(mockGetAuthorByIdGateway());
-        when(getBookByTitleGateway.getBookByTitle("Effective Java (2nd Edition)")).thenReturn(mockGetBookByTitleGatewayReturn());
+        when(getBookByTitleGateway.getBookByTitle("Effective Java (2nd Edition)")).thenReturn(mockGetBookByTitleGatewayOut());
         when(getLocalDateTime.now()).thenReturn(LocalDateTime.parse("2020-03-12T22:04:59.123"));
 
-        final RegisterBookParameters registerBookParameters = new RegisterBookParameters(1L, "Effective Java (2nd Edition)", BigDecimal.valueOf(10.00), Boolean.TRUE);
+        final RegisterBookParameters registerBookParameters = new RegisterBookParameters(1L,
+                                                                                         "Effective Java (2nd Edition)",
+                                                                                         BigDecimal.valueOf(10.00),
+                                                                                         Boolean.TRUE);
 
         final Exception exception = Assertions.assertThrows(Exception.class, () -> {
             getBookByIdUseCase.registerBook(registerBookParameters);
         });
 
         assertThat(exception).isInstanceOf(UniqueConstraintException.class);
-        
+
         final UniqueConstraintException uniqueConstraintException = (UniqueConstraintException) exception;
         assertThat(uniqueConstraintException.getArgs()).isNotEmpty();
         assertThat(uniqueConstraintException.getMessage()).isEqualTo("validation.book.title.already.exists");
     }
 
-    private Optional<Book> mockGetBookByTitleGatewayReturn() {
+    private Optional<Book> mockGetBookByTitleGatewayOut() {
         final Author author = new Author(1L, "Joshua Bloch", Gender.MALE, LocalDate.parse("1961-08-28"));
-		return Optional.of(new Book(1L, author, "Effective Java (2nd Edition)", BigDecimal.valueOf(10.00), Boolean.TRUE, LocalDateTime.parse("2020-03-12T22:04:59.123"), LocalDateTime.parse("2020-03-12T22:04:59.123")));
-    }    
-    
+        return Optional.of(new Book(1L,
+                                    author,
+                                    "Effective Java (2nd Edition)",
+                                    BigDecimal.valueOf(10.00),
+                                    Boolean.TRUE,
+                                    LocalDateTime.parse("2020-03-12T22:04:59.123"),
+                                    LocalDateTime.parse("2020-03-12T22:04:59.123")));
+    }
+
     @DisplayName("Fail to register book if author not found")
     @Test
     void failToRegisterBookIfAuthorNotFound() {
 
-        when(registerBookGateway.registerBook(mockRegisterBookGatewayParameters())).thenReturn(mockRegisterBookGatewayReturn());
+        when(registerBookGateway.registerBook(mockRegisterBookGatewayIn())).thenReturn(mockRegisterBookGatewayOut());
         when(getAuthorByIdGateway.getAuthorById(1L)).thenReturn(Optional.empty());
         when(getBookByTitleGateway.getBookByTitle("Joshua Bloch")).thenReturn(Optional.empty());
         when(getLocalDateTime.now()).thenReturn(LocalDateTime.parse("2020-03-12T22:04:59.123"));
 
-        final RegisterBookParameters registerBookParameters = new RegisterBookParameters(1L, "Effective Java (2nd Edition)", BigDecimal.valueOf(10.00), Boolean.TRUE);
+        final RegisterBookParameters registerBookParameters = new RegisterBookParameters(1L,
+                                                                                         "Effective Java (2nd Edition)",
+                                                                                         BigDecimal.valueOf(10.00),
+                                                                                         Boolean.TRUE);
 
         final Exception exception = Assertions.assertThrows(Exception.class, () -> {
             getBookByIdUseCase.registerBook(registerBookParameters);
