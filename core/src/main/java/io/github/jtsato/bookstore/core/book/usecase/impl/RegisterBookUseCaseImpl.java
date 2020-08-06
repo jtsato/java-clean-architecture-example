@@ -38,7 +38,7 @@ public class RegisterBookUseCaseImpl implements RegisterBookUseCase {
     private final GetLocalDateTime getLocalDateTime;
 
     @Override
-    public Book registerBook(final RegisterBookParameters parameters) {
+    public Book execute(final RegisterBookParameters parameters) {
 
         final Author author = getAuthorAndValidate(parameters.getAuthorId());
 

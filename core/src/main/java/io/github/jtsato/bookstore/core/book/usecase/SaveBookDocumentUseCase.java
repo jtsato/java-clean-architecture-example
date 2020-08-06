@@ -10,5 +10,5 @@ import io.github.jtsato.bookstore.core.book.usecase.parameter.SaveBookDocumentPa
 @FunctionalInterface
 public interface SaveBookDocumentUseCase {
 
-    BookDocument saveBookDocument(final SaveBookDocumentParameters parameters);
+    BookDocument execute(final SaveBookDocumentParameters parameters);
 }

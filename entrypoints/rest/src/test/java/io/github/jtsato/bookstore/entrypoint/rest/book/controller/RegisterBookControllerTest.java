@@ -55,7 +55,7 @@ class RegisterBookControllerTest {
     void successfulRegisterBookIfNotRegistered()
         throws Exception {
 
-        when(registerBookUseCase.registerBook(mockRegisterBookUseCaseParameters())).thenReturn(mockRegisterBookUseCaseReturn());
+        when(registerBookUseCase.execute(mockRegisterBookUseCaseParameters())).thenReturn(mockRegisterBookUseCaseReturn());
 
         mockMvc.perform(post("/books").content(buildRequestBody()).contentType(MediaType.APPLICATION_JSON_VALUE).accept(MediaType.APPLICATION_JSON_VALUE))
                .andDo(print())
@@ -72,7 +72,7 @@ class RegisterBookControllerTest {
                .andExpect(jsonPath("$.creationDate", is("2020-03-12T22:04:59.123")))
                .andExpect(jsonPath("$.updateDate", is("2020-03-12T22:04:59.123")));
 
-        verify(registerBookUseCase, times(1)).registerBook(mockRegisterBookUseCaseParameters());
+        verify(registerBookUseCase, times(1)).execute(mockRegisterBookUseCaseParameters());
         verifyNoMoreInteractions(registerBookUseCase);
     }
 

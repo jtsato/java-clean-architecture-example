@@ -62,7 +62,7 @@ public class SaveBookDocumentControllerImpl implements SaveBookDocumentControlle
 
         final SaveBookDocumentParameters saveBookDocumentParameters = buildSaveBookDocumentParameters(saveBookDocumentRequest);
 
-        final BookDocument bookDocument = saveBookDocumentUseCase.saveBookDocument(saveBookDocumentParameters);
+        final BookDocument bookDocument = saveBookDocumentUseCase.execute(saveBookDocumentParameters);
 
         return SaveBookDocumentPresenter.of(bookDocument);
     }

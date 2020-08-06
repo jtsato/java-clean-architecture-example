@@ -51,7 +51,7 @@ class SaveBookDocumentControllerTest {
     void successfulSaveBookDocumentIfNotRegistered()
         throws Exception {
 
-        when(saveBookDocumentUseCase.saveBookDocument(mockSaveBookDocumentUseCaseParameters())).thenReturn(mockSaveBookDocumentUseCaseReturn());
+        when(saveBookDocumentUseCase.execute(mockSaveBookDocumentUseCaseParameters())).thenReturn(mockSaveBookDocumentUseCaseReturn());
 
         final MockHttpServletRequestBuilder builder = MockMvcRequestBuilders.multipart("/books/{bookId}/content", 1L).file(buildRequestBody());
 
@@ -68,7 +68,7 @@ class SaveBookDocumentControllerTest {
                .andExpect(jsonPath("$.creationDate", is("2020-03-12T22:04:59.123")))
                .andExpect(jsonPath("$.updateDate", is("2020-03-12T22:04:59.123")));
 
-        verify(saveBookDocumentUseCase, times(1)).saveBookDocument(mockSaveBookDocumentUseCaseParameters());
+        verify(saveBookDocumentUseCase, times(1)).execute(mockSaveBookDocumentUseCaseParameters());
         verifyNoMoreInteractions(saveBookDocumentUseCase);
     }
 

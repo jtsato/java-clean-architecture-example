@@ -27,7 +27,7 @@ public class GetBookByIdUseCaseImpl implements GetBookByIdUseCase {
     private final GetBookByIdGateway getBookByIdGateway;
 
     @Override
-    public Book getBookById(final Long id) {
+    public Book execute(final Long id) {
 
         if (id == null) {
             throw new InvalidParameterException("validation.book.id.null");

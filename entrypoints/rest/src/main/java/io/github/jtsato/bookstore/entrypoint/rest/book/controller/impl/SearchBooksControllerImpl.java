@@ -64,7 +64,7 @@ public class SearchBooksControllerImpl implements SearchBooksController {
                                                                            searchBooksRequest.getStartCreationDate(),
                                                                            searchBooksRequest.getEndCreationDate());
 
-        final Page<Book> books = searchBooksUseCase.searchBooks(parameters, pageable.getPageNumber(), pageable.getPageSize(), pageable.getSort().toString());
+        final Page<Book> books = searchBooksUseCase.execute(parameters, pageable.getPageNumber(), pageable.getPageSize(), pageable.getSort().toString());
 
         return SearchBooksPresenter.of(books);
     }

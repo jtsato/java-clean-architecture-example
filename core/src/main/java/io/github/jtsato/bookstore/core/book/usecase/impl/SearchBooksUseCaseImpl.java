@@ -25,7 +25,7 @@ public class SearchBooksUseCaseImpl implements SearchBooksUseCase {
     private final SearchBooksGateway searchBooksGateway;
 
     @Override
-    public Page<Book> searchBooks(final SearchBooksParameters parameters, final Integer page, final Integer size, final String orderBy) {
+    public Page<Book> execute(final SearchBooksParameters parameters, final Integer page, final Integer size, final String orderBy) {
         return searchBooksGateway.searchBooks(parameters, page, size, orderBy);
     }
 }

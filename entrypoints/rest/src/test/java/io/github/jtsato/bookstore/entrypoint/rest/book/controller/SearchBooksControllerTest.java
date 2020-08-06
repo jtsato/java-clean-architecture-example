@@ -59,7 +59,7 @@ class SearchBooksControllerTest {
 
         final SearchAuthorsParameters authorParameters = new SearchAuthorsParameters(1L, null, null, null, null);
         final SearchBooksParameters parameters = new SearchBooksParameters("Effective Java", authorParameters, "2020-02-29T00:00:00", "2020-02-29T23:59:59");
-        when(searchBooksUseCase.searchBooks(parameters, 1, 3, "title: ASC")).thenReturn(mockSearchBooksUseCaseReturn());
+        when(searchBooksUseCase.execute(parameters, 1, 3, "title: ASC")).thenReturn(mockSearchBooksUseCaseReturn());
 
         final String queryParameters = "page=1&size=3&sort=title,asc&title=Effective Java&author.id=1&startCreationDate=2020-02-29T00:00:00&endCreationDate=2020-02-29T23:59:59";
 
@@ -84,7 +84,7 @@ class SearchBooksControllerTest {
                .andExpect(jsonPath("$.pageable.totalOfElements", is(4)))
                .andExpect(jsonPath("$.pageable.totalPages", is(2)));
 
-        verify(searchBooksUseCase, times(1)).searchBooks(parameters, 1, 3, "title: ASC");
+        verify(searchBooksUseCase, times(1)).execute(parameters, 1, 3, "title: ASC");
         verifyNoMoreInteractions(searchBooksUseCase);
     }
 

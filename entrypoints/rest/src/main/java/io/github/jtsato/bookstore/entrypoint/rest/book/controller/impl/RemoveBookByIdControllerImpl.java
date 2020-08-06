@@ -43,6 +43,6 @@ public class RemoveBookByIdControllerImpl implements RemoveBookByIdController {
 
         log.debug("Starting Controller -> RemoveBookByIdController with {}", id);
 
-        removeBookByIdUseCase.removeBookById(id);
+        removeBookByIdUseCase.execute(id);
     }
 }

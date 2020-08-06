@@ -48,7 +48,7 @@ class FindBooksByIdsUseCaseTest {
         when(findBooksByIdsGateway.findBooksByIds(null)).thenReturn(null);
 
         final Exception exception = Assertions.assertThrows(Exception.class, () -> {
-            findBooksByIdsUseCase.findBooksByIds(null);
+            findBooksByIdsUseCase.execute(null);
         });
 
         assertThat(exception).isInstanceOf(InvalidParameterException.class);
@@ -65,7 +65,7 @@ class FindBooksByIdsUseCaseTest {
 
         when(findBooksByIdsGateway.findBooksByIds(ids)).thenReturn(mockFindBooksByIdsGatewayOut());
 
-        final Page<Book> pageOfBooks = findBooksByIdsUseCase.findBooksByIds(ids);
+        final Page<Book> pageOfBooks = findBooksByIdsUseCase.execute(ids);
 
         assertThat(pageOfBooks).isNotNull();
 
@@ -149,7 +149,7 @@ class FindBooksByIdsUseCaseTest {
         when(findBooksByIdsGateway.findBooksByIds(ids)).thenReturn(mockFindBooksByIdsGatewayOut());
 
         final Exception exception = Assertions.assertThrows(Exception.class, () -> {
-            findBooksByIdsUseCase.findBooksByIds(ids);
+            findBooksByIdsUseCase.execute(ids);
         });
 
         assertThat(exception).isInstanceOf(InvalidParameterException.class);
@@ -170,7 +170,7 @@ class FindBooksByIdsUseCaseTest {
 
         when(findBooksByIdsGateway.findBooksByIds(ids)).thenReturn(mockFindBooksByIdsGatewayOut());
 
-        final Page<Book> pageOfBooks = findBooksByIdsUseCase.findBooksByIds(ids);
+        final Page<Book> pageOfBooks = findBooksByIdsUseCase.execute(ids);
 
         assertThat(pageOfBooks).isNotNull();
 

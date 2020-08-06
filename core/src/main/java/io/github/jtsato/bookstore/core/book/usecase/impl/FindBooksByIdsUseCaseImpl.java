@@ -29,7 +29,7 @@ public class FindBooksByIdsUseCaseImpl implements FindBooksByIdsUseCase {
     private final FindBooksByIdsGateway findBooksByIdsGateway;
 
     @Override
-    public Page<Book> findBooksByIds(final List<Long> ids) {
+    public Page<Book> execute(final List<Long> ids) {
 
         if (CollectionUtils.isEmpty(ids)) {
             throw new InvalidParameterException("validation.books.ids.null");

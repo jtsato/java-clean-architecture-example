@@ -140,7 +140,7 @@ class UpdateBookByIdUseCaseTest {
                                                                                  Boolean.TRUE);
         final Author author = mockGetAuthorByIdGateway().get();
 
-        final Book book = updateBookByIdUseCase.updateBookById(parameters);
+        final Book book = updateBookByIdUseCase.execute(parameters);
 
         assertThat(book.getId()).isEqualTo(1L);
         assertThat(book.getTitle()).isEqualTo("Effective Java (2nd Edition)");
@@ -167,7 +167,7 @@ class UpdateBookByIdUseCaseTest {
                                                                                  Boolean.TRUE);
 
         final Exception exception = Assertions.assertThrows(Exception.class, () -> {
-            updateBookByIdUseCase.updateBookById(parameters);
+            updateBookByIdUseCase.execute(parameters);
         });
 
         assertThat(exception).isInstanceOf(NotFoundException.class);
@@ -191,7 +191,7 @@ class UpdateBookByIdUseCaseTest {
                                                                                  Boolean.TRUE);
 
         final Exception exception = Assertions.assertThrows(Exception.class, () -> {
-            updateBookByIdUseCase.updateBookById(parameters);
+            updateBookByIdUseCase.execute(parameters);
         });
 
         assertThat(exception).isInstanceOf(UniqueConstraintException.class);
@@ -237,7 +237,7 @@ class UpdateBookByIdUseCaseTest {
                                                                                  Boolean.TRUE);
 
         final Exception exception = Assertions.assertThrows(Exception.class, () -> {
-            updateBookByIdUseCase.updateBookById(parameters);
+            updateBookByIdUseCase.execute(parameters);
         });
 
         assertThat(exception).isInstanceOf(NotFoundException.class);

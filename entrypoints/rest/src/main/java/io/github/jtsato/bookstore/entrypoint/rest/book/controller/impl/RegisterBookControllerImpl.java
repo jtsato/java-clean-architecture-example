@@ -55,7 +55,7 @@ public class RegisterBookControllerImpl implements RegisterBookController {
                                                                              request.getPrice(),
                                                                              request.getAvailable());
 
-        final Book book = registerBookUseCase.registerBook(parameters);
+        final Book book = registerBookUseCase.execute(parameters);
 
         return RegisterBookPresenter.of(book);
     }

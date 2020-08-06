@@ -46,7 +46,7 @@ public class GetBookByIdControllerImpl implements GetBookByIdController {
 
         log.debug("Starting Controller -> GetBookByIdController with {}", id);
 
-        final Book book = getBookByIdUseCase.getBookById(id);
+        final Book book = getBookByIdUseCase.execute(id);
 
         return GetBookByIdPresenter.of(book);
     }

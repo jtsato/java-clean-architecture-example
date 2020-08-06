@@ -57,7 +57,7 @@ public class UpdateBookByIdControllerImpl implements UpdateBookByIdController {
                                                                                  request.getPrice(),
                                                                                  request.getAvailable());
 
-        final Book book = updateBookByIdUseCase.updateBookById(parameters);
+        final Book book = updateBookByIdUseCase.execute(parameters);
 
         return UpdateBookByIdPresenter.of(book);
     }

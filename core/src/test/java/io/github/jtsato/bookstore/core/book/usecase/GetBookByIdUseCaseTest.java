@@ -43,7 +43,7 @@ class GetBookByIdUseCaseTest {
         when(getBookByIdGateway.getBookById(null)).thenReturn(null);
 
         final Exception exception = Assertions.assertThrows(Exception.class, () -> {
-            getBookByIdUseCase.getBookById(null);
+            getBookByIdUseCase.execute(null);
         });
 
         assertThat(exception).isInstanceOf(InvalidParameterException.class);
@@ -57,7 +57,7 @@ class GetBookByIdUseCaseTest {
 
         when(getBookByIdGateway.getBookById(1L)).thenReturn(mockGetBookByIdGatewayOut());
 
-        final Book book = getBookByIdUseCase.getBookById(1L);
+        final Book book = getBookByIdUseCase.execute(1L);
 
         assertThat(book.getId()).isEqualTo(1L);
         assertThat(book.getTitle()).isEqualTo("Effective Java (2nd Edition)");
@@ -93,7 +93,7 @@ class GetBookByIdUseCaseTest {
         when(getBookByIdGateway.getBookById(1L)).thenReturn(Optional.empty());
 
         final Exception exception = Assertions.assertThrows(Exception.class, () -> {
-            getBookByIdUseCase.getBookById(1L);
+            getBookByIdUseCase.execute(1L);
         });
 
         assertThat(exception).isInstanceOf(NotFoundException.class);

@@ -27,7 +27,7 @@ public class RemoveBookByIdUseCaseImpl implements RemoveBookByIdUseCase {
     private final RemoveBookByIdGateway removeBookByIdGateway;
 
     @Override
-    public Book removeBookById(final Long id) {
+    public Book execute(final Long id) {
 
         if (id == null) {
             throw new InvalidParameterException("validation.book.id.null");

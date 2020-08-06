@@ -43,7 +43,7 @@ class RemoveBookByIdUseCaseTest {
         when(removeBookByIdGateway.removeBookById(null)).thenReturn(null);
 
         final Exception exception = Assertions.assertThrows(Exception.class, () -> {
-            removeBookByIdUseCase.removeBookById(null);
+            removeBookByIdUseCase.execute(null);
         });
 
         assertThat(exception).isInstanceOf(InvalidParameterException.class);
@@ -57,7 +57,7 @@ class RemoveBookByIdUseCaseTest {
 
         when(removeBookByIdGateway.removeBookById(1L)).thenReturn(mockRemoveBookByIdGatewayOut());
 
-        final Book book = removeBookByIdUseCase.removeBookById(1L);
+        final Book book = removeBookByIdUseCase.execute(1L);
 
         assertThat(book.getId()).isEqualTo(1L);
         assertThat(book.getTitle()).isEqualTo("Effective Java (2nd Edition)");
@@ -90,7 +90,7 @@ class RemoveBookByIdUseCaseTest {
         when(removeBookByIdGateway.removeBookById(1L)).thenReturn(Optional.empty());
 
         final Exception exception = Assertions.assertThrows(Exception.class, () -> {
-            removeBookByIdUseCase.removeBookById(1L);
+            removeBookByIdUseCase.execute(1L);
         });
 
         assertThat(exception).isInstanceOf(NotFoundException.class);

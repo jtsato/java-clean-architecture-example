@@ -50,7 +50,7 @@ class GetBookByIdControllerTest {
     void successfulGetBookByIdIfFound()
         throws Exception {
 
-        when(getBookByIdUseCase.getBookById(1L)).thenReturn(mockGetBookByIdUseCaseReturn());
+        when(getBookByIdUseCase.execute(1L)).thenReturn(mockGetBookByIdUseCaseReturn());
 
         mockMvc.perform(get("/books/{id}", 1L).contentType(MediaType.APPLICATION_JSON_VALUE).accept(MediaType.APPLICATION_JSON_VALUE))
                .andDo(print())
@@ -67,7 +67,7 @@ class GetBookByIdControllerTest {
                .andExpect(jsonPath("$.creationDate", is("2020-02-29T12:00:00")))
                .andExpect(jsonPath("$.updateDate", is("2020-02-29T12:00:00")));
 
-        verify(getBookByIdUseCase, times(1)).getBookById(1L);
+        verify(getBookByIdUseCase, times(1)).execute(1L);
         verifyNoMoreInteractions(getBookByIdUseCase);
     }
 

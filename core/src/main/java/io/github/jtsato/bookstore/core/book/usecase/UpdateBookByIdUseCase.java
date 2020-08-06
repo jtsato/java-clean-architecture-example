@@ -10,5 +10,5 @@ import io.github.jtsato.bookstore.core.book.usecase.parameter.UpdateBookByIdPara
 @FunctionalInterface
 public interface UpdateBookByIdUseCase {
 
-    Book updateBookById(final UpdateBookByIdParameters parameters);
+    Book execute(final UpdateBookByIdParameters parameters);
 }

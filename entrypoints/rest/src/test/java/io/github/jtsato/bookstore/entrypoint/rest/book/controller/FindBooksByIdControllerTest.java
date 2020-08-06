@@ -60,7 +60,7 @@ class FindBooksByIdControllerTest {
     void successfulFindBooksByIdsIfFound()
         throws Exception {
 
-        when(findBooksByIdsUseCase.findBooksByIds(mockFindBooksByIdsUseCaseParameters())).thenReturn(mockFindBooksByIdsUseCaseReturn());
+        when(findBooksByIdsUseCase.execute(mockFindBooksByIdsUseCaseParameters())).thenReturn(mockFindBooksByIdsUseCaseReturn());
 
         mockMvc.perform(post("/books/findByIds").content(buildRequestBody())
                                                 .contentType(MediaType.APPLICATION_JSON_VALUE)
@@ -84,7 +84,7 @@ class FindBooksByIdControllerTest {
                .andExpect(jsonPath("$.pageable.totalOfElements", is(4)))
                .andExpect(jsonPath("$.pageable.totalPages", is(2)));
 
-        verify(findBooksByIdsUseCase, times(1)).findBooksByIds(mockFindBooksByIdsUseCaseParameters());
+        verify(findBooksByIdsUseCase, times(1)).execute(mockFindBooksByIdsUseCaseParameters());
         verifyNoMoreInteractions(findBooksByIdsUseCase);
     }
 

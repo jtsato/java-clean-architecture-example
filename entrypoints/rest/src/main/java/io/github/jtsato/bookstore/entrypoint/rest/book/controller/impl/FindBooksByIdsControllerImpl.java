@@ -50,7 +50,7 @@ public class FindBooksByIdsControllerImpl implements FindBooksByIdsController {
 
         log.debug("Starting Controller -> FindBooksByIdsController with {}", JsonConverter.convert(findBooksByIdsRequest));
 
-        final Page<Book> books = findBooksByIdsUseCase.findBooksByIds(findBooksByIdsRequest.getIds());
+        final Page<Book> books = findBooksByIdsUseCase.execute(findBooksByIdsRequest.getIds());
 
         return FindBooksByIdsPresenter.of(books);
     }

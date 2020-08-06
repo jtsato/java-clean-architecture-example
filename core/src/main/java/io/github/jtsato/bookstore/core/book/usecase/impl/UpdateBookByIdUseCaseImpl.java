@@ -38,7 +38,7 @@ public class UpdateBookByIdUseCaseImpl implements UpdateBookByIdUseCase {
     private final GetLocalDateTime getLocalDateTime;
 
     @Override
-    public Book updateBookById(final UpdateBookByIdParameters parameters) {
+    public Book execute(final UpdateBookByIdParameters parameters) {
 
         final Author author = getAuthorAndValidate(parameters.getAuthorId());
 

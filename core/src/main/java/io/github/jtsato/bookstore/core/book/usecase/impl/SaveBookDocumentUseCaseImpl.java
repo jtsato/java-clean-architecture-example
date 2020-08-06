@@ -37,7 +37,7 @@ public class SaveBookDocumentUseCaseImpl implements SaveBookDocumentUseCase {
     private final GetLocalDateTime getLocalDateTime;
 
     @Override
-    public BookDocument saveBookDocument(final SaveBookDocumentParameters parameters) {
+    public BookDocument execute(final SaveBookDocumentParameters parameters) {
 
         final Long bookId = parameters.getBookId();
 

@@ -10,5 +10,5 @@ import io.github.jtsato.bookstore.core.book.usecase.parameter.RegisterBookParame
 @FunctionalInterface
 public interface RegisterBookUseCase {
 
-    Book registerBook(final RegisterBookParameters parameters);
+    Book execute(final RegisterBookParameters parameters);
 }

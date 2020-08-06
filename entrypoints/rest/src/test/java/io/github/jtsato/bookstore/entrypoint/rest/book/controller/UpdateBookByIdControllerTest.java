@@ -55,7 +55,7 @@ class UpdateBookByIdControllerTest {
     void successfulUpdateBookByIdIfFound()
         throws Exception {
 
-        when(updateBookByIdUseCase.updateBookById(mockUpdateBookByIdUseCaseParameters())).thenReturn(mockUpdateBookByIdUseCaseReturn());
+        when(updateBookByIdUseCase.execute(mockUpdateBookByIdUseCaseParameters())).thenReturn(mockUpdateBookByIdUseCaseReturn());
 
         mockMvc.perform(put("/books/{id}", 1L).content(buildRequestBody())
                                               .contentType(MediaType.APPLICATION_JSON_VALUE)
@@ -74,7 +74,7 @@ class UpdateBookByIdControllerTest {
                .andExpect(jsonPath("$.creationDate", is("2020-03-12T22:04:59.123")))
                .andExpect(jsonPath("$.updateDate", is("2020-04-12T22:04:59.123")));
 
-        verify(updateBookByIdUseCase, times(1)).updateBookById(mockUpdateBookByIdUseCaseParameters());
+        verify(updateBookByIdUseCase, times(1)).execute(mockUpdateBookByIdUseCaseParameters());
         verifyNoMoreInteractions(updateBookByIdUseCase);
     }
 

@@ -65,7 +65,7 @@ class SearchBooksUseCaseTest {
 
         when(searchBooksGateway.searchBooks(parameters, 0, 1, "id:asc")).thenReturn(pageWithOneBook);
 
-        final Page<Book> pageOfBooks = searchBooksUseCase.searchBooks(parameters, 0, 1, "id:asc");
+        final Page<Book> pageOfBooks = searchBooksUseCase.execute(parameters, 0, 1, "id:asc");
 
         final Pageable pageable = pageOfBooks.getPageable();
 
@@ -114,7 +114,7 @@ class SearchBooksUseCaseTest {
         final Page<Book> emptyBooksPage = mockEmptyBooksPage();
         when(searchBooksGateway.searchBooks(parameters, 0, 1, "id:asc")).thenReturn(emptyBooksPage);
 
-        final Page<Book> pageOfBooks = searchBooksUseCase.searchBooks(parameters, 0, 1, "id:asc");
+        final Page<Book> pageOfBooks = searchBooksUseCase.execute(parameters, 0, 1, "id:asc");
 
         assertThat(pageOfBooks).isNotNull();
 

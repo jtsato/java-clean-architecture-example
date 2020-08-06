@@ -85,7 +85,7 @@ class SaveBookDocumentUseCaseTest {
                                                                                                      123L,
                                                                                                      "Lorem ipsum dolor sit amet.");
 
-        final BookDocument bookDocument = getBookDocumentByBookIdUseCase.saveBookDocument(saveBookDocumentParameters);
+        final BookDocument bookDocument = getBookDocumentByBookIdUseCase.execute(saveBookDocumentParameters);
 
         assertThat(bookDocument.getId()).isEqualTo(1L);
         assertThat(bookDocument.getBookId()).isEqualTo(1L);
@@ -150,7 +150,7 @@ class SaveBookDocumentUseCaseTest {
                                                                                                      123L,
                                                                                                      "Lorem ipsum dolor sit amet.");
 
-        final BookDocument bookDocument = getBookDocumentByBookIdUseCase.saveBookDocument(saveBookDocumentParameters);
+        final BookDocument bookDocument = getBookDocumentByBookIdUseCase.execute(saveBookDocumentParameters);
 
         assertThat(bookDocument.getId()).isEqualTo(1L);
         assertThat(bookDocument.getBookId()).isEqualTo(1L);
@@ -204,7 +204,7 @@ class SaveBookDocumentUseCaseTest {
                                                                                                      "Lorem ipsum dolor sit amet.");
 
         final Exception exception = Assertions.assertThrows(Exception.class, () -> {
-            getBookDocumentByBookIdUseCase.saveBookDocument(saveBookDocumentParameters);
+            getBookDocumentByBookIdUseCase.execute(saveBookDocumentParameters);
         });
 
         assertThat(exception).isInstanceOf(NotFoundException.class);
