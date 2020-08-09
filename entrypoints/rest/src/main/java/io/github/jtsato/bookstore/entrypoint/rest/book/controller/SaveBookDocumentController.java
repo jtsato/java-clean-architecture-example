@@ -32,6 +32,5 @@ public interface SaveBookDocumentController {
                            @ApiResponse(responseCode = HttpStatusConstants.BAD_REQUEST_400, description = HttpStatusConstants.BAD_REQUEST_400_MESSAGE),
                            @ApiResponse(responseCode = HttpStatusConstants.INTERNAL_SERVER_ERROR_500,
                                         description = HttpStatusConstants.INTERNAL_SERVER_ERROR_500_MESSAGE),})
-    SaveBookDocumentResponse saveBookDocument(final Long bookId, final MultipartFile file)
-        throws IOException;
+    SaveBookDocumentResponse saveBookDocument(final Long bookId, final MultipartFile file);
 }

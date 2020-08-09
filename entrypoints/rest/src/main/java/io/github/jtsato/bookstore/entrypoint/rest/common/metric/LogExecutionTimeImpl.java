@@ -8,6 +8,7 @@ import org.aspectj.lang.annotation.Aspect;
 import org.springframework.stereotype.Component;
 
 import lombok.Generated;
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -20,9 +21,9 @@ import lombok.extern.slf4j.Slf4j;
 @Component
 public class LogExecutionTimeImpl {
 
+    @SneakyThrows
     @Around("@annotation(io.github.jtsato.bookstore.entrypoint.rest.common.metric.LogExecutionTime)")
-    public Object logExecutionTime(final ProceedingJoinPoint joinPoint)
-        throws Throwable {
+    public Object logExecutionTime(final ProceedingJoinPoint joinPoint) {
 
         final StopWatch stopWatch = new StopWatch();
 

@@ -25,6 +25,7 @@ import io.github.jtsato.bookstore.entrypoint.rest.book.mapper.SaveBookDocumentPr
 import io.github.jtsato.bookstore.entrypoint.rest.common.JsonConverter;
 import io.github.jtsato.bookstore.entrypoint.rest.common.metric.LogExecutionTime;
 import lombok.RequiredArgsConstructor;
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 
 /*
@@ -53,8 +54,7 @@ public class SaveBookDocumentControllerImpl implements SaveBookDocumentControlle
     @LogExecutionTime
     @ResponseStatus(HttpStatus.OK)
     @PostMapping(value = "/{bookId}/content", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public SaveBookDocumentResponse saveBookDocument(@PathVariable final Long bookId, @RequestPart final MultipartFile file)
-        throws IOException {
+    public SaveBookDocumentResponse saveBookDocument(@PathVariable final Long bookId, @RequestPart final MultipartFile file) {
 
         final SaveBookDocumentRequest saveBookDocumentRequest = buildSaveBookDocumentRequest(bookId, file);
 
@@ -67,8 +67,8 @@ public class SaveBookDocumentControllerImpl implements SaveBookDocumentControlle
         return SaveBookDocumentPresenter.of(bookDocument);
     }
 
-    private SaveBookDocumentRequest buildSaveBookDocumentRequest(final Long bookId, final MultipartFile file)
-        throws IOException {
+    @SneakyThrows
+    private SaveBookDocumentRequest buildSaveBookDocumentRequest(final Long bookId, final MultipartFile file) {
         final byte[] content = file.getBytes();
         final Encoder encoder = Base64.getEncoder();
         final String fileContent = encoder.encodeToString(content);
