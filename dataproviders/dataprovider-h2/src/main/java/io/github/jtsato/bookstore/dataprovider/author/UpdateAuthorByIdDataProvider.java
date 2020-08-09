@@ -25,22 +25,14 @@ public class UpdateAuthorByIdDataProvider implements UpdateAuthorByIdGateway {
 
     @Override
     public Optional<Author> updateAuthorById(final Author author) {
-
         final Optional<AuthorEntity> optional = authorRepository.findById(author.getId());
-
-        if (!optional.isPresent()) {
-            return Optional.empty();
-        }
-
-        final AuthorEntity authorEntity = optional.get();
-
-        return Optional.of(AuthorMapper.of(authorRepository.saveAndFlush(updateAuthorEntity(authorEntity, author))));
+        return optional.map(authorEntity -> updateAuthorEntity(authorEntity, author));
     }
 
-    private AuthorEntity updateAuthorEntity(final AuthorEntity authorEntity, final Author author) {
+    private Author updateAuthorEntity(final AuthorEntity authorEntity, final Author author) {
         authorEntity.setName(author.getName());
         authorEntity.setBirthday(author.getBirthday());
         authorEntity.setGender(author.getGender().name());
-        return authorEntity;
+        return AuthorMapper.of(authorRepository.saveAndFlush(authorEntity));
     }
 }

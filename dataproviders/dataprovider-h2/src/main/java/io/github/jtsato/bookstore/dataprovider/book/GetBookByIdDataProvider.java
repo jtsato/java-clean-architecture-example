@@ -30,10 +30,6 @@ public class GetBookByIdDataProvider implements GetBookByIdGateway {
 
         final Optional<BookEntity> optional = bookRepository.findById(id, EntityGraphUtils.fromAttributePaths("author"));
 
-        if (optional.isPresent()) {
-            return Optional.of(BookMapper.of(optional.get()));
-        }
-
-        return Optional.empty();
+        return optional.map(BookMapper::of);
     }
 }

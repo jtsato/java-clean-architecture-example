@@ -45,13 +45,26 @@ public class SaveBookDocumentUseCaseImpl implements SaveBookDocumentUseCase {
 
         final Optional<BookDocument> optional = getBookDocumentByBookIdGateway.getBookDocumentByBookId(bookId);
 
-        if (optional.isPresent()) {
-            final BookDocument bookDocument = optional.get();
-            bookDocument.setContent(parameters.getContent());
-            bookDocument.setUpdateDate(getLocalDateTime.now());
-            return saveBookDocumentGateway.saveBookDocument(bookDocument);
-        }
+        return optional.map(bookDocument -> updateBookDocument(parameters, bookDocument)).orElse(registerBookDocument(parameters, bookId));
+    }
 
+    private void checkIfBookExists(final Long bookId) {
+
+        final Optional<Book> optional = getBookByIdGateway.getBookById(bookId);
+        
+        if (optional.isEmpty()) {
+            throw new NotFoundException("validation.book.id.notfound", bookId);
+        }
+    }
+
+    private BookDocument updateBookDocument(final SaveBookDocumentParameters parameters, final BookDocument bookDocument) {
+        bookDocument.setContent(parameters.getContent());
+        bookDocument.setUpdateDate(getLocalDateTime.now());
+        return saveBookDocumentGateway.saveBookDocument(bookDocument);
+    }
+
+    private BookDocument registerBookDocument(final SaveBookDocumentParameters parameters, final Long bookId) {
+        
         final BookDocument bookDocument = new BookDocument(null,
                                                            bookId,
                                                            parameters.getContentType(),
@@ -63,14 +76,5 @@ public class SaveBookDocumentUseCaseImpl implements SaveBookDocumentUseCase {
                                                            getLocalDateTime.now());
 
         return saveBookDocumentGateway.saveBookDocument(bookDocument);
-    }
-
-    private void checkIfBookExists(final Long bookId) {
-
-        final Optional<Book> optional = getBookByIdGateway.getBookById(bookId);
-
-        if (!optional.isPresent()) {
-            throw new NotFoundException("validation.book.id.notfound", bookId);
-        }
     }
 }

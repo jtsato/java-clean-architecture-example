@@ -28,6 +28,6 @@ public class GetAuthorByNameDataProvider implements GetAuthorByNameGateway {
 
         final Optional<AuthorEntity> optional = authorRepository.findByName(name);
 
-        return optional.isPresent() ? Optional.of(AuthorMapper.of(optional.get())) : Optional.empty();
+        return optional.map(AuthorMapper::of);
     }
 }

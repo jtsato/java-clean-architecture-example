@@ -29,32 +29,23 @@ public class UpdateBookByIdDataProvider implements UpdateBookByIdGateway {
 
     @Override
     public Optional<Book> updateBookById(final Book book) {
-
         final Optional<BookEntity> optional = bookRepository.findById(book.getId());
-
-        if (!optional.isPresent()) {
-            return Optional.empty();
-        }
-
-        final BookEntity bookEntity = optional.get();
-        
-        updateAuthor(book, bookEntity);
-        
-        return Optional.of(BookMapper.of(bookRepository.saveAndFlush(updateBookEntity(bookEntity, book))));
+        return optional.map(bookEntity -> updateBookEntity(bookEntity, book));
     }
 
+    private Book updateBookEntity(final BookEntity bookEntity, final Book book) {
+        updateAuthor(book, bookEntity);
+        bookEntity.setTitle(book.getTitle());
+        bookEntity.setPrice(book.getPrice());
+        bookEntity.setAvailable(book.getAvailable());
+        return BookMapper.of(bookRepository.saveAndFlush(bookEntity));
+    }
+    
     private void updateAuthor(final Book book, final BookEntity bookEntity) {
         final Long currentAuthorId = bookEntity.getAuthor().getId();
         final Long newAuthorId = book.getAuthor().getId();
         if (!newAuthorId.equals(currentAuthorId)) {
             authorRepository.findById(newAuthorId).ifPresent(bookEntity::setAuthor);
         }
-    }
-
-    private BookEntity updateBookEntity(final BookEntity bookEntity, final Book book) {
-        bookEntity.setTitle(book.getTitle());
-        bookEntity.setPrice(book.getPrice());
-        bookEntity.setAvailable(book.getAvailable());
-        return bookEntity;
     }
 }

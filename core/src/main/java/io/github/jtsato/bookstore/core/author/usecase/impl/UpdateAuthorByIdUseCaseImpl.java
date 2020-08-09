@@ -45,7 +45,7 @@ public class UpdateAuthorByIdUseCaseImpl implements UpdateAuthorByIdUseCase {
 
         final Optional<Author> optional = getAuthorByNameGateway.getAuthorByName(authorName);
 
-        if (!optional.isPresent()) {
+        if (optional.isEmpty()) {
             return;
         }
 

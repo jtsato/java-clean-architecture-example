@@ -27,7 +27,7 @@ public class GetBookDocumentByBookIdDataProvider implements GetBookDocumentByBoo
     public Optional<BookDocument> getBookDocumentByBookId(final Long bookId) {
 
         final Optional<BookDocumentEntity> optional = bookDocumentRepository.findByBookId(bookId);
-
-        return optional.isPresent() ? Optional.of(BookDocumentMapper.of(optional.get())) : Optional.empty();
+        
+        return optional.map(BookDocumentMapper::of);
     }
 }

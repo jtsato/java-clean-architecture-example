@@ -35,10 +35,6 @@ public class GetBookByIdUseCaseImpl implements GetBookByIdUseCase {
 
         final Optional<Book> optional = getBookByIdGateway.getBookById(id);
 
-        if (!optional.isPresent()) {
-            throw new NotFoundException("validation.book.id.notfound", id);
-        }
-
-        return optional.get();
+        return optional.orElseThrow(() -> new NotFoundException("validation.book.id.notfound", id)); 
     }
 }

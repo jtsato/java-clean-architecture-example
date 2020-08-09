@@ -68,7 +68,7 @@ public class UpdateBookByIdUseCaseImpl implements UpdateBookByIdUseCase {
 
         final Optional<Book> optional = getBookByTitleGateway.getBookByTitle(bookTitle);
 
-        if (!optional.isPresent()) {
+        if (optional.isEmpty()) {
             return;
         }
 

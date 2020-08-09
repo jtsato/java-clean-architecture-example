@@ -27,11 +27,7 @@ public class GetAuthorByIdDataProvider implements GetAuthorByIdGateway {
     public Optional<Author> getAuthorById(final Long id) {
 
         final Optional<AuthorEntity> optional = authorRepository.findById(id);
-
-        if (optional.isPresent()) {
-            return Optional.of(AuthorMapper.of(optional.get()));
-        }
-
-        return Optional.empty();
+        
+        return optional.map(AuthorMapper::of);
     }
 }

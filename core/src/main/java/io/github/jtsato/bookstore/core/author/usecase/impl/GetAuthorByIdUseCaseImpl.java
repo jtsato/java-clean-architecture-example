@@ -34,11 +34,7 @@ public class GetAuthorByIdUseCaseImpl implements GetAuthorByIdUseCase {
         }
 
         final Optional<Author> optional = getAuthorByIdGateway.getAuthorById(id);
-
-        if (!optional.isPresent()) {
-            throw new NotFoundException("validation.author.id.notfound", id);
-        }
-
-        return optional.get();
+        
+        return optional.orElseThrow(() -> new NotFoundException("validation.author.id.notfound", id));
     }
 }

@@ -27,7 +27,7 @@ public class GetBookByTitleDataProvider implements GetBookByTitleGateway {
     public Optional<Book> getBookByTitle(final String title) {
 
         final Optional<BookEntity> optional = bookRepository.findByTitle(title);
-
-        return optional.isPresent() ? Optional.of(BookMapper.of(optional.get())) : Optional.empty();
+        
+        return optional.map(BookMapper::of);
     }
 }

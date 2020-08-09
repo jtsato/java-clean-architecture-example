@@ -44,8 +44,8 @@ public class RegisterAuthorUseCaseImpl implements RegisterAuthorUseCase {
 
         final Optional<Author> optional = getAuthorByNameGateway.getAuthorByName(authorName);
 
-        if (optional.isPresent()) {
-            throw new UniqueConstraintException("validation.author.name.already.exists", authorName);
-        }
+        optional.ifPresent(author -> {
+            throw new UniqueConstraintException("validation.author.name.already.exists", author.getName());
+        });
     }
 }

@@ -54,10 +54,6 @@ public class RemoveAuthorByIdUseCaseImpl implements RemoveAuthorByIdUseCase {
 
         final Optional<Author> optional = removeAuthorByIdGateway.removeAuthorById(id);
 
-        if (!optional.isPresent()) {
-            throw new NotFoundException("validation.author.id.notfound", id);
-        }
-
-        return optional.get();
+        return optional.orElseThrow(() -> new NotFoundException("validation.author.id.notfound", id)); 
     }
 }
