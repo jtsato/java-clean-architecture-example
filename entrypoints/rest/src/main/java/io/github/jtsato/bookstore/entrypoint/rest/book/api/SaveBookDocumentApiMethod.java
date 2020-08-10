@@ -1,5 +1,7 @@
 package io.github.jtsato.bookstore.entrypoint.rest.book.api;
 
+import java.io.IOException;
+
 import org.springframework.web.multipart.MultipartFile;
 
 import io.github.jtsato.bookstore.entrypoint.rest.book.domain.response.SaveBookDocumentResponse;
@@ -31,5 +33,5 @@ public interface SaveBookDocumentApiMethod {
                            @ApiResponse(responseCode = HttpStatusConstants.INTERNAL_SERVER_ERROR_500,
                                         description = HttpStatusConstants.INTERNAL_SERVER_ERROR_500_MESSAGE),})
     
-    SaveBookDocumentResponse saveBookDocument(final Long bookId, final MultipartFile file);
+    SaveBookDocumentResponse saveBookDocument(final Long bookId, final MultipartFile file) throws IOException;
 }

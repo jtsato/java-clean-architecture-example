@@ -15,6 +15,7 @@ import io.github.jtsato.bookstore.core.enumerator.usecase.parameter.SearchEnumer
 /**
  * @author Jorge Takeshi Sato  
  */
+
 class SearchEnumeratorsUseCaseTestCase {
 
     private final SearchEnumeratorsUseCase getBookByIdUseCase = new SearchEnumeratorsUseCaseImpl();
