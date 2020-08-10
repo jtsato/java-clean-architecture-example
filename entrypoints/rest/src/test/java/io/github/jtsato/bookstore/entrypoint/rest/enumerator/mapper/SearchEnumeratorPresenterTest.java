@@ -23,37 +23,39 @@ import io.github.jtsato.bookstore.entrypoint.rest.enumerator.domain.response.Enu
  */
 
 class SearchEnumeratorsPresenterTest {
-    
+
     @Mock
     private final MessageSource messageSource = Mockito.mock(MessageSource.class);
 
+    private final Locale locale = Locale.US;
+
     @InjectMocks
-    private final SearchEnumeratorsPresenter presenter = new SearchEnumeratorsPresenter(messageSource);
-    
-    @DisplayName("Successful to find authors by IDs, when at least one is found")
+    private final SearchEnumeratorsPresenter presenter = new SearchEnumeratorsPresenter(locale, messageSource);
+
+    @DisplayName("Successful to search enumerators")
     @Test
-    void successfulToFindAuthorsByIdsIfFound() {
-        
-        when(messageSource.getMessage(Gender.MALE.getMessageKey(), null, Locale.US)).thenReturn("Male");
-        when(messageSource.getMessage(Gender.FEMALE.getMessageKey(), null, Locale.US)).thenReturn("Female");
-        
-        final List<EnumeratorResponse> enumeratorResponses = presenter.of(dummyEnumerators());
-        assertThat(enumeratorResponses).isNotNull().isNotEmpty();
-        assertThat(enumeratorResponses.size()).isEqualTo(2);
-        
-        final EnumeratorResponse element1 = enumeratorResponses.get(0);
-        assertThat(element1).isNotNull();
-        assertThat(element1.getDomain()).isEqualTo("Gender");
-        assertThat(element1.getKey()).isEqualTo("MALE");
-        assertThat(element1.getValue()).isEqualTo("Male");
-        
-        final EnumeratorResponse element2 = enumeratorResponses.get(1);
-        assertThat(element2).isNotNull();
-        assertThat(element2.getDomain()).isEqualTo("Gender");
-        assertThat(element2.getKey()).isEqualTo("FEMALE");
-        assertThat(element2.getValue()).isEqualTo("Female");
+    void successfulToSearchEnumerators() {
+
+        when(messageSource.getMessage(Gender.MALE.getMessageKey(), null, locale)).thenReturn("Male");
+        when(messageSource.getMessage(Gender.FEMALE.getMessageKey(), null, locale)).thenReturn("Female");
+
+        final List<EnumeratorResponse> responses = presenter.of(dummyEnumerators());
+        assertThat(responses).isNotNull().isNotEmpty();
+        assertThat(responses.size()).isEqualTo(2);
+
+        final EnumeratorResponse response1 = responses.get(0);
+        assertThat(response1).isNotNull();
+        assertThat(response1.getDomain()).isEqualTo("Gender");
+        assertThat(response1.getKey()).isEqualTo("MALE");
+        assertThat(response1.getValue()).isEqualTo("Male");
+
+        final EnumeratorResponse response2 = responses.get(1);
+        assertThat(response2).isNotNull();
+        assertThat(response2.getDomain()).isEqualTo("Gender");
+        assertThat(response2.getKey()).isEqualTo("FEMALE");
+        assertThat(response2.getValue()).isEqualTo("Female");
     }
-    
+
     private List<Enumerator> dummyEnumerators() {
         final List<Enumerator> elements = new ArrayList<>(2);
         elements.add(new Enumerator("Gender", Gender.MALE.name(), Gender.MALE.getMessageKey()));

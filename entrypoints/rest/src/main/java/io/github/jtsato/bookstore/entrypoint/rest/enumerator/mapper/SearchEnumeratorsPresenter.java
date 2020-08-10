@@ -1,10 +1,10 @@
 package io.github.jtsato.bookstore.entrypoint.rest.enumerator.mapper;
 
 import java.util.List;
+import java.util.Locale;
 import java.util.stream.Collectors;
 
 import org.springframework.context.MessageSource;
-import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Component;
 
 import io.github.jtsato.bookstore.core.enumerator.domain.Enumerator;
@@ -18,6 +18,8 @@ import lombok.RequiredArgsConstructor;
 @Component
 @RequiredArgsConstructor
 public class SearchEnumeratorsPresenter {
+    
+    private final Locale locale;
 
     private final MessageSource messageSource;
 
@@ -26,7 +28,7 @@ public class SearchEnumeratorsPresenter {
     }
 
     private EnumeratorResponse of(final Enumerator enumerator) {
-        final String value = messageSource.getMessage(enumerator.getMessageKey(), null, LocaleContextHolder.getLocale());
+        final String value = messageSource.getMessage(enumerator.getMessageKey(), null, locale);
         return new EnumeratorResponse(enumerator.getDomain(), enumerator.getKey(), value);
     }
 }
