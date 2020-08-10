@@ -22,7 +22,7 @@ import io.github.jtsato.bookstore.entrypoint.rest.enumerator.domain.response.Enu
  * @author Jorge Takeshi Sato  
  */
 
-class SearchEnumeratorPresenterTest {
+class SearchEnumeratorsPresenterTest {
     
     @Mock
     private final MessageSource messageSource = Mockito.mock(MessageSource.class);
@@ -40,6 +40,18 @@ class SearchEnumeratorPresenterTest {
         final List<EnumeratorResponse> enumeratorResponses = presenter.of(dummyEnumerators());
         assertThat(enumeratorResponses).isNotNull().isNotEmpty();
         assertThat(enumeratorResponses.size()).isEqualTo(2);
+        
+        final EnumeratorResponse element1 = enumeratorResponses.get(0);
+        assertThat(element1).isNotNull();
+        assertThat(element1.getDomain()).isEqualTo("Gender");
+        assertThat(element1.getKey()).isEqualTo("MALE");
+        assertThat(element1.getValue()).isEqualTo("Male");
+        
+        final EnumeratorResponse element2 = enumeratorResponses.get(1);
+        assertThat(element2).isNotNull();
+        assertThat(element2.getDomain()).isEqualTo("Gender");
+        assertThat(element2.getKey()).isEqualTo("FEMALE");
+        assertThat(element2.getValue()).isEqualTo("Female");
     }
     
     private List<Enumerator> dummyEnumerators() {

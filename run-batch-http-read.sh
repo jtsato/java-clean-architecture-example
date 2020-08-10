@@ -1,5 +1,8 @@
 set -x
 
+http GET :8080/enumerators domain==Gender key==MALE Accept-Language:pt_BR
+http GET :8080/enumerators domain==Gender key==FEMALE Accept-Language:pt_BR
+
 http GET :8080/authors/1 Accept-Language:pt_BR
 http GET :8080/authors Accept-Language:pt_BR
 http POST :8080/authors/findByIds ids:='[1,2]' Accept-Language:pt_BR
