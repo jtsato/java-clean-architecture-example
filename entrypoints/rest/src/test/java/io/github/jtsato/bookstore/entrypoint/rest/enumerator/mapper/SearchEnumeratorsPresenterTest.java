@@ -1,6 +1,9 @@
 package io.github.jtsato.bookstore.entrypoint.rest.enumerator.mapper;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.ArgumentMatchers.isNull;
+import static org.mockito.ArgumentMatchers.nullable;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
@@ -27,17 +30,15 @@ class SearchEnumeratorsPresenterTest {
     @Mock
     private final MessageSource messageSource = Mockito.mock(MessageSource.class);
 
-    private final Locale locale = Locale.US;
-
     @InjectMocks
-    private final SearchEnumeratorsPresenter presenter = new SearchEnumeratorsPresenter(locale, messageSource);
+    private final SearchEnumeratorsPresenter presenter = new SearchEnumeratorsPresenter(messageSource);
 
     @DisplayName("Successful to search enumerators")
     @Test
     void successfulToSearchEnumerators() {
 
-        when(messageSource.getMessage(Gender.MALE.getMessageKey(), null, locale)).thenReturn("Male");
-        when(messageSource.getMessage(Gender.FEMALE.getMessageKey(), null, locale)).thenReturn("Female");
+        when(messageSource.getMessage(eq(Gender.MALE.getMessageKey()), isNull(), nullable(Locale.class))).thenReturn("Male");
+        when(messageSource.getMessage(eq(Gender.FEMALE.getMessageKey()), isNull(), nullable(Locale.class))).thenReturn("Female");
 
         final List<EnumeratorResponse> responses = presenter.of(dummyEnumerators());
         assertThat(responses).isNotNull().isNotEmpty();
