@@ -46,8 +46,7 @@ public class RemoveAuthorByIdUseCaseImpl implements RemoveAuthorByIdUseCase {
             throw new InvalidParameterException("validation.author.id.null");
         }
 
-        final SearchAuthorsParameters authorsParameters = new SearchAuthorsParameters(id, null, null, null, null);
-        final SearchBooksParameters parameters = new SearchBooksParameters(null, authorsParameters, null, null);
+        final SearchBooksParameters parameters = new SearchBooksParameters(null, new SearchAuthorsParameters(id, null, null, null, null), null, null);
 
         final Page<Book> pageOfBook = searchBooksGateway.searchBooks(parameters, 0, 1, null);
 
@@ -57,6 +56,6 @@ public class RemoveAuthorByIdUseCaseImpl implements RemoveAuthorByIdUseCase {
 
         final Optional<Author> optional = removeAuthorByIdGateway.removeAuthorById(id);
 
-        return optional.orElseThrow(() -> new NotFoundException("validation.author.id.notfound", id)); 
+        return optional.orElseThrow(() -> new NotFoundException("validation.author.id.notfound", id));
     }
 }

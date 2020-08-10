@@ -63,8 +63,8 @@ class RegisterAuthorUseCaseTest {
         when(registerAuthorGateway.registerAuthor(mockRegisterAuthorGatewayIn())).thenReturn(mockRegisterAuthorGatewayOut());
         when(getAuthorByNameGateway.getAuthorByName("Joshua Bloch")).thenReturn(Optional.empty());
 
-        final RegisterAuthorParameters registerAuthorParameters = new RegisterAuthorParameters("Joshua Bloch", "MALE", "1961-08-28");
-        final Author author = getAuthorByIdUseCase.registerAuthor(registerAuthorParameters);
+        final RegisterAuthorParameters parameters = new RegisterAuthorParameters("Joshua Bloch", "MALE", "1961-08-28");
+        final Author author = getAuthorByIdUseCase.registerAuthor(parameters);
 
         assertThat(author).isEqualTo(mockRegisterAuthorGatewayOut());
 

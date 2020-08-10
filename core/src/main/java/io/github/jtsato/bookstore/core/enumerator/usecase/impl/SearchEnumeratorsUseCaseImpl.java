@@ -38,8 +38,8 @@ public class SearchEnumeratorsUseCaseImpl implements SearchEnumeratorsUseCase {
     }
 
     private boolean compare(final Enumerator enumerator, final Optional<String> domain, final Optional<String> key) {
-        final boolean domainNotProvidedOrSameDomain = domain.isEmpty() || enumerator.getDomain().equals(domain.get());
-        final boolean keyNotProvidedOrSameKey = key.isEmpty() || enumerator.getKey().equals(key.get());
+        final boolean domainNotProvidedOrSameDomain = domain.isEmpty() || enumerator.getDomain().equalsIgnoreCase(domain.get());
+        final boolean keyNotProvidedOrSameKey = key.isEmpty() || enumerator.getKey().equalsIgnoreCase(key.get());
         return domainNotProvidedOrSameDomain && keyNotProvidedOrSameKey;
     }
 
