@@ -15,6 +15,7 @@ import io.github.jtsato.bookstore.core.enumerator.domain.Enumerator;
 import io.github.jtsato.bookstore.core.enumerator.usecase.SearchEnumeratorsUseCase;
 import io.github.jtsato.bookstore.core.enumerator.usecase.parameter.SearchEnumeratorsParameters;
 import io.github.jtsato.bookstore.entrypoint.rest.common.metric.LogExecutionTime;
+import io.github.jtsato.bookstore.entrypoint.rest.enumerator.api.SearchEnumeratorsApiMethod;
 import io.github.jtsato.bookstore.entrypoint.rest.enumerator.domain.response.EnumeratorResponse;
 import io.github.jtsato.bookstore.entrypoint.rest.enumerator.mapper.SearchEnumeratorsPresenter;
 import lombok.RequiredArgsConstructor;

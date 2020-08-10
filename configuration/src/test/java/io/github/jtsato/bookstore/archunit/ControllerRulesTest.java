@@ -29,41 +29,41 @@ public class ControllerRulesTest {
     static final ArchRule controllers_should_only_call_secured_methods = classes().that()
                                                                                   .resideInAPackage("..controller")
                                                                                   .should()
-                                                                                  .onlyCallMethodsThat(areDeclaredInController().or(areDeclaredInUseCase())
-                                                                                                                                .or(areDeclaredInMapper())
-                                                                                                                                .or(areLogger()));
+                                                                                  .onlyCallMethodsThat(allowedPackages());
 
     @ArchTest
     static final ArchRule controllers_should_only_call_secured_constructors = classes().that()
                                                                                        .resideInAPackage("..controller")
                                                                                        .should()
-                                                                                       .onlyCallConstructorsThat(areDeclaredInController().or(areDeclaredInUseCase())
-                                                                                                                                          .or(areDeclaredInMapper())
-                                                                                                                                          .or(areLogger()));
+                                                                                       .onlyCallConstructorsThat(allowedPackages());
 
     @ArchTest
     static final ArchRule controllers_should_only_call_secured_code_units = classes().that()
                                                                                      .resideInAPackage("..controller")
                                                                                      .should()
-                                                                                     .onlyCallCodeUnitsThat(areDeclaredInController().or(areDeclaredInUseCase())
-                                                                                                                                     .or(areDeclaredInMapper())
-                                                                                                                                     .or(areLogger()));
+                                                                                     .onlyCallCodeUnitsThat(allowedPackages());
 
     @ArchTest
     static final ArchRule controllers_should_only_access_secured_fields = classes().that()
                                                                                    .resideInAPackage("..controller")
                                                                                    .should()
-                                                                                   .onlyAccessFieldsThat(areDeclaredInController().or(areDeclaredInUseCase())
-                                                                                                                                  .or(areDeclaredInMapper())
-                                                                                                                                  .or(areLogger()));
+                                                                                   .onlyAccessFieldsThat(allowedPackages());
 
     @ArchTest
     static final ArchRule controllers_should_only_access_secured_members = classes().that()
                                                                                     .resideInAPackage("..controller")
                                                                                     .should()
-                                                                                    .onlyAccessMembersThat(areDeclaredInController().or(areDeclaredInUseCase())
-                                                                                                                                    .or(areDeclaredInMapper())
-                                                                                                                                    .or(areLogger()));
+                                                                                    .onlyAccessMembersThat(allowedPackages());
+
+    private static DescribedPredicate<JavaMember> allowedPackages() {
+        return areDeclaredInController().or(areDeclaredInUseCase())
+                                        .or(areDeclaredInMapper())
+                                        .or(areDeclaredInRestDomain())
+                                        .or(areDeclaredInRestCommon())
+                                        .or(areDeclaredInSpringFramework())
+                                        .or(areDeclaredInApacheCommons())
+                                        .or(areLogger());
+    }
 
     private static DescribedPredicate<JavaMember> areDeclaredInController() {
         final DescribedPredicate<JavaClass> aPackageController = GET_PACKAGE_NAME.is(PackageMatchers.of("..controller", "java.."))
@@ -81,7 +81,31 @@ public class ControllerRulesTest {
         return are(declaredIn(aPackageController));
     }
 
+    private static DescribedPredicate<JavaMember> areDeclaredInRestDomain() {
+        final DescribedPredicate<JavaClass> aPackageController = GET_PACKAGE_NAME.is(PackageMatchers.of("..rest..domain..", "java.."))
+                                                                                 .as("a package '..domain..'");
+        return are(declaredIn(aPackageController));
+    }
+
+    private static DescribedPredicate<JavaMember> areDeclaredInRestCommon() {
+        final DescribedPredicate<JavaClass> aPackageController = GET_PACKAGE_NAME.is(PackageMatchers.of("..rest..common..", "java.."))
+                                                                                 .as("a package '..common..'");
+        return are(declaredIn(aPackageController));
+    }
+
+    private static DescribedPredicate<JavaMember> areDeclaredInSpringFramework() {
+        final DescribedPredicate<JavaClass> aPackageController = GET_PACKAGE_NAME.is(PackageMatchers.of("..org.springframework..", "java.."))
+                                                                                 .as("a package '..springframework..'");
+        return are(declaredIn(aPackageController));
+    }
+
+    private static DescribedPredicate<JavaMember> areDeclaredInApacheCommons() {
+        final DescribedPredicate<JavaClass> aPackageController = GET_PACKAGE_NAME.is(PackageMatchers.of("..apache.commons..", "java.."))
+                                                                                 .as("a package '..apache.commons..'");
+        return are(declaredIn(aPackageController));
+    }
+
     private static DescribedPredicate<JavaMember> areLogger() {
-        return are(declaredIn(org.slf4j.Logger.class));
+        return are(declaredIn(org.slf4j.Logger.class)).or(declaredIn(org.slf4j.LoggerFactory.class));
     }
 }

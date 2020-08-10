@@ -1,4 +1,4 @@
-package io.github.jtsato.bookstore.entrypoint.rest.enumerator.controller;
+package io.github.jtsato.bookstore.entrypoint.rest.enumerator.api;
 
 import java.util.List;
 
