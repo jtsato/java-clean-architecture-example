@@ -1,6 +1,5 @@
 package io.github.jtsato.bookstore.entrypoint.rest.book.controller.impl;
 
-import java.io.IOException;
 import java.util.Base64;
 import java.util.Base64.Encoder;
 

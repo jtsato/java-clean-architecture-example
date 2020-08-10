@@ -56,18 +56,16 @@ public class RegisterBookUseCaseImpl implements RegisterBookUseCase {
     }
 
     private Author getAuthorAndValidate(final Long authorId) {
-
         final Optional<Author> optional = getAuthorByIdGateway.getAuthorById(authorId);
-
         return optional.orElseThrow(() -> new NotFoundException("validation.author.id.notfound", authorId));
     }
 
     private void checkDuplicatedTitleViolation(final String title) {
-
         final Optional<Book> optional = getBookByTitleGateway.getBookByTitle(title);
+        optional.ifPresent(this::throwUniqueConstraintException);        
+    }
 
-        optional.ifPresent(book -> {
-            throw new UniqueConstraintException("validation.book.title.already.exists", book.getTitle());
-        });        
+    private void throwUniqueConstraintException(final Book book) {
+        throw new UniqueConstraintException("validation.book.title.already.exists", book.getTitle());
     }
 }

@@ -3,8 +3,6 @@ package io.github.jtsato.bookstore.core.author.domain;
 
 import java.util.Arrays;
 
-import lombok.Generated;
-
 /**
  * @author Jorge Takeshi Sato
  */
@@ -27,10 +25,7 @@ public enum Gender {
             }
         };
 
-    @Generated
-    public String getMessageKey() {
-        return null;
-    }
+    public abstract String getMessageKey();
 
     public boolean is(final Gender other) {
         return equals(other);

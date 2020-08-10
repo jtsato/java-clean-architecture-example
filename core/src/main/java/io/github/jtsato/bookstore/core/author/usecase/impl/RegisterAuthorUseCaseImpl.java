@@ -41,11 +41,11 @@ public class RegisterAuthorUseCaseImpl implements RegisterAuthorUseCase {
     }
 
     private void checkDuplicatedNameViolation(final String authorName) {
-
         final Optional<Author> optional = getAuthorByNameGateway.getAuthorByName(authorName);
+        optional.ifPresent(this::throwUniqueConstraintException);
+    }
 
-        optional.ifPresent(author -> {
-            throw new UniqueConstraintException("validation.author.name.already.exists", author.getName());
-        });
+    private void throwUniqueConstraintException(final Author author) {
+        throw new UniqueConstraintException("validation.author.name.already.exists", author.getName());
     }
 }

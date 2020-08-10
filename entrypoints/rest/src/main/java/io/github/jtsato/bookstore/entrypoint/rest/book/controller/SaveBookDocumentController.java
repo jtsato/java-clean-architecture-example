@@ -1,7 +1,5 @@
 package io.github.jtsato.bookstore.entrypoint.rest.book.controller;
 
-import java.io.IOException;
-
 import org.springframework.web.multipart.MultipartFile;
 
 import io.github.jtsato.bookstore.entrypoint.rest.book.domain.response.SaveBookDocumentResponse;
