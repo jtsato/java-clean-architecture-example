@@ -1,31 +1,48 @@
 package io.github.jtsato.bookstore.entrypoint.rest.book.controller;
 
-import io.github.jtsato.bookstore.entrypoint.rest.common.HttpStatusConstants;
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.Parameter;
-import io.swagger.v3.oas.annotations.enums.ParameterIn;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.responses.ApiResponses;
-import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestController;
+
+import io.github.jtsato.bookstore.core.book.usecase.RemoveBookByIdUseCase;
+import io.github.jtsato.bookstore.entrypoint.rest.book.api.RemoveBookByIdApiMethod;
+import io.github.jtsato.bookstore.entrypoint.rest.common.metric.LogExecutionTime;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+
+/*
+ * A EntryPoint follows these steps:
+ *
+ * - Maps HTTP requests to Java objects
+ * - Performs authorization checks
+ * - Maps input to the input model of the use case
+ * - Calls the use case
+ * - Maps the output of the use case back to HTTP Returns an HTTP response
+ */
 
 /**
  * @author Jorge Takeshi Sato  
  */
 
-@Tag(name = "Books")
-@FunctionalInterface
-public interface RemoveBookByIdController {
+@Slf4j
+@RequiredArgsConstructor
+@RestController
+@RequestMapping("/books")
+public class RemoveBookByIdController implements RemoveBookByIdApiMethod {
 
-    @Operation(summary = "Remove Book by Id")
+    private final RemoveBookByIdUseCase removeBookByIdUseCase;
 
-    @Parameter(name = "Accept-Language",
-               example = "pt_BR",
-               in = ParameterIn.HEADER,
-               description = "Represents a specific geographical, political, or cultural region. Language & Country.")
+    @Override
+    @LogExecutionTime
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @DeleteMapping("/{id}")
+    public void removeBookById(@PathVariable final Long id) {
 
-    @ApiResponses(value = {@ApiResponse(responseCode = HttpStatusConstants.NO_CONTENT_204, description = HttpStatusConstants.NO_CONTENT_204_MESSAGE),
-                           @ApiResponse(responseCode = HttpStatusConstants.BAD_REQUEST_400, description = HttpStatusConstants.BAD_REQUEST_400_MESSAGE),
-                           @ApiResponse(responseCode = HttpStatusConstants.NOT_FOUND_404, description = HttpStatusConstants.NOT_FOUND_404_MESSAGE),})
+        log.debug("Starting Controller -> RemoveBookByIdController with {}", id);
 
-    void removeBookById(@Parameter(description = "Book Id") final Long id);
+        removeBookByIdUseCase.execute(id);
+    }
 }

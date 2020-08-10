@@ -180,8 +180,8 @@
 					<siteReportDescription>Bookstore rest springboot mutation report</siteReportDescription>
 					<siteReportDirectory>bbookstore-rest-springboot</siteReportDirectory>
 					<targetClasses>
-						<param>io.github.jtsato.bookstore.entrypoint.rest.author.controller.impl.*ControllerImpl</param>
-						<param>io.github.jtsato.bookstore.entrypoint.rest.book.controller.impl.*ControllerImpl</param>
+						<param>io.github.jtsato.bookstore.entrypoint.rest.author.controller.*Controller</param>
+						<param>io.github.jtsato.bookstore.entrypoint.rest.book.controller.*Controller</param>
 					</targetClasses>
 					<targetTests>
 						<param>io.github.jtsato.bookstore.entrypoint.rest.author.controller.*ControllerTest</param>

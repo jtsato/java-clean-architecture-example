@@ -1,33 +1,53 @@
 package io.github.jtsato.bookstore.entrypoint.rest.author.controller;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestController;
+
+import io.github.jtsato.bookstore.core.author.domain.Author;
+import io.github.jtsato.bookstore.core.author.usecase.GetAuthorByIdUseCase;
+import io.github.jtsato.bookstore.entrypoint.rest.author.api.GetAuthorByIdApiMethod;
 import io.github.jtsato.bookstore.entrypoint.rest.author.domain.response.GetAuthorByIdResponse;
-import io.github.jtsato.bookstore.entrypoint.rest.common.HttpStatusConstants;
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.Parameter;
-import io.swagger.v3.oas.annotations.enums.ParameterIn;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.responses.ApiResponses;
-import io.swagger.v3.oas.annotations.tags.Tag;
+import io.github.jtsato.bookstore.entrypoint.rest.author.mapper.GetAuthorByIdPresenter;
+import io.github.jtsato.bookstore.entrypoint.rest.common.metric.LogExecutionTime;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+
+/*
+ * A EntryPoint follows these steps:
+ *
+ * - Maps HTTP requests to Java objects
+ * - Performs authorization checks
+ * - Maps input to the input model of the use case
+ * - Calls the use case
+ * - Maps the output of the use case back to HTTP Returns an HTTP response
+ */
 
 /**
  * @author Jorge Takeshi Sato  
  */
 
-@Tag(name = "Authors")
-@FunctionalInterface
-public interface GetAuthorByIdController {
+@Slf4j
+@RequiredArgsConstructor
+@RestController
+@RequestMapping("/authors")
+public class GetAuthorByIdController implements GetAuthorByIdApiMethod {
 
-    @Operation(summary = "Get Author by Id")
+    private final GetAuthorByIdUseCase getAuthorByIdUseCase;
 
-    @Parameter(name = "Accept-Language",
-               example = "pt_BR",
-               in = ParameterIn.HEADER,
-               description = "Represents a specific geographical, political, or cultural region. Language & Country.")
+    @Override
+    @LogExecutionTime
+    @ResponseStatus(HttpStatus.OK)
+    @GetMapping("/{id}")
+    public GetAuthorByIdResponse getAuthorById(@PathVariable final Long id) {
 
-    @ApiResponses(value = {@ApiResponse(responseCode = HttpStatusConstants.OK_200, description = HttpStatusConstants.OK_200_MESSAGE),
-                           @ApiResponse(responseCode = HttpStatusConstants.BAD_REQUEST_400, description = HttpStatusConstants.BAD_REQUEST_400_MESSAGE),
-                           @ApiResponse(responseCode = HttpStatusConstants.NOT_FOUND_404, description = HttpStatusConstants.NOT_FOUND_404_MESSAGE),
-                           @ApiResponse(responseCode = HttpStatusConstants.INTERNAL_SERVER_ERROR_500,
-                                        description = HttpStatusConstants.INTERNAL_SERVER_ERROR_500_MESSAGE),})
-    GetAuthorByIdResponse getAuthorById(@Parameter(description = "Author Id") final Long id);
+        log.debug("Starting Controller -> GetAuthorByIdController with {}", id);
+
+        final Author author = getAuthorByIdUseCase.getAuthorById(id);
+
+        return GetAuthorByIdPresenter.of(author);
+    }
 }

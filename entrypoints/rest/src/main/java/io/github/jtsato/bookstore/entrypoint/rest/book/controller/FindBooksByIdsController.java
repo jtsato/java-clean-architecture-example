@@ -1,34 +1,58 @@
 package io.github.jtsato.bookstore.entrypoint.rest.book.controller;
 
+import org.springframework.boot.context.properties.bind.DefaultValue;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestController;
+
+import io.github.jtsato.bookstore.core.book.domain.Book;
+import io.github.jtsato.bookstore.core.book.usecase.FindBooksByIdsUseCase;
+import io.github.jtsato.bookstore.core.common.paging.Page;
+import io.github.jtsato.bookstore.entrypoint.rest.book.api.FindBooksByIdsApiMethod;
 import io.github.jtsato.bookstore.entrypoint.rest.book.domain.request.FindBooksByIdsRequest;
 import io.github.jtsato.bookstore.entrypoint.rest.book.domain.response.FindBooksByIdsResponse;
-import io.github.jtsato.bookstore.entrypoint.rest.common.HttpStatusConstants;
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.Parameter;
-import io.swagger.v3.oas.annotations.enums.ParameterIn;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.responses.ApiResponses;
-import io.swagger.v3.oas.annotations.tags.Tag;
+import io.github.jtsato.bookstore.entrypoint.rest.book.mapper.FindBooksByIdsPresenter;
+import io.github.jtsato.bookstore.entrypoint.rest.common.JsonConverter;
+import io.github.jtsato.bookstore.entrypoint.rest.common.metric.LogExecutionTime;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
-/**
- * @author Jorge Takeshi Sato  
+/*
+ * A EntryPoint follows these steps:
+ *
+ * - Maps HTTP requests to Java objects
+ * - Performs bookization checks
+ * - Maps input to the input model of the use case
+ * - Calls the use case
+ * - Maps the output of the use case back to HTTP Returns an HTTP response
  */
 
-@Tag(name = "Books")
-@FunctionalInterface
-public interface FindBooksByIdsController {
+/**
+ * @book Jorge Takeshi Sato  
+ */
 
-    @Operation(summary = "Finds Books by IDs")
+@Slf4j
+@RequiredArgsConstructor
+@RestController
+@RequestMapping("/books")
+public class FindBooksByIdsController implements FindBooksByIdsApiMethod {
 
-    @Parameter(name = "Accept-Language",
-               example = "pt_BR",
-               in = ParameterIn.HEADER,
-               description = "Represents a specific geographical, political, or cultural region. Language & Country.")
+    private final FindBooksByIdsUseCase findBooksByIdsUseCase;
 
-    @ApiResponses(value = {@ApiResponse(responseCode = HttpStatusConstants.OK_200, description = HttpStatusConstants.OK_200_MESSAGE),
-                           @ApiResponse(responseCode = HttpStatusConstants.BAD_REQUEST_400, description = HttpStatusConstants.BAD_REQUEST_400_MESSAGE),
-                           @ApiResponse(responseCode = HttpStatusConstants.NOT_FOUND_404, description = HttpStatusConstants.NOT_FOUND_404_MESSAGE),
-                           @ApiResponse(responseCode = HttpStatusConstants.INTERNAL_SERVER_ERROR_500,
-                                        description = HttpStatusConstants.INTERNAL_SERVER_ERROR_500_MESSAGE),})
-    FindBooksByIdsResponse findBooksByIds(@Parameter(description = "Books Ids") final FindBooksByIdsRequest findBooksByIdsRequest);
+    @Override
+    @LogExecutionTime
+    @ResponseStatus(HttpStatus.OK)
+    @PostMapping("/findByIds")
+    public FindBooksByIdsResponse findBooksByIds(@RequestBody @DefaultValue final FindBooksByIdsRequest findBooksByIdsRequest) {
+
+        log.debug("Starting Controller -> FindBooksByIdsController with {}", JsonConverter.convert(findBooksByIdsRequest));
+
+        final Page<Book> books = findBooksByIdsUseCase.execute(findBooksByIdsRequest.getIds());
+
+        return FindBooksByIdsPresenter.of(books);
+    }
 }
+

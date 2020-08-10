@@ -35,7 +35,6 @@ import io.github.jtsato.bookstore.core.author.usecase.FindAuthorsByIdsUseCase;
 import io.github.jtsato.bookstore.core.common.paging.Page;
 import io.github.jtsato.bookstore.core.common.paging.PageImpl;
 import io.github.jtsato.bookstore.core.common.paging.Pageable;
-import io.github.jtsato.bookstore.entrypoint.rest.author.controller.impl.FindAuthorsByIdsControllerImpl;
 import io.github.jtsato.bookstore.entrypoint.rest.author.domain.request.FindAuthorsByIdsRequest;
 
 /**
@@ -43,7 +42,7 @@ import io.github.jtsato.bookstore.entrypoint.rest.author.domain.request.FindAuth
  */
 
 @ExtendWith(SpringExtension.class)
-@WebMvcTest(controllers = FindAuthorsByIdsControllerImpl.class)
+@WebMvcTest(controllers = FindAuthorsByIdsController.class)
 class FindAuthorsByIdsControllerTest {
 
     @Autowired

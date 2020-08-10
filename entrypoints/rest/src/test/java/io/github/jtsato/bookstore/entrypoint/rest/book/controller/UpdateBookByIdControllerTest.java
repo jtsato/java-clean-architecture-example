@@ -33,7 +33,6 @@ import io.github.jtsato.bookstore.core.author.domain.Gender;
 import io.github.jtsato.bookstore.core.book.domain.Book;
 import io.github.jtsato.bookstore.core.book.usecase.UpdateBookByIdUseCase;
 import io.github.jtsato.bookstore.core.book.usecase.parameter.UpdateBookByIdParameters;
-import io.github.jtsato.bookstore.entrypoint.rest.book.controller.impl.UpdateBookByIdControllerImpl;
 import io.github.jtsato.bookstore.entrypoint.rest.book.domain.request.UpdateBookByIdRequest;
 
 /**
@@ -41,7 +40,7 @@ import io.github.jtsato.bookstore.entrypoint.rest.book.domain.request.UpdateBook
  */
 
 @ExtendWith(SpringExtension.class)
-@WebMvcTest(controllers = UpdateBookByIdControllerImpl.class)
+@WebMvcTest(controllers = UpdateBookByIdController.class)
 class UpdateBookByIdControllerTest {
 
     @Autowired

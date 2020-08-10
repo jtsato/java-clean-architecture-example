@@ -1,5 +1,7 @@
 package io.github.jtsato.bookstore.core.author.usecase.impl;
 
+import javax.inject.Named;
+
 import io.github.jtsato.bookstore.core.author.domain.Author;
 import io.github.jtsato.bookstore.core.author.gateway.SearchAuthorsGateway;
 import io.github.jtsato.bookstore.core.author.usecase.SearchAuthorsUseCase;
@@ -19,6 +21,7 @@ import lombok.RequiredArgsConstructor;
  * @author Jorge Takeshi Sato  
  */
 
+@Named
 @RequiredArgsConstructor
 public class SearchAuthorsUseCaseImpl implements SearchAuthorsUseCase {
 

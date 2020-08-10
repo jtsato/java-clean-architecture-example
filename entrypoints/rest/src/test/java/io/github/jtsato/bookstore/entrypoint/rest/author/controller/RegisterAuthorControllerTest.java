@@ -30,7 +30,6 @@ import io.github.jtsato.bookstore.core.author.domain.Author;
 import io.github.jtsato.bookstore.core.author.domain.Gender;
 import io.github.jtsato.bookstore.core.author.usecase.RegisterAuthorUseCase;
 import io.github.jtsato.bookstore.core.author.usecase.parameter.RegisterAuthorParameters;
-import io.github.jtsato.bookstore.entrypoint.rest.author.controller.impl.RegisterAuthorControllerImpl;
 import io.github.jtsato.bookstore.entrypoint.rest.author.domain.request.RegisterAuthorRequest;
 
 /**
@@ -38,7 +37,7 @@ import io.github.jtsato.bookstore.entrypoint.rest.author.domain.request.Register
  */
 
 @ExtendWith(SpringExtension.class)
-@WebMvcTest(controllers = RegisterAuthorControllerImpl.class)
+@WebMvcTest(controllers = RegisterAuthorController.class)
 class RegisterAuthorControllerTest {
 
     @Autowired

@@ -74,7 +74,8 @@ public class LayerDependencyRulesTest {
                                                                                                       "..domain..",
                                                                                                       "..response..",
                                                                                                       "..core.common..",
-                                                                                                      "java..");
+                                                                                                      "java..",
+                                                                                                      "org.springframework..");
 
     @ArchTest
     static final ArchRule core_domains_should_only_access_themselves_ = classes().that()

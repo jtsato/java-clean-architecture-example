@@ -26,14 +26,13 @@ import org.springframework.test.web.servlet.MockMvc;
 import io.github.jtsato.bookstore.core.author.domain.Author;
 import io.github.jtsato.bookstore.core.author.domain.Gender;
 import io.github.jtsato.bookstore.core.author.usecase.GetAuthorByIdUseCase;
-import io.github.jtsato.bookstore.entrypoint.rest.author.controller.impl.GetAuthorByIdControllerImpl;
 
 /**
  * @author Jorge Takeshi Sato  
  */
 
 @ExtendWith(SpringExtension.class)
-@WebMvcTest(controllers = GetAuthorByIdControllerImpl.class)
+@WebMvcTest(controllers = GetAuthorByIdController.class)
 class GetAuthorByIdControllerTest {
 
     @Autowired

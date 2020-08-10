@@ -2,6 +2,8 @@ package io.github.jtsato.bookstore.core.book.usecase.impl;
 
 import java.util.Optional;
 
+import javax.inject.Named;
+
 import io.github.jtsato.bookstore.core.book.domain.Book;
 import io.github.jtsato.bookstore.core.book.domain.BookDocument;
 import io.github.jtsato.bookstore.core.book.gateway.GetBookByIdGateway;
@@ -25,6 +27,7 @@ import lombok.RequiredArgsConstructor;
  * @author Jorge Takeshi Sato  
  */
 
+@Named
 @RequiredArgsConstructor
 public class SaveBookDocumentUseCaseImpl implements SaveBookDocumentUseCase {
 

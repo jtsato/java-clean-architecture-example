@@ -1,35 +1,64 @@
 package io.github.jtsato.bookstore.entrypoint.rest.book.controller;
 
+import org.springframework.boot.context.properties.bind.DefaultValue;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestController;
+
+import io.github.jtsato.bookstore.core.book.domain.Book;
+import io.github.jtsato.bookstore.core.book.usecase.UpdateBookByIdUseCase;
+import io.github.jtsato.bookstore.core.book.usecase.parameter.UpdateBookByIdParameters;
+import io.github.jtsato.bookstore.entrypoint.rest.book.api.UpdateBookByIdApiMethod;
 import io.github.jtsato.bookstore.entrypoint.rest.book.domain.request.UpdateBookByIdRequest;
 import io.github.jtsato.bookstore.entrypoint.rest.book.domain.response.UpdateBookByIdResponse;
-import io.github.jtsato.bookstore.entrypoint.rest.common.HttpStatusConstants;
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.Parameter;
-import io.swagger.v3.oas.annotations.enums.ParameterIn;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.responses.ApiResponses;
-import io.swagger.v3.oas.annotations.tags.Tag;
+import io.github.jtsato.bookstore.entrypoint.rest.book.mapper.UpdateBookByIdPresenter;
+import io.github.jtsato.bookstore.entrypoint.rest.common.JsonConverter;
+import io.github.jtsato.bookstore.entrypoint.rest.common.metric.LogExecutionTime;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+
+/*
+ * A EntryPoint follows these steps:
+ *
+ * - Maps HTTP requests to Java objects
+ * - Performs authorization checks
+ * - Maps input to the input model of the use case
+ * - Calls the use case
+ * - Maps the output of the use case back to HTTP Returns an HTTP response
+ */
 
 /**
  * @author Jorge Takeshi Sato  
  */
 
-@Tag(name = "Books")
-@FunctionalInterface
-public interface UpdateBookByIdController {
+@Slf4j
+@RequiredArgsConstructor
+@RestController
+@RequestMapping("/books/{id}")
+public class UpdateBookByIdController implements UpdateBookByIdApiMethod {
 
-    @Operation(summary = "Update Book by Id")
+    private final UpdateBookByIdUseCase updateBookByIdUseCase;
 
-    @Parameter(name = "Accept-Language",
-               example = "pt_BR",
-               in = ParameterIn.HEADER,
-               description = "Represents a specific geographical, political, or cultural region. Language & Country.")
+    @Override
+    @LogExecutionTime
+    @ResponseStatus(HttpStatus.OK)
+    @PutMapping
+    public UpdateBookByIdResponse updateBookById(@PathVariable final Long id, @RequestBody @DefaultValue final UpdateBookByIdRequest request) {
 
-    @ApiResponses(value = {@ApiResponse(responseCode = HttpStatusConstants.OK_200, description = HttpStatusConstants.OK_200_MESSAGE),
-                           @ApiResponse(responseCode = HttpStatusConstants.BAD_REQUEST_400, description = HttpStatusConstants.BAD_REQUEST_400_MESSAGE),
-                           @ApiResponse(responseCode = HttpStatusConstants.NOT_FOUND_404, description = HttpStatusConstants.NOT_FOUND_404_MESSAGE),
-                           @ApiResponse(responseCode = HttpStatusConstants.INTERNAL_SERVER_ERROR_500,
-                                        description = HttpStatusConstants.INTERNAL_SERVER_ERROR_500_MESSAGE),})
+        log.debug("Starting Controller -> UpdateBookByIdController with {}", JsonConverter.convert(request));
 
-    UpdateBookByIdResponse updateBookById(@Parameter(description = "Book Id") final Long id, final UpdateBookByIdRequest request);
+        final UpdateBookByIdParameters parameters = new UpdateBookByIdParameters(id,
+                                                                                 request.getAuthorId(),
+                                                                                 request.getTitle(),
+                                                                                 request.getPrice(),
+                                                                                 request.getAvailable());
+
+        final Book book = updateBookByIdUseCase.execute(parameters);
+
+        return UpdateBookByIdPresenter.of(book);
+    }
 }

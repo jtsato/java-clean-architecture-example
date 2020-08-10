@@ -2,6 +2,8 @@ package io.github.jtsato.bookstore.core.author.usecase.impl;
 
 import java.util.Optional;
 
+import javax.inject.Named;
+
 import io.github.jtsato.bookstore.core.author.domain.Author;
 import io.github.jtsato.bookstore.core.author.gateway.GetAuthorByIdGateway;
 import io.github.jtsato.bookstore.core.author.usecase.GetAuthorByIdUseCase;
@@ -21,6 +23,7 @@ import lombok.RequiredArgsConstructor;
  * @author Jorge Takeshi Sato  
  */
 
+@Named
 @RequiredArgsConstructor
 public class GetAuthorByIdUseCaseImpl implements GetAuthorByIdUseCase {
 

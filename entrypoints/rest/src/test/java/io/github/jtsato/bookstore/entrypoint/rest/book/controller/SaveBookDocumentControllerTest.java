@@ -30,14 +30,13 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import io.github.jtsato.bookstore.core.book.domain.BookDocument;
 import io.github.jtsato.bookstore.core.book.usecase.SaveBookDocumentUseCase;
 import io.github.jtsato.bookstore.core.book.usecase.parameter.SaveBookDocumentParameters;
-import io.github.jtsato.bookstore.entrypoint.rest.book.controller.impl.SaveBookDocumentControllerImpl;
 
 /**
  * @author Jorge Takeshi Sato  
  */
 
 @ExtendWith(SpringExtension.class)
-@WebMvcTest(controllers = SaveBookDocumentControllerImpl.class)
+@WebMvcTest(controllers = SaveBookDocumentController.class)
 class SaveBookDocumentControllerTest {
 
     @Autowired

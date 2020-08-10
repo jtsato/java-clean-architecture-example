@@ -27,14 +27,13 @@ import io.github.jtsato.bookstore.core.author.domain.Author;
 import io.github.jtsato.bookstore.core.author.domain.Gender;
 import io.github.jtsato.bookstore.core.book.domain.Book;
 import io.github.jtsato.bookstore.core.book.usecase.RemoveBookByIdUseCase;
-import io.github.jtsato.bookstore.entrypoint.rest.book.controller.impl.RemoveBookByIdControllerImpl;
 
 /**
  * @author Jorge Takeshi Sato  
  */
 
 @ExtendWith(SpringExtension.class)
-@WebMvcTest(controllers = RemoveBookByIdControllerImpl.class)
+@WebMvcTest(controllers = RemoveBookByIdController.class)
 class RemoveBookByIdControllerTest {
 
     @Autowired

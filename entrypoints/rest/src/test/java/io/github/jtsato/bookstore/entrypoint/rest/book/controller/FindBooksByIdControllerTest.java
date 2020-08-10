@@ -39,14 +39,13 @@ import io.github.jtsato.bookstore.core.common.paging.Page;
 import io.github.jtsato.bookstore.core.common.paging.PageImpl;
 import io.github.jtsato.bookstore.core.common.paging.Pageable;
 import io.github.jtsato.bookstore.entrypoint.rest.author.domain.request.FindAuthorsByIdsRequest;
-import io.github.jtsato.bookstore.entrypoint.rest.book.controller.impl.FindBooksByIdsControllerImpl;
 
 /**
  * @author Jorge Takeshi Sato  
  */
 
 @ExtendWith(SpringExtension.class)
-@WebMvcTest(controllers = FindBooksByIdsControllerImpl.class)
+@WebMvcTest(controllers = FindBooksByIdsController.class)
 class FindBooksByIdControllerTest {
 
     @Autowired

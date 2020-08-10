@@ -25,7 +25,7 @@ public class MethodsTest {
     @ArchTest
     static ArchRule all_public_methods_in_the_controller_layer_should_return_ResponseStatus = methods().that()
                                                                                                        .areDeclaredInClassesThat()
-                                                                                                       .resideInAPackage("..controller.impl..")
+                                                                                                       .resideInAPackage("..controller..")
                                                                                                        .and()
                                                                                                        .arePublic()
                                                                                                        .should()

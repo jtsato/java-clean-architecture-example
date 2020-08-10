@@ -36,14 +36,13 @@ import io.github.jtsato.bookstore.core.book.usecase.parameter.SearchBooksParamet
 import io.github.jtsato.bookstore.core.common.paging.Page;
 import io.github.jtsato.bookstore.core.common.paging.PageImpl;
 import io.github.jtsato.bookstore.core.common.paging.Pageable;
-import io.github.jtsato.bookstore.entrypoint.rest.book.controller.impl.SearchBooksControllerImpl;
 
 /**
  * @author Jorge Takeshi Sato  
  */
 
 @ExtendWith(SpringExtension.class)
-@WebMvcTest(controllers = SearchBooksControllerImpl.class)
+@WebMvcTest(controllers = SearchBooksController.class)
 class SearchBooksControllerTest {
 
     @Autowired

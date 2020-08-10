@@ -33,7 +33,6 @@ import io.github.jtsato.bookstore.core.author.domain.Gender;
 import io.github.jtsato.bookstore.core.book.domain.Book;
 import io.github.jtsato.bookstore.core.book.usecase.RegisterBookUseCase;
 import io.github.jtsato.bookstore.core.book.usecase.parameter.RegisterBookParameters;
-import io.github.jtsato.bookstore.entrypoint.rest.book.controller.impl.RegisterBookControllerImpl;
 import io.github.jtsato.bookstore.entrypoint.rest.book.domain.request.RegisterBookRequest;
 
 /**
@@ -41,7 +40,7 @@ import io.github.jtsato.bookstore.entrypoint.rest.book.domain.request.RegisterBo
  */
 
 @ExtendWith(SpringExtension.class)
-@WebMvcTest(controllers = RegisterBookControllerImpl.class)
+@WebMvcTest(controllers = RegisterBookController.class)
 class RegisterBookControllerTest {
 
     @Autowired

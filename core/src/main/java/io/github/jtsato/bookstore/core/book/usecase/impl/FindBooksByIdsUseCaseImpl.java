@@ -2,6 +2,8 @@ package io.github.jtsato.bookstore.core.book.usecase.impl;
 
 import java.util.List;
 
+import javax.inject.Named;
+
 import org.apache.commons.collections.CollectionUtils;
 
 import io.github.jtsato.bookstore.core.book.domain.Book;
@@ -23,6 +25,7 @@ import lombok.RequiredArgsConstructor;
  * @author Jorge Takeshi Sato  
  */
 
+@Named
 @RequiredArgsConstructor
 public class FindBooksByIdsUseCaseImpl implements FindBooksByIdsUseCase {
 
