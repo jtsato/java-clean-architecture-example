@@ -20,7 +20,7 @@ import lombok.RequiredArgsConstructor;
  */
 
 /**
- * @author Jorge Takeshi Sato  
+ * @author Jorge Takeshi Sato
  */
 
 @Named
@@ -37,7 +37,7 @@ public class GetAuthorByIdUseCaseImpl implements GetAuthorByIdUseCase {
         }
 
         final Optional<Author> optional = getAuthorByIdGateway.getAuthorById(id);
-        
+
         return optional.orElseThrow(() -> new NotFoundException("validation.author.id.notfound", id));
     }
 }

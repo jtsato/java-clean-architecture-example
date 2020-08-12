@@ -3,6 +3,8 @@ package io.github.jtsato.bookstore.entrypoint.rest.book.controller;
 import java.math.BigDecimal;
 
 import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.context.properties.bind.DefaultValue;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -24,7 +26,6 @@ import io.github.jtsato.bookstore.entrypoint.rest.book.mapper.SearchBooksPresent
 import io.github.jtsato.bookstore.entrypoint.rest.common.JsonConverter;
 import io.github.jtsato.bookstore.entrypoint.rest.common.metric.LogExecutionTime;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 
 /*
  * A EntryPoint follows these steps:
@@ -37,14 +38,15 @@ import lombok.extern.slf4j.Slf4j;
  */
 
 /**
- * @author Jorge Takeshi Sato  
+ * @author Jorge Takeshi Sato
  */
 
-@Slf4j
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/books")
 public class SearchBooksController implements SearchBooksApiMethod {
+
+    private static final Logger log = LoggerFactory.getLogger(SearchBooksController.class);
 
     private final SearchBooksUseCase searchBooksUseCase;
 
@@ -60,7 +62,7 @@ public class SearchBooksController implements SearchBooksApiMethod {
         final ImmutablePair<String, String> creationDates = new ImmutablePair<>(request.getStartCreationDate(), request.getEndCreationDate());
         final ImmutablePair<String, String> updateDates = new ImmutablePair<>(request.getStartUpdateDate(), request.getEndUpdateDate());
 
-         final SearchBooksParameters parameters = new SearchBooksParameters(buildAuthorParameters(request),
+        final SearchBooksParameters parameters = new SearchBooksParameters(buildAuthorParameters(request),
                                                                            request.getTitle(),
                                                                            prices,
                                                                            request.getAvailable(),

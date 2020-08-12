@@ -6,7 +6,7 @@ import io.github.jtsato.bookstore.core.enumerator.domain.Enumerator;
 import io.github.jtsato.bookstore.core.enumerator.usecase.parameter.SearchEnumeratorsParameters;
 
 /**
- * @author Jorge Takeshi Sato  
+ * @author Jorge Takeshi Sato
  */
 
 @FunctionalInterface

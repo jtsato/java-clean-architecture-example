@@ -22,7 +22,7 @@ import io.github.jtsato.bookstore.dataprovider.common.PageMapper;
 import io.github.jtsato.bookstore.dataprovider.common.PageRequestHelper;
 
 /**
- * @author Jorge Takeshi Sato  
+ * @author Jorge Takeshi Sato
  */
 
 @Transactional(readOnly = true)

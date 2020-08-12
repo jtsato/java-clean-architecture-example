@@ -4,7 +4,7 @@ import io.github.jtsato.bookstore.core.book.domain.Book;
 import io.github.jtsato.bookstore.core.book.usecase.parameter.RegisterBookParameters;
 
 /**
- * @author Jorge Takeshi Sato  
+ * @author Jorge Takeshi Sato
  */
 
 @FunctionalInterface

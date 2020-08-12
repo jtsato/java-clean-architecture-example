@@ -35,7 +35,7 @@ import io.github.jtsato.bookstore.entrypoint.rest.enumerator.domain.response.Enu
 import io.github.jtsato.bookstore.entrypoint.rest.enumerator.mapper.SearchEnumeratorsPresenter;
 
 /**
- * @author Jorge Takeshi Sato  
+ * @author Jorge Takeshi Sato
  */
 
 @ExtendWith(SpringExtension.class)

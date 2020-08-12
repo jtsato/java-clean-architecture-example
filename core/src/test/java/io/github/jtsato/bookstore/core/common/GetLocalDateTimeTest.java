@@ -10,16 +10,16 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 /**
- * @author Jorge Takeshi Sato  
+ * @author Jorge Takeshi Sato
  */
 
 class GetLocalDateTimeTest {
 
     private final GetLocalDateTime getLocalDateTime = new GetLocalDateTimeImpl();
 
-    @DisplayName("Sucessful to run gender functions")
+    @DisplayName("Successful to run gender functions")
     @Test
-    void sucessfulToRunGenderFunctions() {
+    void successfulToRunGenderFunctions() {
         assertThat(getLocalDateTime.now()).isNotNull();
         assertThat(getLocalDateTime.now()).isCloseTo(LocalDateTime.now(), within(1, ChronoUnit.SECONDS));
     }

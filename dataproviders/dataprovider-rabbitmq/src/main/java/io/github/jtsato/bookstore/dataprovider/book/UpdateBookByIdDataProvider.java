@@ -13,7 +13,7 @@ import io.github.jtsato.bookstore.dataprovider.book.mapper.UpdateBookByIdMessage
 import io.github.jtsato.bookstore.dataprovider.service.DispatcherAmqpProducer;
 
 /**
- * @author Jorge Takeshi Sato  
+ * @author Jorge Takeshi Sato
  */
 
 @Service

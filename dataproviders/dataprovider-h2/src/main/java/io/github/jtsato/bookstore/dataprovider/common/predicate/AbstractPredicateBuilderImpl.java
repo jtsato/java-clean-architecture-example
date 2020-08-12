@@ -4,12 +4,12 @@ import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.dsl.EntityPathBase;
 
 /**
- * @author Jorge Takeshi Sato  
+ * @author Jorge Takeshi Sato
  */
 
 public abstract class AbstractPredicateBuilderImpl<P extends EntityPathBase<?>, Q> implements PredicateBuilder<Q> {
 
-    protected P entityPath;
+    protected final P entityPath;
 
     public AbstractPredicateBuilderImpl(final P entityPath) {
         this.entityPath = entityPath;

@@ -13,7 +13,7 @@ import com.tngtech.archunit.lang.ArchRule;
 import io.github.jtsato.bookstore.BookstoreApplication;
 
 /**
- * @author Jorge Takeshi Sato  
+ * @author Jorge Takeshi Sato
  *
  * This class was based on the example available in the archunit repository in
  * https://github.com/TNG/ArchUnit-Examples/tree/master/example-junit5

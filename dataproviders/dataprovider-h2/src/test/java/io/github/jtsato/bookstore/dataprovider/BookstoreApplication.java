@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import com.cosium.spring.data.jpa.entity.graph.repository.support.EntityGraphJpaRepositoryFactoryBean;
 
 /**
- * @author Jorge Takeshi Sato  
+ * @author Jorge Takeshi Sato
  */
 
 @EnableJpaRepositories(basePackageClasses = BookstoreApplication.class, repositoryFactoryBeanClass = EntityGraphJpaRepositoryFactoryBean.class)

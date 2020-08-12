@@ -13,7 +13,7 @@ import io.github.jtsato.bookstore.dataprovider.book.mapper.BookDocumentMapper;
 import io.github.jtsato.bookstore.dataprovider.book.repository.BookDocumentRepository;
 
 /**
- * @author Jorge Takeshi Sato  
+ * @author Jorge Takeshi Sato
  */
 
 @Transactional
@@ -27,7 +27,7 @@ public class GetBookDocumentByBookIdDataProvider implements GetBookDocumentByBoo
     public Optional<BookDocument> getBookDocumentByBookId(final Long bookId) {
 
         final Optional<BookDocumentEntity> optional = bookDocumentRepository.findByBookId(bookId);
-        
+
         return optional.map(BookDocumentMapper::of);
     }
 }

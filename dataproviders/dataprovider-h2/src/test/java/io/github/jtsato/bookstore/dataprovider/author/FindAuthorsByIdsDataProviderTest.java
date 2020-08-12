@@ -17,7 +17,7 @@ import io.github.jtsato.bookstore.core.common.paging.Page;
 import io.github.jtsato.bookstore.dataprovider.author.repository.AuthorRepository;
 
 /**
- * @author Jorge Takeshi Sato  
+ * @author Jorge Takeshi Sato
  */
 
 @DataJpaTest

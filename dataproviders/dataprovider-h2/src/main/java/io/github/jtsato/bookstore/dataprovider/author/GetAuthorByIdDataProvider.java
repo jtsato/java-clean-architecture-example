@@ -13,7 +13,7 @@ import io.github.jtsato.bookstore.dataprovider.author.mapper.AuthorMapper;
 import io.github.jtsato.bookstore.dataprovider.author.repository.AuthorRepository;
 
 /**
- * @author Jorge Takeshi Sato  
+ * @author Jorge Takeshi Sato
  */
 
 @Transactional(readOnly = true)
@@ -27,7 +27,7 @@ public class GetAuthorByIdDataProvider implements GetAuthorByIdGateway {
     public Optional<Author> getAuthorById(final Long id) {
 
         final Optional<AuthorEntity> optional = authorRepository.findById(id);
-        
+
         return optional.map(AuthorMapper::of);
     }
 }

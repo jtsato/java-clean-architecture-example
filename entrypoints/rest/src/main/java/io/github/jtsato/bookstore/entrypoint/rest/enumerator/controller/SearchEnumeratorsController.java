@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Optional;
 
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,7 +21,6 @@ import io.github.jtsato.bookstore.entrypoint.rest.enumerator.api.SearchEnumerato
 import io.github.jtsato.bookstore.entrypoint.rest.enumerator.domain.response.EnumeratorResponse;
 import io.github.jtsato.bookstore.entrypoint.rest.enumerator.mapper.SearchEnumeratorsPresenter;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 
 /*
  * A EntryPoint follows these steps:
@@ -32,14 +33,15 @@ import lombok.extern.slf4j.Slf4j;
  */
 
 /**
- * @author Jorge Takeshi Sato  
+ * @author Jorge Takeshi Sato
  */
 
-@Slf4j
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/enumerators")
 public class SearchEnumeratorsController implements SearchEnumeratorsApiMethod {
+
+    private static final Logger log = LoggerFactory.getLogger(SearchEnumeratorsController.class);
 
     private final SearchEnumeratorsUseCase searchEnumeratorsUseCase;
 

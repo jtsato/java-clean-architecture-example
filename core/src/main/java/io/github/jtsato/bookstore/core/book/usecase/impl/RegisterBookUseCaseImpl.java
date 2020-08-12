@@ -25,7 +25,7 @@ import lombok.RequiredArgsConstructor;
  */
 
 /**
- * @author Jorge Takeshi Sato  
+ * @author Jorge Takeshi Sato
  */
 
 @Named
@@ -65,7 +65,7 @@ public class RegisterBookUseCaseImpl implements RegisterBookUseCase {
 
     private void checkDuplicatedTitleViolation(final String title) {
         final Optional<Book> optional = getBookByTitleGateway.getBookByTitle(title);
-        optional.ifPresent(this::throwUniqueConstraintException);        
+        optional.ifPresent(this::throwUniqueConstraintException);
     }
 
     private void throwUniqueConstraintException(final Book book) {

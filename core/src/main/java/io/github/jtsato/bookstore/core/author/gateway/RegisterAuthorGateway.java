@@ -3,7 +3,7 @@ package io.github.jtsato.bookstore.core.author.gateway;
 import io.github.jtsato.bookstore.core.author.domain.Author;
 
 /**
- * @author Jorge Takeshi Sato  
+ * @author Jorge Takeshi Sato
  */
 
 @FunctionalInterface

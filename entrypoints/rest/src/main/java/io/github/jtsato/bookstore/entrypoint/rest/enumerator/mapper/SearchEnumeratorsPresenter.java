@@ -12,13 +12,13 @@ import io.github.jtsato.bookstore.entrypoint.rest.enumerator.domain.response.Enu
 import lombok.RequiredArgsConstructor;
 
 /**
- * @author Jorge Takeshi Sato  
+ * @author Jorge Takeshi Sato
  */
 
 @Component
 @RequiredArgsConstructor
 public class SearchEnumeratorsPresenter {
-    
+
     private final MessageSource messageSource;
 
     public List<EnumeratorResponse> of(final List<Enumerator> enumerators) {

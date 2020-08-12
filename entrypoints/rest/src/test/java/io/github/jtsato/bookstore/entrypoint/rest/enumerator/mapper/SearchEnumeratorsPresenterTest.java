@@ -22,7 +22,7 @@ import io.github.jtsato.bookstore.core.enumerator.domain.Enumerator;
 import io.github.jtsato.bookstore.entrypoint.rest.enumerator.domain.response.EnumeratorResponse;
 
 /**
- * @author Jorge Takeshi Sato  
+ * @author Jorge Takeshi Sato
  */
 
 class SearchEnumeratorsPresenterTest {

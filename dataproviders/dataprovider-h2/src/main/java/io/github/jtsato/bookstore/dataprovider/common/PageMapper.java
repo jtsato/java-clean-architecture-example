@@ -9,7 +9,7 @@ import io.github.jtsato.bookstore.core.common.paging.PageImpl;
 import io.github.jtsato.bookstore.core.common.paging.Pageable;
 
 /**
- * @author Jorge Takeshi Sato  
+ * @author Jorge Takeshi Sato
  */
 
 public interface PageMapper<T, K> {

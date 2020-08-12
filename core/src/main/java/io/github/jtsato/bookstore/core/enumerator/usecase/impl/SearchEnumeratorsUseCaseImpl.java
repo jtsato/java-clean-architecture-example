@@ -1,6 +1,5 @@
 package io.github.jtsato.bookstore.core.enumerator.usecase.impl;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -24,7 +23,7 @@ import lombok.RequiredArgsConstructor;
  */
 
 /**
- * @author Jorge Takeshi Sato  
+ * @author Jorge Takeshi Sato
  */
 
 @Named
@@ -44,10 +43,8 @@ public class SearchEnumeratorsUseCaseImpl implements SearchEnumeratorsUseCase {
     }
 
     private List<Enumerator> getAllEnumerators() {
-        final List<Enumerator> enumerators = new ArrayList<>();
         final List<Gender> genders = Arrays.asList(Gender.values());
-        enumerators.addAll(genders.stream().map(this::buildEnumerator).collect(Collectors.toList()));
-        return enumerators;
+        return genders.stream().map(this::buildEnumerator).collect(Collectors.toList());
     }
 
     private Enumerator buildEnumerator(final Gender element) {

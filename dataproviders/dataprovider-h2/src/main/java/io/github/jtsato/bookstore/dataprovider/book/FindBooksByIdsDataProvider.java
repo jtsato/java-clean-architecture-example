@@ -7,6 +7,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.cosium.spring.data.jpa.entity.graph.domain.EntityGraph;
 import com.cosium.spring.data.jpa.entity.graph.domain.EntityGraphUtils;
 import com.querydsl.core.types.dsl.BooleanExpression;
 
@@ -21,7 +22,7 @@ import io.github.jtsato.bookstore.dataprovider.common.PageMapper;
 import io.github.jtsato.bookstore.dataprovider.common.PageRequestHelper;
 
 /**
- * @author Jorge Takeshi Sato  
+ * @author Jorge Takeshi Sato
  */
 
 @Transactional(readOnly = true)
@@ -36,13 +37,11 @@ public class FindBooksByIdsDataProvider implements FindBooksByIdsGateway {
     @Override
     public Page<Book> findBooksByIds(final List<Long> ids) {
 
-        final PageRequest pageRequest = PageRequestHelper.buildPageRequest(0, 1000, "id:asc");
-
         final BooleanExpression predicate = QBookEntity.bookEntity.id.in(ids);
+        final PageRequest pageRequest = PageRequestHelper.buildPageRequest(0, 1000, "id:asc");
+        final EntityGraph entityGraph = EntityGraphUtils.fromAttributePaths("author");
 
-        final org.springframework.data.domain.Page<BookEntity> page = bookRepository.findAll(predicate,
-                                                                                             pageRequest,
-                                                                                             EntityGraphUtils.fromAttributePaths("author"));
+        final org.springframework.data.domain.Page<BookEntity> page = bookRepository.findAll(predicate, pageRequest, entityGraph);
 
         return pageMapper.of(page, BookMapper::of);
     }

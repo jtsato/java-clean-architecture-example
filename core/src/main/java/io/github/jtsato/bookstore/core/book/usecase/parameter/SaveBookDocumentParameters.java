@@ -13,7 +13,7 @@ import lombok.ToString;
 import lombok.experimental.FieldDefaults;
 
 /**
- * @author Jorge Takeshi Sato  
+ * @author Jorge Takeshi Sato
  */
 
 @Getter

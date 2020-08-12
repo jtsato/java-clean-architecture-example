@@ -1,7 +1,7 @@
 package io.github.jtsato.bookstore.core.exception;
 
 /**
- * @author Jorge Takeshi Sato  
+ * @author Jorge Takeshi Sato
  */
 
 public class UniqueConstraintException extends CoreException {

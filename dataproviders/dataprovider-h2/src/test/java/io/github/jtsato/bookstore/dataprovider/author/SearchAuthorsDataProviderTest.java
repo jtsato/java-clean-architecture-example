@@ -19,7 +19,7 @@ import io.github.jtsato.bookstore.core.common.paging.Pageable;
 import io.github.jtsato.bookstore.dataprovider.author.repository.AuthorRepository;
 
 /**
- * @author Jorge Takeshi Sato  
+ * @author Jorge Takeshi Sato
  */
 
 @DataJpaTest
@@ -77,9 +77,7 @@ class SearchAuthorsDataProviderTest {
 
         final SearchAuthorsParameters parameters = new SearchAuthorsParameters(null, name, gender, startBirthdateDate, endBirthdateDate);
 
-        final String orderBy = null;
-
-        final Page<Author> page = searchAuthorsDataProvider.searchAuthors(parameters, 0, -1, orderBy);
+        final Page<Author> page = searchAuthorsDataProvider.searchAuthors(parameters, 0, -1, null);
 
         assertThat(page).isNotNull();
 
@@ -123,15 +121,15 @@ class SearchAuthorsDataProviderTest {
         assertThat(pageable.getNumberOfElements()).isOne();
         assertThat(pageable.getTotalOfElements()).isEqualTo(4);
         assertThat(pageable.getTotalPages()).isEqualTo(2);
-        
+
         final Author author = authors.get(0);
-        
+
         assertThat(author).isNotNull();
         assertThat(author.getId()).isNotNull().isEqualTo(1L);
 
         assertThat(authorRepository.count()).isEqualTo(4);
     }
-    
+
     @DisplayName("Successful to paging authors if found with sorted order")
     @Test
     void successfulToPagingAuthorsIfFoundWithSortedOrder() {
@@ -156,13 +154,13 @@ class SearchAuthorsDataProviderTest {
         assertThat(pageable.getNumberOfElements()).isOne();
         assertThat(pageable.getTotalOfElements()).isEqualTo(4);
         assertThat(pageable.getTotalPages()).isEqualTo(2);
-        
+
         final Author author = authors.get(0);
-        
+
         assertThat(author).isNotNull();
         assertThat(author.getId()).isNotNull().isEqualTo(3L);
 
         assertThat(authorRepository.count()).isEqualTo(4);
     }
-    
+
 }

@@ -32,7 +32,7 @@ import io.github.jtsato.bookstore.core.exception.NotFoundException;
 import io.github.jtsato.bookstore.core.exception.UniqueConstraintException;
 
 /**
- * @author Jorge Takeshi Sato  
+ * @author Jorge Takeshi Sato
  */
 
 class UpdateBookByIdUseCaseTest {
@@ -59,9 +59,7 @@ class UpdateBookByIdUseCaseTest {
     @Test
     void failToUpdateABookIfParametersAreNotValid() {
 
-        final Exception exception = Assertions.assertThrows(Exception.class, () -> {
-            new UpdateBookByIdParameters(null, null, StringUtils.SPACE, null, null);
-        });
+        final Exception exception = Assertions.assertThrows(Exception.class, () -> new UpdateBookByIdParameters(null, null, StringUtils.SPACE, null, null));
 
         assertThat(exception).isInstanceOf(ConstraintViolationException.class);
         final ConstraintViolationException constraintViolationException = (ConstraintViolationException) exception;
@@ -76,9 +74,12 @@ class UpdateBookByIdUseCaseTest {
     @Test
     void failToRegisterABookIfPriceIsNegative() {
 
-        final Exception exception = Assertions.assertThrows(Exception.class, () -> {
-            new UpdateBookByIdParameters(1L, 1L, "Effective Java (2nd Edition)", BigDecimal.valueOf(-1.00), Boolean.TRUE);
-        });
+        final Exception exception = Assertions.assertThrows(Exception.class,
+                                                            () -> new UpdateBookByIdParameters(1L,
+                                                                                               1L,
+                                                                                               "Effective Java (2nd Edition)",
+                                                                                               BigDecimal.valueOf(-1.00),
+                                                                                               Boolean.TRUE));
 
         assertThat(exception).isInstanceOf(ConstraintViolationException.class);
 
@@ -138,7 +139,11 @@ class UpdateBookByIdUseCaseTest {
                                                                                  "Effective Java (2nd Edition)",
                                                                                  BigDecimal.valueOf(10.00),
                                                                                  Boolean.TRUE);
-        final Author author = mockGetAuthorByIdGateway().get();
+        final Optional<Author> optional = mockGetAuthorByIdGateway();
+
+        assertThat(optional.isPresent()).isTrue();
+
+        final Author author = optional.get();
 
         final Book book = updateBookByIdUseCase.execute(parameters);
 
@@ -166,9 +171,7 @@ class UpdateBookByIdUseCaseTest {
                                                                                  BigDecimal.valueOf(10.00),
                                                                                  Boolean.TRUE);
 
-        final Exception exception = Assertions.assertThrows(Exception.class, () -> {
-            updateBookByIdUseCase.execute(parameters);
-        });
+        final Exception exception = Assertions.assertThrows(Exception.class, () -> updateBookByIdUseCase.execute(parameters));
 
         assertThat(exception).isInstanceOf(NotFoundException.class);
         final NotFoundException notFoundException = (NotFoundException) exception;
@@ -190,9 +193,7 @@ class UpdateBookByIdUseCaseTest {
                                                                                  BigDecimal.valueOf(10.00),
                                                                                  Boolean.TRUE);
 
-        final Exception exception = Assertions.assertThrows(Exception.class, () -> {
-            updateBookByIdUseCase.execute(parameters);
-        });
+        final Exception exception = Assertions.assertThrows(Exception.class, () -> updateBookByIdUseCase.execute(parameters));
 
         assertThat(exception).isInstanceOf(UniqueConstraintException.class);
         final UniqueConstraintException uniqueConstraintException = (UniqueConstraintException) exception;
@@ -236,9 +237,7 @@ class UpdateBookByIdUseCaseTest {
                                                                                  BigDecimal.valueOf(10.00),
                                                                                  Boolean.TRUE);
 
-        final Exception exception = Assertions.assertThrows(Exception.class, () -> {
-            updateBookByIdUseCase.execute(parameters);
-        });
+        final Exception exception = Assertions.assertThrows(Exception.class, () -> updateBookByIdUseCase.execute(parameters));
 
         assertThat(exception).isInstanceOf(NotFoundException.class);
         final NotFoundException notFoundException = (NotFoundException) exception;

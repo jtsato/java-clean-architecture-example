@@ -19,7 +19,7 @@ import io.github.jtsato.bookstore.dataprovider.author.GetAuthorByIdDataProvider;
 import io.github.jtsato.bookstore.dataprovider.book.repository.BookRepository;
 
 /**
- * @author Jorge Takeshi Sato  
+ * @author Jorge Takeshi Sato
  */
 
 @DataJpaTest
@@ -51,7 +51,7 @@ class UpdateBookByIdDataProviderTest {
         final Book result = updateBookById(update);
 
         assertThat(result.getAuthor()).isEqualTo(update.getAuthor());
-        
+
         assertThat(result.getId()).isEqualTo(update.getId());
         assertThat(result.getTitle()).isEqualTo(update.getTitle());
         assertThat(result.getPrice()).isEqualTo(update.getPrice());
@@ -74,7 +74,7 @@ class UpdateBookByIdDataProviderTest {
                                      LocalDateTime.parse("2020-04-12T22:04:59.123"));
 
         final Book result = updateBookById(update);
-        
+
         assertThat(result.getAuthor()).isEqualTo(update.getAuthor());
 
         assertThat(result.getId()).isEqualTo(update.getId());

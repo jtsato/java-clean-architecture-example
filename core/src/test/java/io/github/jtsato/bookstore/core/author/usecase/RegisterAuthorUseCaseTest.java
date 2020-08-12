@@ -27,7 +27,7 @@ import io.github.jtsato.bookstore.core.exception.UniqueConstraintException;
 
 
 /**
- * @author Jorge Takeshi Sato  
+ * @author Jorge Takeshi Sato
  */
 
 class RegisterAuthorUseCaseTest {
@@ -45,9 +45,7 @@ class RegisterAuthorUseCaseTest {
     @Test
     void failToRegisterAnAuthorIfParametersAreNotValid() {
 
-        final Exception exception = Assertions.assertThrows(Exception.class, () -> {
-            new RegisterAuthorParameters(StringUtils.SPACE, null, null);
-        });
+        final Exception exception = Assertions.assertThrows(Exception.class, () -> new RegisterAuthorParameters(StringUtils.SPACE, null, null));
 
         assertThat(exception).isInstanceOf(ConstraintViolationException.class);
         final ConstraintViolationException constraintViolationException = (ConstraintViolationException) exception;
@@ -91,9 +89,7 @@ class RegisterAuthorUseCaseTest {
 
         final RegisterAuthorParameters registerAuthorParameters = new RegisterAuthorParameters("Joshua Bloch", "MALE", "1961-08-28");
 
-        final Exception exception = Assertions.assertThrows(Exception.class, () -> {
-            getAuthorByIdUseCase.registerAuthor(registerAuthorParameters);
-        });
+        final Exception exception = Assertions.assertThrows(Exception.class, () -> getAuthorByIdUseCase.registerAuthor(registerAuthorParameters));
 
         assertThat(exception).isInstanceOf(UniqueConstraintException.class);
         final UniqueConstraintException uniqueConstraintException = (UniqueConstraintException) exception;

@@ -20,7 +20,7 @@ import io.github.jtsato.bookstore.dataprovider.common.PageMapper;
 import io.github.jtsato.bookstore.dataprovider.common.PageRequestHelper;
 
 /**
- * @author Jorge Takeshi Sato  
+ * @author Jorge Takeshi Sato
  */
 
 @Transactional(readOnly = true)
@@ -35,9 +35,9 @@ public class FindAuthorsByIdsDataProvider implements FindAuthorsByIdsGateway {
     @Override
     public Page<Author> findAuthorsByIds(final List<Long> ids) {
 
+        final BooleanExpression predicate = QAuthorEntity.authorEntity.id.in(ids);
         final PageRequest pageRequest = PageRequestHelper.buildPageRequest(0, 1000, "id:asc");
 
-        final BooleanExpression predicate = QAuthorEntity.authorEntity.id.in(ids);
         final org.springframework.data.domain.Page<AuthorEntity> page = authorRepository.findAll(predicate, pageRequest);
 
         return pageMapper.of(page, AuthorMapper::of);

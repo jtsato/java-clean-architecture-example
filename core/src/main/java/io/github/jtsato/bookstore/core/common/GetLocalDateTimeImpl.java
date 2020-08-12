@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 import javax.inject.Named;
 
 /**
- * @author Jorge Takeshi Sato  
+ * @author Jorge Takeshi Sato
  */
 
 @Named

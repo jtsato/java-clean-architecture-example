@@ -5,7 +5,7 @@ import java.util.Optional;
 import io.github.jtsato.bookstore.core.book.domain.Book;
 
 /**
- * @author Jorge Takeshi Sato  
+ * @author Jorge Takeshi Sato
  */
 
 @FunctionalInterface

@@ -21,7 +21,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
- * @author Jorge Takeshi Sato  
+ * @author Jorge Takeshi Sato
  */
 
 @Getter
@@ -56,7 +56,7 @@ public class BookDocumentEntity implements Serializable {
     private Long size;
 
     @Lob
-    @Column(name = "CONTENT", nullable = true)
+    @Column(name = "CONTENT")
     private String content;
 
     @Setter(value = AccessLevel.NONE)

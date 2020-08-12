@@ -33,7 +33,7 @@ import io.github.jtsato.bookstore.core.author.usecase.parameter.UpdateAuthorById
 import io.github.jtsato.bookstore.entrypoint.rest.author.domain.request.UpdateAuthorByIdRequest;
 
 /**
- * @author Jorge Takeshi Sato  
+ * @author Jorge Takeshi Sato
  */
 
 @ExtendWith(SpringExtension.class)

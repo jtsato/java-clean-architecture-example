@@ -14,7 +14,7 @@ import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
 /**
- * @author Jorge Takeshi Sato  
+ * @author Jorge Takeshi Sato
  */
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
@@ -39,8 +39,7 @@ public class PageRequestHelper {
 
         final String orderBy = StringUtils.deleteWhitespace(rawSortBy);
 
-        final List<String> parameters = Arrays.asList(StringUtils.split(orderBy, FIELD_DELIMITER))
-                                              .stream()
+        final List<String> parameters = Arrays.stream(StringUtils.split(orderBy, FIELD_DELIMITER))
                                               .map(element -> StringUtils.substringBefore(element, DELIMITER))
                                               .collect(Collectors.toList());
 

@@ -32,7 +32,7 @@ import io.github.jtsato.bookstore.core.common.paging.PageImpl;
 import io.github.jtsato.bookstore.core.common.paging.Pageable;
 
 /**
- * @author Jorge Takeshi Sato  
+ * @author Jorge Takeshi Sato
  */
 
 class SearchBooksUseCaseTest {
@@ -63,7 +63,7 @@ class SearchBooksUseCaseTest {
     @DisplayName("Successful to search books if found")
     @Test
     void successfulToSearchBooksIfFound() {
-        
+
         final ImmutablePair<BigDecimal, BigDecimal> prices = new ImmutablePair<>(null, null);
         final ImmutablePair<String, String> creationDates = new ImmutablePair<>("2020-02-29T00:00:00", "2020-02-29T23:59:59");
         final ImmutablePair<String, String> updateDates = new ImmutablePair<>("2020-02-29T00:00:00", "2020-02-29T23:59:59");
@@ -110,17 +110,17 @@ class SearchBooksUseCaseTest {
                              LocalDateTime.parse("2020-03-12T22:04:59.123"),
                              LocalDateTime.parse("2020-03-12T22:04:59.123")));
 
-        return new PageImpl<Book>(content, new Pageable(0, 1, 1, 1L, 1));
+        return new PageImpl<>(content, new Pageable(0, 1, 1, 1L, 1));
     }
 
     @DisplayName("Fail to search book by id if not found")
     @Test
     void successfulToSearchBooksIfNotFound() {
-        
+
         final ImmutablePair<BigDecimal, BigDecimal> prices = new ImmutablePair<>(null, null);
         final ImmutablePair<String, String> creationDates = new ImmutablePair<>(null, null);
         final ImmutablePair<String, String> updateDates = new ImmutablePair<>(null, null);
-        final SearchBooksParameters parameters = new SearchBooksParameters(null, null, prices, null, creationDates, updateDates);        
+        final SearchBooksParameters parameters = new SearchBooksParameters(null, null, prices, null, creationDates, updateDates);
 
         final Page<Book> emptyBooksPage = mockEmptyBooksPage();
         when(searchBooksGateway.searchBooks(parameters, 0, 1, "id:asc")).thenReturn(emptyBooksPage);
@@ -146,6 +146,6 @@ class SearchBooksUseCaseTest {
     }
 
     private Page<Book> mockEmptyBooksPage() {
-        return new PageImpl<Book>(Collections.emptyList(), new Pageable(0, 1, 0, 0L, 0));
+        return new PageImpl<>(Collections.emptyList(), new Pageable(0, 1, 0, 0L, 0));
     }
 }

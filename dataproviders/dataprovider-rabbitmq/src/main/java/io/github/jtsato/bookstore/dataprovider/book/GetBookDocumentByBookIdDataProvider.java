@@ -8,7 +8,7 @@ import io.github.jtsato.bookstore.core.book.domain.BookDocument;
 import io.github.jtsato.bookstore.core.book.gateway.GetBookDocumentByBookIdGateway;
 
 /**
- * @author Jorge Takeshi Sato  
+ * @author Jorge Takeshi Sato
  */
 
 @Service

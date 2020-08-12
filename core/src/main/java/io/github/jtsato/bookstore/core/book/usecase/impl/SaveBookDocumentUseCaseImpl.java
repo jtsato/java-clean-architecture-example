@@ -24,7 +24,7 @@ import lombok.RequiredArgsConstructor;
  */
 
 /**
- * @author Jorge Takeshi Sato  
+ * @author Jorge Takeshi Sato
  */
 
 @Named
@@ -54,7 +54,7 @@ public class SaveBookDocumentUseCaseImpl implements SaveBookDocumentUseCase {
     private void checkIfBookExists(final Long bookId) {
 
         final Optional<Book> optional = getBookByIdGateway.getBookById(bookId);
-        
+
         if (optional.isEmpty()) {
             throw new NotFoundException("validation.book.id.notfound", bookId);
         }
@@ -67,7 +67,7 @@ public class SaveBookDocumentUseCaseImpl implements SaveBookDocumentUseCase {
     }
 
     private BookDocument registerBookDocument(final SaveBookDocumentParameters parameters, final Long bookId) {
-        
+
         final BookDocument bookDocument = new BookDocument(null,
                                                            bookId,
                                                            parameters.getContentType(),

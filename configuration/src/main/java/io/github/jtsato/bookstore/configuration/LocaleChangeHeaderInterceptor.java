@@ -1,7 +1,6 @@
 package io.github.jtsato.bookstore.configuration;
 
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -10,14 +9,13 @@ import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 import org.springframework.web.servlet.support.RequestContextUtils;
 
 /**
- * @author Jorge Takeshi Sato  
+ * @author Jorge Takeshi Sato
  */
 
 public class LocaleChangeHeaderInterceptor extends LocaleChangeInterceptor {
 
     @Override
-    public boolean preHandle(final HttpServletRequest request, final HttpServletResponse response, final Object handler)
-        throws ServletException {
+    public boolean preHandle(final HttpServletRequest request, final HttpServletResponse response, final Object handler) {
 
         final String newLocale = request.getHeader(getParamName());
         if (newLocale != null) {
@@ -30,7 +28,10 @@ public class LocaleChangeHeaderInterceptor extends LocaleChangeInterceptor {
         return true;
     }
 
-    private void setNewLocale(final HttpServletRequest request, final HttpServletResponse response, final String newLocale, final LocaleResolver localeResolver) {
+    private void setNewLocale(final HttpServletRequest request,
+                              final HttpServletResponse response,
+                              final String newLocale,
+                              final LocaleResolver localeResolver) {
         try {
             localeResolver.setLocale(request, response, parseLocaleValue(newLocale));
         } catch (final IllegalArgumentException ex) {

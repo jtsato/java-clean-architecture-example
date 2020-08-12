@@ -16,7 +16,7 @@ import javax.validation.Constraint;
 import javax.validation.Payload;
 
 /**
- * @author Jorge Takeshi Sato  
+ * @author Jorge Takeshi Sato
  */
 
 @Documented
@@ -34,7 +34,7 @@ public @interface LocalDateConstraint {
     @Target({METHOD, FIELD, ANNOTATION_TYPE, CONSTRUCTOR, PARAMETER, TYPE_USE})
     @Retention(RUNTIME)
     @Documented
-    public @interface List {
+    @interface List {
 
         LocalDateConstraint[] value();
     }

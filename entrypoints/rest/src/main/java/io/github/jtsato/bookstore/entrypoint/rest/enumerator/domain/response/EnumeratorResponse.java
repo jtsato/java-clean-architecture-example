@@ -6,7 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 /**
- * @author Jorge Takeshi Sato  
+ * @author Jorge Takeshi Sato
  */
 
 @Getter
@@ -15,9 +15,9 @@ public class EnumeratorResponse implements Serializable {
 
     private static final long serialVersionUID = -7218399148021136190L;
 
-    private String domain;
+    private final String domain;
 
-    private String key;
+    private final String key;
 
-    private String value;
+    private final String value;
 }

@@ -33,7 +33,7 @@ import io.github.jtsato.bookstore.core.exception.UniqueConstraintException;
 
 
 /**
- * @author Jorge Takeshi Sato  
+ * @author Jorge Takeshi Sato
  */
 
 class RegisterBookUseCaseTest {
@@ -52,17 +52,15 @@ class RegisterBookUseCaseTest {
 
     @InjectMocks
     private final RegisterBookUseCase registerBookUseCase = new RegisterBookUseCaseImpl(registerBookGateway,
-                                                                                       getAuthorByIdGateway,
-                                                                                       getBookByTitleGateway,
-                                                                                       getLocalDateTime);
+                                                                                        getAuthorByIdGateway,
+                                                                                        getBookByTitleGateway,
+                                                                                        getLocalDateTime);
 
     @DisplayName("Fail to register a book if parameters are not valid")
     @Test
     void failToRegisterABookIfParametersAreNotValid() {
 
-        final Exception exception = Assertions.assertThrows(Exception.class, () -> {
-            new RegisterBookParameters(null, StringUtils.SPACE, null, null);
-        });
+        final Exception exception = Assertions.assertThrows(Exception.class, () -> new RegisterBookParameters(null, StringUtils.SPACE, null, null));
 
         assertThat(exception).isInstanceOf(ConstraintViolationException.class);
 
@@ -77,9 +75,11 @@ class RegisterBookUseCaseTest {
     @Test
     void failToRegisterABookIfPriceIsNegative() {
 
-        final Exception exception = Assertions.assertThrows(Exception.class, () -> {
-            new RegisterBookParameters(1L, "Effective Java (2nd Edition)", BigDecimal.valueOf(-1.00), Boolean.TRUE);
-        });
+        final Exception exception = Assertions.assertThrows(Exception.class,
+                                                            () -> new RegisterBookParameters(1L,
+                                                                                             "Effective Java (2nd Edition)",
+                                                                                             BigDecimal.valueOf(-1.00),
+                                                                                             Boolean.TRUE));
 
         assertThat(exception).isInstanceOf(ConstraintViolationException.class);
 
@@ -158,9 +158,7 @@ class RegisterBookUseCaseTest {
                                                                                          BigDecimal.valueOf(10.00),
                                                                                          Boolean.TRUE);
 
-        final Exception exception = Assertions.assertThrows(Exception.class, () -> {
-            registerBookUseCase.execute(registerBookParameters);
-        });
+        final Exception exception = Assertions.assertThrows(Exception.class, () -> registerBookUseCase.execute(registerBookParameters));
 
         assertThat(exception).isInstanceOf(UniqueConstraintException.class);
 
@@ -194,9 +192,7 @@ class RegisterBookUseCaseTest {
                                                                                          BigDecimal.valueOf(10.00),
                                                                                          Boolean.TRUE);
 
-        final Exception exception = Assertions.assertThrows(Exception.class, () -> {
-            registerBookUseCase.execute(registerBookParameters);
-        });
+        final Exception exception = Assertions.assertThrows(Exception.class, () -> registerBookUseCase.execute(registerBookParameters));
 
         assertThat(exception).isInstanceOf(NotFoundException.class);
         final NotFoundException notFoundException = (NotFoundException) exception;

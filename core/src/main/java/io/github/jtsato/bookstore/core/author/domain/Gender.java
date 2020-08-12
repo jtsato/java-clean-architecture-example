@@ -36,10 +36,10 @@ public enum Gender {
     }
 
     public boolean in(final Gender... others) {
-        return Arrays.asList(others).stream().anyMatch(this::equals);
+        return Arrays.asList(others).contains(this);
     }
 
     public boolean notIn(final Gender... others) {
-        return Arrays.asList(others).stream().noneMatch(this::equals);
+        return Arrays.stream(others).noneMatch(this::equals);
     }
 }

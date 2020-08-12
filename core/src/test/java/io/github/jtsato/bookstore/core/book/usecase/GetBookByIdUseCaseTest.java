@@ -25,7 +25,7 @@ import io.github.jtsato.bookstore.core.exception.InvalidParameterException;
 import io.github.jtsato.bookstore.core.exception.NotFoundException;
 
 /**
- * @author Jorge Takeshi Sato  
+ * @author Jorge Takeshi Sato
  */
 
 class GetBookByIdUseCaseTest {
@@ -42,9 +42,7 @@ class GetBookByIdUseCaseTest {
 
         when(getBookByIdGateway.getBookById(null)).thenReturn(null);
 
-        final Exception exception = Assertions.assertThrows(Exception.class, () -> {
-            getBookByIdUseCase.execute(null);
-        });
+        final Exception exception = Assertions.assertThrows(Exception.class, () -> getBookByIdUseCase.execute(null));
 
         assertThat(exception).isInstanceOf(InvalidParameterException.class);
         final InvalidParameterException invalidParameterException = (InvalidParameterException) exception;
@@ -92,9 +90,7 @@ class GetBookByIdUseCaseTest {
 
         when(getBookByIdGateway.getBookById(1L)).thenReturn(Optional.empty());
 
-        final Exception exception = Assertions.assertThrows(Exception.class, () -> {
-            getBookByIdUseCase.execute(1L);
-        });
+        final Exception exception = Assertions.assertThrows(Exception.class, () -> getBookByIdUseCase.execute(1L));
 
         assertThat(exception).isInstanceOf(NotFoundException.class);
         final NotFoundException notFoundException = (NotFoundException) exception;

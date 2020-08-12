@@ -21,7 +21,7 @@ import io.github.jtsato.bookstore.dataprovider.author.GetAuthorByIdDataProvider;
 import io.github.jtsato.bookstore.dataprovider.book.repository.BookRepository;
 
 /**
- * @author Jorge Takeshi Sato  
+ * @author Jorge Takeshi Sato
  */
 
 @DataJpaTest

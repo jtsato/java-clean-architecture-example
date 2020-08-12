@@ -17,7 +17,7 @@ import io.github.jtsato.bookstore.core.exception.UniqueConstraintException;
 import lombok.RequiredArgsConstructor;
 
 /**
- * @author Jorge Takeshi Sato  
+ * @author Jorge Takeshi Sato
  */
 
 @Named

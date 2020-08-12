@@ -20,7 +20,7 @@ import lombok.RequiredArgsConstructor;
  */
 
 /**
- * @author Jorge Takeshi Sato  
+ * @author Jorge Takeshi Sato
  */
 
 @Named
@@ -38,6 +38,6 @@ public class GetBookByIdUseCaseImpl implements GetBookByIdUseCase {
 
         final Optional<Book> optional = getBookByIdGateway.getBookById(id);
 
-        return optional.orElseThrow(() -> new NotFoundException("validation.book.id.notfound", id)); 
+        return optional.orElseThrow(() -> new NotFoundException("validation.book.id.notfound", id));
     }
 }

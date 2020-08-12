@@ -15,7 +15,7 @@ import io.github.jtsato.bookstore.core.book.domain.Book;
 import io.github.jtsato.bookstore.dataprovider.book.repository.BookRepository;
 
 /**
- * @author Jorge Takeshi Sato  
+ * @author Jorge Takeshi Sato
  */
 
 @DataJpaTest

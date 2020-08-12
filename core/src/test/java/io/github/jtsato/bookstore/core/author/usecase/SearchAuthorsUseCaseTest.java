@@ -29,7 +29,7 @@ import io.github.jtsato.bookstore.core.common.paging.PageImpl;
 import io.github.jtsato.bookstore.core.common.paging.Pageable;
 
 /**
- * @author Jorge Takeshi Sato  
+ * @author Jorge Takeshi Sato
  */
 
 class SearchAuthorsUseCaseTest {
@@ -45,9 +45,12 @@ class SearchAuthorsUseCaseTest {
     @Test
     void failToSearchAuthorsWithInconsistentParameters() {
 
-        final Exception exception = Assertions.assertThrows(Exception.class, () -> {
-            new SearchAuthorsParameters(null, StringUtils.SPACE, StringUtils.SPACE, "2019-02-29", "2019-02-29");
-        });
+        final Exception exception = Assertions.assertThrows(Exception.class,
+                                                            () -> new SearchAuthorsParameters(null,
+                                                                                              StringUtils.SPACE,
+                                                                                              StringUtils.SPACE,
+                                                                                              "2019-02-29",
+                                                                                              "2019-02-29"));
 
         assertThat(exception).isInstanceOf(ConstraintViolationException.class);
         final ConstraintViolationException constraintViolationException = (ConstraintViolationException) exception;
@@ -95,7 +98,7 @@ class SearchAuthorsUseCaseTest {
         final List<Author> content = new ArrayList<>(1);
         content.add(new Author(1L, "Joshua Bloch", Gender.MALE, LocalDate.parse("1961-08-28")));
 
-        return new PageImpl<Author>(content, new Pageable(0, 1, 1, 1L, 1));
+        return new PageImpl<>(content, new Pageable(0, 1, 1, 1L, 1));
     }
 
     @DisplayName("Fail to get author by id if not found")
@@ -127,6 +130,6 @@ class SearchAuthorsUseCaseTest {
     }
 
     private Page<Author> mockEmptyAuthorsPage() {
-        return new PageImpl<Author>(Collections.emptyList(), new Pageable(0, 1, 0, 0L, 0));
+        return new PageImpl<>(Collections.emptyList(), new Pageable(0, 1, 0, 0L, 0));
     }
 }

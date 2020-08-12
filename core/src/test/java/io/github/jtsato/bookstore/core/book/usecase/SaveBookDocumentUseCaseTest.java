@@ -31,7 +31,7 @@ import io.github.jtsato.bookstore.core.common.GetLocalDateTime;
 import io.github.jtsato.bookstore.core.exception.NotFoundException;
 
 /**
- * @author Jorge Takeshi Sato  
+ * @author Jorge Takeshi Sato
  */
 
 class SaveBookDocumentUseCaseTest {
@@ -58,9 +58,8 @@ class SaveBookDocumentUseCaseTest {
     @Test
     void failToRegisterABookDocumentIfParametersAreNotValid() {
 
-        final Exception exception = Assertions.assertThrows(Exception.class, () -> {
-            new SaveBookDocumentParameters(null, null, null, StringUtils.SPACE, 0L, null);
-        });
+        final Exception exception = Assertions.assertThrows(Exception.class,
+                                                            () -> new SaveBookDocumentParameters(null, null, null, StringUtils.SPACE, 0L, null));
 
         assertThat(exception).isInstanceOf(ConstraintViolationException.class);
 
@@ -203,9 +202,7 @@ class SaveBookDocumentUseCaseTest {
                                                                                                      123L,
                                                                                                      "Lorem ipsum dolor sit amet.");
 
-        final Exception exception = Assertions.assertThrows(Exception.class, () -> {
-            getBookDocumentByBookIdUseCase.execute(saveBookDocumentParameters);
-        });
+        final Exception exception = Assertions.assertThrows(Exception.class, () -> getBookDocumentByBookIdUseCase.execute(saveBookDocumentParameters));
 
         assertThat(exception).isInstanceOf(NotFoundException.class);
         final NotFoundException notFoundException = (NotFoundException) exception;

@@ -14,7 +14,7 @@ import io.github.jtsato.bookstore.dataprovider.author.domain.QAuthorEntity;
 import io.github.jtsato.bookstore.dataprovider.common.predicate.AbstractPredicateBuilderImpl;
 
 /**
- * @author Jorge Takeshi Sato  
+ * @author Jorge Takeshi Sato
  */
 
 public class AuthorPredicateBuilder extends AbstractPredicateBuilderImpl<QAuthorEntity, SearchAuthorsParameters> {

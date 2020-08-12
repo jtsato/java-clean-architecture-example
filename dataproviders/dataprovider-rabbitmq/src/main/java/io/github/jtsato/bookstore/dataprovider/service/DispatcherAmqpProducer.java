@@ -1,5 +1,7 @@
 package io.github.jtsato.bookstore.dataprovider.service;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
@@ -11,17 +13,17 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import lombok.Getter;
 import lombok.Setter;
-import lombok.extern.slf4j.Slf4j;
 
 /**
- * @author Jorge Takeshi Sato  
+ * @author Jorge Takeshi Sato
  */
 
-@Slf4j
 @Getter
 @Setter
 @Component
 public class DispatcherAmqpProducer {
+    
+    private static final Logger log = LoggerFactory.getLogger(DispatcherAmqpProducer.class);
 
     @Autowired
     private ConnectionFactory connectionFactory;
@@ -41,7 +43,7 @@ public class DispatcherAmqpProducer {
             log.info("Starting AMQP: exchange: {}, routingKey: {}, message: {}", exchange, routingKey, message);
             rabbitTemplate.convertAndSend(object);
         } catch (final JsonProcessingException exception) {
-            log.error("RabbitMQService: Exception: {}", exception);
+            log.error("RabbitMQService: Exception: {}", exception.getMessage());
         }
     }
 }

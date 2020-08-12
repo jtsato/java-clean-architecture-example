@@ -30,7 +30,7 @@ import io.github.jtsato.bookstore.core.common.paging.Pageable;
 import io.github.jtsato.bookstore.core.exception.InvalidParameterException;
 
 /**
- * @book Jorge Takeshi Sato  
+ * @author Jorge Takeshi Sato
  */
 
 class FindBooksByIdsUseCaseTest {
@@ -47,9 +47,7 @@ class FindBooksByIdsUseCaseTest {
 
         when(findBooksByIdsGateway.findBooksByIds(null)).thenReturn(null);
 
-        final Exception exception = Assertions.assertThrows(Exception.class, () -> {
-            findBooksByIdsUseCase.execute(null);
-        });
+        final Exception exception = Assertions.assertThrows(Exception.class, () -> findBooksByIdsUseCase.execute(null));
 
         assertThat(exception).isInstanceOf(InvalidParameterException.class);
 
@@ -61,7 +59,7 @@ class FindBooksByIdsUseCaseTest {
     @Test
     void successfulToFindBooksByIdsIfFound() {
 
-        final List<Long> ids = Arrays.asList(new Long[] {1L, 2L});
+        final List<Long> ids = Arrays.asList(1L, 2L);
 
         when(findBooksByIdsGateway.findBooksByIds(ids)).thenReturn(mockFindBooksByIdsGatewayOut());
 
@@ -113,16 +111,16 @@ class FindBooksByIdsUseCaseTest {
                              LocalDateTime.parse("2020-03-12T22:04:59.123"),
                              LocalDateTime.parse("2020-04-12T22:04:59.123")));
 
-        return new PageImpl<Book>(content, new Pageable(0, 1, 1, 1L, 1));
+        return new PageImpl<>(content, new Pageable(0, 1, 1, 1L, 1));
     }
 
     @DisplayName("Fail to find books by IDs if not found")
     @Test
     void failToFindBooksByIdsIfNotFound() {
 
-        final List<Long> ids = Arrays.asList(new Long[] {1L, 2L});
+        final List<Long> ids = Arrays.asList(1L, 2L);
 
-        final Page<Book> pageOfBooks = new PageImpl<Book>(Collections.emptyList(), new Pageable(0, 1, 0, 0L, 0));
+        final Page<Book> pageOfBooks = new PageImpl<>(Collections.emptyList(), new Pageable(0, 1, 0, 0L, 0));
 
         when(findBooksByIdsGateway.findBooksByIds(ids)).thenReturn(pageOfBooks);
 
@@ -140,7 +138,7 @@ class FindBooksByIdsUseCaseTest {
     @Test
     void failedToFindBooksByIdsIfTheLimitIsExceeded() {
 
-        final List<Long> ids = new ArrayList<Long>(1001);
+        final List<Long> ids = new ArrayList<>(1001);
 
         for (int index = 1; index <= 1001; index++) {
             ids.add((long) index);
@@ -148,9 +146,7 @@ class FindBooksByIdsUseCaseTest {
 
         when(findBooksByIdsGateway.findBooksByIds(ids)).thenReturn(mockFindBooksByIdsGatewayOut());
 
-        final Exception exception = Assertions.assertThrows(Exception.class, () -> {
-            findBooksByIdsUseCase.execute(ids);
-        });
+        final Exception exception = Assertions.assertThrows(Exception.class, () -> findBooksByIdsUseCase.execute(ids));
 
         assertThat(exception).isInstanceOf(InvalidParameterException.class);
 
@@ -162,7 +158,7 @@ class FindBooksByIdsUseCaseTest {
     @Test
     void successfulToFindBooksByIdsIfTheLimitIsNotExceeded() {
 
-        final List<Long> ids = new ArrayList<Long>(1000);
+        final List<Long> ids = new ArrayList<>(1000);
 
         for (int index = 1; index <= 1000; index++) {
             ids.add((long) index);

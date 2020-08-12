@@ -10,7 +10,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.Base64;
 
@@ -32,7 +31,7 @@ import io.github.jtsato.bookstore.core.book.usecase.SaveBookDocumentUseCase;
 import io.github.jtsato.bookstore.core.book.usecase.parameter.SaveBookDocumentParameters;
 
 /**
- * @author Jorge Takeshi Sato  
+ * @author Jorge Takeshi Sato
  */
 
 @ExtendWith(SpringExtension.class)
@@ -92,8 +91,7 @@ class SaveBookDocumentControllerTest {
                                 LocalDateTime.parse("2020-03-12T22:04:59.123"));
     }
 
-    private MockMultipartFile buildRequestBody()
-        throws IOException {
+    private MockMultipartFile buildRequestBody() {
         return new MockMultipartFile("file", "Document.txt", "text/plain", "Lorem ipsum dolor sit amet.".getBytes());
     }
 }

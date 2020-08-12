@@ -36,7 +36,7 @@ import io.github.jtsato.bookstore.core.book.usecase.parameter.UpdateBookByIdPara
 import io.github.jtsato.bookstore.entrypoint.rest.book.domain.request.UpdateBookByIdRequest;
 
 /**
- * @author Jorge Takeshi Sato  
+ * @author Jorge Takeshi Sato
  */
 
 @ExtendWith(SpringExtension.class)

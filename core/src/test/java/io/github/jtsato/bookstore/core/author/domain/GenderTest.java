@@ -6,14 +6,14 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 /**
- * @author Jorge Takeshi Sato  
+ * @author Jorge Takeshi Sato
  */
 
 class GenderTest {
 
-    @DisplayName("Sucessful to run gender functions")
+    @DisplayName("Successful to run gender functions")
     @Test
-    void sucessfulToRunGenderFunctions() {
+    void successfulToRunGenderFunctions() {
         assertThat(Gender.MALE.is(Gender.MALE)).isTrue();
         assertThat(Gender.MALE.isNot(Gender.MALE)).isFalse();
         assertThat(Gender.MALE.isNot(Gender.FEMALE)).isTrue();

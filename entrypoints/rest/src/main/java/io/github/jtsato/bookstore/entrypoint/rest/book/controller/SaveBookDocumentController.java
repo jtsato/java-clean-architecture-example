@@ -5,6 +5,8 @@ import java.util.Base64;
 import java.util.Base64.Encoder;
 
 import org.apache.commons.io.FilenameUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,7 +27,6 @@ import io.github.jtsato.bookstore.entrypoint.rest.book.mapper.SaveBookDocumentPr
 import io.github.jtsato.bookstore.entrypoint.rest.common.JsonConverter;
 import io.github.jtsato.bookstore.entrypoint.rest.common.metric.LogExecutionTime;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 
 /*
  * A EntryPoint follows these steps:
@@ -38,14 +39,15 @@ import lombok.extern.slf4j.Slf4j;
  */
 
 /**
- * @author Jorge Takeshi Sato  
+ * @author Jorge Takeshi Sato
  */
 
-@Slf4j
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/books")
 public class SaveBookDocumentController implements SaveBookDocumentApiMethod {
+
+    private static final Logger log = LoggerFactory.getLogger(SaveBookDocumentController.class);
 
     private final SaveBookDocumentUseCase saveBookDocumentUseCase;
 
@@ -53,7 +55,8 @@ public class SaveBookDocumentController implements SaveBookDocumentApiMethod {
     @LogExecutionTime
     @ResponseStatus(HttpStatus.OK)
     @PostMapping(value = "/{bookId}/content", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public SaveBookDocumentResponse saveBookDocument(@PathVariable final Long bookId, @RequestPart final MultipartFile file) throws IOException {
+    public SaveBookDocumentResponse saveBookDocument(@PathVariable final Long bookId, @RequestPart final MultipartFile file)
+        throws IOException {
 
         final SaveBookDocumentRequest saveBookDocumentRequest = buildSaveBookDocumentRequest(bookId, file);
 
@@ -66,7 +69,8 @@ public class SaveBookDocumentController implements SaveBookDocumentApiMethod {
         return SaveBookDocumentPresenter.of(bookDocument);
     }
 
-    private SaveBookDocumentRequest buildSaveBookDocumentRequest(final Long bookId, final MultipartFile file) throws IOException {
+    private SaveBookDocumentRequest buildSaveBookDocumentRequest(final Long bookId, final MultipartFile file)
+        throws IOException {
         final byte[] content = file.getBytes();
         final Encoder encoder = Base64.getEncoder();
         final String fileContent = encoder.encodeToString(content);

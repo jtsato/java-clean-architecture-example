@@ -3,7 +3,7 @@ package io.github.jtsato.bookstore.core.common;
 import java.time.LocalDateTime;
 
 /**
- * @author Jorge Takeshi Sato  
+ * @author Jorge Takeshi Sato
  */
 
 @FunctionalInterface

@@ -13,7 +13,7 @@ import io.github.jtsato.bookstore.dataprovider.author.mapper.AuthorMapper;
 import io.github.jtsato.bookstore.dataprovider.author.repository.AuthorRepository;
 
 /**
- * @author Jorge Takeshi Sato  
+ * @author Jorge Takeshi Sato
  */
 
 @Transactional(readOnly = true)

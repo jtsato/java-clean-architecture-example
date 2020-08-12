@@ -15,7 +15,7 @@ import io.github.jtsato.bookstore.dataprovider.book.domain.QBookEntity;
 import io.github.jtsato.bookstore.dataprovider.common.predicate.AbstractPredicateBuilderImpl;
 
 /**
- * @author Jorge Takeshi Sato  
+ * @author Jorge Takeshi Sato
  */
 
 public class SearchBookPredicateBuilder extends AbstractPredicateBuilderImpl<QBookEntity, SearchBooksParameters> {
@@ -37,11 +37,11 @@ public class SearchBookPredicateBuilder extends AbstractPredicateBuilderImpl<QBo
         if (StringUtils.isNotBlank(query.getTitle())) {
             booleanExpressions.add(entityPath.title.like(addLikeOperator(query.getTitle())));
         }
-        
+
         if (query.getStartPrice() != null) {
             booleanExpressions.add(entityPath.price.goe(query.getStartPrice()));
         }
-        
+
         if (query.getEndPrice() != null) {
             booleanExpressions.add(entityPath.price.loe(query.getEndPrice()));
         }

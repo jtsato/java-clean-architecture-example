@@ -14,7 +14,7 @@ import io.github.jtsato.bookstore.dataprovider.book.mapper.BookMapper;
 import io.github.jtsato.bookstore.dataprovider.book.repository.BookRepository;
 
 /**
- * @author Jorge Takeshi Sato  
+ * @author Jorge Takeshi Sato
  */
 
 @Transactional
@@ -40,7 +40,7 @@ public class UpdateBookByIdDataProvider implements UpdateBookByIdGateway {
         bookEntity.setAvailable(book.getAvailable());
         return BookMapper.of(bookRepository.saveAndFlush(bookEntity));
     }
-    
+
     private void updateAuthor(final Book book, final BookEntity bookEntity) {
         final Long currentAuthorId = bookEntity.getAuthor().getId();
         final Long newAuthorId = book.getAuthor().getId();

@@ -27,7 +27,7 @@ import io.github.jtsato.bookstore.core.exception.NotFoundException;
 import io.github.jtsato.bookstore.core.exception.UniqueConstraintException;
 
 /**
- * @author Jorge Takeshi Sato  
+ * @author Jorge Takeshi Sato
  */
 
 class UpdateAuthorByIdUseCaseTest {
@@ -45,9 +45,7 @@ class UpdateAuthorByIdUseCaseTest {
     @Test
     void failToUpdateAnAuthorIfParametersAreNotValid() {
 
-        final Exception exception = Assertions.assertThrows(Exception.class, () -> {
-            new UpdateAuthorByIdParameters(null, StringUtils.SPACE, null, "1979-02-29");
-        });
+        final Exception exception = Assertions.assertThrows(Exception.class, () -> new UpdateAuthorByIdParameters(null, StringUtils.SPACE, null, "1979-02-29"));
 
         assertThat(exception).isInstanceOf(ConstraintViolationException.class);
         final ConstraintViolationException constraintViolationException = (ConstraintViolationException) exception;
@@ -100,9 +98,7 @@ class UpdateAuthorByIdUseCaseTest {
 
         final UpdateAuthorByIdParameters parameters = new UpdateAuthorByIdParameters(1L, "Joshua Bloch", "MALE", "1961-08-28");
 
-        final Exception exception = Assertions.assertThrows(Exception.class, () -> {
-            updateAuthorByIdUseCase.updateAuthorById(parameters);
-        });
+        final Exception exception = Assertions.assertThrows(Exception.class, () -> updateAuthorByIdUseCase.updateAuthorById(parameters));
 
         assertThat(exception).isInstanceOf(UniqueConstraintException.class);
         final UniqueConstraintException uniqueConstraintException = (UniqueConstraintException) exception;
@@ -127,9 +123,7 @@ class UpdateAuthorByIdUseCaseTest {
 
         final UpdateAuthorByIdParameters parameters = new UpdateAuthorByIdParameters(1L, "Joshua Bloch", "MALE", "1961-08-28");
 
-        final Exception exception = Assertions.assertThrows(Exception.class, () -> {
-            updateAuthorByIdUseCase.updateAuthorById(parameters);
-        });
+        final Exception exception = Assertions.assertThrows(Exception.class, () -> updateAuthorByIdUseCase.updateAuthorById(parameters));
 
         assertThat(exception).isInstanceOf(NotFoundException.class);
         final NotFoundException notFoundException = (NotFoundException) exception;
@@ -146,9 +140,7 @@ class UpdateAuthorByIdUseCaseTest {
 
         final UpdateAuthorByIdParameters parameters = new UpdateAuthorByIdParameters(1L, "Joshua Bloch", "MALE", "1961-08-28");
 
-        final Exception exception = Assertions.assertThrows(Exception.class, () -> {
-            updateAuthorByIdUseCase.updateAuthorById(parameters);
-        });
+        final Exception exception = Assertions.assertThrows(Exception.class, () -> updateAuthorByIdUseCase.updateAuthorById(parameters));
 
         assertThat(exception).isInstanceOf(UniqueConstraintException.class);
         final UniqueConstraintException uniqueConstraintException = (UniqueConstraintException) exception;

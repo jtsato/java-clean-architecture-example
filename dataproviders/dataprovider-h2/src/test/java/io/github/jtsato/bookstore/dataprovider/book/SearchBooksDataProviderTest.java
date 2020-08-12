@@ -21,7 +21,7 @@ import io.github.jtsato.bookstore.core.common.paging.Pageable;
 import io.github.jtsato.bookstore.dataprovider.book.repository.BookRepository;
 
 /**
- * @author Jorge Takeshi Sato  
+ * @author Jorge Takeshi Sato
  */
 
 @DataJpaTest
@@ -46,7 +46,7 @@ class SearchBooksDataProviderTest {
         final ImmutablePair<BigDecimal, BigDecimal> prices = new ImmutablePair<>(BigDecimal.valueOf(20.00), BigDecimal.valueOf(21.00));
         final ImmutablePair<String, String> creationDates = new ImmutablePair<>("2020-03-12T21:04:59.000", "2020-03-13T21:05:00.000");
         final ImmutablePair<String, String> updateDates = new ImmutablePair<>("2020-04-12T21:04:59.000", "2020-04-12T21:05:00.000");
-        
+
         final SearchBooksParameters parameters = new SearchBooksParameters(searchAuthorsParameters, title, prices, Boolean.FALSE, creationDates, updateDates);
 
         final Page<Book> page = searchBooksDataProvider.searchBooks(parameters, null, null, null);
@@ -127,22 +127,22 @@ class SearchBooksDataProviderTest {
         assertThat(books).isNotNull().isNotEmpty();
 
         final Pageable pageable = page.getPageable();
-        
+
         assertThat(pageable).isNotNull();
         assertThat(pageable.getPage()).isOne();
         assertThat(pageable.getSize()).isEqualTo(3);
         assertThat(pageable.getNumberOfElements()).isOne();
         assertThat(pageable.getTotalOfElements()).isEqualTo(4);
-        assertThat(pageable.getTotalPages()).isEqualTo(2);        
-        
+        assertThat(pageable.getTotalPages()).isEqualTo(2);
+
         final Book book = books.get(0);
-        
+
         assertThat(book).isNotNull();
         assertThat(book.getId()).isNotNull().isEqualTo(1L);
 
         assertThat(bookRepository.count()).isEqualTo(4);
     }
-    
+
     @DisplayName("Successful to paging books if found with sorted order")
     @Test
     void successfulToPagingBooksIfFoundWithSortedOrder() {
@@ -165,16 +165,16 @@ class SearchBooksDataProviderTest {
         assertThat(books).isNotNull().isNotEmpty();
 
         final Pageable pageable = page.getPageable();
-        
+
         assertThat(pageable).isNotNull();
         assertThat(pageable.getPage()).isOne();
         assertThat(pageable.getSize()).isEqualTo(3);
         assertThat(pageable.getNumberOfElements()).isOne();
         assertThat(pageable.getTotalOfElements()).isEqualTo(4);
-        assertThat(pageable.getTotalPages()).isEqualTo(2);        
-        
+        assertThat(pageable.getTotalPages()).isEqualTo(2);
+
         final Book book = books.get(0);
-        
+
         assertThat(book).isNotNull();
         assertThat(book.getId()).isNotNull().isEqualTo(2L);
 

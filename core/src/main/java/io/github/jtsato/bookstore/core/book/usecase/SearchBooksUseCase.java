@@ -5,7 +5,7 @@ import io.github.jtsato.bookstore.core.book.usecase.parameter.SearchBooksParamet
 import io.github.jtsato.bookstore.core.common.paging.Page;
 
 /**
- * @author Jorge Takeshi Sato  
+ * @author Jorge Takeshi Sato
  */
 
 @FunctionalInterface

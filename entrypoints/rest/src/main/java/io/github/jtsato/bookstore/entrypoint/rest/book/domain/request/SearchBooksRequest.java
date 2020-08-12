@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
- * @author Jorge Takeshi Sato  
+ * @author Jorge Takeshi Sato
  */
 
 @Getter
@@ -25,10 +25,10 @@ public final class SearchBooksRequest implements Serializable {
     private String title;
 
     private Boolean available;
-    
+
     private BigDecimal startPrice;
 
-    private BigDecimal endPrice;    
+    private BigDecimal endPrice;
 
     private String startCreationDate;
 

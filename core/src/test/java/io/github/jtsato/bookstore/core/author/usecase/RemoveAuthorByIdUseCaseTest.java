@@ -35,7 +35,7 @@ import io.github.jtsato.bookstore.core.exception.InvalidParameterException;
 import io.github.jtsato.bookstore.core.exception.NotFoundException;
 
 /**
- * @author Jorge Takeshi Sato  
+ * @author Jorge Takeshi Sato
  */
 
 class RemoveAuthorByIdUseCaseTest {
@@ -55,9 +55,7 @@ class RemoveAuthorByIdUseCaseTest {
 
         when(removeAuthorByIdGateway.removeAuthorById(null)).thenReturn(null);
 
-        final Exception exception = Assertions.assertThrows(Exception.class, () -> {
-            removeAuthorByIdUseCase.removeAuthorById(null);
-        });
+        final Exception exception = Assertions.assertThrows(Exception.class, () -> removeAuthorByIdUseCase.removeAuthorById(null));
 
         assertThat(exception).isInstanceOf(InvalidParameterException.class);
         final InvalidParameterException invalidParameterException = (InvalidParameterException) exception;
@@ -74,7 +72,7 @@ class RemoveAuthorByIdUseCaseTest {
         final ImmutablePair<String, String> creationDates = new ImmutablePair<>(null, null);
         final ImmutablePair<String, String> updateDates = new ImmutablePair<>(null, null);
         final SearchBooksParameters parameters = new SearchBooksParameters(authorsParameters, null, prices, null, creationDates, updateDates);
-        final Page<Book> emptyBookPage = new PageImpl<Book>(Collections.emptyList(), new Pageable(0, 0, 0, 0L, 0));
+        final Page<Book> emptyBookPage = new PageImpl<>(Collections.emptyList(), new Pageable(0, 0, 0, 0L, 0));
         when(searchBooksGateway.searchBooks(parameters, 0, 1, null)).thenReturn(emptyBookPage);
 
         final Author author = removeAuthorByIdUseCase.removeAuthorById(1L);
@@ -102,9 +100,7 @@ class RemoveAuthorByIdUseCaseTest {
         final Page<Book> emptyBooksPage = mockEmptyBooksPage();
         when(searchBooksGateway.searchBooks(parameters, 0, 1, null)).thenReturn(emptyBooksPage);
 
-        final Exception exception = Assertions.assertThrows(Exception.class, () -> {
-            removeAuthorByIdUseCase.removeAuthorById(1L);
-        });
+        final Exception exception = Assertions.assertThrows(Exception.class, () -> removeAuthorByIdUseCase.removeAuthorById(1L));
 
         assertThat(exception).isInstanceOf(NotFoundException.class);
         final NotFoundException notFoundException = (NotFoundException) exception;
@@ -113,7 +109,7 @@ class RemoveAuthorByIdUseCaseTest {
     }
 
     private Page<Book> mockEmptyBooksPage() {
-        return new PageImpl<Book>(Collections.emptyList(), new Pageable(0, 1, 0, 0L, 0));
+        return new PageImpl<>(Collections.emptyList(), new Pageable(0, 1, 0, 0L, 0));
     }
 
     @DisplayName("Fail to remove author by id if has books associated")
@@ -129,9 +125,7 @@ class RemoveAuthorByIdUseCaseTest {
         final Page<Book> bookPage = mockPageWithOneBook();
         when(searchBooksGateway.searchBooks(parameters, 0, 1, null)).thenReturn(bookPage);
 
-        final Exception exception = Assertions.assertThrows(Exception.class, () -> {
-            removeAuthorByIdUseCase.removeAuthorById(1L);
-        });
+        final Exception exception = Assertions.assertThrows(Exception.class, () -> removeAuthorByIdUseCase.removeAuthorById(1L));
 
         assertThat(exception.getMessage()).isNotNull();
         assertThat(exception.getMessage()).isEqualTo("validation.author.with.books.removal");
@@ -151,6 +145,6 @@ class RemoveAuthorByIdUseCaseTest {
                              LocalDateTime.parse("2020-03-12T22:04:59.123"),
                              LocalDateTime.parse("2020-03-12T22:04:59.123")));
 
-        return new PageImpl<Book>(content, new Pageable(0, 1, 1, 1L, 1));
+        return new PageImpl<>(content, new Pageable(0, 1, 1, 1L, 1));
     }
 }

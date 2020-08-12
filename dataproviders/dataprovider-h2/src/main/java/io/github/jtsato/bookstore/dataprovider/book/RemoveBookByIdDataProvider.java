@@ -28,7 +28,7 @@ public class RemoveBookByIdDataProvider implements RemoveBookByIdGateway {
         final Optional<BookEntity> optional = bookRepository.findById(id);
         return optional.map(this::removeBookEntity);
     }
-    
+
     private Book removeBookEntity(final BookEntity bookEntity) {
         final Book book = BookMapper.of(bookEntity);
         bookRepository.delete(bookEntity);

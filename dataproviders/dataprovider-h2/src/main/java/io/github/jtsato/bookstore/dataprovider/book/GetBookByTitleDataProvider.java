@@ -13,7 +13,7 @@ import io.github.jtsato.bookstore.dataprovider.book.mapper.BookMapper;
 import io.github.jtsato.bookstore.dataprovider.book.repository.BookRepository;
 
 /**
- * @author Jorge Takeshi Sato  
+ * @author Jorge Takeshi Sato
  */
 
 @Transactional(readOnly = true)
@@ -27,7 +27,7 @@ public class GetBookByTitleDataProvider implements GetBookByTitleGateway {
     public Optional<Book> getBookByTitle(final String title) {
 
         final Optional<BookEntity> optional = bookRepository.findByTitle(title);
-        
+
         return optional.map(BookMapper::of);
     }
 }

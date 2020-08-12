@@ -28,7 +28,7 @@ import io.github.jtsato.bookstore.core.author.domain.Gender;
 import io.github.jtsato.bookstore.core.author.usecase.GetAuthorByIdUseCase;
 
 /**
- * @author Jorge Takeshi Sato  
+ * @author Jorge Takeshi Sato
  */
 
 @ExtendWith(SpringExtension.class)

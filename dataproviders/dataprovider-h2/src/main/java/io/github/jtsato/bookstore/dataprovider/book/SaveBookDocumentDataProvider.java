@@ -11,7 +11,7 @@ import io.github.jtsato.bookstore.dataprovider.book.mapper.BookDocumentMapper;
 import io.github.jtsato.bookstore.dataprovider.book.repository.BookDocumentRepository;
 
 /**
- * @author Jorge Takeshi Sato  
+ * @author Jorge Takeshi Sato
  */
 
 @Transactional

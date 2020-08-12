@@ -9,22 +9,20 @@ import org.junit.jupiter.api.Test;
 import io.github.jtsato.bookstore.core.exception.InvalidParameterException;
 
 /**
- * @author Jorge Takeshi Sato  
+ * @author Jorge Takeshi Sato
  */
 
 class EnumUtilsTest {
 
     enum Semaphore {
             GREEN, YELLOW, RED
-    };
+    }
 
     @DisplayName("Fail to get value if not found")
     @Test
     void failToGetValueIfNotFound() {
 
-        final Exception exception = Assertions.assertThrows(Exception.class, () -> {
-            EnumUtils.valueOf("BLUE", Semaphore.class);
-        });
+        final Exception exception = Assertions.assertThrows(Exception.class, () -> EnumUtils.valueOf("BLUE", Semaphore.class));
 
         assertThat(exception).isInstanceOf(InvalidParameterException.class);
 

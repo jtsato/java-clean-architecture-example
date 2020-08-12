@@ -10,7 +10,7 @@ import com.cosium.spring.data.jpa.entity.graph.repository.EntityGraphQuerydslPre
 import io.github.jtsato.bookstore.dataprovider.author.domain.AuthorEntity;
 
 /**
- * @author Jorge Takeshi Sato  
+ * @author Jorge Takeshi Sato
  */
 
 @Repository
