@@ -2,11 +2,12 @@ package io.github.jtsato.bookstore.core.enumerator.usecase.impl;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import javax.inject.Named;
+
+import org.apache.commons.lang3.StringUtils;
 
 import io.github.jtsato.bookstore.core.author.domain.Gender;
 import io.github.jtsato.bookstore.core.enumerator.domain.Enumerator;
@@ -36,9 +37,9 @@ public class SearchEnumeratorsUseCaseImpl implements SearchEnumeratorsUseCase {
         return getAllEnumerators().stream().filter(filter).collect(Collectors.toList());
     }
 
-    private boolean compare(final Enumerator enumerator, final Optional<String> domain, final Optional<String> key) {
-        final boolean domainNotProvidedOrSameDomain = domain.isEmpty() || enumerator.getDomain().equalsIgnoreCase(domain.get());
-        final boolean keyNotProvidedOrSameKey = key.isEmpty() || enumerator.getKey().equalsIgnoreCase(key.get());
+    private boolean compare(final Enumerator enumerator, final String domain, final String key) {
+        final boolean domainNotProvidedOrSameDomain = StringUtils.isBlank(domain) || enumerator.getDomain().equalsIgnoreCase(domain);
+        final boolean keyNotProvidedOrSameKey = StringUtils.isBlank(key) || enumerator.getKey().equalsIgnoreCase(key);
         return domainNotProvidedOrSameDomain && keyNotProvidedOrSameKey;
     }
 

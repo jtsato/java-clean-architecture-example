@@ -33,16 +33,16 @@ public class SearchBooksParameters extends SelfValidating<SearchBooksParameters>
 
     private Boolean available;
 
-    @LocalDateTimeConstraint(message = "validation.book.start.creation.date.notvalid")
+    @LocalDateTimeConstraint(message = "validation.book.start.creation.date.invalid")
     private String startCreationDate;
 
-    @LocalDateTimeConstraint(message = "validation.book.end.creation.date.notvalid")
+    @LocalDateTimeConstraint(message = "validation.book.end.creation.date.invalid")
     private String endCreationDate;
 
-    @LocalDateTimeConstraint(message = "validation.book.start.update.date.notvalid")
+    @LocalDateTimeConstraint(message = "validation.book.start.update.date.invalid")
     private String startUpdateDate;
 
-    @LocalDateTimeConstraint(message = "validation.book.end.creation.date.notvalid")
+    @LocalDateTimeConstraint(message = "validation.book.end.creation.date.invalid")
     private String endUpdateDate;
 
     public SearchBooksParameters(final SearchAuthorsParameters authorParameters,

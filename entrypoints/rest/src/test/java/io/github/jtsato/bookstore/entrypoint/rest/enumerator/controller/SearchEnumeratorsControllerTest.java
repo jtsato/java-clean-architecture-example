@@ -14,7 +14,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import org.apache.commons.lang3.StringUtils;
 import org.junit.jupiter.api.DisplayName;
@@ -56,7 +55,7 @@ class SearchEnumeratorsControllerTest {
     void successfulSearchEnumeratorsIfFound()
         throws Exception {
 
-        final SearchEnumeratorsParameters parameters = new SearchEnumeratorsParameters(Optional.empty(), Optional.empty());
+        final SearchEnumeratorsParameters parameters = new SearchEnumeratorsParameters(null, null);
         when(searchEnumeratorsUseCase.execute(parameters)).thenReturn(mockSearchEnumeratorsUseCaseReturn());
         when(searchEnumeratorsPresenter.of(mockSearchEnumeratorsUseCaseReturn())).thenReturn(mockSearchEnumeratorsPresenterReturn());
 

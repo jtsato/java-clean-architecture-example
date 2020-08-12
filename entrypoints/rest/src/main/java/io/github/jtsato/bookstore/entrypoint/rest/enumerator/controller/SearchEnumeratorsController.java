@@ -1,7 +1,6 @@
 package io.github.jtsato.bookstore.entrypoint.rest.enumerator.controller;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -55,8 +54,7 @@ public class SearchEnumeratorsController implements SearchEnumeratorsApiMethod {
 
         log.debug("Starting Controller -> SearchEnumeratorsController with domain {}, and key {}", domain, key);
 
-        final SearchEnumeratorsParameters parameters = new SearchEnumeratorsParameters(Optional.ofNullable(StringUtils.stripToNull(domain)),
-                                                                                       Optional.ofNullable(StringUtils.stripToNull(key)));
+        final SearchEnumeratorsParameters parameters = new SearchEnumeratorsParameters(StringUtils.stripToNull(domain), StringUtils.stripToNull(key));
 
         final List<Enumerator> enumerators = searchEnumeratorsUseCase.execute(parameters);
 

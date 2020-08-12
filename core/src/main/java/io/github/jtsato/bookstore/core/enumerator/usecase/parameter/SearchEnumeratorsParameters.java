@@ -1,7 +1,5 @@
 package io.github.jtsato.bookstore.core.enumerator.usecase.parameter;
 
-import java.util.Optional;
-
 import lombok.AccessLevel;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -16,11 +14,11 @@ import lombok.experimental.FieldDefaults;
 @EqualsAndHashCode(callSuper = false)
 public class SearchEnumeratorsParameters {
 
-    private Optional<String> domain;
+    private final String domain;
 
-    private Optional<String> key;
+    private final String key;
 
-    public SearchEnumeratorsParameters(final Optional<String> domain, final Optional<String> key) {
+    public SearchEnumeratorsParameters(final String domain, final String key) {
         this.domain = domain;
         this.key = key;
     }

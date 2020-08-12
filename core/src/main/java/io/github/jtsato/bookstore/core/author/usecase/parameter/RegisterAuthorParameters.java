@@ -27,7 +27,7 @@ public class RegisterAuthorParameters extends SelfValidating<RegisterAuthorParam
     private final String gender;
 
     @NotBlank(message = "validation.author.birthdate.blank")
-    @LocalDateConstraint(message = "validation.author.birthdate.notvalid")
+    @LocalDateConstraint(message = "validation.author.birthdate.invalid")
     private final String birthdate;
 
     public RegisterAuthorParameters(final String name, final String gender, final String birthdate) {

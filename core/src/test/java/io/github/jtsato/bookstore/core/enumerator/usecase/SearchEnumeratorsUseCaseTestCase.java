@@ -3,7 +3,6 @@ package io.github.jtsato.bookstore.core.enumerator.usecase;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -24,7 +23,7 @@ class SearchEnumeratorsUseCaseTestCase {
     @Test
     void successfulToSearchEnumeratorsIfNoFilterIsProvided() {
 
-        final SearchEnumeratorsParameters parameters = new SearchEnumeratorsParameters(Optional.empty(), Optional.empty());
+        final SearchEnumeratorsParameters parameters = new SearchEnumeratorsParameters(null, null);
         final List<Enumerator> enumerators = getBookByIdUseCase.execute(parameters);
 
         assertThat(enumerators).isNotNull().isNotEmpty();
@@ -35,7 +34,7 @@ class SearchEnumeratorsUseCaseTestCase {
     @Test
     void successfulToSearchEnumeratorsIfDomainIsProvided() {
 
-        final SearchEnumeratorsParameters parameters = new SearchEnumeratorsParameters(Optional.of("Gender"), Optional.empty());
+        final SearchEnumeratorsParameters parameters = new SearchEnumeratorsParameters("Gender", null);
         final List<Enumerator> enumerators = getBookByIdUseCase.execute(parameters);
 
         assertThat(enumerators).isNotNull().isNotEmpty();
@@ -46,7 +45,7 @@ class SearchEnumeratorsUseCaseTestCase {
     @Test
     void successfulToSearchEnumeratorsIfDomainAndKeyAreProvided() {
 
-        final SearchEnumeratorsParameters parameters = new SearchEnumeratorsParameters(Optional.of("Gender"), Optional.of("Female"));
+        final SearchEnumeratorsParameters parameters = new SearchEnumeratorsParameters("Gender", "Female");
         final List<Enumerator> enumerators = getBookByIdUseCase.execute(parameters);
 
         assertThat(enumerators).isNotNull().isNotEmpty();
@@ -57,7 +56,7 @@ class SearchEnumeratorsUseCaseTestCase {
     @Test
     void successfulToSearchEnumeratorsIfDomainDoNotExist() {
 
-        final SearchEnumeratorsParameters parameters = new SearchEnumeratorsParameters(Optional.of("X"), Optional.empty());
+        final SearchEnumeratorsParameters parameters = new SearchEnumeratorsParameters("X", null);
         final List<Enumerator> enumerators = getBookByIdUseCase.execute(parameters);
 
         assertThat(enumerators).isNotNull().isEmpty();
@@ -67,7 +66,7 @@ class SearchEnumeratorsUseCaseTestCase {
     @Test
     void successfulToSearchEnumeratorsIfKeyDoNotExist() {
 
-        final SearchEnumeratorsParameters parameters = new SearchEnumeratorsParameters(Optional.empty(), Optional.of("X"));
+        final SearchEnumeratorsParameters parameters = new SearchEnumeratorsParameters(null, "X");
         final List<Enumerator> enumerators = getBookByIdUseCase.execute(parameters);
 
         assertThat(enumerators).isNotNull().isEmpty();

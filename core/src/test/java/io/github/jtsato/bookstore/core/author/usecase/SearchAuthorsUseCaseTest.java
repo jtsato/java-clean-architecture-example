@@ -54,8 +54,8 @@ class SearchAuthorsUseCaseTest {
 
         assertThat(exception).isInstanceOf(ConstraintViolationException.class);
         final ConstraintViolationException constraintViolationException = (ConstraintViolationException) exception;
-        assertThat(constraintViolationException.getMessage()).contains("startBirthdateDate: validation.author.start.birthdate.date.notvalid");
-        assertThat(constraintViolationException.getMessage()).contains("endBirthdateDate: validation.author.end.birthdate.date.notvalid");
+        assertThat(constraintViolationException.getMessage()).contains("startBirthdateDate: validation.author.start.birthdate.date.invalid");
+        assertThat(constraintViolationException.getMessage()).contains("endBirthdateDate: validation.author.end.birthdate.date.invalid");
     }
 
     @DisplayName("Successful to search authors if found")

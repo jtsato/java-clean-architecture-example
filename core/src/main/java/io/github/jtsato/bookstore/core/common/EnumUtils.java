@@ -33,7 +33,7 @@ public class EnumUtils {
     private static Supplier<? extends InvalidParameterException> throwIllegalArgumentException(final String enumClass,
                                                                                                final String actual,
                                                                                                final List<String> values) {
-        final String message = String.format("The value %s is not valid for %s. Valid values are: %s.", actual, enumClass, String.join(", ", values));
+        final String message = String.format("The value %s is invalid for %s. Valid values are: %s.", actual, enumClass, String.join(", ", values));
         return () -> new InvalidParameterException(message);
     }
 }

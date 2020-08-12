@@ -27,6 +27,6 @@ class EnumUtilsTest {
         assertThat(exception).isInstanceOf(InvalidParameterException.class);
 
         assertThat(exception.getMessage()).isNotNull();
-        assertThat(exception.getMessage()).isEqualTo("The value BLUE is not valid for Semaphore. Valid values are: GREEN, YELLOW, RED.");
+        assertThat(exception.getMessage()).isEqualTo("The value BLUE is invalid for Semaphore. Valid values are: GREEN, YELLOW, RED.");
     }
 }

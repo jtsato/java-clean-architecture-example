@@ -24,10 +24,10 @@ public class SearchAuthorsParameters extends SelfValidating<SearchAuthorsParamet
 
     private String gender;
 
-    @LocalDateConstraint(message = "validation.author.start.birthdate.date.notvalid")
+    @LocalDateConstraint(message = "validation.author.start.birthdate.date.invalid")
     private String startBirthdateDate;
 
-    @LocalDateConstraint(message = "validation.author.end.birthdate.date.notvalid")
+    @LocalDateConstraint(message = "validation.author.end.birthdate.date.invalid")
     private String endBirthdateDate;
 
     public SearchAuthorsParameters(final Long id, final String name, final String gender, final String startBirthdateDate, final String endBirthdateDate) {

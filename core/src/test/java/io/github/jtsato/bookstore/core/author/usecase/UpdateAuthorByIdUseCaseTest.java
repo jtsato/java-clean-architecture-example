@@ -52,7 +52,7 @@ class UpdateAuthorByIdUseCaseTest {
         assertThat(constraintViolationException.getMessage()).contains("id: validation.author.id.null");
         assertThat(constraintViolationException.getMessage()).contains("name: validation.author.name.blank");
         assertThat(constraintViolationException.getMessage()).contains("gender: validation.author.gender.blank");
-        assertThat(constraintViolationException.getMessage()).contains("birthdate: validation.author.birthdate.notvalid");
+        assertThat(constraintViolationException.getMessage()).contains("birthdate: validation.author.birthdate.invalid");
     }
 
     @DisplayName("Successful to update author by id if found")

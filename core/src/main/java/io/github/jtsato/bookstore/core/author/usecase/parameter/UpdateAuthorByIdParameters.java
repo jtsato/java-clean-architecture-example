@@ -31,7 +31,7 @@ public class UpdateAuthorByIdParameters extends SelfValidating<UpdateAuthorByIdP
     private final String gender;
 
     @NotNull(message = "validation.author.birthdate.blank")
-    @LocalDateConstraint(message = "validation.author.birthdate.notvalid")
+    @LocalDateConstraint(message = "validation.author.birthdate.invalid")
     private final String birthdate;
 
     public UpdateAuthorByIdParameters(final Long id, final String name, final String gender, final String birthdate) {

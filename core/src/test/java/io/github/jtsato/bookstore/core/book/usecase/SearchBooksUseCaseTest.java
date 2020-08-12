@@ -56,8 +56,8 @@ class SearchBooksUseCaseTest {
 
         assertThat(exception).isInstanceOf(ConstraintViolationException.class);
         final ConstraintViolationException constraintViolationException = (ConstraintViolationException) exception;
-        assertThat(constraintViolationException.getMessage()).contains("startCreationDate: validation.book.start.creation.date.notvalid");
-        assertThat(constraintViolationException.getMessage()).contains("endCreationDate: validation.book.end.creation.date.notvalid");
+        assertThat(constraintViolationException.getMessage()).contains("startCreationDate: validation.book.start.creation.date.invalid");
+        assertThat(constraintViolationException.getMessage()).contains("endCreationDate: validation.book.end.creation.date.invalid");
     }
 
     @DisplayName("Successful to search books if found")
