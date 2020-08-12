@@ -25,12 +25,16 @@ public class LocaleChangeHeaderInterceptor extends LocaleChangeInterceptor {
             if (localeResolver == null) {
                 throw new IllegalStateException("No LocaleResolver found!");
             }
-            try {
-                localeResolver.setLocale(request, response, parseLocaleValue(newLocale));
-            } catch (final IllegalArgumentException ex) {
-                logger.debug("Ignoring invalid locale value [" + newLocale + "]: " + ex.getMessage());
-            }
+            setNewLocale(request, response, newLocale, localeResolver);
         }
         return true;
+    }
+
+    private void setNewLocale(final HttpServletRequest request, final HttpServletResponse response, final String newLocale, final LocaleResolver localeResolver) {
+        try {
+            localeResolver.setLocale(request, response, parseLocaleValue(newLocale));
+        } catch (final IllegalArgumentException ex) {
+            logger.debug("Ignoring invalid locale value [" + newLocale + "]: " + ex.getMessage());
+        }
     }
 }
