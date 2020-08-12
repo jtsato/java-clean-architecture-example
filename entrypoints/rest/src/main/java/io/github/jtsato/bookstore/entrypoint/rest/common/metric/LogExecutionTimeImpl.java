@@ -7,6 +7,7 @@ import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.springframework.stereotype.Component;
 
+import io.github.jtsato.bookstore.entrypoint.rest.common.JsonConverter;
 import lombok.Generated;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
@@ -35,7 +36,7 @@ public class LogExecutionTimeImpl {
 
         final String clazzName = StringUtils.substringAfterLast(joinPoint.getSignature().getDeclaringTypeName(), ".");
 
-        log.debug("LogExecutionTime -> {} executed in {} miliseconds.", clazzName, stopWatch.getTime());
+        log.debug("LogExecutionTime    -> {} executed in {} miliseconds.", clazzName, stopWatch.getTime());
 
         return proceed;
     }

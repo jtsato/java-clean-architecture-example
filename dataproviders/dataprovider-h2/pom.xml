@@ -25,7 +25,6 @@
 		<maven.compiler.target>11</maven.compiler.target>
 		<lombok.version>1.18.12</lombok.version>
 		<commons-lang3.version>3.9</commons-lang3.version>
-		<querydsl.version>4.2.2</querydsl.version>
 		<spring-data-jpa-entity-graph.version>2.3.1</spring-data-jpa-entity-graph.version>
 		<javax.el.version>3.0.0</javax.el.version>
 		<pitest-maven.version>1.5.2</pitest-maven.version>
@@ -36,7 +35,7 @@
 		<sonar.coverage.exclusions>
 			**/src/**/core/**,
 			**/src/**/BookstoreApplication.java
-		</sonar.coverage.exclusions>				
+		</sonar.coverage.exclusions>
 	</properties>
 
 	<dependencies>
@@ -102,10 +101,6 @@
 			<artifactId>h2</artifactId>
 			<scope>runtime</scope>
 		</dependency>
-		<dependency>
-			<groupId>com.microsoft.sqlserver</groupId>
-			<artifactId>mssql-jdbc</artifactId>
-			</dependency>
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>

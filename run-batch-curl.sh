@@ -6,7 +6,7 @@ curl --request POST \
   --data '{
 	"name": "John Smith",
 	"gender": "MALE",
-	"birthday": "1980-04-23"
+	"birthdate": "1980-04-23"
 }' | json_pp
 
 echo
@@ -18,7 +18,7 @@ curl --request PUT \
   --data '{
 	"name": "Emma Williams",
 	"gender": "FEMALE",
-	"birthday": "1982-09-04"
+	"birthdate": "1982-09-04"
 }' | json_pp
 
 echo
@@ -30,7 +30,7 @@ curl --request POST \
   --data '{
 	"name": "John Smith",
 	"gender": "MALE",
-	"birthday": "1980-04-23"
+	"birthdate": "1980-04-23"
 }' | json_pp
 
 echo

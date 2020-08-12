@@ -11,7 +11,7 @@ resources:
         {
         	"name": "John Smith",
         	"gender": "MALE",
-        	"birthday": "1980-04-23"
+        	"birthdate": "1980-04-23"
         }
     created: 1583267450245
     description: ""
@@ -115,12 +115,12 @@ resources:
       - description: ""
         disabled: true
         id: pair_30ef53cf93f64a1ebb2004ba26b85e75
-        name: startBirthday
+        name: startBirthdate
         value: 1980-04-23
       - description: ""
         disabled: true
         id: pair_e0428b567c194c71b0fa19011628c9ab
-        name: endBirthday
+        name: endBirthdate
         value: 1980-04-23
     parentId: fld_75e19a6fc9044619b3f0ffce83b28413
     settingDisableRenderRequestBody: false
@@ -170,7 +170,7 @@ resources:
         {
         	"name": "Emma Williams",
         	"gender": "FEMALE",
-        	"birthday": "1982-09-04"
+        	"birthdate": "1982-09-04"
         }
     created: 1583498586190
     description: ""
@@ -333,12 +333,12 @@ resources:
       - description: ""
         disabled: false
         id: pair_fd339560ec46477ca91de0af46ecbc1a
-        name: author.startBirthday
+        name: author.startBirthdate
         value: 1979-09-04
       - description: ""
         disabled: false
         id: pair_da4838e2d10b4380b9a8305fce790cf7
-        name: author.endBirthday
+        name: author.endBirthdate
         value: 1983-09-04
       - description: ""
         id: pair_0c33394ba443471b808c95e348bac500
