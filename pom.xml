@@ -62,9 +62,6 @@
 					<verbose>false</verbose>
 					<failWhenNoMutations>false</failWhenNoMutations>
 					<skip>false</skip>
-					<skippedModules>
-						<param>configuration</param>
-					</skippedModules>
 				</configuration>
 				<dependencies>
 					<dependency>
