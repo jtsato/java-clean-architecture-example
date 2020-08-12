@@ -18,6 +18,6 @@ public class UpdateAuthorByIdMessageConverter {
         return new UpdateAuthorByIdMessage(author.getId(),
                                            author.getName(),
                                            author.getGender().toString(),
-                                           author.getBirthday().format(DateTimeFormatter.ISO_DATE));
+                                           author.getBirthdate().format(DateTimeFormatter.ISO_DATE));
     }
 }

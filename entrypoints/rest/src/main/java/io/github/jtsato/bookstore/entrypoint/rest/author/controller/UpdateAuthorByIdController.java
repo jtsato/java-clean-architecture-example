@@ -51,7 +51,7 @@ public class UpdateAuthorByIdController implements UpdateAuthorByIdApiMethod {
 
         log.debug("Starting Controller -> UpdateAuthorByIdController with {}", JsonConverter.convert(request));
 
-        final UpdateAuthorByIdParameters parameters = new UpdateAuthorByIdParameters(id, request.getName(), request.getGender(), request.getBirthday());
+        final UpdateAuthorByIdParameters parameters = new UpdateAuthorByIdParameters(id, request.getName(), request.getGender(), request.getBirthdate());
 
         final Author author = updateAuthorByIdUseCase.updateAuthorById(parameters);
 

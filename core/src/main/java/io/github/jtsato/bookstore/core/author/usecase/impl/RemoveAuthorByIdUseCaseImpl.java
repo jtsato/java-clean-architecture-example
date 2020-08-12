@@ -1,10 +1,12 @@
 package io.github.jtsato.bookstore.core.author.usecase.impl;
 
+import java.math.BigDecimal;
 import java.util.Optional;
 
 import javax.inject.Named;
 
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang3.tuple.ImmutablePair;
 
 import io.github.jtsato.bookstore.core.author.domain.Author;
 import io.github.jtsato.bookstore.core.author.gateway.RemoveAuthorByIdGateway;
@@ -46,7 +48,12 @@ public class RemoveAuthorByIdUseCaseImpl implements RemoveAuthorByIdUseCase {
             throw new InvalidParameterException("validation.author.id.null");
         }
 
-        final SearchBooksParameters parameters = new SearchBooksParameters(null, new SearchAuthorsParameters(id, null, null, null, null), null, null);
+        final SearchAuthorsParameters searchAuthorsParameters = new SearchAuthorsParameters(id, null, null, null, null);
+        final ImmutablePair<BigDecimal, BigDecimal> prices = new ImmutablePair<>(null, null);
+        final ImmutablePair<String, String> creationDates = new ImmutablePair<>(null, null);
+        final ImmutablePair<String, String> updateDates = new ImmutablePair<>(null, null);
+
+        final SearchBooksParameters parameters = new SearchBooksParameters(searchAuthorsParameters, null, prices, null, creationDates, updateDates);
 
         final Page<Book> pageOfBook = searchBooksGateway.searchBooks(parameters, 0, 1, null);
 

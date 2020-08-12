@@ -12,6 +12,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
+import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -69,7 +70,10 @@ class RemoveAuthorByIdUseCaseTest {
 
         when(removeAuthorByIdGateway.removeAuthorById(1L)).thenReturn(mockRemoveAuthorByIdGatewayOut());
         final SearchAuthorsParameters authorsParameters = new SearchAuthorsParameters(1L, null, null, null, null);
-        final SearchBooksParameters parameters = new SearchBooksParameters(null, authorsParameters, null, null);
+        final ImmutablePair<BigDecimal, BigDecimal> prices = new ImmutablePair<>(null, null);
+        final ImmutablePair<String, String> creationDates = new ImmutablePair<>(null, null);
+        final ImmutablePair<String, String> updateDates = new ImmutablePair<>(null, null);
+        final SearchBooksParameters parameters = new SearchBooksParameters(authorsParameters, null, prices, null, creationDates, updateDates);
         final Page<Book> emptyBookPage = new PageImpl<Book>(Collections.emptyList(), new Pageable(0, 0, 0, 0L, 0));
         when(searchBooksGateway.searchBooks(parameters, 0, 1, null)).thenReturn(emptyBookPage);
 
@@ -78,7 +82,7 @@ class RemoveAuthorByIdUseCaseTest {
         assertThat(author.getId()).isEqualTo(1L);
         assertThat(author.getName()).isEqualTo("Joshua Bloch");
         assertThat(author.getGender()).isEqualTo(Gender.MALE);
-        assertThat(author.getBirthday()).isEqualTo(LocalDate.parse("1961-08-28"));
+        assertThat(author.getBirthdate()).isEqualTo(LocalDate.parse("1961-08-28"));
     }
 
     private Optional<Author> mockRemoveAuthorByIdGatewayOut() {
@@ -91,7 +95,10 @@ class RemoveAuthorByIdUseCaseTest {
 
         when(removeAuthorByIdGateway.removeAuthorById(1L)).thenReturn(Optional.empty());
         final SearchAuthorsParameters authorsParameters = new SearchAuthorsParameters(1L, null, null, null, null);
-        final SearchBooksParameters parameters = new SearchBooksParameters(null, authorsParameters, null, null);
+        final ImmutablePair<BigDecimal, BigDecimal> prices = new ImmutablePair<>(null, null);
+        final ImmutablePair<String, String> creationDates = new ImmutablePair<>(null, null);
+        final ImmutablePair<String, String> updateDates = new ImmutablePair<>(null, null);
+        final SearchBooksParameters parameters = new SearchBooksParameters(authorsParameters, null, prices, null, creationDates, updateDates);
         final Page<Book> emptyBooksPage = mockEmptyBooksPage();
         when(searchBooksGateway.searchBooks(parameters, 0, 1, null)).thenReturn(emptyBooksPage);
 
@@ -115,7 +122,10 @@ class RemoveAuthorByIdUseCaseTest {
 
         when(removeAuthorByIdGateway.removeAuthorById(1L)).thenReturn(mockRemoveAuthorByIdGatewayOut());
         final SearchAuthorsParameters authorsParameters = new SearchAuthorsParameters(1L, null, null, null, null);
-        final SearchBooksParameters parameters = new SearchBooksParameters(null, authorsParameters, null, null);
+        final ImmutablePair<BigDecimal, BigDecimal> prices = new ImmutablePair<>(null, null);
+        final ImmutablePair<String, String> creationDates = new ImmutablePair<>(null, null);
+        final ImmutablePair<String, String> updateDates = new ImmutablePair<>(null, null);
+        final SearchBooksParameters parameters = new SearchBooksParameters(authorsParameters, null, prices, null, creationDates, updateDates);
         final Page<Book> bookPage = mockPageWithOneBook();
         when(searchBooksGateway.searchBooks(parameters, 0, 1, null)).thenReturn(bookPage);
 

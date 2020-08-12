@@ -55,7 +55,7 @@ class SearchAuthorsControllerTest {
         final SearchAuthorsParameters parameters = new SearchAuthorsParameters(null, "John", "MALE", "1960-01-01", "1980-12-31");
         when(searchAuthorsUseCase.searchAuthors(parameters, 1, 3, "name: ASC")).thenReturn(mockSearchAuthorsUseCaseReturn());
 
-        final String queryParameters = "page=1&size=3&sort=name,asc&name=John&gender=MALE&startBirthday=1960-01-01&endBirthday=1980-12-31";
+        final String queryParameters = "page=1&size=3&sort=name,asc&name=John&gender=MALE&startBirthdate=1960-01-01&endBirthdate=1980-12-31";
 
         mockMvc.perform(get(String.format("/authors/?%s", queryParameters)).contentType(MediaType.APPLICATION_JSON_VALUE)
                                                                            .accept(MediaType.APPLICATION_JSON_VALUE))
@@ -65,7 +65,7 @@ class SearchAuthorsControllerTest {
                .andExpect(jsonPath("$.content[0].id", is(1)))
                .andExpect(jsonPath("$.content[0].name", is("Joshua Bloch")))
                .andExpect(jsonPath("$.content[0].gender", is("MALE")))
-               .andExpect(jsonPath("$.content[0].birthday", is("1961-08-28")))
+               .andExpect(jsonPath("$.content[0].birthdate", is("1961-08-28")))
                .andExpect(jsonPath("$.pageable.page", is(1)))
                .andExpect(jsonPath("$.pageable.size", is(3)))
                .andExpect(jsonPath("$.pageable.numberOfElements", is(1)))

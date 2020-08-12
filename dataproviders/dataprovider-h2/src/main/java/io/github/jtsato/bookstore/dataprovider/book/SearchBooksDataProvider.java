@@ -1,5 +1,6 @@
 package io.github.jtsato.bookstore.dataprovider.book;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -15,8 +16,8 @@ import io.github.jtsato.bookstore.core.common.paging.Page;
 import io.github.jtsato.bookstore.dataprovider.book.domain.BookEntity;
 import io.github.jtsato.bookstore.dataprovider.book.domain.QBookEntity;
 import io.github.jtsato.bookstore.dataprovider.book.mapper.BookMapper;
-import io.github.jtsato.bookstore.dataprovider.book.repository.BookPredicateBuilder;
 import io.github.jtsato.bookstore.dataprovider.book.repository.BookRepository;
+import io.github.jtsato.bookstore.dataprovider.book.repository.SearchBookPredicateBuilder;
 import io.github.jtsato.bookstore.dataprovider.common.PageMapper;
 import io.github.jtsato.bookstore.dataprovider.common.PageRequestHelper;
 
@@ -36,14 +37,23 @@ public class SearchBooksDataProvider implements SearchBooksGateway {
     @Override
     public Page<Book> searchBooks(final SearchBooksParameters parameters, final Integer pageNumber, final Integer size, final String orderBy) {
 
-        final PageRequest pageRequest = PageRequestHelper.buildPageRequest(pageNumber, size, orderBy);
+        final PageRequest pageRequest = PageRequestHelper.buildPageRequest(pageNumber, size, sanitizeOrderBy(orderBy));
 
-        final BooleanBuilder predicate = new BookPredicateBuilder(QBookEntity.bookEntity).buildBooleanBuilder(parameters);
+        final BooleanBuilder predicate = new SearchBookPredicateBuilder(QBookEntity.bookEntity).buildBooleanBuilder(parameters);
 
         final org.springframework.data.domain.Page<BookEntity> page = bookRepository.findAll(predicate,
                                                                                              pageRequest,
                                                                                              EntityGraphUtils.fromAttributePaths("author"));
 
         return pageMapper.of(page, BookMapper::of);
+    }
+
+    private String sanitizeOrderBy(final String orderBy) {
+
+        if (StringUtils.isBlank(orderBy) || StringUtils.equalsIgnoreCase(orderBy, "UNSORTED")) {
+            return "title:asc";
+        }
+
+        return StringUtils.stripToEmpty(orderBy);
     }
 }

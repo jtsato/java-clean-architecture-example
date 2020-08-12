@@ -26,5 +26,5 @@ public class Author implements Serializable {
 
     private final Gender gender;
 
-    private final LocalDate birthday;
+    private final LocalDate birthdate;
 }

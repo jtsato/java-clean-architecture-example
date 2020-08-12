@@ -26,5 +26,5 @@ public class UpdateAuthorByIdResponse implements Serializable {
 
     private final String gender;
 
-    private final LocalDate birthday;
+    private final LocalDate birthdate;
 }

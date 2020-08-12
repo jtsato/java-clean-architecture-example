@@ -25,6 +25,6 @@ public class RegisterBookPresenter {
     }
 
     public static RegisterBookAuthorResponse of(final Author author) {
-        return new RegisterBookAuthorResponse(author.getId(), author.getName(), author.getGender().toString(), author.getBirthday());
+        return new RegisterBookAuthorResponse(author.getId(), author.getName(), author.getGender().toString(), author.getBirthdate());
     }
 }

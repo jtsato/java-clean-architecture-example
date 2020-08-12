@@ -13,6 +13,7 @@ import java.util.List;
 
 import javax.validation.ConstraintViolationException;
 
+import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -47,7 +48,10 @@ class SearchBooksUseCaseTest {
     void failToSearchBooksWithInconsistentParameters() {
 
         final Exception exception = Assertions.assertThrows(Exception.class, () -> {
-            new SearchBooksParameters(null, null, "2019-02-29T00:00:00", "2019-02-29T23:59:59");
+            final ImmutablePair<BigDecimal, BigDecimal> prices = new ImmutablePair<>(null, null);
+            final ImmutablePair<String, String> creationDates = new ImmutablePair<>("2019-02-29T00:00:00", "2019-02-29T23:59:59");
+            final ImmutablePair<String, String> updateDates = new ImmutablePair<>("2019-02-29T00:00:00", "2019-02-29T23:59:59");
+            new SearchBooksParameters(null, null, prices, null, creationDates, updateDates);
         });
 
         assertThat(exception).isInstanceOf(ConstraintViolationException.class);
@@ -59,8 +63,11 @@ class SearchBooksUseCaseTest {
     @DisplayName("Successful to search books if found")
     @Test
     void successfulToSearchBooksIfFound() {
-
-        final SearchBooksParameters parameters = new SearchBooksParameters(null, null, "2020-02-29T00:00:00", "2020-02-29T23:59:59");
+        
+        final ImmutablePair<BigDecimal, BigDecimal> prices = new ImmutablePair<>(null, null);
+        final ImmutablePair<String, String> creationDates = new ImmutablePair<>("2020-02-29T00:00:00", "2020-02-29T23:59:59");
+        final ImmutablePair<String, String> updateDates = new ImmutablePair<>("2020-02-29T00:00:00", "2020-02-29T23:59:59");
+        final SearchBooksParameters parameters = new SearchBooksParameters(null, null, prices, null, creationDates, updateDates);
         final Page<Book> pageWithOneBook = mockPageWithOneBook();
 
         when(searchBooksGateway.searchBooks(parameters, 0, 1, "id:asc")).thenReturn(pageWithOneBook);
@@ -109,8 +116,12 @@ class SearchBooksUseCaseTest {
     @DisplayName("Fail to search book by id if not found")
     @Test
     void successfulToSearchBooksIfNotFound() {
+        
+        final ImmutablePair<BigDecimal, BigDecimal> prices = new ImmutablePair<>(null, null);
+        final ImmutablePair<String, String> creationDates = new ImmutablePair<>(null, null);
+        final ImmutablePair<String, String> updateDates = new ImmutablePair<>(null, null);
+        final SearchBooksParameters parameters = new SearchBooksParameters(null, null, prices, null, creationDates, updateDates);        
 
-        final SearchBooksParameters parameters = new SearchBooksParameters(null, null, null, null);
         final Page<Book> emptyBooksPage = mockEmptyBooksPage();
         when(searchBooksGateway.searchBooks(parameters, 0, 1, "id:asc")).thenReturn(emptyBooksPage);
 

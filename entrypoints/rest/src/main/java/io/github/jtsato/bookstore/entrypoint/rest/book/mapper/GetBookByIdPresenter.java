@@ -25,6 +25,6 @@ public class GetBookByIdPresenter {
     }
 
     private static GetBookByIdAuthorResponse of(final Author author) {
-        return new GetBookByIdAuthorResponse(author.getId(), author.getName(), author.getGender().toString(), author.getBirthday());
+        return new GetBookByIdAuthorResponse(author.getId(), author.getName(), author.getGender().toString(), author.getBirthdate());
     }
 }

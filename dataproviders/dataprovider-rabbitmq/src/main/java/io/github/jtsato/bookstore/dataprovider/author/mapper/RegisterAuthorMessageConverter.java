@@ -15,6 +15,6 @@ import lombok.NoArgsConstructor;
 public class RegisterAuthorMessageConverter {
 
     public static RegisterAuthorMessage of(final Author author) {
-        return new RegisterAuthorMessage(author.getName(), author.getGender().toString(), author.getBirthday().format(DateTimeFormatter.ISO_DATE));
+        return new RegisterAuthorMessage(author.getName(), author.getGender().toString(), author.getBirthdate().format(DateTimeFormatter.ISO_DATE));
     }
 }

@@ -42,7 +42,7 @@ class UpdateAuthorByIdDataProviderTest {
         assertThat(result.getId()).isEqualTo(update.getId());
         assertThat(result.getName()).isEqualTo(update.getName());
         assertThat(result.getGender()).isEqualTo(update.getGender());
-        assertThat(result.getBirthday()).isEqualTo(update.getBirthday());
+        assertThat(result.getBirthdate()).isEqualTo(update.getBirthdate());
 
         assertThat(authorRepository.count()).isEqualTo(4L);
     }

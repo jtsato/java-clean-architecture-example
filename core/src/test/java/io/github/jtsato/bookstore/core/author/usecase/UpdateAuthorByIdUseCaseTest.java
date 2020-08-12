@@ -54,7 +54,7 @@ class UpdateAuthorByIdUseCaseTest {
         assertThat(constraintViolationException.getMessage()).contains("id: validation.author.id.null");
         assertThat(constraintViolationException.getMessage()).contains("name: validation.author.name.blank");
         assertThat(constraintViolationException.getMessage()).contains("gender: validation.author.gender.blank");
-        assertThat(constraintViolationException.getMessage()).contains("birthday: validation.author.birthday.notvalid");
+        assertThat(constraintViolationException.getMessage()).contains("birthdate: validation.author.birthdate.notvalid");
     }
 
     @DisplayName("Successful to update author by id if found")
@@ -88,7 +88,7 @@ class UpdateAuthorByIdUseCaseTest {
         assertThat(author.getId()).isEqualTo(1L);
         assertThat(author.getName()).isEqualTo("Joshua Bloch");
         assertThat(author.getGender()).isEqualTo(Gender.MALE);
-        assertThat(author.getBirthday()).isEqualTo(LocalDate.parse("1961-08-28"));
+        assertThat(author.getBirthdate()).isEqualTo(LocalDate.parse("1961-08-28"));
     }
 
     @DisplayName("Fail to update author by id if found and name is duplicated")

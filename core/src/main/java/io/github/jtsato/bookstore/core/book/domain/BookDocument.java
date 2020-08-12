@@ -16,7 +16,7 @@ import lombok.ToString;
 @Getter
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = false)
-@ToString
+@ToString(exclude = {"content"})
 public class BookDocument implements Serializable {
 
     private static final long serialVersionUID = 8678192311370127564L;

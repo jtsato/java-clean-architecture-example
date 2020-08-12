@@ -62,7 +62,7 @@ class UpdateAuthorByIdControllerTest {
                .andExpect(jsonPath("$.id", is(1)))
                .andExpect(jsonPath("$.name", is("Joshua Bloch")))
                .andExpect(jsonPath("$.gender", is("MALE")))
-               .andExpect(jsonPath("$.birthday", is("1961-08-28")));
+               .andExpect(jsonPath("$.birthdate", is("1961-08-28")));
 
         verify(updateAuthorByIdUseCase, times(1)).updateAuthorById(mockUpdateAuthorByIdUseCaseParameters());
         verifyNoMoreInteractions(updateAuthorByIdUseCase);

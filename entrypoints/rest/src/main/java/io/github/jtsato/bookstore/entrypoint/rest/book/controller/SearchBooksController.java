@@ -1,10 +1,10 @@
 package io.github.jtsato.bookstore.entrypoint.rest.book.controller;
 
+import java.math.BigDecimal;
+
+import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.springframework.boot.context.properties.bind.DefaultValue;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.web.PageableDefault;
-import org.springframework.data.web.SortDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -52,24 +52,28 @@ public class SearchBooksController implements SearchBooksApiMethod {
     @LogExecutionTime
     @ResponseStatus(HttpStatus.OK)
     @GetMapping
-    public SearchBooksResponse searchBooks(@PageableDefault(page = 0, size = 20) 
-                                           @SortDefault.SortDefaults({@SortDefault(sort = "title", direction = Sort.Direction.ASC)}) final Pageable pageable,
-                                           @DefaultValue final SearchBooksRequest request) {
+    public SearchBooksResponse searchBooks(final Pageable pageable, @DefaultValue final SearchBooksRequest request) {
 
         log.debug("Starting Controller -> SearchBooksController with {}", JsonConverter.convert(request));
 
-        final SearchBooksParameters parameters = new SearchBooksParameters(request.getTitle(),
-                                                                           buildParameters(request),
-                                                                           request.getStartCreationDate(),
-                                                                           request.getEndCreationDate());
+        final ImmutablePair<BigDecimal, BigDecimal> prices = new ImmutablePair<>(request.getStartPrice(), request.getEndPrice());
+        final ImmutablePair<String, String> creationDates = new ImmutablePair<>(request.getStartCreationDate(), request.getEndCreationDate());
+        final ImmutablePair<String, String> updateDates = new ImmutablePair<>(request.getStartUpdateDate(), request.getEndUpdateDate());
+
+         final SearchBooksParameters parameters = new SearchBooksParameters(buildAuthorParameters(request),
+                                                                           request.getTitle(),
+                                                                           prices,
+                                                                           request.getAvailable(),
+                                                                           creationDates,
+                                                                           updateDates);
 
         final Page<Book> books = searchBooksUseCase.execute(parameters, pageable.getPageNumber(), pageable.getPageSize(), pageable.getSort().toString());
 
         return SearchBooksPresenter.of(books);
     }
 
-    private SearchAuthorsParameters buildParameters(final SearchBooksRequest searchBooksRequest) {
+    private SearchAuthorsParameters buildAuthorParameters(final SearchBooksRequest searchBooksRequest) {
         final SearchBooksAuthorRequest author = searchBooksRequest.getAuthor();
-        return new SearchAuthorsParameters(author.getId(), author.getName(), author.getGender(), author.getStartBirthday(), author.getEndBirthday());
+        return new SearchAuthorsParameters(author.getId(), author.getName(), author.getGender(), author.getStartBirthdate(), author.getEndBirthdate());
     }
 }

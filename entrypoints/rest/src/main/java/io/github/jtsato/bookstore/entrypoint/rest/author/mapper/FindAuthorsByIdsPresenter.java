@@ -25,6 +25,6 @@ public class FindAuthorsByIdsPresenter {
     }
 
     private static FindAuthorsByIdInnerResponse of(final Author author) {
-        return new FindAuthorsByIdInnerResponse(author.getId(), author.getName(), author.getGender().toString(), author.getBirthday());
+        return new FindAuthorsByIdInnerResponse(author.getId(), author.getName(), author.getGender().toString(), author.getBirthdate());
     }
 }

@@ -97,7 +97,7 @@ class FindBooksByIdsUseCaseTest {
         assertThat(author.getId()).isEqualTo(1L);
         assertThat(author.getName()).isEqualTo("Joshua Bloch");
         assertThat(author.getGender()).isEqualTo(Gender.MALE);
-        assertThat(author.getBirthday()).isEqualTo(LocalDate.parse("1961-08-28"));
+        assertThat(author.getBirthdate()).isEqualTo(LocalDate.parse("1961-08-28"));
     }
 
     private Page<Book> mockFindBooksByIdsGatewayOut() {
@@ -202,6 +202,6 @@ class FindBooksByIdsUseCaseTest {
         assertThat(author.getId()).isEqualTo(1L);
         assertThat(author.getName()).isEqualTo("Joshua Bloch");
         assertThat(author.getGender()).isEqualTo(Gender.MALE);
-        assertThat(author.getBirthday()).isEqualTo(LocalDate.parse("1961-08-28"));
+        assertThat(author.getBirthdate()).isEqualTo(LocalDate.parse("1961-08-28"));
     }
 }

@@ -37,6 +37,6 @@ public class SearchBooksPresenter {
     }
 
     private static SearchBooksAuthorResponse of(final Author author) {
-        return new SearchBooksAuthorResponse(author.getId(), author.getName(), author.getGender().toString(), author.getBirthday());
+        return new SearchBooksAuthorResponse(author.getId(), author.getName(), author.getGender().toString(), author.getBirthdate());
     }
 }

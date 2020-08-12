@@ -16,10 +16,10 @@ public class AuthorMapper {
 
     public static Author of(final AuthorEntity authorEntity) {
         final Gender gender = EnumUtils.valueOf(authorEntity.getGender(), Gender.class);
-        return new Author(authorEntity.getId(), authorEntity.getName(), gender, authorEntity.getBirthday());
+        return new Author(authorEntity.getId(), authorEntity.getName(), gender, authorEntity.getBirthdate());
     }
 
     public static AuthorEntity of(final Author author) {
-        return new AuthorEntity(author.getId(), author.getName(), author.getGender().name(), author.getBirthday());
+        return new AuthorEntity(author.getId(), author.getName(), author.getGender().name(), author.getBirthdate());
     }
 }

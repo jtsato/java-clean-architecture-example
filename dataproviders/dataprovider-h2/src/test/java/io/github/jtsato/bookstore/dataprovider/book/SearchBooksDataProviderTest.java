@@ -2,8 +2,10 @@ package io.github.jtsato.bookstore.dataprovider.book;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.math.BigDecimal;
 import java.util.List;
 
+import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,27 +39,25 @@ class SearchBooksDataProviderTest {
     @Test
     void successfulToSearchBooksIfFound() {
 
-        final String title = "Core Java SE 9 for the Impatient, 2nd Edition";
         final Long authorId = 1L;
-        final String startCreationDate = "2020-03-12T21:04:59.000";
-        final String endCreationDate = "2020-03-12T21:05:00.000";
+        final SearchAuthorsParameters searchAuthorsParameters = new SearchAuthorsParameters(authorId, null, null, null, null);
 
-        final SearchBooksParameters parameters = new SearchBooksParameters(title,
-                                                                           new SearchAuthorsParameters(authorId, null, null, null, null),
-                                                                           startCreationDate,
-                                                                           endCreationDate);
+        final String title = "Core Java SE 9 for the Impatient, 2nd Edition";
+        final ImmutablePair<BigDecimal, BigDecimal> prices = new ImmutablePair<>(BigDecimal.valueOf(20.00), BigDecimal.valueOf(21.00));
+        final ImmutablePair<String, String> creationDates = new ImmutablePair<>("2020-03-12T21:04:59.000", "2020-03-13T21:05:00.000");
+        final ImmutablePair<String, String> updateDates = new ImmutablePair<>("2020-04-12T21:04:59.000", "2020-04-12T21:05:00.000");
+        
+        final SearchBooksParameters parameters = new SearchBooksParameters(searchAuthorsParameters, title, prices, Boolean.FALSE, creationDates, updateDates);
 
-        final String orderBy = "title:desc";
+        final Page<Book> page = searchBooksDataProvider.searchBooks(parameters, null, null, null);
 
-        final Page<Book> pageOfBooks = searchBooksDataProvider.searchBooks(parameters, null, null, orderBy);
+        assertThat(page).isNotNull();
 
-        assertThat(pageOfBooks).isNotNull();
+        final List<Book> books = page.getContent();
 
-        final List<Book> Books = pageOfBooks.getContent();
+        assertThat(books).isNotNull().isNotEmpty();
 
-        assertThat(Books).isNotNull().isNotEmpty();
-
-        final Pageable pageable = pageOfBooks.getPageable();
+        final Pageable pageable = page.getPageable();
 
         assertThat(pageable).isNotNull();
         assertThat(pageable.getPage()).isZero();
@@ -73,25 +73,27 @@ class SearchBooksDataProviderTest {
     @Test
     void successfulToSearchBooksIfNotFound() {
 
-        final String title = "Core Java SE 9 for the Impatient, 2nd Edition";
         final Long authorId = 1L;
-        final String startCreationDate = "2020-03-12T21:05:00";
-        final String endCreationDate = "2020-03-12T21:04:58";
+        final SearchAuthorsParameters searchAuthorsParameters = new SearchAuthorsParameters(authorId, null, null, null, null);
 
-        final SearchAuthorsParameters authorParameters = new SearchAuthorsParameters(authorId, null, null, null, null);
-        final SearchBooksParameters parameters = new SearchBooksParameters(title, authorParameters, startCreationDate, endCreationDate);
+        final String title = "Core Java SE 9 for the Impatient, 2nd Edition";
+        final ImmutablePair<BigDecimal, BigDecimal> prices = new ImmutablePair<>(BigDecimal.valueOf(20.00), BigDecimal.valueOf(21.00));
+        final ImmutablePair<String, String> creationDates = new ImmutablePair<>("2020-03-12T21:05:00", "2020-03-12T21:04:58");
+        final ImmutablePair<String, String> updateDates = new ImmutablePair<>("2020-03-12T21:04:59.000", "2020-03-12T21:05:00.000");
 
-        final String orderBy = "title:desc";
+        final SearchBooksParameters parameters = new SearchBooksParameters(searchAuthorsParameters, title, prices, null, creationDates, updateDates);
 
-        final Page<Book> pageOfBooks = searchBooksDataProvider.searchBooks(parameters, 0, -1, orderBy);
+        final String orderBy = "creationDate,title:desc";
 
-        assertThat(pageOfBooks).isNotNull();
+        final Page<Book> page = searchBooksDataProvider.searchBooks(parameters, 0, -1, orderBy);
 
-        final List<Book> Books = pageOfBooks.getContent();
+        assertThat(page).isNotNull();
 
-        assertThat(Books).isNotNull().isEmpty();
+        final List<Book> books = page.getContent();
 
-        final Pageable pageable = pageOfBooks.getPageable();
+        assertThat(books).isNotNull().isEmpty();
+
+        final Pageable pageable = page.getPageable();
 
         assertThat(pageable).isNotNull();
         assertThat(pageable.getPage()).isZero();
@@ -103,34 +105,78 @@ class SearchBooksDataProviderTest {
         assertThat(bookRepository.count()).isEqualTo(4);
     }
 
-    @DisplayName("Successful to paging books if found")
+    @DisplayName("Successful to paging books if found with unsorted order")
     @Test
-    void successfulToPagingBooksIfFound() {
+    void successfulToPagingBooksIfFoundWithUnsortedOrder() {
 
-        final SearchBooksParameters parameters = new SearchBooksParameters(null, null, null, null);
+        final ImmutablePair<BigDecimal, BigDecimal> prices = new ImmutablePair<>(null, null);
+        final ImmutablePair<String, String> creationDates = new ImmutablePair<>(null, null);
+        final ImmutablePair<String, String> updateDates = new ImmutablePair<>(null, null);
 
-        final String orderBy = "creationDate,title:desc";
+        final SearchBooksParameters parameters = new SearchBooksParameters(null, null, prices, null, creationDates, updateDates);
+        final String orderBy = "UNSORTED";
 
         final Page<Book> page = searchBooksDataProvider.searchBooks(parameters, 1, 3, orderBy);
 
         assertThat(page.getContent()).isNotEmpty();
 
-        final Page<Book> pageOfBooks = searchBooksDataProvider.searchBooks(parameters, 0, 1, orderBy);
+        assertThat(page).isNotNull();
 
-        assertThat(pageOfBooks).isNotNull();
+        final List<Book> books = page.getContent();
 
-        final List<Book> Books = pageOfBooks.getContent();
+        assertThat(books).isNotNull().isNotEmpty();
 
-        assertThat(Books).isNotNull().isNotEmpty();
-
-        final Pageable pageable = pageOfBooks.getPageable();
-
+        final Pageable pageable = page.getPageable();
+        
         assertThat(pageable).isNotNull();
-        assertThat(pageable.getPage()).isZero();
-        assertThat(pageable.getSize()).isOne();
+        assertThat(pageable.getPage()).isOne();
+        assertThat(pageable.getSize()).isEqualTo(3);
         assertThat(pageable.getNumberOfElements()).isOne();
         assertThat(pageable.getTotalOfElements()).isEqualTo(4);
-        assertThat(pageable.getTotalPages()).isEqualTo(4);
+        assertThat(pageable.getTotalPages()).isEqualTo(2);        
+        
+        final Book book = books.get(0);
+        
+        assertThat(book).isNotNull();
+        assertThat(book.getId()).isNotNull().isEqualTo(1L);
+
+        assertThat(bookRepository.count()).isEqualTo(4);
+    }
+    
+    @DisplayName("Successful to paging books if found with sorted order")
+    @Test
+    void successfulToPagingBooksIfFoundWithSortedOrder() {
+
+        final ImmutablePair<BigDecimal, BigDecimal> prices = new ImmutablePair<>(null, null);
+        final ImmutablePair<String, String> creationDates = new ImmutablePair<>(null, null);
+        final ImmutablePair<String, String> updateDates = new ImmutablePair<>(null, null);
+
+        final SearchBooksParameters parameters = new SearchBooksParameters(null, null, prices, null, creationDates, updateDates);
+        final String orderBy = "id:asc";
+
+        final Page<Book> page = searchBooksDataProvider.searchBooks(parameters, 1, 3, orderBy);
+
+        assertThat(page.getContent()).isNotEmpty();
+
+        assertThat(page).isNotNull();
+
+        final List<Book> books = page.getContent();
+
+        assertThat(books).isNotNull().isNotEmpty();
+
+        final Pageable pageable = page.getPageable();
+        
+        assertThat(pageable).isNotNull();
+        assertThat(pageable.getPage()).isOne();
+        assertThat(pageable.getSize()).isEqualTo(3);
+        assertThat(pageable.getNumberOfElements()).isOne();
+        assertThat(pageable.getTotalOfElements()).isEqualTo(4);
+        assertThat(pageable.getTotalPages()).isEqualTo(2);        
+        
+        final Book book = books.get(0);
+        
+        assertThat(book).isNotNull();
+        assertThat(book.getId()).isNotNull().isEqualTo(4L);
 
         assertThat(bookRepository.count()).isEqualTo(4);
     }

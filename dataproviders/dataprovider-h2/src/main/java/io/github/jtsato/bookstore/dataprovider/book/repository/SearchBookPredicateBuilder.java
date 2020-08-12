@@ -18,9 +18,9 @@ import io.github.jtsato.bookstore.dataprovider.common.predicate.AbstractPredicat
  * @author Jorge Takeshi Sato  
  */
 
-public class BookPredicateBuilder extends AbstractPredicateBuilderImpl<QBookEntity, SearchBooksParameters> {
+public class SearchBookPredicateBuilder extends AbstractPredicateBuilderImpl<QBookEntity, SearchBooksParameters> {
 
-    public BookPredicateBuilder(final QBookEntity entityPath) {
+    public SearchBookPredicateBuilder(final QBookEntity entityPath) {
         super(entityPath);
     }
 
@@ -29,13 +29,25 @@ public class BookPredicateBuilder extends AbstractPredicateBuilderImpl<QBookEnti
 
         final List<BooleanExpression> booleanExpressions = new LinkedList<>();
 
-        if (StringUtils.isNotBlank(query.getTitle())) {
-            booleanExpressions.add(entityPath.title.like(addLikeOperator(query.getTitle())));
-        }
-
         if (query.getAuthorParameters() != null) {
             final AuthorPredicateBuilder authorPredicateBuilder = new AuthorPredicateBuilder(entityPath.author);
             booleanExpressions.addAll(authorPredicateBuilder.buildBooleanExpressions(query.getAuthorParameters()));
+        }
+
+        if (StringUtils.isNotBlank(query.getTitle())) {
+            booleanExpressions.add(entityPath.title.like(addLikeOperator(query.getTitle())));
+        }
+        
+        if (query.getStartPrice() != null) {
+            booleanExpressions.add(entityPath.price.goe(query.getStartPrice()));
+        }
+        
+        if (query.getEndPrice() != null) {
+            booleanExpressions.add(entityPath.price.loe(query.getEndPrice()));
+        }
+
+        if (query.getAvailable() != null) {
+            booleanExpressions.add(entityPath.available.eq(query.getAvailable()));
         }
 
         if (StringUtils.isNotBlank(query.getStartCreationDate())) {
@@ -46,6 +58,16 @@ public class BookPredicateBuilder extends AbstractPredicateBuilderImpl<QBookEnti
         if (StringUtils.isNotBlank(query.getEndCreationDate())) {
             final LocalDateTime endCreationDate = LocalDateTime.parse(query.getEndCreationDate(), DateTimeFormatter.ISO_DATE_TIME);
             booleanExpressions.add(entityPath.creationDate.loe(endCreationDate));
+        }
+
+        if (StringUtils.isNotBlank(query.getStartUpdateDate())) {
+            final LocalDateTime startUpdateDate = LocalDateTime.parse(query.getStartUpdateDate(), DateTimeFormatter.ISO_DATE_TIME);
+            booleanExpressions.add(entityPath.updateDate.goe(startUpdateDate));
+        }
+
+        if (StringUtils.isNotBlank(query.getEndUpdateDate())) {
+            final LocalDateTime endUpdateDate = LocalDateTime.parse(query.getEndUpdateDate(), DateTimeFormatter.ISO_DATE_TIME);
+            booleanExpressions.add(entityPath.updateDate.loe(endUpdateDate));
         }
 
         return booleanExpressions;

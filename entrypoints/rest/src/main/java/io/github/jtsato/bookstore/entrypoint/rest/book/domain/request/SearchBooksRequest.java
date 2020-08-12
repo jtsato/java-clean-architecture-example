@@ -1,6 +1,7 @@
 package io.github.jtsato.bookstore.entrypoint.rest.book.domain.request;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -23,7 +24,17 @@ public final class SearchBooksRequest implements Serializable {
 
     private String title;
 
+    private Boolean available;
+    
+    private BigDecimal startPrice;
+
+    private BigDecimal endPrice;    
+
     private String startCreationDate;
 
     private String endCreationDate;
+
+    private String startUpdateDate;
+
+    private String endUpdateDate;
 }

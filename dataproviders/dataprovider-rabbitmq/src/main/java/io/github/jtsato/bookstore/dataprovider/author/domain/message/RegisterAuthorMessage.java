@@ -19,5 +19,5 @@ public class RegisterAuthorMessage implements Serializable {
 
     private final String gender;
 
-    private final String birthday;
+    private final String birthdate;
 }

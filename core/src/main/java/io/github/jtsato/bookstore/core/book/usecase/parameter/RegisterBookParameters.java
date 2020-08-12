@@ -10,6 +10,7 @@ import io.github.jtsato.bookstore.core.common.validation.SelfValidating;
 import lombok.AccessLevel;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.ToString;
 import lombok.experimental.FieldDefaults;
 
 /**
@@ -19,6 +20,7 @@ import lombok.experimental.FieldDefaults;
 @Getter
 @FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
 @EqualsAndHashCode(callSuper = false)
+@ToString
 public class RegisterBookParameters extends SelfValidating<RegisterBookParameters> {
 
     @NotNull(message = "validation.author.id.null")

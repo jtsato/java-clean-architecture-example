@@ -40,6 +40,6 @@ public class FindBooksByIdsPresenter {
     }
 
     private static FindBooksByIdsAuthorResponse of(final Author author) {
-        return new FindBooksByIdsAuthorResponse(author.getId(), author.getName(), author.getGender().toString(), author.getBirthday());
+        return new FindBooksByIdsAuthorResponse(author.getId(), author.getName(), author.getGender().toString(), author.getBirthdate());
     }
 }

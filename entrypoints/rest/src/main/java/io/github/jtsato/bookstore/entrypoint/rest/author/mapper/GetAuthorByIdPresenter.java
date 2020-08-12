@@ -13,6 +13,6 @@ import lombok.NoArgsConstructor;
 public class GetAuthorByIdPresenter {
 
     public static GetAuthorByIdResponse of(final Author author) {
-        return new GetAuthorByIdResponse(author.getId(), author.getName(), author.getGender().toString(), author.getBirthday());
+        return new GetAuthorByIdResponse(author.getId(), author.getName(), author.getGender().toString(), author.getBirthdate());
     }
 }

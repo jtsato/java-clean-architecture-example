@@ -71,7 +71,7 @@ class FindBooksByIdControllerTest {
                .andExpect(jsonPath("$.content[0].author.id", is(1)))
                .andExpect(jsonPath("$.content[0].author.name", is("Joshua Bloch")))
                .andExpect(jsonPath("$.content[0].author.gender", is("MALE")))
-               .andExpect(jsonPath("$.content[0].author.birthday", is("1961-08-28")))
+               .andExpect(jsonPath("$.content[0].author.birthdate", is("1961-08-28")))
                .andExpect(jsonPath("$.content[0].title", is("Effective Java (2nd Edition)")))
                .andExpect(jsonPath("$.content[0].price", is(10.00)))
                .andExpect(jsonPath("$.content[0].available", is(Boolean.TRUE)))

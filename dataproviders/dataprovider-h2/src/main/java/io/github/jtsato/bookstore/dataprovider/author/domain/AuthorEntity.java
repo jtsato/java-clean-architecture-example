@@ -44,6 +44,6 @@ public class AuthorEntity implements Serializable {
     @Column(name = "GENDER", nullable = false)
     private String gender;
 
-    @Column(name = "BIRTHDAY", nullable = false)
-    private LocalDate birthday;
+    @Column(name = "BIRTHDATE", nullable = false)
+    private LocalDate birthdate;
 }

@@ -53,7 +53,7 @@ class RegisterAuthorUseCaseTest {
         final ConstraintViolationException constraintViolationException = (ConstraintViolationException) exception;
         assertThat(constraintViolationException.getMessage()).contains("name: validation.author.name.blank");
         assertThat(constraintViolationException.getMessage()).contains("gender: validation.author.gender.blank");
-        assertThat(constraintViolationException.getMessage()).contains("birthday: validation.author.birthday.blank");
+        assertThat(constraintViolationException.getMessage()).contains("birthdate: validation.author.birthdate.blank");
     }
 
     @DisplayName("Successful to register author if not registered")
@@ -71,7 +71,7 @@ class RegisterAuthorUseCaseTest {
         assertThat(author.getId()).isEqualTo(1L);
         assertThat(author.getName()).isEqualTo("Joshua Bloch");
         assertThat(author.getGender()).isEqualTo(Gender.MALE);
-        assertThat(author.getBirthday()).isEqualTo(LocalDate.parse("1961-08-28"));
+        assertThat(author.getBirthdate()).isEqualTo(LocalDate.parse("1961-08-28"));
     }
 
     private Author mockRegisterAuthorGatewayIn() {

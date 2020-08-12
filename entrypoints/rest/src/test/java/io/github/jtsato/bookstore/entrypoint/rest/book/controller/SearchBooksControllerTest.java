@@ -17,6 +17,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -56,8 +57,12 @@ class SearchBooksControllerTest {
     void successfulSearchBooksIfFound()
         throws Exception {
 
-        final SearchAuthorsParameters authorParameters = new SearchAuthorsParameters(1L, null, null, null, null);
-        final SearchBooksParameters parameters = new SearchBooksParameters("Effective Java", authorParameters, "2020-02-29T00:00:00", "2020-02-29T23:59:59");
+        final SearchAuthorsParameters searchAuthorsParameters = new SearchAuthorsParameters(1L, null, null, null, null);
+        final ImmutablePair<BigDecimal, BigDecimal> prices = new ImmutablePair<>(null, null);
+        final ImmutablePair<String, String> creationDates = new ImmutablePair<>("2020-02-29T00:00:00", "2020-02-29T23:59:59");
+        final ImmutablePair<String, String> updateDates = new ImmutablePair<>(null, null);
+        final SearchBooksParameters parameters = new SearchBooksParameters(searchAuthorsParameters, "Effective Java", prices, null, creationDates, updateDates);
+
         when(searchBooksUseCase.execute(parameters, 1, 3, "title: ASC")).thenReturn(mockSearchBooksUseCaseReturn());
 
         final String queryParameters = "page=1&size=3&sort=title,asc&title=Effective Java&author.id=1&startCreationDate=2020-02-29T00:00:00&endCreationDate=2020-02-29T23:59:59";
@@ -71,7 +76,7 @@ class SearchBooksControllerTest {
                .andExpect(jsonPath("$.content[0].author.id", is(1)))
                .andExpect(jsonPath("$.content[0].author.name", is("Joshua Bloch")))
                .andExpect(jsonPath("$.content[0].author.gender", is("MALE")))
-               .andExpect(jsonPath("$.content[0].author.birthday", is("1961-08-28")))
+               .andExpect(jsonPath("$.content[0].author.birthdate", is("1961-08-28")))
                .andExpect(jsonPath("$.content[0].title", is("Effective Java (2nd Edition)")))
                .andExpect(jsonPath("$.content[0].price", is(10.00)))
                .andExpect(jsonPath("$.content[0].available", is(Boolean.TRUE)))

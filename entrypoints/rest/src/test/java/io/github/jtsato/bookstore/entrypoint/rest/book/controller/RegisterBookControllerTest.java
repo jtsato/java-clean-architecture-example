@@ -64,7 +64,7 @@ class RegisterBookControllerTest {
                .andExpect(jsonPath("$.author.id", is(1)))
                .andExpect(jsonPath("$.author.name", is("Joshua Bloch")))
                .andExpect(jsonPath("$.author.gender", is("MALE")))
-               .andExpect(jsonPath("$.author.birthday", is("1961-08-28")))
+               .andExpect(jsonPath("$.author.birthdate", is("1961-08-28")))
                .andExpect(jsonPath("$.title", is("Effective Java (2nd Edition)")))
                .andExpect(jsonPath("$.price", is(10.00)))
                .andExpect(jsonPath("$.available", is(Boolean.TRUE)))

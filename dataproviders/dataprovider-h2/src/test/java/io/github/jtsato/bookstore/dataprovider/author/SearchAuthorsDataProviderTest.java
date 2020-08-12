@@ -39,26 +39,27 @@ class SearchAuthorsDataProviderTest {
 
         final String name = "Robert Cecil Martin";
         final String gender = Gender.MALE.name();
-        final String startBirthdayDate = "1952-12-04";
-        final String endBirthdayDate = "1952-12-06";
+        final String startBirthdateDate = "1952-12-04";
+        final String endBirthdateDate = "1952-12-06";
 
-        final SearchAuthorsParameters parameters = new SearchAuthorsParameters(null, name, gender, startBirthdayDate, endBirthdayDate);
+        final SearchAuthorsParameters parameters = new SearchAuthorsParameters(null, name, gender, startBirthdateDate, endBirthdateDate);
 
         final String orderBy = "name:desc,gender:asc";
 
-        final Page<Author> pageOfAuthors = searchAuthorsDataProvider.searchAuthors(parameters, null, null, orderBy);
+        final Page<Author> page = searchAuthorsDataProvider.searchAuthors(parameters, null, null, orderBy);
 
-        assertThat(pageOfAuthors).isNotNull();
+        assertThat(page).isNotNull();
 
-        final List<Author> authors = pageOfAuthors.getContent();
+        final List<Author> authors = page.getContent();
 
         assertThat(authors).isNotNull().isNotEmpty();
 
-        final Pageable pageable = pageOfAuthors.getPageable();
+        final Pageable pageable = page.getPageable();
 
         assertThat(pageable).isNotNull();
         assertThat(pageable.getPage()).isZero();
         assertThat(pageable.getSize()).isEqualTo(10);
+        assertThat(pageable.getNumberOfElements()).isOne();
         assertThat(pageable.getTotalOfElements()).isOne();
         assertThat(pageable.getTotalPages()).isOne();
 
@@ -71,56 +72,97 @@ class SearchAuthorsDataProviderTest {
 
         final String name = "Joshua Bloch";
         final String gender = Gender.MALE.name();
-        final String startBirthdayDate = "1952-12-06";
-        final String endBirthdayDate = "1952-12-06";
+        final String startBirthdateDate = "1952-12-06";
+        final String endBirthdateDate = "1952-12-06";
 
-        final SearchAuthorsParameters parameters = new SearchAuthorsParameters(null, name, gender, startBirthdayDate, endBirthdayDate);
+        final SearchAuthorsParameters parameters = new SearchAuthorsParameters(null, name, gender, startBirthdateDate, endBirthdateDate);
 
         final String orderBy = null;
 
-        final Page<Author> pageOfAuthors = searchAuthorsDataProvider.searchAuthors(parameters, 0, -1, orderBy);
+        final Page<Author> page = searchAuthorsDataProvider.searchAuthors(parameters, 0, -1, orderBy);
 
-        assertThat(pageOfAuthors).isNotNull();
+        assertThat(page).isNotNull();
 
-        final List<Author> authors = pageOfAuthors.getContent();
+        final List<Author> authors = page.getContent();
 
         assertThat(authors).isNotNull().isEmpty();
 
-        final Pageable pageable = pageOfAuthors.getPageable();
+        final Pageable pageable = page.getPageable();
 
         assertThat(pageable).isNotNull();
         assertThat(pageable.getPage()).isZero();
         assertThat(pageable.getSize()).isEqualTo(10);
+        assertThat(pageable.getNumberOfElements()).isZero();
         assertThat(pageable.getTotalOfElements()).isZero();
         assertThat(pageable.getTotalPages()).isZero();
 
         assertThat(authorRepository.count()).isEqualTo(4);
     }
 
-    @DisplayName("Successful to paging authors if found")
+    @DisplayName("Successful to paging authors if found with unsorted order")
     @Test
-    void successfulToPagingAuthorsIfFound() {
+    void successfulToPagingAuthorsIfFoundWithUnsortedOrder() {
 
         final SearchAuthorsParameters parameters = new SearchAuthorsParameters(null, null, null, null, null);
 
-        final String orderBy = "gender:asc,name:desc";
+        final String orderBy = "UNSORTED";
 
-        final Page<Author> pageOfAuthors = searchAuthorsDataProvider.searchAuthors(parameters, 1, 3, orderBy);
+        final Page<Author> page = searchAuthorsDataProvider.searchAuthors(parameters, 1, 3, orderBy);
 
-        assertThat(pageOfAuthors).isNotNull();
+        assertThat(page).isNotNull();
 
-        final List<Author> authors = pageOfAuthors.getContent();
+        final List<Author> authors = page.getContent();
 
         assertThat(authors).isNotNull().isNotEmpty();
 
-        final Pageable pageable = pageOfAuthors.getPageable();
+        final Pageable pageable = page.getPageable();
 
         assertThat(pageable).isNotNull();
         assertThat(pageable.getPage()).isOne();
         assertThat(pageable.getSize()).isEqualTo(3);
+        assertThat(pageable.getNumberOfElements()).isOne();
         assertThat(pageable.getTotalOfElements()).isEqualTo(4);
         assertThat(pageable.getTotalPages()).isEqualTo(2);
+        
+        final Author author = authors.get(0);
+        
+        assertThat(author).isNotNull();
+        assertThat(author.getId()).isNotNull().isEqualTo(1L);
 
         assertThat(authorRepository.count()).isEqualTo(4);
     }
+    
+    @DisplayName("Successful to paging authors if found with sorted order")
+    @Test
+    void successfulToPagingAuthorsIfFoundWithSortedOrder() {
+
+        final SearchAuthorsParameters parameters = new SearchAuthorsParameters(null, null, null, null, null);
+
+        final String orderBy = "birthdate:asc";
+
+        final Page<Author> page = searchAuthorsDataProvider.searchAuthors(parameters, 1, 3, orderBy);
+
+        assertThat(page).isNotNull();
+
+        final List<Author> authors = page.getContent();
+
+        assertThat(authors).isNotNull().isNotEmpty();
+
+        final Pageable pageable = page.getPageable();
+
+        assertThat(pageable).isNotNull();
+        assertThat(pageable.getPage()).isOne();
+        assertThat(pageable.getSize()).isEqualTo(3);
+        assertThat(pageable.getNumberOfElements()).isOne();
+        assertThat(pageable.getTotalOfElements()).isEqualTo(4);
+        assertThat(pageable.getTotalPages()).isEqualTo(2);
+        
+        final Author author = authors.get(0);
+        
+        assertThat(author).isNotNull();
+        assertThat(author.getId()).isNotNull().isEqualTo(3L);
+
+        assertThat(authorRepository.count()).isEqualTo(4);
+    }
+    
 }

@@ -40,14 +40,14 @@ public class AuthorPredicateBuilder extends AbstractPredicateBuilderImpl<QAuthor
             booleanExpressions.add(entityPath.gender.eq(query.getGender()));
         }
 
-        if (StringUtils.isNotBlank(query.getStartBirthdayDate())) {
-            final LocalDate startBirthdayDate = LocalDate.parse(query.getStartBirthdayDate(), DateTimeFormatter.ISO_DATE);
-            booleanExpressions.add(entityPath.birthday.goe(startBirthdayDate));
+        if (StringUtils.isNotBlank(query.getStartBirthdateDate())) {
+            final LocalDate startBirthdateDate = LocalDate.parse(query.getStartBirthdateDate(), DateTimeFormatter.ISO_DATE);
+            booleanExpressions.add(entityPath.birthdate.goe(startBirthdateDate));
         }
 
-        if (StringUtils.isNotBlank(query.getEndBirthdayDate())) {
-            final LocalDate endBirthdayDate = LocalDate.parse(query.getEndBirthdayDate(), DateTimeFormatter.ISO_DATE);
-            booleanExpressions.add(entityPath.birthday.loe(endBirthdayDate));
+        if (StringUtils.isNotBlank(query.getEndBirthdateDate())) {
+            final LocalDate endBirthdateDate = LocalDate.parse(query.getEndBirthdateDate(), DateTimeFormatter.ISO_DATE);
+            booleanExpressions.add(entityPath.birthdate.loe(endBirthdateDate));
         }
 
         return booleanExpressions;

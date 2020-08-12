@@ -13,6 +13,6 @@ import lombok.NoArgsConstructor;
 public class UpdateAuthorByIdPresenter {
 
     public static UpdateAuthorByIdResponse of(final Author author) {
-        return new UpdateAuthorByIdResponse(author.getId(), author.getName(), author.getGender().toString(), author.getBirthday());
+        return new UpdateAuthorByIdResponse(author.getId(), author.getName(), author.getGender().toString(), author.getBirthdate());
     }
 }

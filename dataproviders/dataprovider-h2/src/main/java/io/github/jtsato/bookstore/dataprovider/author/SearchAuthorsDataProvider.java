@@ -1,5 +1,6 @@
 package io.github.jtsato.bookstore.dataprovider.author;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -35,12 +36,21 @@ public class SearchAuthorsDataProvider implements SearchAuthorsGateway {
     @Override
     public Page<Author> searchAuthors(final SearchAuthorsParameters parameters, final Integer pageNumber, final Integer size, final String orderBy) {
 
-        final PageRequest pageRequest = PageRequestHelper.buildPageRequest(pageNumber, size, orderBy);
+        final PageRequest pageRequest = PageRequestHelper.buildPageRequest(pageNumber, size, sanitizeOrderBy(orderBy));
 
         final BooleanBuilder predicate = new AuthorPredicateBuilder(QAuthorEntity.authorEntity).buildBooleanBuilder(parameters);
 
         final org.springframework.data.domain.Page<AuthorEntity> page = authorRepository.findAll(predicate, pageRequest);
 
         return pageMapper.of(page, AuthorMapper::of);
+    }
+
+    private String sanitizeOrderBy(final String orderBy) {
+
+        if (StringUtils.isBlank(orderBy) || StringUtils.equalsIgnoreCase(orderBy, "UNSORTED")) {
+            return "name:asc";
+        }
+
+        return StringUtils.stripToEmpty(orderBy);
     }
 }

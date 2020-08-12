@@ -25,6 +25,6 @@ public class SearchAuthorsPresenter {
     }
 
     private static SearchAuthorsInnerResponse of(final Author author) {
-        return new SearchAuthorsInnerResponse(author.getId(), author.getName(), author.getGender().toString(), author.getBirthday());
+        return new SearchAuthorsInnerResponse(author.getId(), author.getName(), author.getGender().toString(), author.getBirthdate());
     }
 }

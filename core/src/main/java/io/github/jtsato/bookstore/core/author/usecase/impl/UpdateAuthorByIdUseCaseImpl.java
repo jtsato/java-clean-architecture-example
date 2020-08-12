@@ -33,11 +33,11 @@ public class UpdateAuthorByIdUseCaseImpl implements UpdateAuthorByIdUseCase {
 
         checkDuplicatedNameViolation(parameters.getId(), parameters.getName());
 
-        final LocalDate birthday = LocalDate.parse(parameters.getBirthday());
+        final LocalDate birthdate = LocalDate.parse(parameters.getBirthdate());
 
         final Gender gender = EnumUtils.valueOf(parameters.getGender(), Gender.class);
 
-        final Author author = new Author(parameters.getId(), parameters.getName(), gender, birthday);
+        final Author author = new Author(parameters.getId(), parameters.getName(), gender, birthdate);
 
         final Optional<Author> optional = updateAuthorGateway.updateAuthorById(author);
 

@@ -13,6 +13,6 @@ import lombok.NoArgsConstructor;
 public class RegisterAuthorPresenter {
 
     public static RegisterAuthorResponse of(final Author author) {
-        return new RegisterAuthorResponse(author.getId(), author.getName(), author.getGender().toString(), author.getBirthday());
+        return new RegisterAuthorResponse(author.getId(), author.getName(), author.getGender().toString(), author.getBirthdate());
     }
 }

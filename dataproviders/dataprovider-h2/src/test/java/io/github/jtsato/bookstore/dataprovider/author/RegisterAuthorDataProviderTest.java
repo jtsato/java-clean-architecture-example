@@ -41,7 +41,7 @@ class RegisterAuthorDataProviderTest {
         assertThat(result.getId()).isNotNull();
         assertThat(result.getName()).isEqualTo(newAuthor.getName());
         assertThat(result.getGender()).isEqualTo(newAuthor.getGender());
-        assertThat(result.getBirthday()).isEqualTo(newAuthor.getBirthday());
+        assertThat(result.getBirthdate()).isEqualTo(newAuthor.getBirthdate());
 
         assertThat(authorRepository.count()).isOne();
     }

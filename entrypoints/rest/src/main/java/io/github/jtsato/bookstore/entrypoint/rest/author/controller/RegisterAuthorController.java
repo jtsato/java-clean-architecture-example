@@ -50,7 +50,7 @@ public class RegisterAuthorController implements RegisterAuthorApiMethod {
 
         log.debug("Starting Controller -> RegisterAuthorController with {}", JsonConverter.convert(request));
 
-        final RegisterAuthorParameters parameters = new RegisterAuthorParameters(request.getName(), request.getGender(), request.getBirthday());
+        final RegisterAuthorParameters parameters = new RegisterAuthorParameters(request.getName(), request.getGender(), request.getBirthdate());
 
         final Author author = registerAuthorUseCase.registerAuthor(parameters);
 

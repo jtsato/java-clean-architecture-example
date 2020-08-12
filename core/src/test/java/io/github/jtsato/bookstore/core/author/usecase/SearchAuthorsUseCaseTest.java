@@ -51,8 +51,8 @@ class SearchAuthorsUseCaseTest {
 
         assertThat(exception).isInstanceOf(ConstraintViolationException.class);
         final ConstraintViolationException constraintViolationException = (ConstraintViolationException) exception;
-        assertThat(constraintViolationException.getMessage()).contains("startBirthdayDate: validation.author.start.birthday.date.notvalid");
-        assertThat(constraintViolationException.getMessage()).contains("endBirthdayDate: validation.author.end.birthday.date.notvalid");
+        assertThat(constraintViolationException.getMessage()).contains("startBirthdateDate: validation.author.start.birthdate.date.notvalid");
+        assertThat(constraintViolationException.getMessage()).contains("endBirthdateDate: validation.author.end.birthdate.date.notvalid");
     }
 
     @DisplayName("Successful to search authors if found")
@@ -87,7 +87,7 @@ class SearchAuthorsUseCaseTest {
         assertThat(author.getId()).isEqualTo(1L);
         assertThat(author.getName()).isEqualTo("Joshua Bloch");
         assertThat(author.getGender()).isEqualTo(Gender.MALE);
-        assertThat(author.getBirthday()).isEqualTo(LocalDate.parse("1961-08-28"));
+        assertThat(author.getBirthdate()).isEqualTo(LocalDate.parse("1961-08-28"));
     }
 
     private Page<Author> mockPageWithOneAuthor() {

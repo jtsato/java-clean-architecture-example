@@ -67,7 +67,7 @@ class FindAuthorsByIdsControllerTest {
                .andExpect(jsonPath("$.content[0].id", is(1)))
                .andExpect(jsonPath("$.content[0].name", is("Joshua Bloch")))
                .andExpect(jsonPath("$.content[0].gender", is("MALE")))
-               .andExpect(jsonPath("$.content[0].birthday", is("1961-08-28")))
+               .andExpect(jsonPath("$.content[0].birthdate", is("1961-08-28")))
                .andExpect(jsonPath("$.pageable.page", is(0)))
                .andExpect(jsonPath("$.pageable.size", is(2)))
                .andExpect(jsonPath("$.pageable.numberOfElements", is(1)))

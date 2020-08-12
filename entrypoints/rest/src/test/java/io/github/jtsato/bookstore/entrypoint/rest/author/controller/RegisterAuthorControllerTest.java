@@ -60,7 +60,7 @@ class RegisterAuthorControllerTest {
                .andExpect(jsonPath("$.id", is(1)))
                .andExpect(jsonPath("$.name", is("Joshua Bloch")))
                .andExpect(jsonPath("$.gender", is("MALE")))
-               .andExpect(jsonPath("$.birthday", is("1961-08-28")));
+               .andExpect(jsonPath("$.birthdate", is("1961-08-28")));
 
         verify(registerAuthorUseCase, times(1)).registerAuthor(mockRegisterAuthorUseCaseParameters());
         verifyNoMoreInteractions(registerAuthorUseCase);

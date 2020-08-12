@@ -25,7 +25,7 @@ public final class SearchAuthorsRequest implements Serializable {
 
     private String gender;
 
-    private String startBirthday;
+    private String startBirthdate;
 
-    private String endBirthday;
+    private String endBirthdate;
 }

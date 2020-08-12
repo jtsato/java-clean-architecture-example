@@ -21,5 +21,5 @@ public class RegisterAuthorRequest implements Serializable {
 
     private String gender;
 
-    private String birthday;
+    private String birthdate;
 }

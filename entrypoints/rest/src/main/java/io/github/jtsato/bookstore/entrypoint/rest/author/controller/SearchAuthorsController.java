@@ -2,9 +2,6 @@ package io.github.jtsato.bookstore.entrypoint.rest.author.controller;
 
 import org.springframework.boot.context.properties.bind.DefaultValue;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.web.PageableDefault;
-import org.springframework.data.web.SortDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -50,18 +47,15 @@ public class SearchAuthorsController implements SearchAuthorsApiMethod {
     @LogExecutionTime
     @ResponseStatus(HttpStatus.OK)
     @GetMapping
-    public SearchAuthorsResponse searchAuthors(@PageableDefault(page = 0,
-                                                                size = 20) @SortDefault.SortDefaults({@SortDefault(sort = "name",
-                                                                                                                   direction = Sort.Direction.ASC)}) final Pageable pageable,
-                                               @DefaultValue final SearchAuthorsRequest searchAuthorsRequest) {
+    public SearchAuthorsResponse searchAuthors(final Pageable pageable, @DefaultValue final SearchAuthorsRequest searchAuthorsRequest) {
 
         log.debug("Starting Controller -> SearchAuthorsController with {}", JsonConverter.convert(searchAuthorsRequest));
 
         final SearchAuthorsParameters parameters = new SearchAuthorsParameters(searchAuthorsRequest.getId(),
                                                                                searchAuthorsRequest.getName(),
                                                                                searchAuthorsRequest.getGender(),
-                                                                               searchAuthorsRequest.getStartBirthday(),
-                                                                               searchAuthorsRequest.getEndBirthday());
+                                                                               searchAuthorsRequest.getStartBirthdate(),
+                                                                               searchAuthorsRequest.getEndBirthdate());
 
         final Page<Author> authors = searchAuthorsUseCase.searchAuthors(parameters,
                                                                         pageable.getPageNumber(),

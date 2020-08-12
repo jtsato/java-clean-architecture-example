@@ -25,6 +25,6 @@ public class UpdateBookByIdPresenter {
     }
 
     private static UpdateBookByIdAuthorResponse of(final Author author) {
-        return new UpdateBookByIdAuthorResponse(author.getId(), author.getName(), author.getGender().toString(), author.getBirthday());
+        return new UpdateBookByIdAuthorResponse(author.getId(), author.getName(), author.getGender().toString(), author.getBirthdate());
     }
 }

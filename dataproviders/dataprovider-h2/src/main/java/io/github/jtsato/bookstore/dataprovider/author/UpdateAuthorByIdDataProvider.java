@@ -31,7 +31,7 @@ public class UpdateAuthorByIdDataProvider implements UpdateAuthorByIdGateway {
 
     private Author updateAuthorEntity(final AuthorEntity authorEntity, final Author author) {
         authorEntity.setName(author.getName());
-        authorEntity.setBirthday(author.getBirthday());
+        authorEntity.setBirthdate(author.getBirthdate());
         authorEntity.setGender(author.getGender().name());
         return AuthorMapper.of(authorRepository.saveAndFlush(authorEntity));
     }

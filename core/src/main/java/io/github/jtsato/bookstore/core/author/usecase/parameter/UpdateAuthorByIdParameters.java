@@ -8,6 +8,7 @@ import io.github.jtsato.bookstore.core.common.validation.SelfValidating;
 import lombok.AccessLevel;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.ToString;
 import lombok.experimental.FieldDefaults;
 
 /**
@@ -17,6 +18,7 @@ import lombok.experimental.FieldDefaults;
 @Getter
 @FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
 @EqualsAndHashCode(callSuper = false)
+@ToString
 public class UpdateAuthorByIdParameters extends SelfValidating<UpdateAuthorByIdParameters> {
 
     @NotNull(message = "validation.author.id.null")
@@ -28,15 +30,15 @@ public class UpdateAuthorByIdParameters extends SelfValidating<UpdateAuthorByIdP
     @NotBlank(message = "validation.author.gender.blank")
     private final String gender;
 
-    @NotNull(message = "validation.author.birthday.blank")
-    @LocalDateConstraint(message = "validation.author.birthday.notvalid")
-    private final String birthday;
+    @NotNull(message = "validation.author.birthdate.blank")
+    @LocalDateConstraint(message = "validation.author.birthdate.notvalid")
+    private final String birthdate;
 
-    public UpdateAuthorByIdParameters(final Long id, final String name, final String gender, final String birthday) {
+    public UpdateAuthorByIdParameters(final Long id, final String name, final String gender, final String birthdate) {
         this.id = id;
         this.name = name;
         this.gender = gender;
-        this.birthday = birthday;
+        this.birthdate = birthdate;
         this.validateSelf();
     }
 }
