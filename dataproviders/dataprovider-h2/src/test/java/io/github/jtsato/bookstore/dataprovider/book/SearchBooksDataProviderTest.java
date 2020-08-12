@@ -152,7 +152,7 @@ class SearchBooksDataProviderTest {
         final ImmutablePair<String, String> updateDates = new ImmutablePair<>(null, null);
 
         final SearchBooksParameters parameters = new SearchBooksParameters(null, null, prices, null, creationDates, updateDates);
-        final String orderBy = "id:asc";
+        final String orderBy = "creationDate:asc";
 
         final Page<Book> page = searchBooksDataProvider.searchBooks(parameters, 1, 3, orderBy);
 
@@ -176,7 +176,7 @@ class SearchBooksDataProviderTest {
         final Book book = books.get(0);
         
         assertThat(book).isNotNull();
-        assertThat(book.getId()).isNotNull().isEqualTo(4L);
+        assertThat(book.getId()).isNotNull().isEqualTo(2L);
 
         assertThat(bookRepository.count()).isEqualTo(4);
     }
