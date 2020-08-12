@@ -25,7 +25,7 @@ import lombok.RequiredArgsConstructor;
  * A EntryPoint follows these steps:
  *
  * - Maps HTTP requests to Java objects
- * - Performs bookization checks
+ * - Performs authorization checks
  * - Maps input to the input model of the use case
  * - Calls the use case
  * - Maps the output of the use case back to HTTP Returns an HTTP response

@@ -37,7 +37,7 @@ public class LogExecutionTimeImpl {
 
         final String clazzName = StringUtils.substringAfterLast(joinPoint.getSignature().getDeclaringTypeName(), ".");
 
-        log.debug("LogExecutionTime    -> {} executed in {} miliseconds.", clazzName, stopWatch.getTime());
+        log.debug("LogExecutionTime    -> {} executed in {} milliseconds.", clazzName, stopWatch.getTime());
 
         return proceed;
     }

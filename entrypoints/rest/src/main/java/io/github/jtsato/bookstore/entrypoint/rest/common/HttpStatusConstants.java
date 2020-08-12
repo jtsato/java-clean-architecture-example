@@ -20,7 +20,7 @@ public class HttpStatusConstants {
     public static final String PROCESSING_102_MESSAGE = "Processing";
 
     public static final String CHECKPOINT_103 = "103";
-    public static final String CHECKPOINT_103_MESSAGE = "CheckpoString";
+    public static final String CHECKPOINT_103_MESSAGE = "Checkpoint";
 
     public static final String OK_200 = "200";
     public static final String OK_200_MESSAGE = "OK";
