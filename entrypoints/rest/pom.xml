@@ -178,7 +178,7 @@
 					</sourceDataFormats>
 					<siteReportName>bookstore-rest-springboot</siteReportName>
 					<siteReportDescription>Bookstore rest springboot mutation report</siteReportDescription>
-					<siteReportDirectory>bbookstore-rest-springboot</siteReportDirectory>
+					<siteReportDirectory>bookstore-rest-springboot</siteReportDirectory>
 					<targetClasses>
 						<param>io.github.jtsato.bookstore.entrypoint.rest.author.controller.*Controller</param>
 						<param>io.github.jtsato.bookstore.entrypoint.rest.book.controller.*Controller</param>
@@ -187,9 +187,6 @@
 						<param>io.github.jtsato.bookstore.entrypoint.rest.author.controller.*ControllerTest</param>
 						<param>io.github.jtsato.bookstore.entrypoint.rest.book.controller.*ControllerTest</param>
 					</targetTests>
-					<skippedModules>
-						<param>configuration</param>
-					</skippedModules>
 				</configuration>
 				<dependencies>
 					<dependency>
