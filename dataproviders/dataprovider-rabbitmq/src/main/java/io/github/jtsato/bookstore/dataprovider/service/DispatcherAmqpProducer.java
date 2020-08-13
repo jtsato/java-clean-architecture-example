@@ -22,7 +22,7 @@ import lombok.Setter;
 @Setter
 @Component
 public class DispatcherAmqpProducer {
-    
+
     private static final Logger log = LoggerFactory.getLogger(DispatcherAmqpProducer.class);
 
     @Autowired
