@@ -58,11 +58,12 @@ public class SaveBookDocumentController implements SaveBookDocumentApiMethod {
     public SaveBookDocumentResponse saveBookDocument(@PathVariable final Long bookId, @RequestPart final MultipartFile file)
         throws IOException {
 
-        final SaveBookDocumentRequest saveBookDocumentRequest = buildSaveBookDocumentRequest(bookId, file);
+        final SaveBookDocumentRequest request = buildSaveBookDocumentRequest(bookId, file);
 
-        log.debug("Starting Controller -> SaveBookDocumentController with {}", JsonConverter.convert(saveBookDocumentRequest));
+        final String jsonRequest = JsonConverter.of(request);        
+        log.info("Starting Controller -> SaveBookDocumentController with {}", jsonRequest);
 
-        final SaveBookDocumentParameters saveBookDocumentParameters = buildSaveBookDocumentParameters(saveBookDocumentRequest);
+        final SaveBookDocumentParameters saveBookDocumentParameters = buildSaveBookDocumentParameters(request);
 
         final BookDocument bookDocument = saveBookDocumentUseCase.execute(saveBookDocumentParameters);
 

@@ -41,7 +41,7 @@ import lombok.RequiredArgsConstructor;
 public class RegisterBookController implements RegisterBookApiMethod {
 
     private static final Logger log = LoggerFactory.getLogger(RegisterBookController.class);
-
+    
     private final RegisterBookUseCase registerBookUseCase;
 
     @Override
@@ -50,7 +50,8 @@ public class RegisterBookController implements RegisterBookApiMethod {
     @PostMapping
     public RegisterBookResponse registerBook(@RequestBody @DefaultValue final RegisterBookRequest request) {
 
-        log.debug("Starting Controller -> RegisterBookController with {}", JsonConverter.convert(request));
+        final String jsonRequest = JsonConverter.of(request);
+        log.info("Starting Controller -> RegisterBookController with {}", jsonRequest);
 
         final RegisterBookParameters parameters = new RegisterBookParameters(request.getAuthorId(),
                                                                              request.getTitle(),

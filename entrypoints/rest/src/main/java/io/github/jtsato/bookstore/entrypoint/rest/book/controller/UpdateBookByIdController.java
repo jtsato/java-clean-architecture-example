@@ -51,7 +51,8 @@ public class UpdateBookByIdController implements UpdateBookByIdApiMethod {
     @PutMapping
     public UpdateBookByIdResponse updateBookById(@PathVariable final Long id, @RequestBody @DefaultValue final UpdateBookByIdRequest request) {
 
-        log.debug("Starting Controller -> UpdateBookByIdController with {}", JsonConverter.convert(request));
+        final String jsonRequest = JsonConverter.of(request);         
+        log.info("Starting Controller -> UpdateBookByIdController with {}", jsonRequest);
 
         final UpdateBookByIdParameters parameters = new UpdateBookByIdParameters(id,
                                                                                  request.getAuthorId(),

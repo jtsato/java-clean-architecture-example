@@ -11,7 +11,7 @@ import io.github.jtsato.bookstore.core.author.gateway.GetAuthorByNameGateway;
 import io.github.jtsato.bookstore.core.author.gateway.UpdateAuthorByIdGateway;
 import io.github.jtsato.bookstore.core.author.usecase.UpdateAuthorByIdUseCase;
 import io.github.jtsato.bookstore.core.author.usecase.parameter.UpdateAuthorByIdParameters;
-import io.github.jtsato.bookstore.core.common.EnumUtils;
+import io.github.jtsato.bookstore.core.enumerator.EnumeratorUtils;
 import io.github.jtsato.bookstore.core.exception.NotFoundException;
 import io.github.jtsato.bookstore.core.exception.UniqueConstraintException;
 import lombok.RequiredArgsConstructor;
@@ -35,7 +35,7 @@ public class UpdateAuthorByIdUseCaseImpl implements UpdateAuthorByIdUseCase {
 
         final LocalDate birthdate = LocalDate.parse(parameters.getBirthdate());
 
-        final Gender gender = EnumUtils.valueOf(parameters.getGender(), Gender.class);
+        final Gender gender = EnumeratorUtils.valueOf(parameters.getGender(), Gender.class);
 
         final Author author = new Author(parameters.getId(), parameters.getName(), gender, birthdate);
 

@@ -47,19 +47,19 @@ public class SearchBooksParameters extends SelfValidating<SearchBooksParameters>
 
     public SearchBooksParameters(final SearchAuthorsParameters authorParameters,
                                  final String title,
-                                 final ImmutablePair<BigDecimal, BigDecimal> prices,
+                                 final ImmutablePair<BigDecimal, BigDecimal> priceRange,
                                  final Boolean available,
-                                 final ImmutablePair<String, String> creationDates,
-                                 final ImmutablePair<String, String> updateDates) {
+                                 final ImmutablePair<String, String> creationDateRange,
+                                 final ImmutablePair<String, String> updateDateRange) {
         this.authorParameters = authorParameters;
         this.title = title;
-        this.startPrice = prices.getLeft();
-        this.endPrice = prices.getRight();
+        this.startPrice = priceRange.getLeft();
+        this.endPrice = priceRange.getRight();
         this.available = available;
-        this.startCreationDate = creationDates.getLeft();
-        this.endCreationDate = creationDates.getRight();
-        this.startUpdateDate = updateDates.getLeft();
-        this.endUpdateDate = updateDates.getRight();
+        this.startCreationDate = creationDateRange.getLeft();
+        this.endCreationDate = creationDateRange.getRight();
+        this.startUpdateDate = updateDateRange.getLeft();
+        this.endUpdateDate = updateDateRange.getRight();
         this.validateSelf();
     }
 }

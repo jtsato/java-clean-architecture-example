@@ -50,7 +50,8 @@ public class RegisterAuthorController implements RegisterAuthorApiMethod {
     @PostMapping
     public RegisterAuthorResponse registerAuthor(@RequestBody @DefaultValue final RegisterAuthorRequest request) {
 
-        log.debug("Starting Controller -> RegisterAuthorController with {}", JsonConverter.convert(request));
+        final String jsonRequest = JsonConverter.of(request);
+        log.info("Starting Controller -> RegisterAuthorController with {}", jsonRequest);
 
         final RegisterAuthorParameters parameters = new RegisterAuthorParameters(request.getName(), request.getGender(), request.getBirthdate());
 

@@ -52,7 +52,7 @@ public class SearchEnumeratorsController implements SearchEnumeratorsApiMethod {
     @GetMapping
     public List<EnumeratorResponse> execute(@RequestParam(required = false) final String domain, @RequestParam(required = false) final String key) {
 
-        log.debug("Starting Controller -> SearchEnumeratorsController with domain {}, and key {}", domain, key);
+        log.info("Starting Controller -> SearchEnumeratorsController with domain {}, and key {}", domain, key);
 
         final SearchEnumeratorsParameters parameters = new SearchEnumeratorsParameters(StringUtils.stripToNull(domain), StringUtils.stripToNull(key));
 

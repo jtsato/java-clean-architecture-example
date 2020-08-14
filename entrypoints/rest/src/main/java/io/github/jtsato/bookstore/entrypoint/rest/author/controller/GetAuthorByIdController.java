@@ -46,7 +46,7 @@ public class GetAuthorByIdController implements GetAuthorByIdApiMethod {
     @GetMapping("/{id}")
     public GetAuthorByIdResponse getAuthorById(@PathVariable final Long id) {
 
-        log.debug("Starting Controller -> GetAuthorByIdController with {}", id);
+        log.info("Starting Controller -> GetAuthorByIdController with {}", id);
 
         final Author author = getAuthorByIdUseCase.getAuthorById(id);
 

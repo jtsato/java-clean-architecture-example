@@ -44,7 +44,7 @@ public class RemoveBookByIdController implements RemoveBookByIdApiMethod {
     @DeleteMapping("/{id}")
     public void removeBookById(@PathVariable final Long id) {
 
-        log.debug("Starting Controller -> RemoveBookByIdController with {}", id);
+        log.info("Starting Controller -> RemoveBookByIdController with {}", id);
 
         removeBookByIdUseCase.execute(id);
     }

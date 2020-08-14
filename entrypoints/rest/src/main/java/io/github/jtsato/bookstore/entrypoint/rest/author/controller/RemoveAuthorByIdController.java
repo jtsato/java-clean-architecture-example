@@ -43,7 +43,7 @@ public class RemoveAuthorByIdController implements RemoveAuthorByIdApiMethod {
     @DeleteMapping("/{id}")
     public void removeAuthorById(@PathVariable final Long id) {
 
-        log.debug("Starting Controller -> RemoveAuthorByIdController with {}", id);
+        log.info("Starting Controller -> RemoveAuthorByIdController with {}", id);
 
         removeAuthorByIdUseCase.removeAuthorById(id);
     }

@@ -1,4 +1,4 @@
-package io.github.jtsato.bookstore.core.common;
+package io.github.jtsato.bookstore.core.enumerator;
 
 import java.util.Arrays;
 import java.util.List;
@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
  */
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-public class EnumUtils {
+public class EnumeratorUtils {
 
     public static <E extends Enum<E>> E valueOf(final String name, final Class<E> clazz) {
 
@@ -26,7 +26,7 @@ public class EnumUtils {
         return constants.stream().filter(byEquals).findFirst().orElseThrow(throwIllegalArgumentException(clazz.getSimpleName(), name, getValues(constants)));
     }
 
-    public static <T extends Enum<T>> List<String> getValues(final List<T> values) {
+    private static <T extends Enum<T>> List<String> getValues(final List<T> values) {
         return values.stream().map(T::toString).collect(Collectors.toList());
     }
 

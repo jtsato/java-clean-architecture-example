@@ -6,13 +6,14 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import io.github.jtsato.bookstore.core.enumerator.EnumeratorUtils;
 import io.github.jtsato.bookstore.core.exception.InvalidParameterException;
 
 /**
  * @author Jorge Takeshi Sato
  */
 
-class EnumUtilsTest {
+class EnumeratorUtilsTest {
 
     enum Semaphore {
             GREEN, YELLOW, RED
@@ -22,7 +23,7 @@ class EnumUtilsTest {
     @Test
     void failToGetValueIfNotFound() {
 
-        final Exception exception = Assertions.assertThrows(Exception.class, () -> EnumUtils.valueOf("BLUE", Semaphore.class));
+        final Exception exception = Assertions.assertThrows(Exception.class, () -> EnumeratorUtils.valueOf("BLUE", Semaphore.class));
 
         assertThat(exception).isInstanceOf(InvalidParameterException.class);
 
