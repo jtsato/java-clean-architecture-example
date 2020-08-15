@@ -38,14 +38,16 @@ public class UpdateBookByIdDataProvider implements UpdateBookByIdGateway {
         bookEntity.setTitle(book.getTitle());
         bookEntity.setPrice(book.getPrice());
         bookEntity.setAvailable(book.getAvailable());
+        bookEntity.setUpdateDate(book.getUpdateDate());
         return BookMapper.of(bookRepository.saveAndFlush(bookEntity));
     }
 
     private void updateAuthor(final Book book, final BookEntity bookEntity) {
         final Long currentAuthorId = bookEntity.getAuthor().getId();
         final Long newAuthorId = book.getAuthor().getId();
-        if (!newAuthorId.equals(currentAuthorId)) {
-            authorRepository.findById(newAuthorId).ifPresent(bookEntity::setAuthor);
+        if (newAuthorId.equals(currentAuthorId)) {
+            return;
         }
+        authorRepository.findById(newAuthorId).ifPresent(bookEntity::setAuthor);
     }
 }

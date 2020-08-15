@@ -14,16 +14,15 @@ public class LocalDateValidator implements ConstraintValidator<LocalDateConstrai
 
     @Override
     public boolean isValid(final String candidate, final ConstraintValidatorContext constraintContext) {
-
-        if (candidate != null) {
-
-            try {
-                LocalDate.parse(candidate, DateTimeFormatter.ISO_DATE);
-            } catch (final Exception exception) {
-                return false;
-            }
+        return candidate != null ? parseLocalDate(candidate) : Boolean.TRUE;
+    }
+    
+    private boolean parseLocalDate(final String candidate) {
+        try {
+            LocalDate.parse(candidate, DateTimeFormatter.ISO_DATE);
+        } catch (final Exception exception) {
+            return false;
         }
-
         return true;
     }
 }

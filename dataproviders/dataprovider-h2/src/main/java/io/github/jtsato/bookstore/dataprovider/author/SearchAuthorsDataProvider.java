@@ -46,11 +46,9 @@ public class SearchAuthorsDataProvider implements SearchAuthorsGateway {
     }
 
     private String sanitizeOrderBy(final String orderBy) {
-
         if (StringUtils.isBlank(orderBy) || StringUtils.equalsIgnoreCase(orderBy, "UNSORTED")) {
             return "name:asc";
         }
-
         return StringUtils.stripToEmpty(orderBy);
     }
 }

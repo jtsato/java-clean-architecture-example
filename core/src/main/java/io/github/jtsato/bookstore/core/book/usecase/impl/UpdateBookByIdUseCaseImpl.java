@@ -56,14 +56,11 @@ public class UpdateBookByIdUseCaseImpl implements UpdateBookByIdUseCase {
                                    getLocalDateTime.now());
 
         final Optional<Book> optional = updateBookGateway.updateBookById(book);
-
         return optional.orElseThrow(() -> new NotFoundException("validation.book.id.notfound", parameters.getId()));
     }
 
     private Author getAuthorAndValidate(final Long authorId) {
-
         final Optional<Author> optional = getAuthorByIdGateway.getAuthorById(authorId);
-
         return optional.orElseThrow(() -> new NotFoundException("validation.author.id.notfound", authorId));
     }
 
@@ -74,11 +71,14 @@ public class UpdateBookByIdUseCaseImpl implements UpdateBookByIdUseCase {
         if (optional.isEmpty()) {
             return;
         }
-
+        
         final Book book = optional.get();
-
         if (!book.getId().equals(bookId)) {
-            throw new UniqueConstraintException("validation.book.title.already.exists", bookTitle);
+            throwUniqueConstraintException(book);
         }
+    }
+
+    private void throwUniqueConstraintException(final Book book) {
+        throw new UniqueConstraintException("validation.book.title.already.exists", book.getTitle());
     }
 }

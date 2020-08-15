@@ -2,7 +2,7 @@ package io.github.jtsato.bookstore.dataprovider.author.mapper;
 
 import io.github.jtsato.bookstore.core.author.domain.Author;
 import io.github.jtsato.bookstore.core.author.domain.Gender;
-import io.github.jtsato.bookstore.core.enumerator.EnumeratorUtils;
+import io.github.jtsato.bookstore.core.common.EnumeratorUtils;
 import io.github.jtsato.bookstore.dataprovider.author.domain.AuthorEntity;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;

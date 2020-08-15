@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import io.github.jtsato.bookstore.core.enumerator.EnumeratorUtils;
 import io.github.jtsato.bookstore.core.exception.InvalidParameterException;
 
 /**

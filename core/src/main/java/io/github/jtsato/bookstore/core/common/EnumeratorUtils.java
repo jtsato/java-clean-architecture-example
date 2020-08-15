@@ -1,4 +1,4 @@
-package io.github.jtsato.bookstore.core.enumerator;
+package io.github.jtsato.bookstore.core.common;
 
 import java.util.Arrays;
 import java.util.List;
@@ -18,11 +18,8 @@ import lombok.NoArgsConstructor;
 public class EnumeratorUtils {
 
     public static <E extends Enum<E>> E valueOf(final String name, final Class<E> clazz) {
-
         final List<E> constants = Arrays.asList(clazz.getEnumConstants());
-
         final Predicate<? super E> byEquals = element -> element.toString().equals(name);
-
         return constants.stream().filter(byEquals).findFirst().orElseThrow(throwIllegalArgumentException(clazz.getSimpleName(), name, getValues(constants)));
     }
 

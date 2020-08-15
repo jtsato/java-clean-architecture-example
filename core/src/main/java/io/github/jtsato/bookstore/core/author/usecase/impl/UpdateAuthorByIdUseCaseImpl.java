@@ -11,7 +11,7 @@ import io.github.jtsato.bookstore.core.author.gateway.GetAuthorByNameGateway;
 import io.github.jtsato.bookstore.core.author.gateway.UpdateAuthorByIdGateway;
 import io.github.jtsato.bookstore.core.author.usecase.UpdateAuthorByIdUseCase;
 import io.github.jtsato.bookstore.core.author.usecase.parameter.UpdateAuthorByIdParameters;
-import io.github.jtsato.bookstore.core.enumerator.EnumeratorUtils;
+import io.github.jtsato.bookstore.core.common.EnumeratorUtils;
 import io.github.jtsato.bookstore.core.exception.NotFoundException;
 import io.github.jtsato.bookstore.core.exception.UniqueConstraintException;
 import lombok.RequiredArgsConstructor;

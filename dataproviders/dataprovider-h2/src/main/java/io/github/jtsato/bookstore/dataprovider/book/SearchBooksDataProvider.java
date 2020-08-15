@@ -6,6 +6,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.cosium.spring.data.jpa.entity.graph.domain.EntityGraph;
 import com.cosium.spring.data.jpa.entity.graph.domain.EntityGraphUtils;
 import com.querydsl.core.BooleanBuilder;
 
@@ -41,19 +42,17 @@ public class SearchBooksDataProvider implements SearchBooksGateway {
 
         final BooleanBuilder predicate = new SearchBookPredicateBuilder(QBookEntity.bookEntity).buildBooleanBuilder(parameters);
 
-        final org.springframework.data.domain.Page<BookEntity> page = bookRepository.findAll(predicate,
-                                                                                             pageRequest,
-                                                                                             EntityGraphUtils.fromAttributePaths("author"));
+        final EntityGraph entityGraph = EntityGraphUtils.fromAttributePaths("author");
+        
+        final org.springframework.data.domain.Page<BookEntity> page = bookRepository.findAll(predicate, pageRequest, entityGraph);
 
         return pageMapper.of(page, BookMapper::of);
     }
 
     private String sanitizeOrderBy(final String orderBy) {
-
         if (StringUtils.isBlank(orderBy) || StringUtils.equalsIgnoreCase(orderBy, "UNSORTED")) {
             return "title:asc";
         }
-
         return StringUtils.stripToEmpty(orderBy);
     }
 }

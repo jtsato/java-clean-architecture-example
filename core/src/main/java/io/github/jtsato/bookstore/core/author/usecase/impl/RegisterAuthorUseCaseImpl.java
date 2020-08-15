@@ -12,7 +12,7 @@ import io.github.jtsato.bookstore.core.author.gateway.GetAuthorByNameGateway;
 import io.github.jtsato.bookstore.core.author.gateway.RegisterAuthorGateway;
 import io.github.jtsato.bookstore.core.author.usecase.RegisterAuthorUseCase;
 import io.github.jtsato.bookstore.core.author.usecase.parameter.RegisterAuthorParameters;
-import io.github.jtsato.bookstore.core.enumerator.EnumeratorUtils;
+import io.github.jtsato.bookstore.core.common.EnumeratorUtils;
 import io.github.jtsato.bookstore.core.exception.UniqueConstraintException;
 import lombok.RequiredArgsConstructor;
 
