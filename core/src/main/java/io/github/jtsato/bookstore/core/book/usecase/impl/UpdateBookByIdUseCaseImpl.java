@@ -74,11 +74,7 @@ public class UpdateBookByIdUseCaseImpl implements UpdateBookByIdUseCase {
         
         final Book book = optional.get();
         if (!book.getId().equals(bookId)) {
-            throwUniqueConstraintException(book);
+            throw new UniqueConstraintException("validation.book.title.already.exists", book.getTitle());
         }
-    }
-
-    private void throwUniqueConstraintException(final Book book) {
-        throw new UniqueConstraintException("validation.book.title.already.exists", book.getTitle());
     }
 }
