@@ -40,7 +40,7 @@ class RemoveBookByIdUseCaseTest {
     @Test
     void failToRemoveBookByIdIfParametersAreNotValid() {
 
-        when(removeBookByIdGateway.removeBookById(null)).thenReturn(null);
+        when(removeBookByIdGateway.execute(null)).thenReturn(null);
 
         final Exception exception = Assertions.assertThrows(Exception.class, () -> removeBookByIdUseCase.execute(null));
 
@@ -53,7 +53,7 @@ class RemoveBookByIdUseCaseTest {
     @Test
     void successfulToRemoveBookByIdIfFound() {
 
-        when(removeBookByIdGateway.removeBookById(1L)).thenReturn(mockRemoveBookByIdGatewayOut());
+        when(removeBookByIdGateway.execute(1L)).thenReturn(mockRemoveBookByIdGatewayOut());
 
         final Book book = removeBookByIdUseCase.execute(1L);
 
@@ -85,7 +85,7 @@ class RemoveBookByIdUseCaseTest {
     @Test
     void failToRemoveBookByIdIfNotFound() {
 
-        when(removeBookByIdGateway.removeBookById(1L)).thenReturn(Optional.empty());
+        when(removeBookByIdGateway.execute(1L)).thenReturn(Optional.empty());
 
         final Exception exception = Assertions.assertThrows(Exception.class, () -> removeBookByIdUseCase.execute(1L));
 

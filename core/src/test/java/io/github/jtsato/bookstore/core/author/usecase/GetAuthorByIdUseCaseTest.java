@@ -37,7 +37,7 @@ class GetAuthorByIdUseCaseTest {
     @Test
     void failToGetAuthorByIdIfParametersAreNotValid() {
 
-        when(getAuthorByIdGateway.getAuthorById(null)).thenReturn(null);
+        when(getAuthorByIdGateway.execute(null)).thenReturn(null);
 
         final Exception exception = Assertions.assertThrows(Exception.class, () -> getAuthorByIdUseCase.getAuthorById(null));
 
@@ -51,7 +51,7 @@ class GetAuthorByIdUseCaseTest {
     @Test
     void successfulToGetAuthorByIdIfFound() {
 
-        when(getAuthorByIdGateway.getAuthorById(1L)).thenReturn(mockGetAuthorByIdGatewayOut());
+        when(getAuthorByIdGateway.execute(1L)).thenReturn(mockGetAuthorByIdGatewayOut());
 
         final Author author = getAuthorByIdUseCase.getAuthorById(1L);
 
@@ -69,7 +69,7 @@ class GetAuthorByIdUseCaseTest {
     @Test
     void failToGetAuthorByIdIfNotFound() {
 
-        when(getAuthorByIdGateway.getAuthorById(1L)).thenReturn(Optional.empty());
+        when(getAuthorByIdGateway.execute(1L)).thenReturn(Optional.empty());
 
         final Exception exception = Assertions.assertThrows(Exception.class, () -> getAuthorByIdUseCase.getAuthorById(1L));
 

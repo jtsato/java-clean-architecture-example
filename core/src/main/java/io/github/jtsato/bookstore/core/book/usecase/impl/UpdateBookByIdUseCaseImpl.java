@@ -55,30 +55,26 @@ public class UpdateBookByIdUseCaseImpl implements UpdateBookByIdUseCase {
                                    null,
                                    getLocalDateTime.now());
 
-        final Optional<Book> optional = updateBookGateway.updateBookById(book);
-
+        final Optional<Book> optional = updateBookGateway.execute(book);
         return optional.orElseThrow(() -> new NotFoundException("validation.book.id.notfound", parameters.getId()));
     }
 
     private Author getAuthorAndValidate(final Long authorId) {
-
-        final Optional<Author> optional = getAuthorByIdGateway.getAuthorById(authorId);
-
+        final Optional<Author> optional = getAuthorByIdGateway.execute(authorId);
         return optional.orElseThrow(() -> new NotFoundException("validation.author.id.notfound", authorId));
     }
 
     private void checkDuplicatedTitleViolation(final Long bookId, final String bookTitle) {
 
-        final Optional<Book> optional = getBookByTitleGateway.getBookByTitle(bookTitle);
+        final Optional<Book> optional = getBookByTitleGateway.execute(bookTitle);
 
         if (optional.isEmpty()) {
             return;
         }
 
         final Book book = optional.get();
-
         if (!book.getId().equals(bookId)) {
-            throw new UniqueConstraintException("validation.book.title.already.exists", bookTitle);
+            throw new UniqueConstraintException("validation.book.title.already.exists", book.getTitle());
         }
     }
 }

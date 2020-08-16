@@ -35,7 +35,7 @@ public class FindBooksByIdsDataProvider implements FindBooksByIdsGateway {
     private final PageMapper<Book, BookEntity> pageMapper = new PageMapper<>() {};
 
     @Override
-    public Page<Book> findBooksByIds(final List<Long> ids) {
+    public Page<Book> execute(final List<Long> ids) {
 
         final BooleanExpression predicate = QBookEntity.bookEntity.id.in(ids);
         final PageRequest pageRequest = PageRequestHelper.buildPageRequest(0, 1000, "id:asc");

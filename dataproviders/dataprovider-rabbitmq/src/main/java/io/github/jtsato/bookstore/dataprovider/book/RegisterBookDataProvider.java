@@ -17,17 +17,17 @@ import io.github.jtsato.bookstore.dataprovider.service.DispatcherAmqpProducer;
 @Service
 public class RegisterBookDataProvider implements RegisterBookGateway {
 
-    @Value("${bookstore.exchange.register-book}")
+    @Value("${bookstore.rabbitmq.exchange.register-book}")
     private String exchange;
 
-    @Value("${bookstore.routingkey.register-book}")
+    @Value("${bookstore.rabbitmq.routingkey.register-book}")
     private String routingKey;
 
     @Autowired
     DispatcherAmqpProducer dispatcherAmqpProducer;
 
     @Override
-    public Book registerBook(final Book book) {
+    public Book execute(final Book book) {
         final RegisterBookMessage registerBookMessage = RegisterBookMessageConverter.of(book);
         dispatcherAmqpProducer.sendMessage(exchange, routingKey, registerBookMessage);
         return book;

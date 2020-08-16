@@ -28,5 +28,5 @@ public interface GetBookByIdApiMethod {
                            @ApiResponse(description = HttpStatusConstants.BAD_REQUEST_400_MESSAGE),
                            @ApiResponse(description = HttpStatusConstants.NOT_FOUND_404_MESSAGE),
                            @ApiResponse(description = HttpStatusConstants.INTERNAL_SERVER_ERROR_500_MESSAGE),})
-    GetBookByIdResponse getBookById(@Parameter(description = "Book Id") final Long id);
+    GetBookByIdResponse execute(@Parameter(description = "Book Id") final Long id);
 }

@@ -18,16 +18,10 @@ public class GetBookByIdResponse implements Serializable {
     private static final long serialVersionUID = 8114419514719050282L;
 
     private final Long id;
-
     private final GetBookByIdAuthorResponse author;
-
     private final String title;
-
     private final BigDecimal price;
-
     private final Boolean available;
-
     private final LocalDateTime creationDate;
-
     private final LocalDateTime updateDate;
 }

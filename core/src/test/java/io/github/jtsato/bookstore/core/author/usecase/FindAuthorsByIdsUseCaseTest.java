@@ -42,7 +42,7 @@ class FindAuthorsByIdsUseCaseTest {
     @Test
     void failToFindAuthorsByIdsIfParametersAreNotValid() {
 
-        when(findAuthorsByIdsGateway.findAuthorsByIds(null)).thenReturn(null);
+        when(findAuthorsByIdsGateway.execute(null)).thenReturn(null);
 
         final Exception exception = Assertions.assertThrows(Exception.class, () -> findAuthorsByIdsUseCase.findAuthorsByIds(null));
 
@@ -58,7 +58,7 @@ class FindAuthorsByIdsUseCaseTest {
 
         final List<Long> ids = Arrays.asList(1L, 2L);
 
-        when(findAuthorsByIdsGateway.findAuthorsByIds(ids)).thenReturn(mockFindAuthorsByIdsGatewayOut());
+        when(findAuthorsByIdsGateway.execute(ids)).thenReturn(mockFindAuthorsByIdsGatewayOut());
 
         final Page<Author> pageOfAuthors = findAuthorsByIdsUseCase.findAuthorsByIds(ids);
 
@@ -102,7 +102,7 @@ class FindAuthorsByIdsUseCaseTest {
 
         final Page<Author> pageOfAuthors = new PageImpl<>(Collections.emptyList(), new Pageable(0, 1, 0, 0L, 0));
 
-        when(findAuthorsByIdsGateway.findAuthorsByIds(ids)).thenReturn(pageOfAuthors);
+        when(findAuthorsByIdsGateway.execute(ids)).thenReturn(pageOfAuthors);
 
         final Pageable pageable = pageOfAuthors.getPageable();
 
@@ -124,7 +124,7 @@ class FindAuthorsByIdsUseCaseTest {
             ids.add((long) index);
         }
 
-        when(findAuthorsByIdsGateway.findAuthorsByIds(ids)).thenReturn(mockFindAuthorsByIdsGatewayOut());
+        when(findAuthorsByIdsGateway.execute(ids)).thenReturn(mockFindAuthorsByIdsGatewayOut());
 
         final Exception exception = Assertions.assertThrows(Exception.class, () -> findAuthorsByIdsUseCase.findAuthorsByIds(ids));
 
@@ -144,7 +144,7 @@ class FindAuthorsByIdsUseCaseTest {
             ids.add((long) index);
         }
 
-        when(findAuthorsByIdsGateway.findAuthorsByIds(ids)).thenReturn(mockFindAuthorsByIdsGatewayOut());
+        when(findAuthorsByIdsGateway.execute(ids)).thenReturn(mockFindAuthorsByIdsGatewayOut());
 
         final Page<Author> pageOfAuthors = findAuthorsByIdsUseCase.findAuthorsByIds(ids);
 

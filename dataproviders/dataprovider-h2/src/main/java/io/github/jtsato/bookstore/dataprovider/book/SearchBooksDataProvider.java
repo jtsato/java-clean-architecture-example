@@ -6,6 +6,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.cosium.spring.data.jpa.entity.graph.domain.EntityGraph;
 import com.cosium.spring.data.jpa.entity.graph.domain.EntityGraphUtils;
 import com.querydsl.core.BooleanBuilder;
 
@@ -35,25 +36,21 @@ public class SearchBooksDataProvider implements SearchBooksGateway {
     private final PageMapper<Book, BookEntity> pageMapper = new PageMapper<>() {};
 
     @Override
-    public Page<Book> searchBooks(final SearchBooksParameters parameters, final Integer pageNumber, final Integer size, final String orderBy) {
+    public Page<Book> execute(final SearchBooksParameters parameters, final Integer pageNumber, final Integer size, final String orderBy) {
 
         final PageRequest pageRequest = PageRequestHelper.buildPageRequest(pageNumber, size, sanitizeOrderBy(orderBy));
-
         final BooleanBuilder predicate = new SearchBookPredicateBuilder(QBookEntity.bookEntity).buildBooleanBuilder(parameters);
+        final EntityGraph entityGraph = EntityGraphUtils.fromAttributePaths("author");
 
-        final org.springframework.data.domain.Page<BookEntity> page = bookRepository.findAll(predicate,
-                                                                                             pageRequest,
-                                                                                             EntityGraphUtils.fromAttributePaths("author"));
+        final org.springframework.data.domain.Page<BookEntity> page = bookRepository.findAll(predicate, pageRequest, entityGraph);
 
         return pageMapper.of(page, BookMapper::of);
     }
 
     private String sanitizeOrderBy(final String orderBy) {
-
         if (StringUtils.isBlank(orderBy) || StringUtils.equalsIgnoreCase(orderBy, "UNSORTED")) {
             return "title:asc";
         }
-
         return StringUtils.stripToEmpty(orderBy);
     }
 }

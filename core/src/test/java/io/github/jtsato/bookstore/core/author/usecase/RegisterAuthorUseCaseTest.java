@@ -58,8 +58,8 @@ class RegisterAuthorUseCaseTest {
     @Test
     void successfulToRegisterAuthorIfNotRegistered() {
 
-        when(registerAuthorGateway.registerAuthor(mockRegisterAuthorGatewayIn())).thenReturn(mockRegisterAuthorGatewayOut());
-        when(getAuthorByNameGateway.getAuthorByName("Joshua Bloch")).thenReturn(Optional.empty());
+        when(registerAuthorGateway.execute(mockRegisterAuthorGatewayIn())).thenReturn(mockRegisterAuthorGatewayOut());
+        when(getAuthorByNameGateway.execute("Joshua Bloch")).thenReturn(Optional.empty());
 
         final RegisterAuthorParameters parameters = new RegisterAuthorParameters("Joshua Bloch", "MALE", "1961-08-28");
         final Author author = getAuthorByIdUseCase.registerAuthor(parameters);
@@ -84,8 +84,8 @@ class RegisterAuthorUseCaseTest {
     @Test
     void failToRegisterAuthorIfAlreadyRegistered() {
 
-        when(registerAuthorGateway.registerAuthor(mockRegisterAuthorGatewayIn())).thenReturn(mockRegisterAuthorGatewayOut());
-        when(getAuthorByNameGateway.getAuthorByName("Joshua Bloch")).thenReturn(mockGetAuthorByNameGateway());
+        when(registerAuthorGateway.execute(mockRegisterAuthorGatewayIn())).thenReturn(mockRegisterAuthorGatewayOut());
+        when(getAuthorByNameGateway.execute("Joshua Bloch")).thenReturn(mockGetAuthorByNameGateway());
 
         final RegisterAuthorParameters registerAuthorParameters = new RegisterAuthorParameters("Joshua Bloch", "MALE", "1961-08-28");
 

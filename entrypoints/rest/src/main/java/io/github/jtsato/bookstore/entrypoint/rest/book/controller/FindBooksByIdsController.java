@@ -48,11 +48,12 @@ public class FindBooksByIdsController implements FindBooksByIdsApiMethod {
     @LogExecutionTime
     @ResponseStatus(HttpStatus.OK)
     @PostMapping("/findByIds")
-    public FindBooksByIdsResponse findBooksByIds(@RequestBody @DefaultValue final FindBooksByIdsRequest findBooksByIdsRequest) {
+    public FindBooksByIdsResponse execute(@RequestBody @DefaultValue final FindBooksByIdsRequest request) {
 
-        log.debug("Starting Controller -> FindBooksByIdsController with {}", JsonConverter.convert(findBooksByIdsRequest));
+        final String jsonRequest = JsonConverter.of(request);
+        log.info("Starting Controller -> FindBooksByIdsController with {}", jsonRequest);
 
-        final Page<Book> books = findBooksByIdsUseCase.execute(findBooksByIdsRequest.getIds());
+        final Page<Book> books = findBooksByIdsUseCase.execute(request.getIds());
 
         return FindBooksByIdsPresenter.of(books);
     }

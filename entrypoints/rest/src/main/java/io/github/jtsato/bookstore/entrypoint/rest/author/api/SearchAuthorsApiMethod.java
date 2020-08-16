@@ -59,6 +59,5 @@ public interface SearchAuthorsApiMethod {
                            @ApiResponse(responseCode = HttpStatusConstants.INTERNAL_SERVER_ERROR_500,
                                         description = HttpStatusConstants.INTERNAL_SERVER_ERROR_500_MESSAGE),})
 
-    SearchAuthorsResponse searchAuthors(@Parameter(hidden = true) final Pageable pageable,
-                                        @Parameter(hidden = true) final SearchAuthorsRequest searchAuthorsRequest);
+    SearchAuthorsResponse execute(@Parameter(hidden = true) final Pageable pageable, @Parameter(hidden = true) final SearchAuthorsRequest searchAuthorsRequest);
 }

@@ -72,10 +72,10 @@ class SaveBookDocumentUseCaseTest {
     @Test
     void successfulToSaveBookDocumentIfNotRegistered() {
 
-        when(getBookByIdGateway.getBookById(1L)).thenReturn(mockGetBookByIdGatewayOut());
-        when(getBookDocumentByBookIdGateway.getBookDocumentByBookId(1L)).thenReturn(Optional.empty());
+        when(getBookByIdGateway.execute(1L)).thenReturn(mockGetBookByIdGatewayOut());
+        when(getBookDocumentByBookIdGateway.execute(1L)).thenReturn(Optional.empty());
         when(getLocalDateTime.now()).thenReturn(LocalDateTime.parse("2020-04-12T22:04:59.123"));
-        when(saveBookDocumentGateway.saveBookDocument(mockSaveBookDocumentGatewayIn1())).thenReturn(mockSaveBookDocumentGatewayOut());
+        when(saveBookDocumentGateway.execute(mockSaveBookDocumentGatewayIn1())).thenReturn(mockSaveBookDocumentGatewayOut());
 
         final SaveBookDocumentParameters saveBookDocumentParameters = new SaveBookDocumentParameters(1L,
                                                                                                      "text/plain",
@@ -137,10 +137,10 @@ class SaveBookDocumentUseCaseTest {
     @Test
     void successfulToUpdateBookDocumentIfAlreadyRegistered() {
 
-        when(getBookByIdGateway.getBookById(1L)).thenReturn(mockGetBookByIdGatewayOut());
-        when(getBookDocumentByBookIdGateway.getBookDocumentByBookId(1L)).thenReturn(getBookDocumentByBookIdGatewayOut());
+        when(getBookByIdGateway.execute(1L)).thenReturn(mockGetBookByIdGatewayOut());
+        when(getBookDocumentByBookIdGateway.execute(1L)).thenReturn(getBookDocumentByBookIdGatewayOut());
         when(getLocalDateTime.now()).thenReturn(LocalDateTime.parse("2020-04-12T22:04:59.123"));
-        when(saveBookDocumentGateway.saveBookDocument(mockSaveBookDocumentGatewayIn2())).thenReturn(mockSaveBookDocumentGatewayOut());
+        when(saveBookDocumentGateway.execute(mockSaveBookDocumentGatewayIn2())).thenReturn(mockSaveBookDocumentGatewayOut());
 
         final SaveBookDocumentParameters saveBookDocumentParameters = new SaveBookDocumentParameters(1L,
                                                                                                      "text/plain",
@@ -190,10 +190,10 @@ class SaveBookDocumentUseCaseTest {
     @Test
     void failToSaveBookDocumentIfBookNotFound() {
 
-        when(getBookByIdGateway.getBookById(1L)).thenReturn(Optional.empty());
-        when(getBookDocumentByBookIdGateway.getBookDocumentByBookId(1L)).thenReturn(Optional.empty());
+        when(getBookByIdGateway.execute(1L)).thenReturn(Optional.empty());
+        when(getBookDocumentByBookIdGateway.execute(1L)).thenReturn(Optional.empty());
         when(getLocalDateTime.now()).thenReturn(LocalDateTime.parse("2020-03-12T22:04:59.123"));
-        when(saveBookDocumentGateway.saveBookDocument(mockSaveBookDocumentGatewayIn1())).thenReturn(mockSaveBookDocumentGatewayOut());
+        when(saveBookDocumentGateway.execute(mockSaveBookDocumentGatewayIn1())).thenReturn(mockSaveBookDocumentGatewayOut());
 
         final SaveBookDocumentParameters saveBookDocumentParameters = new SaveBookDocumentParameters(1L,
                                                                                                      "text/plain",

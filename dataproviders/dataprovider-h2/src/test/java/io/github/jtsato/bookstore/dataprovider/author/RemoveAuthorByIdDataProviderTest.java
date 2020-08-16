@@ -33,7 +33,7 @@ class RemoveAuthorByIdDataProviderTest {
     @Test
     void successfulToRemoveAuthorByIdIfFound() {
 
-        final Optional<Author> optional = removeAuthorByIdDataProvider.removeAuthorById(3L);
+        final Optional<Author> optional = removeAuthorByIdDataProvider.execute(3L);
 
         assertThat(optional).isPresent();
         assertThat(authorRepository.count()).isEqualTo(2);
@@ -43,7 +43,7 @@ class RemoveAuthorByIdDataProviderTest {
     @Test
     void failToRemoveAuthorByIdIfNotFound() {
 
-        final Optional<Author> optional = removeAuthorByIdDataProvider.removeAuthorById(4L);
+        final Optional<Author> optional = removeAuthorByIdDataProvider.execute(4L);
 
         assertThat(optional).isNotPresent();
         assertThat(authorRepository.count()).isEqualTo(3);

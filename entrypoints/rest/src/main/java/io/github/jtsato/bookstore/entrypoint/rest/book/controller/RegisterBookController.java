@@ -48,9 +48,10 @@ public class RegisterBookController implements RegisterBookApiMethod {
     @LogExecutionTime
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
-    public RegisterBookResponse registerBook(@RequestBody @DefaultValue final RegisterBookRequest request) {
+    public RegisterBookResponse execute(@RequestBody @DefaultValue final RegisterBookRequest request) {
 
-        log.debug("Starting Controller -> RegisterBookController with {}", JsonConverter.convert(request));
+        final String jsonRequest = JsonConverter.of(request);
+        log.info("Starting Controller -> RegisterBookController with {}", jsonRequest);
 
         final RegisterBookParameters parameters = new RegisterBookParameters(request.getAuthorId(),
                                                                              request.getTitle(),

@@ -11,5 +11,5 @@ import io.github.jtsato.bookstore.core.book.domain.Book;
 @FunctionalInterface
 public interface GetBookByTitleGateway {
 
-    Optional<Book> getBookByTitle(final String title);
+    Optional<Book> execute(final String title);
 }

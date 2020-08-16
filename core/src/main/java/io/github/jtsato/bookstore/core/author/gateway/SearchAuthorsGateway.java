@@ -11,5 +11,5 @@ import io.github.jtsato.bookstore.core.common.paging.Page;
 @FunctionalInterface
 public interface SearchAuthorsGateway {
 
-    Page<Author> searchAuthors(final SearchAuthorsParameters parameters, final Integer page, final Integer size, final String orderBy);
+    Page<Author> execute(final SearchAuthorsParameters parameters, final Integer page, final Integer size, final String orderBy);
 }

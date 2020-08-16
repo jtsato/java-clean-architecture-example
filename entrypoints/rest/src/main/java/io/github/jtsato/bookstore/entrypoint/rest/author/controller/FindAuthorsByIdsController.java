@@ -48,11 +48,12 @@ public class FindAuthorsByIdsController implements FindAuthorsByIdsApiMethod {
     @LogExecutionTime
     @ResponseStatus(HttpStatus.OK)
     @PostMapping("/findByIds")
-    public FindAuthorsByIdsResponse findAuthorsByIds(@RequestBody @DefaultValue final FindAuthorsByIdsRequest findAuthorsByIdsRequest) {
+    public FindAuthorsByIdsResponse execute(@RequestBody @DefaultValue final FindAuthorsByIdsRequest request) {
 
-        log.debug("Starting Controller -> FindAuthorsByIdsController with {}", JsonConverter.convert(findAuthorsByIdsRequest));
+        final String jsonRequest = JsonConverter.of(request);
+        log.info("Starting Controller -> FindAuthorsByIdsController with {}", jsonRequest);
 
-        final Page<Author> authors = findAuthorsByIdsUseCase.findAuthorsByIds(findAuthorsByIdsRequest.getIds());
+        final Page<Author> authors = findAuthorsByIdsUseCase.findAuthorsByIds(request.getIds());
 
         return FindAuthorsByIdsPresenter.of(authors);
     }

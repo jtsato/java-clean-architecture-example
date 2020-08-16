@@ -11,5 +11,5 @@ import io.github.jtsato.bookstore.core.author.domain.Author;
 @FunctionalInterface
 public interface GetAuthorByNameGateway {
 
-    Optional<Author> getAuthorByName(final String name);
+    Optional<Author> execute(final String name);
 }

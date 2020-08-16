@@ -83,5 +83,5 @@ public interface SearchBooksApiMethod {
                            @ApiResponse(responseCode = HttpStatusConstants.INTERNAL_SERVER_ERROR_500,
                                         description = HttpStatusConstants.INTERNAL_SERVER_ERROR_500_MESSAGE),})
 
-    SearchBooksResponse searchBooks(@Parameter(hidden = true) final Pageable pageable, @Parameter(hidden = true) final SearchBooksRequest searchBooksRequest);
+    SearchBooksResponse execute(@Parameter(hidden = true) final Pageable pageable, @Parameter(hidden = true) final SearchBooksRequest searchBooksRequest);
 }

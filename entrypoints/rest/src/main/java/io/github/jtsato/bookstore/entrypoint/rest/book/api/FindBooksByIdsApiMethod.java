@@ -30,5 +30,6 @@ public interface FindBooksByIdsApiMethod {
                            @ApiResponse(responseCode = HttpStatusConstants.NOT_FOUND_404, description = HttpStatusConstants.NOT_FOUND_404_MESSAGE),
                            @ApiResponse(responseCode = HttpStatusConstants.INTERNAL_SERVER_ERROR_500,
                                         description = HttpStatusConstants.INTERNAL_SERVER_ERROR_500_MESSAGE),})
-    FindBooksByIdsResponse findBooksByIds(@Parameter(description = "Books Ids") final FindBooksByIdsRequest findBooksByIdsRequest);
+
+    FindBooksByIdsResponse execute(final FindBooksByIdsRequest findBooksByIdsRequest);
 }

@@ -24,10 +24,8 @@ public class GetBookByTitleDataProvider implements GetBookByTitleGateway {
     BookRepository bookRepository;
 
     @Override
-    public Optional<Book> getBookByTitle(final String title) {
-
+    public Optional<Book> execute(final String title) {
         final Optional<BookEntity> optional = bookRepository.findByTitle(title);
-
         return optional.map(BookMapper::of);
     }
 }

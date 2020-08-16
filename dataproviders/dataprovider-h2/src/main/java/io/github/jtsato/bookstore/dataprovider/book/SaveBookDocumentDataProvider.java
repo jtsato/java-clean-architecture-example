@@ -22,7 +22,7 @@ public class SaveBookDocumentDataProvider implements SaveBookDocumentGateway {
     BookDocumentRepository bookDocumentRepository;
 
     @Override
-    public BookDocument saveBookDocument(final BookDocument bookDocument) {
+    public BookDocument execute(final BookDocument bookDocument) {
         final BookDocumentEntity bookDocumentEntity = BookDocumentMapper.of(bookDocument);
         return BookDocumentMapper.of(bookDocumentRepository.saveAndFlush(bookDocumentEntity));
     }

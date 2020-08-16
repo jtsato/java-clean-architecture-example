@@ -41,9 +41,9 @@ public class RemoveAuthorByIdController implements RemoveAuthorByIdApiMethod {
     @LogExecutionTime
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("/{id}")
-    public void removeAuthorById(@PathVariable final Long id) {
+    public void execute(@PathVariable final Long id) {
 
-        log.debug("Starting Controller -> RemoveAuthorByIdController with {}", id);
+        log.info("Starting Controller -> RemoveAuthorByIdController with {}", id);
 
         removeAuthorByIdUseCase.removeAuthorById(id);
     }

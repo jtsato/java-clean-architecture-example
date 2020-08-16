@@ -46,7 +46,7 @@ class UpdateBookByIdDataProviderTest {
                                      BigDecimal.valueOf(50.55),
                                      Boolean.TRUE,
                                      null,
-                                     LocalDateTime.parse("2020-04-12T22:04:59.123"));
+                                     LocalDateTime.parse("2020-04-13T22:04:59.123"));
 
         final Book result = updateBookById(update);
 
@@ -88,7 +88,7 @@ class UpdateBookByIdDataProviderTest {
 
     private Book updateBookById(final Book candidate) {
 
-        final Optional<Book> optional = updateBookByIdDataProvider.updateBookById(candidate);
+        final Optional<Book> optional = updateBookByIdDataProvider.execute(candidate);
 
         assertThat(optional).isPresent();
 
@@ -97,7 +97,7 @@ class UpdateBookByIdDataProviderTest {
 
     private Author getAuthor(final Long authorId) {
 
-        final Optional<Author> optional = getAuthorByIdDataProvider.getAuthorById(authorId);
+        final Optional<Author> optional = getAuthorByIdDataProvider.execute(authorId);
 
         assertThat(optional).isPresent();
 
@@ -110,7 +110,7 @@ class UpdateBookByIdDataProviderTest {
 
         final Book update = new Book(5L, getAuthor(2L), null, null, null, null, null);
 
-        final Optional<Book> optional = updateBookByIdDataProvider.updateBookById(update);
+        final Optional<Book> optional = updateBookByIdDataProvider.execute(update);
 
         assertThat(optional).isNotPresent();
     }

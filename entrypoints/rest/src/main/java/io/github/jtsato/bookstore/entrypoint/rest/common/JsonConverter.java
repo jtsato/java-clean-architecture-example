@@ -19,7 +19,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class JsonConverter {
 
-    public static String convert(final Serializable serializable) {
+    public static String of(final Serializable serializable) {
+
         try {
             return new ObjectMapper().writeValueAsString(serializable);
         } catch (final JsonProcessingException jsonProcessingException) {

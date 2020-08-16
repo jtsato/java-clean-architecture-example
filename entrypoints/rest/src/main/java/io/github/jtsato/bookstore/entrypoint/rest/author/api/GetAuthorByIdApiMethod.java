@@ -30,5 +30,5 @@ public interface GetAuthorByIdApiMethod {
                            @ApiResponse(responseCode = HttpStatusConstants.INTERNAL_SERVER_ERROR_500,
                                         description = HttpStatusConstants.INTERNAL_SERVER_ERROR_500_MESSAGE),})
 
-    GetAuthorByIdResponse getAuthorById(@Parameter(description = "Author Id") final Long id);
+    GetAuthorByIdResponse execute(@Parameter(description = "Author Id") final Long id);
 }

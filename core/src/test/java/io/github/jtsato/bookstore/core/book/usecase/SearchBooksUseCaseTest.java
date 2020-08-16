@@ -70,7 +70,7 @@ class SearchBooksUseCaseTest {
         final SearchBooksParameters parameters = new SearchBooksParameters(null, null, prices, null, creationDates, updateDates);
         final Page<Book> pageWithOneBook = mockPageWithOneBook();
 
-        when(searchBooksGateway.searchBooks(parameters, 0, 1, "id:asc")).thenReturn(pageWithOneBook);
+        when(searchBooksGateway.execute(parameters, 0, 1, "id:asc")).thenReturn(pageWithOneBook);
 
         final Page<Book> pageOfBooks = searchBooksUseCase.execute(parameters, 0, 1, "id:asc");
 
@@ -123,7 +123,7 @@ class SearchBooksUseCaseTest {
         final SearchBooksParameters parameters = new SearchBooksParameters(null, null, prices, null, creationDates, updateDates);
 
         final Page<Book> emptyBooksPage = mockEmptyBooksPage();
-        when(searchBooksGateway.searchBooks(parameters, 0, 1, "id:asc")).thenReturn(emptyBooksPage);
+        when(searchBooksGateway.execute(parameters, 0, 1, "id:asc")).thenReturn(emptyBooksPage);
 
         final Page<Book> pageOfBooks = searchBooksUseCase.execute(parameters, 0, 1, "id:asc");
 

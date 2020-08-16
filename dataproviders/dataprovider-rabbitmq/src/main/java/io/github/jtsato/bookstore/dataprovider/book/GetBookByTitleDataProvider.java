@@ -15,7 +15,7 @@ import io.github.jtsato.bookstore.core.book.gateway.GetBookByTitleGateway;
 public class GetBookByTitleDataProvider implements GetBookByTitleGateway {
 
     @Override
-    public Optional<Book> getBookByTitle(final String title) {
+    public Optional<Book> execute(final String title) {
         return Optional.empty();
     }
 }

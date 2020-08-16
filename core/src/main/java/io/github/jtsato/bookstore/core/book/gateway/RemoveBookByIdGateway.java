@@ -11,5 +11,5 @@ import io.github.jtsato.bookstore.core.book.domain.Book;
 @FunctionalInterface
 public interface RemoveBookByIdGateway {
 
-    Optional<Book> removeBookById(final Long id);
+    Optional<Book> execute(final Long id);
 }

@@ -19,17 +19,17 @@ import io.github.jtsato.bookstore.dataprovider.service.DispatcherAmqpProducer;
 @Service
 public class UpdateAuthorByIdDataProvider implements UpdateAuthorByIdGateway {
 
-    @Value("${bookstore.exchange.update-author-by-id}")
+    @Value("${bookstore.rabbitmq.exchange.update-author-by-id}")
     private String exchange;
 
-    @Value("${bookstore.routingkey.update-author-by-id}")
+    @Value("${bookstore.rabbitmq.routingkey.update-author-by-id}")
     private String routingKey;
 
     @Autowired
     DispatcherAmqpProducer dispatcherAmqpProducer;
 
     @Override
-    public Optional<Author> updateAuthorById(final Author author) {
+    public Optional<Author> execute(final Author author) {
         final UpdateAuthorByIdMessage updateAuthorByIdMessage = UpdateAuthorByIdMessageConverter.of(author);
         dispatcherAmqpProducer.sendMessage(exchange, routingKey, updateAuthorByIdMessage);
         return Optional.of(author);

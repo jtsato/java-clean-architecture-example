@@ -34,10 +34,9 @@ public class SearchAuthorsDataProvider implements SearchAuthorsGateway {
     private final PageMapper<Author, AuthorEntity> pageMapper = new PageMapper<>() {};
 
     @Override
-    public Page<Author> searchAuthors(final SearchAuthorsParameters parameters, final Integer pageNumber, final Integer size, final String orderBy) {
+    public Page<Author> execute(final SearchAuthorsParameters parameters, final Integer pageNumber, final Integer size, final String orderBy) {
 
         final PageRequest pageRequest = PageRequestHelper.buildPageRequest(pageNumber, size, sanitizeOrderBy(orderBy));
-
         final BooleanBuilder predicate = new AuthorPredicateBuilder(QAuthorEntity.authorEntity).buildBooleanBuilder(parameters);
 
         final org.springframework.data.domain.Page<AuthorEntity> page = authorRepository.findAll(predicate, pageRequest);
@@ -46,11 +45,9 @@ public class SearchAuthorsDataProvider implements SearchAuthorsGateway {
     }
 
     private String sanitizeOrderBy(final String orderBy) {
-
         if (StringUtils.isBlank(orderBy) || StringUtils.equalsIgnoreCase(orderBy, "UNSORTED")) {
             return "name:asc";
         }
-
         return StringUtils.stripToEmpty(orderBy);
     }
 }

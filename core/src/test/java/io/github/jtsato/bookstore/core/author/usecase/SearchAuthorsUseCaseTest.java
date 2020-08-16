@@ -65,7 +65,7 @@ class SearchAuthorsUseCaseTest {
         final SearchAuthorsParameters parameters = new SearchAuthorsParameters(null, null, null, null, null);
         final Page<Author> pageWithOneAuthor = mockPageWithOneAuthor();
 
-        when(searchAuthorsGateway.searchAuthors(parameters, 0, 1, "id:asc")).thenReturn(pageWithOneAuthor);
+        when(searchAuthorsGateway.execute(parameters, 0, 1, "id:asc")).thenReturn(pageWithOneAuthor);
 
         final Page<Author> pageOfAuthors = searchAuthorsUseCase.searchAuthors(parameters, 0, 1, "id:asc");
 
@@ -107,7 +107,8 @@ class SearchAuthorsUseCaseTest {
 
         final SearchAuthorsParameters parameters = new SearchAuthorsParameters(null, null, null, null, null);
         final Page<Author> emptyAuthorsPage = mockEmptyAuthorsPage();
-        when(searchAuthorsGateway.searchAuthors(parameters, 0, 1, "id:asc")).thenReturn(emptyAuthorsPage);
+
+        when(searchAuthorsGateway.execute(parameters, 0, 1, "id:asc")).thenReturn(emptyAuthorsPage);
 
         final Page<Author> pageOfAuthors = searchAuthorsUseCase.searchAuthors(parameters, 0, 1, "id:asc");
 

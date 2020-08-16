@@ -44,9 +44,9 @@ public class GetBookByIdController implements GetBookByIdApiMethod {
     @LogExecutionTime
     @ResponseStatus(HttpStatus.OK)
     @GetMapping("/{id}")
-    public GetBookByIdResponse getBookById(@PathVariable final Long id) {
+    public GetBookByIdResponse execute(@PathVariable final Long id) {
 
-        log.debug("Starting Controller -> GetBookByIdController with {}", id);
+        log.info("Starting Controller -> GetBookByIdController with {}", id);
 
         final Book book = getBookByIdUseCase.execute(id);
 

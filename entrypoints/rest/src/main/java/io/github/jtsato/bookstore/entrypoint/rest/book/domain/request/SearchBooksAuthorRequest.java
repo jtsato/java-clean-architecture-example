@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 /**
  * @author Jorge Takeshi Sato
@@ -15,17 +16,14 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
 public final class SearchBooksAuthorRequest implements Serializable {
 
     private static final long serialVersionUID = 6528126199921883953L;
 
     private Long id;
-
     private String name;
-
     private String gender;
-
     private String startBirthdate;
-
     private String endBirthdate;
 }

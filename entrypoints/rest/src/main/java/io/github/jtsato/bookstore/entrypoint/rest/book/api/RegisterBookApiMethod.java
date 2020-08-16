@@ -30,5 +30,5 @@ public interface RegisterBookApiMethod {
                            @ApiResponse(responseCode = HttpStatusConstants.INTERNAL_SERVER_ERROR_500,
                                         description = HttpStatusConstants.INTERNAL_SERVER_ERROR_500_MESSAGE),})
 
-    RegisterBookResponse registerBook(final RegisterBookRequest request);
+    RegisterBookResponse execute(final RegisterBookRequest request);
 }

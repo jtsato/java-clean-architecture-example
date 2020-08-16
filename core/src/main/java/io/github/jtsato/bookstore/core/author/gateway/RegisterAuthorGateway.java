@@ -9,5 +9,5 @@ import io.github.jtsato.bookstore.core.author.domain.Author;
 @FunctionalInterface
 public interface RegisterAuthorGateway {
 
-    Author registerAuthor(final Author author);
+    Author execute(final Author author);
 }

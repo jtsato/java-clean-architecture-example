@@ -55,16 +55,16 @@ public class RegisterBookUseCaseImpl implements RegisterBookUseCase {
                                    getLocalDateTime.now(),
                                    getLocalDateTime.now());
 
-        return registerBookGateway.registerBook(book);
+        return registerBookGateway.execute(book);
     }
 
     private Author getAuthorAndValidate(final Long authorId) {
-        final Optional<Author> optional = getAuthorByIdGateway.getAuthorById(authorId);
+        final Optional<Author> optional = getAuthorByIdGateway.execute(authorId);
         return optional.orElseThrow(() -> new NotFoundException("validation.author.id.notfound", authorId));
     }
 
     private void checkDuplicatedTitleViolation(final String title) {
-        final Optional<Book> optional = getBookByTitleGateway.getBookByTitle(title);
+        final Optional<Book> optional = getBookByTitleGateway.execute(title);
         optional.ifPresent(this::throwUniqueConstraintException);
     }
 

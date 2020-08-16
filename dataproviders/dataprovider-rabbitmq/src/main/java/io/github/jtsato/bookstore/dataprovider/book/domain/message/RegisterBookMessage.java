@@ -5,22 +5,23 @@ import java.math.BigDecimal;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 /**
  * @author Jorge Takeshi Sato
  */
 
 @Getter
+@NoArgsConstructor
 @AllArgsConstructor
+@ToString
 public class RegisterBookMessage implements Serializable {
 
     private static final long serialVersionUID = -1401793357376446399L;
 
-    private final Long authorId;
-
-    private final String title;
-
-    private final BigDecimal price;
-
-    private final Boolean available;
+    private Long authorId;
+    private String title;
+    private BigDecimal price;
+    private Boolean available;
 }

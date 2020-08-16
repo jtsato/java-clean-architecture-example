@@ -33,7 +33,7 @@ class GetBookByTitleDataProviderTest {
     @Test
     void successfulToGetBookByTitleIfFound() {
 
-        final Optional<Book> optional = getBookByTitleDataProvider.getBookByTitle("Effective Java");
+        final Optional<Book> optional = getBookByTitleDataProvider.execute("Effective Java");
 
         assertThat(optional).isPresent();
         assertThat(authorRepository.count()).isEqualTo(3);
@@ -43,7 +43,7 @@ class GetBookByTitleDataProviderTest {
     @Test
     void failToGetAuthorByTitleIfNotFound() {
 
-        final Optional<Book> optional = getBookByTitleDataProvider.getBookByTitle("Effective Java (2nd Edition)");
+        final Optional<Book> optional = getBookByTitleDataProvider.execute("Effective Java (2nd Edition)");
 
         assertThat(optional).isNotPresent();
         assertThat(authorRepository.count()).isEqualTo(3);

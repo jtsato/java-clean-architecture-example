@@ -42,6 +42,6 @@ public class FindBooksByIdsUseCaseImpl implements FindBooksByIdsUseCase {
             throw new InvalidParameterException("validation.get.by.ids.limit");
         }
 
-        return findBooksByIdsGateway.findBooksByIds(ids);
+        return findBooksByIdsGateway.execute(ids);
     }
 }

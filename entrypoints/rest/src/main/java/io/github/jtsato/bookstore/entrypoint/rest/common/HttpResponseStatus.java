@@ -6,14 +6,12 @@ import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 /**
  * @author Jorge Takeshi Sato
  */
 
 @Getter
-@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class HttpResponseStatus implements Serializable {

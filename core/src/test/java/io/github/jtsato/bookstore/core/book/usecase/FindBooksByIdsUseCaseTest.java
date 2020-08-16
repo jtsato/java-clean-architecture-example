@@ -45,7 +45,7 @@ class FindBooksByIdsUseCaseTest {
     @Test
     void failToFindBooksByIdsIfParametersAreNotValid() {
 
-        when(findBooksByIdsGateway.findBooksByIds(null)).thenReturn(null);
+        when(findBooksByIdsGateway.execute(null)).thenReturn(null);
 
         final Exception exception = Assertions.assertThrows(Exception.class, () -> findBooksByIdsUseCase.execute(null));
 
@@ -61,7 +61,7 @@ class FindBooksByIdsUseCaseTest {
 
         final List<Long> ids = Arrays.asList(1L, 2L);
 
-        when(findBooksByIdsGateway.findBooksByIds(ids)).thenReturn(mockFindBooksByIdsGatewayOut());
+        when(findBooksByIdsGateway.execute(ids)).thenReturn(mockFindBooksByIdsGatewayOut());
 
         final Page<Book> pageOfBooks = findBooksByIdsUseCase.execute(ids);
 
@@ -122,7 +122,7 @@ class FindBooksByIdsUseCaseTest {
 
         final Page<Book> pageOfBooks = new PageImpl<>(Collections.emptyList(), new Pageable(0, 1, 0, 0L, 0));
 
-        when(findBooksByIdsGateway.findBooksByIds(ids)).thenReturn(pageOfBooks);
+        when(findBooksByIdsGateway.execute(ids)).thenReturn(pageOfBooks);
 
         final Pageable pageable = pageOfBooks.getPageable();
 
@@ -144,7 +144,7 @@ class FindBooksByIdsUseCaseTest {
             ids.add((long) index);
         }
 
-        when(findBooksByIdsGateway.findBooksByIds(ids)).thenReturn(mockFindBooksByIdsGatewayOut());
+        when(findBooksByIdsGateway.execute(ids)).thenReturn(mockFindBooksByIdsGatewayOut());
 
         final Exception exception = Assertions.assertThrows(Exception.class, () -> findBooksByIdsUseCase.execute(ids));
 
@@ -164,7 +164,7 @@ class FindBooksByIdsUseCaseTest {
             ids.add((long) index);
         }
 
-        when(findBooksByIdsGateway.findBooksByIds(ids)).thenReturn(mockFindBooksByIdsGatewayOut());
+        when(findBooksByIdsGateway.execute(ids)).thenReturn(mockFindBooksByIdsGatewayOut());
 
         final Page<Book> pageOfBooks = findBooksByIdsUseCase.execute(ids);
 

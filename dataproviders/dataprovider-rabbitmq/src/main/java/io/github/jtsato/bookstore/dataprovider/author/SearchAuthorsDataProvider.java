@@ -19,7 +19,7 @@ import io.github.jtsato.bookstore.core.common.paging.Pageable;
 public class SearchAuthorsDataProvider implements SearchAuthorsGateway {
 
     @Override
-    public Page<Author> searchAuthors(final SearchAuthorsParameters parameters, final Integer pageNumber, final Integer size, final String orderBy) {
+    public Page<Author> execute(final SearchAuthorsParameters parameters, final Integer pageNumber, final Integer size, final String orderBy) {
         return new PageImpl<>(Collections.emptyList(), new Pageable(pageNumber, size, 0, 0L, 0));
     }
 }

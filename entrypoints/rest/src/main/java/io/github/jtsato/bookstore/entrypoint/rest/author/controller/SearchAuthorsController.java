@@ -49,21 +49,21 @@ public class SearchAuthorsController implements SearchAuthorsApiMethod {
     @LogExecutionTime
     @ResponseStatus(HttpStatus.OK)
     @GetMapping
-    public SearchAuthorsResponse searchAuthors(final Pageable pageable, @DefaultValue final SearchAuthorsRequest searchAuthorsRequest) {
+    public SearchAuthorsResponse execute(final Pageable pageable, @DefaultValue final SearchAuthorsRequest request) {
 
-        log.debug("Starting Controller -> SearchAuthorsController with {}", JsonConverter.convert(searchAuthorsRequest));
+        final String jsonRequest = JsonConverter.of(request);
+        log.info("Starting Controller -> SearchAuthorsController with {}", jsonRequest);
 
-        final SearchAuthorsParameters parameters = new SearchAuthorsParameters(searchAuthorsRequest.getId(),
-                                                                               searchAuthorsRequest.getName(),
-                                                                               searchAuthorsRequest.getGender(),
-                                                                               searchAuthorsRequest.getStartBirthdate(),
-                                                                               searchAuthorsRequest.getEndBirthdate());
-
+        final SearchAuthorsParameters parameters = buildSearchAuthorsParameters(request);
         final Page<Author> authors = searchAuthorsUseCase.searchAuthors(parameters,
                                                                         pageable.getPageNumber(),
                                                                         pageable.getPageSize(),
                                                                         pageable.getSort().toString());
 
         return SearchAuthorsPresenter.of(authors);
+    }
+
+    private SearchAuthorsParameters buildSearchAuthorsParameters(final SearchAuthorsRequest request) {
+        return new SearchAuthorsParameters(request.getId(), request.getName(), request.getGender(), request.getStartBirthdate(), request.getEndBirthdate());
     }
 }

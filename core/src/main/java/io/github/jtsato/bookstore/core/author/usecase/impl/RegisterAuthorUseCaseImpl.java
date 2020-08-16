@@ -12,7 +12,7 @@ import io.github.jtsato.bookstore.core.author.gateway.GetAuthorByNameGateway;
 import io.github.jtsato.bookstore.core.author.gateway.RegisterAuthorGateway;
 import io.github.jtsato.bookstore.core.author.usecase.RegisterAuthorUseCase;
 import io.github.jtsato.bookstore.core.author.usecase.parameter.RegisterAuthorParameters;
-import io.github.jtsato.bookstore.core.common.EnumUtils;
+import io.github.jtsato.bookstore.core.common.EnumeratorUtils;
 import io.github.jtsato.bookstore.core.exception.UniqueConstraintException;
 import lombok.RequiredArgsConstructor;
 
@@ -35,15 +35,15 @@ public class RegisterAuthorUseCaseImpl implements RegisterAuthorUseCase {
 
         final LocalDate birthdate = LocalDate.parse(parameters.getBirthdate());
 
-        final Gender gender = EnumUtils.valueOf(parameters.getGender(), Gender.class);
+        final Gender gender = EnumeratorUtils.valueOf(parameters.getGender(), Gender.class);
 
         final Author author = new Author(null, parameters.getName(), gender, birthdate);
 
-        return registerAuthorGateway.registerAuthor(author);
+        return registerAuthorGateway.execute(author);
     }
 
     private void checkDuplicatedNameViolation(final String authorName) {
-        final Optional<Author> optional = getAuthorByNameGateway.getAuthorByName(authorName);
+        final Optional<Author> optional = getAuthorByNameGateway.execute(authorName);
         optional.ifPresent(this::throwUniqueConstraintException);
     }
 

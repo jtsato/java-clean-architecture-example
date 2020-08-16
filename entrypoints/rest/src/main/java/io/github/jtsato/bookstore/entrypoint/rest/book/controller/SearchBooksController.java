@@ -54,24 +54,23 @@ public class SearchBooksController implements SearchBooksApiMethod {
     @LogExecutionTime
     @ResponseStatus(HttpStatus.OK)
     @GetMapping
-    public SearchBooksResponse searchBooks(final Pageable pageable, @DefaultValue final SearchBooksRequest request) {
+    public SearchBooksResponse execute(final Pageable pageable, @DefaultValue final SearchBooksRequest request) {
 
-        log.debug("Starting Controller -> SearchBooksController with {}", JsonConverter.convert(request));
+        final String jsonRequest = JsonConverter.of(request);
+        log.info("Starting Controller -> SearchBooksController with {}", jsonRequest);
 
-        final ImmutablePair<BigDecimal, BigDecimal> prices = new ImmutablePair<>(request.getStartPrice(), request.getEndPrice());
-        final ImmutablePair<String, String> creationDates = new ImmutablePair<>(request.getStartCreationDate(), request.getEndCreationDate());
-        final ImmutablePair<String, String> updateDates = new ImmutablePair<>(request.getStartUpdateDate(), request.getEndUpdateDate());
-
-        final SearchBooksParameters parameters = new SearchBooksParameters(buildAuthorParameters(request),
-                                                                           request.getTitle(),
-                                                                           prices,
-                                                                           request.getAvailable(),
-                                                                           creationDates,
-                                                                           updateDates);
-
+        final SearchBooksParameters parameters = buildSearchBooksParameters(request);
         final Page<Book> books = searchBooksUseCase.execute(parameters, pageable.getPageNumber(), pageable.getPageSize(), pageable.getSort().toString());
 
         return SearchBooksPresenter.of(books);
+    }
+
+    private SearchBooksParameters buildSearchBooksParameters(final SearchBooksRequest request) {
+        final SearchAuthorsParameters authorParameters = buildAuthorParameters(request);
+        final ImmutablePair<BigDecimal, BigDecimal> priceRange = new ImmutablePair<>(request.getStartPrice(), request.getEndPrice());
+        final ImmutablePair<String, String> creationDateRange = new ImmutablePair<>(request.getStartCreationDate(), request.getEndCreationDate());
+        final ImmutablePair<String, String> updateDateRange = new ImmutablePair<>(request.getStartUpdateDate(), request.getEndUpdateDate());
+        return new SearchBooksParameters(authorParameters, request.getTitle(), priceRange, request.getAvailable(), creationDateRange, updateDateRange);
     }
 
     private SearchAuthorsParameters buildAuthorParameters(final SearchBooksRequest searchBooksRequest) {

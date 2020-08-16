@@ -24,7 +24,7 @@ public class RemoveBookByIdDataProvider implements RemoveBookByIdGateway {
     BookRepository bookRepository;
 
     @Override
-    public Optional<Book> removeBookById(final Long id) {
+    public Optional<Book> execute(final Long id) {
         final Optional<BookEntity> optional = bookRepository.findById(id);
         return optional.map(this::removeBookEntity);
     }
