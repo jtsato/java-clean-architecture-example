@@ -19,10 +19,10 @@ import io.github.jtsato.bookstore.dataprovider.service.DispatcherAmqpProducer;
 @Service
 public class UpdateBookByIdDataProvider implements UpdateBookByIdGateway {
 
-    @Value("${bookstore.exchange.update-book-by-id}")
+    @Value("${bookstore.rabbitmq.exchange.update-book-by-id}")
     private String exchange;
 
-    @Value("${bookstore.routingkey.update-book-by-id}")
+    @Value("${bookstore.rabbitmq.routingkey.update-book-by-id}")
     private String routingKey;
 
     @Autowired
