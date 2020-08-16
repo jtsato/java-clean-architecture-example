@@ -141,7 +141,7 @@ class UpdateBookByIdUseCaseTest {
                                                                                  Boolean.TRUE);
         final Optional<Author> optional = mockGetAuthorByIdGateway();
 
-        assertThat(optional.isPresent()).isTrue();
+        assertThat(optional).isPresent();
 
         final Author author = optional.get();
 
