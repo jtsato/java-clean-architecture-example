@@ -37,7 +37,6 @@ public class SearchAuthorsDataProvider implements SearchAuthorsGateway {
     public Page<Author> searchAuthors(final SearchAuthorsParameters parameters, final Integer pageNumber, final Integer size, final String orderBy) {
 
         final PageRequest pageRequest = PageRequestHelper.buildPageRequest(pageNumber, size, sanitizeOrderBy(orderBy));
-
         final BooleanBuilder predicate = new AuthorPredicateBuilder(QAuthorEntity.authorEntity).buildBooleanBuilder(parameters);
 
         final org.springframework.data.domain.Page<AuthorEntity> page = authorRepository.findAll(predicate, pageRequest);

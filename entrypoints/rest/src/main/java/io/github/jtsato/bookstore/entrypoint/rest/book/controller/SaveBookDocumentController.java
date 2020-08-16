@@ -60,7 +60,7 @@ public class SaveBookDocumentController implements SaveBookDocumentApiMethod {
 
         final SaveBookDocumentRequest request = buildSaveBookDocumentRequest(bookId, file);
 
-        final String jsonRequest = JsonConverter.of(request);        
+        final String jsonRequest = JsonConverter.of(request);
         log.info("Starting Controller -> SaveBookDocumentController with {}", jsonRequest);
 
         final SaveBookDocumentParameters saveBookDocumentParameters = buildSaveBookDocumentParameters(request);

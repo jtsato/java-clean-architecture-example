@@ -51,7 +51,7 @@ public class SearchAuthorsController implements SearchAuthorsApiMethod {
     @GetMapping
     public SearchAuthorsResponse searchAuthors(final Pageable pageable, @DefaultValue final SearchAuthorsRequest request) {
 
-        final String jsonRequest = JsonConverter.of(request);         
+        final String jsonRequest = JsonConverter.of(request);
         log.info("Starting Controller -> SearchAuthorsController with {}", jsonRequest);
 
         final SearchAuthorsParameters parameters = new SearchAuthorsParameters(request.getId(),

@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import io.github.jtsato.bookstore.core.exception.InvalidParameterException;
+import io.github.jtsato.bookstore.core.exception.InvalidEnumeratorException;
 
 /**
  * @author Jorge Takeshi Sato
@@ -24,9 +24,9 @@ class EnumeratorUtilsTest {
 
         final Exception exception = Assertions.assertThrows(Exception.class, () -> EnumeratorUtils.valueOf("BLUE", Semaphore.class));
 
-        assertThat(exception).isInstanceOf(InvalidParameterException.class);
+        assertThat(exception).isInstanceOf(InvalidEnumeratorException.class);
 
         assertThat(exception.getMessage()).isNotNull();
-        assertThat(exception.getMessage()).isEqualTo("The value BLUE is invalid for Semaphore. Valid values are: GREEN, YELLOW, RED.");
+        assertThat(exception.getMessage()).isEqualTo("validation.enumerator.value.invalid");
     }
 }

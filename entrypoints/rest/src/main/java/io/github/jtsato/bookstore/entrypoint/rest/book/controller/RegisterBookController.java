@@ -41,7 +41,7 @@ import lombok.RequiredArgsConstructor;
 public class RegisterBookController implements RegisterBookApiMethod {
 
     private static final Logger log = LoggerFactory.getLogger(RegisterBookController.class);
-    
+
     private final RegisterBookUseCase registerBookUseCase;
 
     @Override

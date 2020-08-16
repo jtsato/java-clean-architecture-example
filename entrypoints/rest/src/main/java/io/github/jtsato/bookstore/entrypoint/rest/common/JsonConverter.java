@@ -20,7 +20,7 @@ import lombok.NoArgsConstructor;
 public class JsonConverter {
 
     public static String of(final Serializable serializable) {
-        
+
         try {
             return new ObjectMapper().writeValueAsString(serializable);
         } catch (final JsonProcessingException jsonProcessingException) {

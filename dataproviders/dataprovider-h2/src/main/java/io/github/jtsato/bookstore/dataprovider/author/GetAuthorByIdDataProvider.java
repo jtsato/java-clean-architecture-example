@@ -25,9 +25,7 @@ public class GetAuthorByIdDataProvider implements GetAuthorByIdGateway {
 
     @Override
     public Optional<Author> getAuthorById(final Long id) {
-
         final Optional<AuthorEntity> optional = authorRepository.findById(id);
-
         return optional.map(AuthorMapper::of);
     }
 }

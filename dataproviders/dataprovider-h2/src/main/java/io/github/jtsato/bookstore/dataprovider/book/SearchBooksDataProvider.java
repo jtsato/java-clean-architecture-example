@@ -39,11 +39,9 @@ public class SearchBooksDataProvider implements SearchBooksGateway {
     public Page<Book> searchBooks(final SearchBooksParameters parameters, final Integer pageNumber, final Integer size, final String orderBy) {
 
         final PageRequest pageRequest = PageRequestHelper.buildPageRequest(pageNumber, size, sanitizeOrderBy(orderBy));
-
         final BooleanBuilder predicate = new SearchBookPredicateBuilder(QBookEntity.bookEntity).buildBooleanBuilder(parameters);
-
         final EntityGraph entityGraph = EntityGraphUtils.fromAttributePaths("author");
-        
+
         final org.springframework.data.domain.Page<BookEntity> page = bookRepository.findAll(predicate, pageRequest, entityGraph);
 
         return pageMapper.of(page, BookMapper::of);

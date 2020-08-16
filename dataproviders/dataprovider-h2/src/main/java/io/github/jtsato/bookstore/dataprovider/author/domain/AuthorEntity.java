@@ -17,6 +17,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 /**
  * @author Jorge Takeshi Sato
@@ -26,6 +27,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
 @Entity
 @Table(name = "AUTHORS", uniqueConstraints = {@UniqueConstraint(columnNames = {"NAME"}, name = "UN_AUTHORS_NAME"),})
 public class AuthorEntity implements Serializable {

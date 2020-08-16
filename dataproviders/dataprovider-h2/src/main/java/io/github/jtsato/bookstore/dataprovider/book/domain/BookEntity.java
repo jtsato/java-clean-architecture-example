@@ -24,6 +24,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 /**
  * @author Jorge Takeshi Sato
@@ -33,6 +34,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
 @Entity
 @Table(name = "BOOKS", uniqueConstraints = {@UniqueConstraint(columnNames = {"TITLE"}, name = "UN_BOOKS_TITLE"),})
 public class BookEntity implements Serializable {

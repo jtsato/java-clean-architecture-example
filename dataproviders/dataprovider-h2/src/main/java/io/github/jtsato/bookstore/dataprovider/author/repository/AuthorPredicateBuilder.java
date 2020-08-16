@@ -9,7 +9,9 @@ import org.apache.commons.lang3.StringUtils;
 
 import com.querydsl.core.types.dsl.BooleanExpression;
 
+import io.github.jtsato.bookstore.core.author.domain.Gender;
 import io.github.jtsato.bookstore.core.author.usecase.parameter.SearchAuthorsParameters;
+import io.github.jtsato.bookstore.core.common.EnumeratorUtils;
 import io.github.jtsato.bookstore.dataprovider.author.domain.QAuthorEntity;
 import io.github.jtsato.bookstore.dataprovider.common.predicate.AbstractPredicateBuilderImpl;
 
@@ -37,7 +39,8 @@ public class AuthorPredicateBuilder extends AbstractPredicateBuilderImpl<QAuthor
         }
 
         if (StringUtils.isNotBlank(query.getGender())) {
-            booleanExpressions.add(entityPath.gender.eq(query.getGender()));
+            final Gender gender = EnumeratorUtils.valueOf(query.getGender(), Gender.class);
+            booleanExpressions.add(entityPath.gender.eq(gender.name()));
         }
 
         if (StringUtils.isNotBlank(query.getStartBirthdateDate())) {
