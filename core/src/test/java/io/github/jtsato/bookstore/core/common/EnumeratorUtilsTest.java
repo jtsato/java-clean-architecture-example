@@ -18,6 +18,20 @@ class EnumeratorUtilsTest {
             GREEN, YELLOW, RED
     }
 
+    @DisplayName("Success to get value if found")
+    @Test
+    void successToGetValueIfFound() {
+
+        final Semaphore green = EnumeratorUtils.valueOf("GREEN", Semaphore.class);
+        assertThat(green).isEqualTo(Semaphore.GREEN);
+
+        final Semaphore yellow = EnumeratorUtils.valueOf("YELLOW", Semaphore.class);
+        assertThat(yellow).isEqualTo(Semaphore.YELLOW);
+        
+        final Semaphore red = EnumeratorUtils.valueOf("RED", Semaphore.class);
+        assertThat(red).isEqualTo(Semaphore.RED);
+    }
+
     @DisplayName("Fail to get value if not found")
     @Test
     void failToGetValueIfNotFound() {

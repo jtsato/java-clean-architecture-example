@@ -46,7 +46,7 @@ class UpdateBookByIdDataProviderTest {
                                      BigDecimal.valueOf(50.55),
                                      Boolean.TRUE,
                                      null,
-                                     LocalDateTime.parse("2020-04-12T22:04:59.123"));
+                                     LocalDateTime.parse("2020-04-13T22:04:59.123"));
 
         final Book result = updateBookById(update);
 

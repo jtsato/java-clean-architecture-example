@@ -18,12 +18,10 @@ import lombok.NoArgsConstructor;
 public class EnumeratorUtils {
 
     public static <E extends Enum<E>> E valueOf(final String candidate, final Class<E> clazz) {
-        final List<E> constants = Arrays.asList(clazz.getEnumConstants());
-        final Predicate<? super E> byEquals = element -> element.toString().equals(candidate);
-        return constants.stream()
-                        .filter(byEquals)
-                        .findFirst()
-                        .orElseThrow(throwIllegalArgumentException(clazz.getSimpleName(), candidate, getValues(constants)));
+        final List<E> values = Arrays.asList(clazz.getEnumConstants());
+        final Predicate<? super E> byEquals = element -> element.name().equals(candidate);
+        final List<String> valuesAsString = getValues(values);
+        return values.stream().filter(byEquals).findFirst().orElseThrow(throwIllegalArgumentException(clazz.getSimpleName(), candidate, valuesAsString));
     }
 
     private static <T extends Enum<T>> List<String> getValues(final List<T> values) {

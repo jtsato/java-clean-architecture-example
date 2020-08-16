@@ -31,16 +31,12 @@ public class LayeredArchitectureTest {
                                                                                   .definedBy("..gateway..")
                                                                                   .layer("DataProviders")
                                                                                   .definedBy("..dataprovider..")
-
                                                                                   .whereLayer("Controllers")
                                                                                   .mayNotBeAccessedByAnyLayer()
                                                                                   .whereLayer("UseCases")
-                                                                                  .mayOnlyBeAccessedByLayers("Configurations",
-                                                                                                             "Controllers",
-                                                                                                             "Gateways",
-                                                                                                             "DataProviders")
+                                                                                  .mayOnlyBeAccessedByLayers("Controllers", "Gateways", "DataProviders")
                                                                                   .whereLayer("Gateways")
-                                                                                  .mayOnlyBeAccessedByLayers("Configurations", "UseCases", "DataProviders")
+                                                                                  .mayOnlyBeAccessedByLayers("UseCases", "DataProviders")
                                                                                   .whereLayer("DataProviders")
                                                                                   .mayOnlyBeAccessedByLayers("Gateways");
 }
