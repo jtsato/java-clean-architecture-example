@@ -6,7 +6,6 @@ import io.github.jtsato.bookstore.entrypoint.rest.common.HttpStatusConstants;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
-import io.swagger.v3.oas.annotations.media.ExampleObject;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -32,7 +31,5 @@ public interface FindBooksByIdsApiMethod {
                            @ApiResponse(responseCode = HttpStatusConstants.INTERNAL_SERVER_ERROR_500,
                                         description = HttpStatusConstants.INTERNAL_SERVER_ERROR_500_MESSAGE),})
 
-    FindBooksByIdsResponse execute(@Parameter(description = "Books Ids",
-                                              examples = {@ExampleObject(value = "1"),
-                                                          @ExampleObject(value = "2")}) final FindBooksByIdsRequest findBooksByIdsRequest);
+    FindBooksByIdsResponse execute(final FindBooksByIdsRequest findBooksByIdsRequest);
 }

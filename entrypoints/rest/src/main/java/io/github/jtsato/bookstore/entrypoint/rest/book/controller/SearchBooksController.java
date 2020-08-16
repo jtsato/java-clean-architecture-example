@@ -59,21 +59,18 @@ public class SearchBooksController implements SearchBooksApiMethod {
         final String jsonRequest = JsonConverter.of(request);
         log.info("Starting Controller -> SearchBooksController with {}", jsonRequest);
 
+        final SearchBooksParameters parameters = buildSearchBooksParameters(request);
+        final Page<Book> books = searchBooksUseCase.execute(parameters, pageable.getPageNumber(), pageable.getPageSize(), pageable.getSort().toString());
+
+        return SearchBooksPresenter.of(books);
+    }
+
+    private SearchBooksParameters buildSearchBooksParameters(final SearchBooksRequest request) {
         final SearchAuthorsParameters authorParameters = buildAuthorParameters(request);
         final ImmutablePair<BigDecimal, BigDecimal> priceRange = new ImmutablePair<>(request.getStartPrice(), request.getEndPrice());
         final ImmutablePair<String, String> creationDateRange = new ImmutablePair<>(request.getStartCreationDate(), request.getEndCreationDate());
         final ImmutablePair<String, String> updateDateRange = new ImmutablePair<>(request.getStartUpdateDate(), request.getEndUpdateDate());
-
-        final SearchBooksParameters parameters = new SearchBooksParameters(authorParameters,
-                                                                           request.getTitle(),
-                                                                           priceRange,
-                                                                           request.getAvailable(),
-                                                                           creationDateRange,
-                                                                           updateDateRange);
-
-        final Page<Book> books = searchBooksUseCase.execute(parameters, pageable.getPageNumber(), pageable.getPageSize(), pageable.getSort().toString());
-
-        return SearchBooksPresenter.of(books);
+        return new SearchBooksParameters(authorParameters, request.getTitle(), priceRange, request.getAvailable(), creationDateRange, updateDateRange);
     }
 
     private SearchAuthorsParameters buildAuthorParameters(final SearchBooksRequest searchBooksRequest) {
