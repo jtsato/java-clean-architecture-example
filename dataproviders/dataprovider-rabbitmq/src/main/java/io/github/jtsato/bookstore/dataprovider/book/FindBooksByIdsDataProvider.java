@@ -19,7 +19,7 @@ import io.github.jtsato.bookstore.core.common.paging.Pageable;
 public class FindBooksByIdsDataProvider implements FindBooksByIdsGateway {
 
     @Override
-    public Page<Book> findBooksByIds(final List<Long> ids) {
+    public Page<Book> execute(final List<Long> ids) {
         return new PageImpl<>(Collections.emptyList(), new Pageable(0, 0, 0, 0L, 0));
     }
 }

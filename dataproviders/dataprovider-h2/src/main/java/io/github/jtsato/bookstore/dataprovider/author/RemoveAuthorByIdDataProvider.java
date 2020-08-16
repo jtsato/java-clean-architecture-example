@@ -24,7 +24,7 @@ public class RemoveAuthorByIdDataProvider implements RemoveAuthorByIdGateway {
     AuthorRepository authorRepository;
 
     @Override
-    public Optional<Author> removeAuthorById(final Long id) {
+    public Optional<Author> execute(final Long id) {
         final Optional<AuthorEntity> optional = authorRepository.findById(id);
         return optional.map(this::removeAuthorEntity);
     }

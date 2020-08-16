@@ -29,6 +29,6 @@ public class SearchAuthorsUseCaseImpl implements SearchAuthorsUseCase {
 
     @Override
     public Page<Author> searchAuthors(final SearchAuthorsParameters parameters, final Integer page, final Integer size, final String orderBy) {
-        return searchAuthorsGateway.searchAuthors(parameters, page, size, orderBy);
+        return searchAuthorsGateway.execute(parameters, page, size, orderBy);
     }
 }

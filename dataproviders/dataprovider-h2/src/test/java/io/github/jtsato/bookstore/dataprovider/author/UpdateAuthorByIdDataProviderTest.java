@@ -49,7 +49,7 @@ class UpdateAuthorByIdDataProviderTest {
 
     private Author updateAuthorById(final Author author) {
 
-        final Optional<Author> optional = updateAuthorByIdDataProvider.updateAuthorById(author);
+        final Optional<Author> optional = updateAuthorByIdDataProvider.execute(author);
 
         assertThat(optional).isPresent();
 
@@ -60,7 +60,7 @@ class UpdateAuthorByIdDataProviderTest {
     @Test
     void failToUpdateAuthorByIdIfNotFound() {
 
-        final Optional<Author> optional = updateAuthorByIdDataProvider.updateAuthorById(new Author(5L, null, Gender.MALE, null));
+        final Optional<Author> optional = updateAuthorByIdDataProvider.execute(new Author(5L, null, Gender.MALE, null));
 
         assertThat(optional).isNotPresent();
     }

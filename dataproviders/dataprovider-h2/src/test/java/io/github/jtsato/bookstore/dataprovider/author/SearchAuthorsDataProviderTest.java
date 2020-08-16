@@ -46,7 +46,7 @@ class SearchAuthorsDataProviderTest {
 
         final String orderBy = "name:desc,gender:asc";
 
-        final Page<Author> page = searchAuthorsDataProvider.searchAuthors(parameters, null, null, orderBy);
+        final Page<Author> page = searchAuthorsDataProvider.execute(parameters, null, null, orderBy);
 
         assertThat(page).isNotNull();
 
@@ -77,7 +77,7 @@ class SearchAuthorsDataProviderTest {
 
         final SearchAuthorsParameters parameters = new SearchAuthorsParameters(null, name, gender, startBirthdateDate, endBirthdateDate);
 
-        final Page<Author> page = searchAuthorsDataProvider.searchAuthors(parameters, 0, -1, null);
+        final Page<Author> page = searchAuthorsDataProvider.execute(parameters, 0, -1, null);
 
         assertThat(page).isNotNull();
 
@@ -105,7 +105,7 @@ class SearchAuthorsDataProviderTest {
 
         final String orderBy = "UNSORTED";
 
-        final Page<Author> page = searchAuthorsDataProvider.searchAuthors(parameters, 1, 3, orderBy);
+        final Page<Author> page = searchAuthorsDataProvider.execute(parameters, 1, 3, orderBy);
 
         assertThat(page).isNotNull();
 
@@ -138,7 +138,7 @@ class SearchAuthorsDataProviderTest {
 
         final String orderBy = "birthdate:asc";
 
-        final Page<Author> page = searchAuthorsDataProvider.searchAuthors(parameters, 1, 3, orderBy);
+        final Page<Author> page = searchAuthorsDataProvider.execute(parameters, 1, 3, orderBy);
 
         assertThat(page).isNotNull();
 

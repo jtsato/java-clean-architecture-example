@@ -30,5 +30,5 @@ public interface RegisterAuthorApiMethod {
                            @ApiResponse(responseCode = HttpStatusConstants.INTERNAL_SERVER_ERROR_500,
                                         description = HttpStatusConstants.INTERNAL_SERVER_ERROR_500_MESSAGE),})
 
-    RegisterAuthorResponse registerAuthor(final RegisterAuthorRequest request);
+    RegisterAuthorResponse execute(final RegisterAuthorRequest request);
 }

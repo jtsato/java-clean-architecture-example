@@ -27,7 +27,7 @@ public class RegisterAuthorDataProvider implements RegisterAuthorGateway {
     DispatcherAmqpProducer dispatcherAmqpProducer;
 
     @Override
-    public Author registerAuthor(final Author author) {
+    public Author execute(final Author author) {
         final RegisterAuthorMessage registerAuthorMessage = RegisterAuthorMessageConverter.of(author);
         dispatcherAmqpProducer.sendMessage(exchange, routingKey, registerAuthorMessage);
         return author;

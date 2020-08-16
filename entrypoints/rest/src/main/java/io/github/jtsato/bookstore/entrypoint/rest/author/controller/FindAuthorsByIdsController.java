@@ -48,7 +48,7 @@ public class FindAuthorsByIdsController implements FindAuthorsByIdsApiMethod {
     @LogExecutionTime
     @ResponseStatus(HttpStatus.OK)
     @PostMapping("/findByIds")
-    public FindAuthorsByIdsResponse findAuthorsByIds(@RequestBody @DefaultValue final FindAuthorsByIdsRequest request) {
+    public FindAuthorsByIdsResponse execute(@RequestBody @DefaultValue final FindAuthorsByIdsRequest request) {
 
         final String jsonRequest = JsonConverter.of(request);
         log.info("Starting Controller -> FindAuthorsByIdsController with {}", jsonRequest);

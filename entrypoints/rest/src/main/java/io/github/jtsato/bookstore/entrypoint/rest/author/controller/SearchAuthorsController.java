@@ -49,7 +49,7 @@ public class SearchAuthorsController implements SearchAuthorsApiMethod {
     @LogExecutionTime
     @ResponseStatus(HttpStatus.OK)
     @GetMapping
-    public SearchAuthorsResponse searchAuthors(final Pageable pageable, @DefaultValue final SearchAuthorsRequest request) {
+    public SearchAuthorsResponse execute(final Pageable pageable, @DefaultValue final SearchAuthorsRequest request) {
 
         final String jsonRequest = JsonConverter.of(request);
         log.info("Starting Controller -> SearchAuthorsController with {}", jsonRequest);

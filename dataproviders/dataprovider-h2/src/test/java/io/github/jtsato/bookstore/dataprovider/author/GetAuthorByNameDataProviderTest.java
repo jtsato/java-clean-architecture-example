@@ -33,7 +33,7 @@ class GetAuthorByNameDataProviderTest {
     @Test
     void successfulToGetAuthorByNameIfFound() {
 
-        final Optional<Author> optional = getAuthorByNameDataProvider.getAuthorByName("Cay S. Horstmann");
+        final Optional<Author> optional = getAuthorByNameDataProvider.execute("Cay S. Horstmann");
 
         assertThat(optional).isPresent();
         assertThat(authorRepository.count()).isEqualTo(2);
@@ -43,7 +43,7 @@ class GetAuthorByNameDataProviderTest {
     @Test
     void failToGetAuthorByNameIfNotFound() {
 
-        final Optional<Author> optional = getAuthorByNameDataProvider.getAuthorByName("Robert Cecil Martin");
+        final Optional<Author> optional = getAuthorByNameDataProvider.execute("Robert Cecil Martin");
 
         assertThat(optional).isNotPresent();
         assertThat(authorRepository.count()).isEqualTo(2);

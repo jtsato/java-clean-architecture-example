@@ -59,13 +59,13 @@ class UpdateAuthorByIdUseCaseTest {
     @Test
     void successfulToUpdateAuthorByIdIfFound() {
 
-        when(updateAuthorByIdGateway.updateAuthorById(mockUpdateAuthorByIdGatewayIn())).thenReturn(mockUpdateAuthorByIdGatewayOut());
-        when(getAuthorByNameGateway.getAuthorByName("Joshua Bloch")).thenReturn(Optional.empty());
+        when(updateAuthorByIdGateway.execute(mockUpdateAuthorByIdGatewayIn())).thenReturn(mockUpdateAuthorByIdGatewayOut());
+        when(getAuthorByNameGateway.execute("Joshua Bloch")).thenReturn(Optional.empty());
 
         updateAuthorById();
 
-        when(updateAuthorByIdGateway.updateAuthorById(mockUpdateAuthorByIdGatewayIn())).thenReturn(mockUpdateAuthorByIdGatewayOut());
-        when(getAuthorByNameGateway.getAuthorByName("Joshua Bloch")).thenReturn(mockGetAuthorByNameGatewayWithSameId());
+        when(updateAuthorByIdGateway.execute(mockUpdateAuthorByIdGatewayIn())).thenReturn(mockUpdateAuthorByIdGatewayOut());
+        when(getAuthorByNameGateway.execute("Joshua Bloch")).thenReturn(mockGetAuthorByNameGatewayWithSameId());
 
         updateAuthorById();
     }
@@ -93,8 +93,8 @@ class UpdateAuthorByIdUseCaseTest {
     @Test
     void failToUpdateAuthorByIdIfFoundAndNameIsDuplicated() {
 
-        when(updateAuthorByIdGateway.updateAuthorById(mockUpdateAuthorByIdGatewayIn())).thenReturn(Optional.empty());
-        when(getAuthorByNameGateway.getAuthorByName("Joshua Bloch")).thenReturn(mockGetAuthorByNameGatewayWithOtherId());
+        when(updateAuthorByIdGateway.execute(mockUpdateAuthorByIdGatewayIn())).thenReturn(Optional.empty());
+        when(getAuthorByNameGateway.execute("Joshua Bloch")).thenReturn(mockGetAuthorByNameGatewayWithOtherId());
 
         final UpdateAuthorByIdParameters parameters = new UpdateAuthorByIdParameters(1L, "Joshua Bloch", "MALE", "1961-08-28");
 
@@ -118,8 +118,8 @@ class UpdateAuthorByIdUseCaseTest {
     @Test
     void failToUpdateAuthorByIdIfNotFound() {
 
-        when(updateAuthorByIdGateway.updateAuthorById(mockUpdateAuthorByIdGatewayIn())).thenReturn(Optional.empty());
-        when(getAuthorByNameGateway.getAuthorByName("Joshua Bloch")).thenReturn(Optional.empty());
+        when(updateAuthorByIdGateway.execute(mockUpdateAuthorByIdGatewayIn())).thenReturn(Optional.empty());
+        when(getAuthorByNameGateway.execute("Joshua Bloch")).thenReturn(Optional.empty());
 
         final UpdateAuthorByIdParameters parameters = new UpdateAuthorByIdParameters(1L, "Joshua Bloch", "MALE", "1961-08-28");
 
@@ -135,8 +135,8 @@ class UpdateAuthorByIdUseCaseTest {
     @Test
     void failToUpdateAuthorByIdIfHasAnAuthorWithSameName() {
 
-        when(updateAuthorByIdGateway.updateAuthorById(mockUpdateAuthorByIdGatewayIn())).thenReturn(Optional.empty());
-        when(getAuthorByNameGateway.getAuthorByName("Joshua Bloch")).thenReturn(mockGetAuthorByNameWithOtherIdGateway());
+        when(updateAuthorByIdGateway.execute(mockUpdateAuthorByIdGatewayIn())).thenReturn(Optional.empty());
+        when(getAuthorByNameGateway.execute("Joshua Bloch")).thenReturn(mockGetAuthorByNameWithOtherIdGateway());
 
         final UpdateAuthorByIdParameters parameters = new UpdateAuthorByIdParameters(1L, "Joshua Bloch", "MALE", "1961-08-28");
 

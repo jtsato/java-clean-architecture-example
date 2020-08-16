@@ -19,7 +19,7 @@ import io.github.jtsato.bookstore.core.common.paging.Pageable;
 public class SearchBooksDataProvider implements SearchBooksGateway {
 
     @Override
-    public Page<Book> searchBooks(final SearchBooksParameters parameters, final Integer pageNumber, final Integer size, final String orderBy) {
+    public Page<Book> execute(final SearchBooksParameters parameters, final Integer pageNumber, final Integer size, final String orderBy) {
         return new PageImpl<>(Collections.emptyList(), new Pageable(pageNumber, size, 0, 0L, 0));
     }
 }

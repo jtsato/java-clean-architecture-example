@@ -38,7 +38,7 @@ class FindBooksByIdsDataProviderTest {
 
         final List<Long> ids = Arrays.asList(1L, 2L);
 
-        final Page<Book> pageOfBooks = findBooksByIdsDataProvider.findBooksByIds(ids);
+        final Page<Book> pageOfBooks = findBooksByIdsDataProvider.execute(ids);
 
         assertThat(pageOfBooks).isNotNull();
 
@@ -64,7 +64,7 @@ class FindBooksByIdsDataProviderTest {
 
         final List<Long> ids = Arrays.asList(5L, 6L);
 
-        final Page<Book> pageOfBooks = findBooksByIdsDataProvider.findBooksByIds(ids);
+        final Page<Book> pageOfBooks = findBooksByIdsDataProvider.execute(ids);
 
         assertThat(pageOfBooks).isNotNull();
 

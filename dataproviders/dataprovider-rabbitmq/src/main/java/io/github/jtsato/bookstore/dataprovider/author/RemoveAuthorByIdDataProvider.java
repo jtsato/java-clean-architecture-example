@@ -27,7 +27,7 @@ public class RemoveAuthorByIdDataProvider implements RemoveAuthorByIdGateway {
     DispatcherAmqpProducer dispatcherAmqpProducer;
 
     @Override
-    public Optional<Author> removeAuthorById(final Long id) {
+    public Optional<Author> execute(final Long id) {
         dispatcherAmqpProducer.sendMessage(exchange, routingKey, id);
         return Optional.empty();
     }

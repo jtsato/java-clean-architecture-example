@@ -31,5 +31,5 @@ public interface FindAuthorsByIdsApiMethod {
                            @ApiResponse(responseCode = HttpStatusConstants.INTERNAL_SERVER_ERROR_500,
                                         description = HttpStatusConstants.INTERNAL_SERVER_ERROR_500_MESSAGE),})
 
-    FindAuthorsByIdsResponse findAuthorsByIds(@Parameter(description = "Authors Ids") final FindAuthorsByIdsRequest findAuthorsByIdsRequest);
+    FindAuthorsByIdsResponse execute(@Parameter(description = "Authors Ids") final FindAuthorsByIdsRequest findAuthorsByIdsRequest);
 }

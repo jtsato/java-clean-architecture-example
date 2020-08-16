@@ -11,15 +11,10 @@ import org.springframework.stereotype.Component;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import lombok.Getter;
-import lombok.Setter;
-
 /**
  * @author Jorge Takeshi Sato
  */
 
-@Getter
-@Setter
 @Component
 public class DispatcherAmqpProducer {
 

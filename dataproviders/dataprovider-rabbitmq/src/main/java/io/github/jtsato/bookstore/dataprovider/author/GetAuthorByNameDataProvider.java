@@ -15,7 +15,7 @@ import io.github.jtsato.bookstore.core.author.gateway.GetAuthorByNameGateway;
 public class GetAuthorByNameDataProvider implements GetAuthorByNameGateway {
 
     @Override
-    public Optional<Author> getAuthorByName(final String name) {
+    public Optional<Author> execute(final String name) {
         return Optional.empty();
     }
 }

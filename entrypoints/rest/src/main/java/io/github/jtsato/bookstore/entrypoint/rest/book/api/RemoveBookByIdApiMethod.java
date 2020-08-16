@@ -27,5 +27,5 @@ public interface RemoveBookByIdApiMethod {
                            @ApiResponse(responseCode = HttpStatusConstants.BAD_REQUEST_400, description = HttpStatusConstants.BAD_REQUEST_400_MESSAGE),
                            @ApiResponse(responseCode = HttpStatusConstants.NOT_FOUND_404, description = HttpStatusConstants.NOT_FOUND_404_MESSAGE),})
 
-    void removeBookById(@Parameter(description = "Book Id") final Long id);
+    void execute(@Parameter(description = "Book Id") final Long id);
 }

@@ -36,7 +36,7 @@ public class GetBookByIdUseCaseImpl implements GetBookByIdUseCase {
             throw new InvalidParameterException("validation.book.id.null");
         }
 
-        final Optional<Book> optional = getBookByIdGateway.getBookById(id);
+        final Optional<Book> optional = getBookByIdGateway.execute(id);
 
         return optional.orElseThrow(() -> new NotFoundException("validation.book.id.notfound", id));
     }

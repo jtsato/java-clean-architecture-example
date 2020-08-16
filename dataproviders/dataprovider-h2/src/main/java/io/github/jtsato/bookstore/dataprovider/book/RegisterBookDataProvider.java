@@ -22,7 +22,7 @@ public class RegisterBookDataProvider implements RegisterBookGateway {
     BookRepository bookRepository;
 
     @Override
-    public Book registerBook(final Book book) {
+    public Book execute(final Book book) {
         final BookEntity bookEntity = BookMapper.of(book);
         return BookMapper.of(bookRepository.saveAndFlush(bookEntity));
     }

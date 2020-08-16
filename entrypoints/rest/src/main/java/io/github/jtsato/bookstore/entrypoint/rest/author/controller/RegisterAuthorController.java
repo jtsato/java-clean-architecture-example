@@ -48,7 +48,7 @@ public class RegisterAuthorController implements RegisterAuthorApiMethod {
     @LogExecutionTime
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
-    public RegisterAuthorResponse registerAuthor(@RequestBody @DefaultValue final RegisterAuthorRequest request) {
+    public RegisterAuthorResponse execute(@RequestBody @DefaultValue final RegisterAuthorRequest request) {
 
         final String jsonRequest = JsonConverter.of(request);
         log.info("Starting Controller -> RegisterAuthorController with {}", jsonRequest);

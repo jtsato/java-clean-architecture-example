@@ -36,7 +36,7 @@ public class RemoveBookByIdUseCaseImpl implements RemoveBookByIdUseCase {
             throw new InvalidParameterException("validation.book.id.null");
         }
 
-        final Optional<Book> optional = removeBookByIdGateway.removeBookById(id);
+        final Optional<Book> optional = removeBookByIdGateway.execute(id);
 
         return optional.orElseThrow(() -> new NotFoundException("validation.book.id.notfound", id));
     }

@@ -29,7 +29,7 @@ public class UpdateAuthorByIdDataProvider implements UpdateAuthorByIdGateway {
     DispatcherAmqpProducer dispatcherAmqpProducer;
 
     @Override
-    public Optional<Author> updateAuthorById(final Author author) {
+    public Optional<Author> execute(final Author author) {
         final UpdateAuthorByIdMessage updateAuthorByIdMessage = UpdateAuthorByIdMessageConverter.of(author);
         dispatcherAmqpProducer.sendMessage(exchange, routingKey, updateAuthorByIdMessage);
         return Optional.of(author);

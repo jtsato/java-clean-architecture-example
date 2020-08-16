@@ -52,7 +52,7 @@ class RegisterBookDataProviderTest {
                                       LocalDateTime.parse("2020-03-12T22:04:59.123"),
                                       LocalDateTime.parse("2020-04-12T22:04:59.123"));
 
-        final Book result = registerBookDataProvider.registerBook(newBook);
+        final Book result = registerBookDataProvider.execute(newBook);
 
         assertThat(result.getId()).isNotNull();
         assertThat(result.getTitle()).isEqualTo(newBook.getTitle());
@@ -65,7 +65,7 @@ class RegisterBookDataProviderTest {
 
     private Author getAuthor() {
 
-        final Optional<Author> optional = getAuthorByIdDataProvider.getAuthorById(1L);
+        final Optional<Author> optional = getAuthorByIdDataProvider.execute(1L);
 
         assertThat(optional).isPresent();
 
@@ -78,7 +78,7 @@ class RegisterBookDataProviderTest {
 
         final Book book = new Book(null, getAuthor(), null, null, null, null, null);
 
-        final Exception exception = Assertions.assertThrows(Exception.class, () -> registerBookDataProvider.registerBook(book));
+        final Exception exception = Assertions.assertThrows(Exception.class, () -> registerBookDataProvider.execute(book));
 
         assertThat(exception).isInstanceOf(DataIntegrityViolationException.class);
     }

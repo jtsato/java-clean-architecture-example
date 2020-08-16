@@ -37,7 +37,7 @@ class FindAuthorsByIdsDataProviderTest {
 
         final List<Long> ids = Arrays.asList(1L, 2L);
 
-        final Page<Author> pageOfAuthors = findAuthorsByIdsDataProvider.findAuthorsByIds(ids);
+        final Page<Author> pageOfAuthors = findAuthorsByIdsDataProvider.execute(ids);
 
         assertThat(pageOfAuthors).isNotNull();
         assertThat(pageOfAuthors.getContent()).isNotNull().isNotEmpty();
@@ -51,7 +51,7 @@ class FindAuthorsByIdsDataProviderTest {
 
         final List<Long> ids = Arrays.asList(3L, 4L);
 
-        final Page<Author> pageOfAuthors = findAuthorsByIdsDataProvider.findAuthorsByIds(ids);
+        final Page<Author> pageOfAuthors = findAuthorsByIdsDataProvider.execute(ids);
 
         assertThat(pageOfAuthors).isNotNull();
         assertThat(pageOfAuthors.getContent()).isNotNull().isEmpty();

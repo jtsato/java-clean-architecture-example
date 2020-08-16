@@ -46,14 +46,14 @@ public class SaveBookDocumentUseCaseImpl implements SaveBookDocumentUseCase {
 
         checkIfBookExists(bookId);
 
-        final Optional<BookDocument> optional = getBookDocumentByBookIdGateway.getBookDocumentByBookId(bookId);
+        final Optional<BookDocument> optional = getBookDocumentByBookIdGateway.execute(bookId);
 
         return optional.map(bookDocument -> updateBookDocument(parameters, bookDocument)).orElse(registerBookDocument(parameters, bookId));
     }
 
     private void checkIfBookExists(final Long bookId) {
 
-        final Optional<Book> optional = getBookByIdGateway.getBookById(bookId);
+        final Optional<Book> optional = getBookByIdGateway.execute(bookId);
 
         if (optional.isEmpty()) {
             throw new NotFoundException("validation.book.id.notfound", bookId);
@@ -63,7 +63,7 @@ public class SaveBookDocumentUseCaseImpl implements SaveBookDocumentUseCase {
     private BookDocument updateBookDocument(final SaveBookDocumentParameters parameters, final BookDocument bookDocument) {
         bookDocument.setContent(parameters.getContent());
         bookDocument.setUpdateDate(getLocalDateTime.now());
-        return saveBookDocumentGateway.saveBookDocument(bookDocument);
+        return saveBookDocumentGateway.execute(bookDocument);
     }
 
     private BookDocument registerBookDocument(final SaveBookDocumentParameters parameters, final Long bookId) {
@@ -78,6 +78,6 @@ public class SaveBookDocumentUseCaseImpl implements SaveBookDocumentUseCase {
                                                            getLocalDateTime.now(),
                                                            getLocalDateTime.now());
 
-        return saveBookDocumentGateway.saveBookDocument(bookDocument);
+        return saveBookDocumentGateway.execute(bookDocument);
     }
 }

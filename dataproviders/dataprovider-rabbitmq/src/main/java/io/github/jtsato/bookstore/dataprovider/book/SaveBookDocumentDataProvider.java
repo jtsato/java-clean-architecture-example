@@ -27,7 +27,7 @@ public class SaveBookDocumentDataProvider implements SaveBookDocumentGateway {
     DispatcherAmqpProducer dispatcherAmqpProducer;
 
     @Override
-    public BookDocument saveBookDocument(final BookDocument bookDocument) {
+    public BookDocument execute(final BookDocument bookDocument) {
         final SaveBookDocumentMessage saveBookDocumentMessage = SaveBookDocumentMessageConverter.of(bookDocument);
         dispatcherAmqpProducer.sendMessage(exchange, routingKey, saveBookDocumentMessage);
         return bookDocument;

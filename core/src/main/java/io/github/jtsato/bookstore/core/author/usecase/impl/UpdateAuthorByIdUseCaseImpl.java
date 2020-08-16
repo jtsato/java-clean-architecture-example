@@ -39,14 +39,14 @@ public class UpdateAuthorByIdUseCaseImpl implements UpdateAuthorByIdUseCase {
 
         final Author author = new Author(parameters.getId(), parameters.getName(), gender, birthdate);
 
-        final Optional<Author> optional = updateAuthorGateway.updateAuthorById(author);
+        final Optional<Author> optional = updateAuthorGateway.execute(author);
 
         return optional.orElseThrow(() -> new NotFoundException("validation.author.id.notfound", author.getId()));
     }
 
     private void checkDuplicatedNameViolation(final Long authorId, final String authorName) {
 
-        final Optional<Author> optional = getAuthorByNameGateway.getAuthorByName(authorName);
+        final Optional<Author> optional = getAuthorByNameGateway.execute(authorName);
 
         if (optional.isEmpty()) {
             return;

@@ -27,7 +27,7 @@ class EnumeratorUtilsTest {
 
         final Semaphore yellow = EnumeratorUtils.valueOf("YELLOW", Semaphore.class);
         assertThat(yellow).isEqualTo(Semaphore.YELLOW);
-        
+
         final Semaphore red = EnumeratorUtils.valueOf("RED", Semaphore.class);
         assertThat(red).isEqualTo(Semaphore.RED);
     }

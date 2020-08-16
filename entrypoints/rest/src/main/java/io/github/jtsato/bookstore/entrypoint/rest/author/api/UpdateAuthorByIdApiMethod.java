@@ -31,5 +31,5 @@ public interface UpdateAuthorByIdApiMethod {
                            @ApiResponse(responseCode = HttpStatusConstants.INTERNAL_SERVER_ERROR_500,
                                         description = HttpStatusConstants.INTERNAL_SERVER_ERROR_500_MESSAGE),})
 
-    UpdateAuthorByIdResponse updateAuthorById(@Parameter(description = "Author Id") final Long id, final UpdateAuthorByIdRequest request);
+    UpdateAuthorByIdResponse execute(@Parameter(description = "Author Id") final Long id, final UpdateAuthorByIdRequest request);
 }

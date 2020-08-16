@@ -39,11 +39,11 @@ public class RegisterAuthorUseCaseImpl implements RegisterAuthorUseCase {
 
         final Author author = new Author(null, parameters.getName(), gender, birthdate);
 
-        return registerAuthorGateway.registerAuthor(author);
+        return registerAuthorGateway.execute(author);
     }
 
     private void checkDuplicatedNameViolation(final String authorName) {
-        final Optional<Author> optional = getAuthorByNameGateway.getAuthorByName(authorName);
+        final Optional<Author> optional = getAuthorByNameGateway.execute(authorName);
         optional.ifPresent(this::throwUniqueConstraintException);
     }
 

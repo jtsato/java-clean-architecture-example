@@ -53,7 +53,7 @@ class RemoveAuthorByIdUseCaseTest {
     @Test
     void failToRemoveAuthorByIdIfParametersAreNotValid() {
 
-        when(removeAuthorByIdGateway.removeAuthorById(null)).thenReturn(null);
+        when(removeAuthorByIdGateway.execute(null)).thenReturn(null);
 
         final Exception exception = Assertions.assertThrows(Exception.class, () -> removeAuthorByIdUseCase.removeAuthorById(null));
 
@@ -66,14 +66,14 @@ class RemoveAuthorByIdUseCaseTest {
     @Test
     void successfulToRemoveAuthorByIdIfFound() {
 
-        when(removeAuthorByIdGateway.removeAuthorById(1L)).thenReturn(mockRemoveAuthorByIdGatewayOut());
+        when(removeAuthorByIdGateway.execute(1L)).thenReturn(mockRemoveAuthorByIdGatewayOut());
         final SearchAuthorsParameters authorsParameters = new SearchAuthorsParameters(1L, null, null, null, null);
         final ImmutablePair<BigDecimal, BigDecimal> prices = new ImmutablePair<>(null, null);
         final ImmutablePair<String, String> creationDates = new ImmutablePair<>(null, null);
         final ImmutablePair<String, String> updateDates = new ImmutablePair<>(null, null);
         final SearchBooksParameters parameters = new SearchBooksParameters(authorsParameters, null, prices, null, creationDates, updateDates);
         final Page<Book> emptyBookPage = new PageImpl<>(Collections.emptyList(), new Pageable(0, 0, 0, 0L, 0));
-        when(searchBooksGateway.searchBooks(parameters, 0, 1, null)).thenReturn(emptyBookPage);
+        when(searchBooksGateway.execute(parameters, 0, 1, null)).thenReturn(emptyBookPage);
 
         final Author author = removeAuthorByIdUseCase.removeAuthorById(1L);
 
@@ -91,14 +91,14 @@ class RemoveAuthorByIdUseCaseTest {
     @Test
     void failToRemoveAuthorByIdIfNotFound() {
 
-        when(removeAuthorByIdGateway.removeAuthorById(1L)).thenReturn(Optional.empty());
+        when(removeAuthorByIdGateway.execute(1L)).thenReturn(Optional.empty());
         final SearchAuthorsParameters authorsParameters = new SearchAuthorsParameters(1L, null, null, null, null);
         final ImmutablePair<BigDecimal, BigDecimal> prices = new ImmutablePair<>(null, null);
         final ImmutablePair<String, String> creationDates = new ImmutablePair<>(null, null);
         final ImmutablePair<String, String> updateDates = new ImmutablePair<>(null, null);
         final SearchBooksParameters parameters = new SearchBooksParameters(authorsParameters, null, prices, null, creationDates, updateDates);
         final Page<Book> emptyBooksPage = mockEmptyBooksPage();
-        when(searchBooksGateway.searchBooks(parameters, 0, 1, null)).thenReturn(emptyBooksPage);
+        when(searchBooksGateway.execute(parameters, 0, 1, null)).thenReturn(emptyBooksPage);
 
         final Exception exception = Assertions.assertThrows(Exception.class, () -> removeAuthorByIdUseCase.removeAuthorById(1L));
 
@@ -116,14 +116,14 @@ class RemoveAuthorByIdUseCaseTest {
     @Test
     void failToRemoveAuthorByIdIfHasBooksAssociated() {
 
-        when(removeAuthorByIdGateway.removeAuthorById(1L)).thenReturn(mockRemoveAuthorByIdGatewayOut());
+        when(removeAuthorByIdGateway.execute(1L)).thenReturn(mockRemoveAuthorByIdGatewayOut());
         final SearchAuthorsParameters authorsParameters = new SearchAuthorsParameters(1L, null, null, null, null);
         final ImmutablePair<BigDecimal, BigDecimal> prices = new ImmutablePair<>(null, null);
         final ImmutablePair<String, String> creationDates = new ImmutablePair<>(null, null);
         final ImmutablePair<String, String> updateDates = new ImmutablePair<>(null, null);
         final SearchBooksParameters parameters = new SearchBooksParameters(authorsParameters, null, prices, null, creationDates, updateDates);
         final Page<Book> bookPage = mockPageWithOneBook();
-        when(searchBooksGateway.searchBooks(parameters, 0, 1, null)).thenReturn(bookPage);
+        when(searchBooksGateway.execute(parameters, 0, 1, null)).thenReturn(bookPage);
 
         final Exception exception = Assertions.assertThrows(Exception.class, () -> removeAuthorByIdUseCase.removeAuthorById(1L));
 

@@ -17,7 +17,7 @@ import io.github.jtsato.bookstore.core.author.gateway.GetAuthorByIdGateway;
 public class GetAuthorByIdDataProvider implements GetAuthorByIdGateway {
 
     @Override
-    public Optional<Author> getAuthorById(final Long id) {
+    public Optional<Author> execute(final Long id) {
         return Optional.of(new Author(id, null, Gender.FEMALE, LocalDate.MIN));
     }
 }

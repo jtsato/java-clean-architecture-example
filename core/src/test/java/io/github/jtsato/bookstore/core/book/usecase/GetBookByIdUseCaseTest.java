@@ -40,7 +40,7 @@ class GetBookByIdUseCaseTest {
     @Test
     void failToGetBookByIdIfParametersAreNotValid() {
 
-        when(getBookByIdGateway.getBookById(null)).thenReturn(null);
+        when(getBookByIdGateway.execute(null)).thenReturn(null);
 
         final Exception exception = Assertions.assertThrows(Exception.class, () -> getBookByIdUseCase.execute(null));
 
@@ -53,7 +53,7 @@ class GetBookByIdUseCaseTest {
     @Test
     void successfulToGetBookByIdIfFound() {
 
-        when(getBookByIdGateway.getBookById(1L)).thenReturn(mockGetBookByIdGatewayOut());
+        when(getBookByIdGateway.execute(1L)).thenReturn(mockGetBookByIdGatewayOut());
 
         final Book book = getBookByIdUseCase.execute(1L);
 
@@ -88,7 +88,7 @@ class GetBookByIdUseCaseTest {
     @Test
     void failToGetBookByIdIfNotFound() {
 
-        when(getBookByIdGateway.getBookById(1L)).thenReturn(Optional.empty());
+        when(getBookByIdGateway.execute(1L)).thenReturn(Optional.empty());
 
         final Exception exception = Assertions.assertThrows(Exception.class, () -> getBookByIdUseCase.execute(1L));
 

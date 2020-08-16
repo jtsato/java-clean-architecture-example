@@ -24,7 +24,7 @@ public class GetAuthorByNameDataProvider implements GetAuthorByNameGateway {
     AuthorRepository authorRepository;
 
     @Override
-    public Optional<Author> getAuthorByName(final String name) {
+    public Optional<Author> execute(final String name) {
         final Optional<AuthorEntity> optional = authorRepository.findByName(name);
         return optional.map(AuthorMapper::of);
     }

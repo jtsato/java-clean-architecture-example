@@ -42,7 +42,7 @@ public class RemoveBookByIdController implements RemoveBookByIdApiMethod {
     @LogExecutionTime
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("/{id}")
-    public void removeBookById(@PathVariable final Long id) {
+    public void execute(@PathVariable final Long id) {
 
         log.info("Starting Controller -> RemoveBookByIdController with {}", id);
 

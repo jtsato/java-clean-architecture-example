@@ -27,7 +27,7 @@ public class RegisterBookDataProvider implements RegisterBookGateway {
     DispatcherAmqpProducer dispatcherAmqpProducer;
 
     @Override
-    public Book registerBook(final Book book) {
+    public Book execute(final Book book) {
         final RegisterBookMessage registerBookMessage = RegisterBookMessageConverter.of(book);
         dispatcherAmqpProducer.sendMessage(exchange, routingKey, registerBookMessage);
         return book;

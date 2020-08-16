@@ -28,5 +28,5 @@ public interface RemoveAuthorByIdApiMethod {
                            @ApiResponse(responseCode = HttpStatusConstants.INTERNAL_SERVER_ERROR_500,
                                         description = HttpStatusConstants.INTERNAL_SERVER_ERROR_500_MESSAGE),})
 
-    void removeAuthorById(@Parameter(description = "Author Id") final Long id);
+    void execute(@Parameter(description = "Author Id") final Long id);
 }

@@ -22,7 +22,7 @@ public class RegisterAuthorDataProvider implements RegisterAuthorGateway {
     AuthorRepository authorRepository;
 
     @Override
-    public Author registerAuthor(final Author author) {
+    public Author execute(final Author author) {
         final AuthorEntity authorEntity = AuthorMapper.of(author);
         return AuthorMapper.of(authorRepository.saveAndFlush(authorEntity));
     }

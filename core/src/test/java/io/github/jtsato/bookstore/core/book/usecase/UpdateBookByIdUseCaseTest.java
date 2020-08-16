@@ -93,15 +93,15 @@ class UpdateBookByIdUseCaseTest {
 
         when(getLocalDateTime.now()).thenReturn(LocalDateTime.parse("2020-04-12T22:04:59.123"));
 
-        when(updateBookByIdGateway.updateBookById(mockUpdateBookByIdGatewayIn())).thenReturn(mockUpdateBookByIdGatewayOut());
-        when(getAuthorByIdGateway.getAuthorById(1L)).thenReturn(mockGetAuthorByIdGateway());
-        when(getBookByTitleGateway.getBookByTitle("Effective Java (2nd Edition)")).thenReturn(Optional.empty());
+        when(updateBookByIdGateway.execute(mockUpdateBookByIdGatewayIn())).thenReturn(mockUpdateBookByIdGatewayOut());
+        when(getAuthorByIdGateway.execute(1L)).thenReturn(mockGetAuthorByIdGateway());
+        when(getBookByTitleGateway.execute("Effective Java (2nd Edition)")).thenReturn(Optional.empty());
 
         updateBookById();
 
-        when(updateBookByIdGateway.updateBookById(mockUpdateBookByIdGatewayIn())).thenReturn(mockUpdateBookByIdGatewayOut());
-        when(getAuthorByIdGateway.getAuthorById(1L)).thenReturn(mockGetAuthorByIdGateway());
-        when(getBookByTitleGateway.getBookByTitle("Effective Java (2nd Edition)")).thenReturn(mockGetBookByTitleGatewayWithSameId());
+        when(updateBookByIdGateway.execute(mockUpdateBookByIdGatewayIn())).thenReturn(mockUpdateBookByIdGatewayOut());
+        when(getAuthorByIdGateway.execute(1L)).thenReturn(mockGetAuthorByIdGateway());
+        when(getBookByTitleGateway.execute("Effective Java (2nd Edition)")).thenReturn(mockGetBookByTitleGatewayWithSameId());
 
         updateBookById();
     }
@@ -161,9 +161,9 @@ class UpdateBookByIdUseCaseTest {
     @Test
     void failToUpdateBookByIdIfNotFound() {
 
-        when(updateBookByIdGateway.updateBookById(mockUpdateBookByIdGatewayIn())).thenReturn(Optional.empty());
-        when(getAuthorByIdGateway.getAuthorById(1L)).thenReturn(mockGetAuthorByIdGateway());
-        when(getBookByTitleGateway.getBookByTitle("Effective Java (2nd Edition)")).thenReturn(Optional.empty());
+        when(updateBookByIdGateway.execute(mockUpdateBookByIdGatewayIn())).thenReturn(Optional.empty());
+        when(getAuthorByIdGateway.execute(1L)).thenReturn(mockGetAuthorByIdGateway());
+        when(getBookByTitleGateway.execute("Effective Java (2nd Edition)")).thenReturn(Optional.empty());
 
         final UpdateBookByIdParameters parameters = new UpdateBookByIdParameters(1L,
                                                                                  1L,
@@ -183,9 +183,9 @@ class UpdateBookByIdUseCaseTest {
     @Test
     void failToUpdateBookByIdIfHasABookWithSameTitle() {
 
-        when(updateBookByIdGateway.updateBookById(mockUpdateBookByIdGatewayIn())).thenReturn(Optional.empty());
-        when(getAuthorByIdGateway.getAuthorById(1L)).thenReturn(mockGetAuthorByIdGateway());
-        when(getBookByTitleGateway.getBookByTitle("Effective Java (2nd Edition)")).thenReturn(mockGetBookByTitleGatewayWithOtherId());
+        when(updateBookByIdGateway.execute(mockUpdateBookByIdGatewayIn())).thenReturn(Optional.empty());
+        when(getAuthorByIdGateway.execute(1L)).thenReturn(mockGetAuthorByIdGateway());
+        when(getBookByTitleGateway.execute("Effective Java (2nd Edition)")).thenReturn(mockGetBookByTitleGatewayWithOtherId());
 
         final UpdateBookByIdParameters parameters = new UpdateBookByIdParameters(1L,
                                                                                  1L,
@@ -227,9 +227,9 @@ class UpdateBookByIdUseCaseTest {
     @Test
     void failToUpdateBookByIdIfAuthorNotFound() {
 
-        when(updateBookByIdGateway.updateBookById(mockUpdateBookByIdGatewayIn())).thenReturn(mockUpdateBookByIdGatewayOut());
-        when(getAuthorByIdGateway.getAuthorById(1L)).thenReturn(Optional.empty());
-        when(getBookByTitleGateway.getBookByTitle("Effective Java (2nd Edition)")).thenReturn(mockGetBookByTitleGatewayWithSameId());
+        when(updateBookByIdGateway.execute(mockUpdateBookByIdGatewayIn())).thenReturn(mockUpdateBookByIdGatewayOut());
+        when(getAuthorByIdGateway.execute(1L)).thenReturn(Optional.empty());
+        when(getBookByTitleGateway.execute("Effective Java (2nd Edition)")).thenReturn(mockGetBookByTitleGatewayWithSameId());
 
         final UpdateBookByIdParameters parameters = new UpdateBookByIdParameters(1L,
                                                                                  1L,

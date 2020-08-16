@@ -54,7 +54,7 @@ public class SearchBooksController implements SearchBooksApiMethod {
     @LogExecutionTime
     @ResponseStatus(HttpStatus.OK)
     @GetMapping
-    public SearchBooksResponse searchBooks(final Pageable pageable, @DefaultValue final SearchBooksRequest request) {
+    public SearchBooksResponse execute(final Pageable pageable, @DefaultValue final SearchBooksRequest request) {
 
         final String jsonRequest = JsonConverter.of(request);
         log.info("Starting Controller -> SearchBooksController with {}", jsonRequest);

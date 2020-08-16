@@ -49,7 +49,7 @@ public class UpdateAuthorByIdController implements UpdateAuthorByIdApiMethod {
     @LogExecutionTime
     @ResponseStatus(HttpStatus.OK)
     @PutMapping
-    public UpdateAuthorByIdResponse updateAuthorById(@PathVariable final Long id, @RequestBody @DefaultValue final UpdateAuthorByIdRequest request) {
+    public UpdateAuthorByIdResponse execute(@PathVariable final Long id, @RequestBody @DefaultValue final UpdateAuthorByIdRequest request) {
 
         final String jsonRequest = JsonConverter.of(request);
         log.info("Starting Controller -> UpdateAuthorByIdController with {}", jsonRequest);

@@ -33,7 +33,7 @@ class GetBookDocumentByBookIdDataProviderTest {
     @Test
     void successfulToGetBookDocumentByBookIdIfFound() {
 
-        final Optional<BookDocument> optional = getBookDocumentByBookIdDataProvider.getBookDocumentByBookId(1L);
+        final Optional<BookDocument> optional = getBookDocumentByBookIdDataProvider.execute(1L);
 
         assertThat(optional).isPresent();
         assertThat(authorRepository.count()).isEqualTo(1);
@@ -43,7 +43,7 @@ class GetBookDocumentByBookIdDataProviderTest {
     @Test
     void failToGetAuthorByTitleIfNotFound() {
 
-        final Optional<BookDocument> optional = getBookDocumentByBookIdDataProvider.getBookDocumentByBookId(2L);
+        final Optional<BookDocument> optional = getBookDocumentByBookIdDataProvider.execute(2L);
 
         assertThat(optional).isNotPresent();
         assertThat(authorRepository.count()).isEqualTo(1);

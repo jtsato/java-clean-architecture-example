@@ -55,13 +55,13 @@ public class RemoveAuthorByIdUseCaseImpl implements RemoveAuthorByIdUseCase {
 
         final SearchBooksParameters parameters = new SearchBooksParameters(searchAuthorsParameters, null, prices, null, creationDates, updateDates);
 
-        final Page<Book> pageOfBook = searchBooksGateway.searchBooks(parameters, 0, 1, null);
+        final Page<Book> pageOfBook = searchBooksGateway.execute(parameters, 0, 1, null);
 
         if (CollectionUtils.isNotEmpty(pageOfBook.getContent())) {
             throw new ParentConstraintException("validation.author.with.books.removal");
         }
 
-        final Optional<Author> optional = removeAuthorByIdGateway.removeAuthorById(id);
+        final Optional<Author> optional = removeAuthorByIdGateway.execute(id);
 
         return optional.orElseThrow(() -> new NotFoundException("validation.author.id.notfound", id));
     }

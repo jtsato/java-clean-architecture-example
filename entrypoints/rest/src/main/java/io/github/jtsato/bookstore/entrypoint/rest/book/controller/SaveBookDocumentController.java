@@ -55,7 +55,7 @@ public class SaveBookDocumentController implements SaveBookDocumentApiMethod {
     @LogExecutionTime
     @ResponseStatus(HttpStatus.OK)
     @PostMapping(value = "/{bookId}/content", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public SaveBookDocumentResponse saveBookDocument(@PathVariable final Long bookId, @RequestPart final MultipartFile file)
+    public SaveBookDocumentResponse execute(@PathVariable final Long bookId, @RequestPart final MultipartFile file)
         throws IOException {
 
         final SaveBookDocumentRequest request = buildSaveBookDocumentRequest(bookId, file);

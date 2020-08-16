@@ -29,7 +29,7 @@ public class UpdateBookByIdDataProvider implements UpdateBookByIdGateway {
     DispatcherAmqpProducer dispatcherAmqpProducer;
 
     @Override
-    public Optional<Book> updateBookById(final Book book) {
+    public Optional<Book> execute(final Book book) {
         final UpdateBookByIdMessage updateBookByIdMessage = UpdateBookByIdMessageConverter.of(book);
         dispatcherAmqpProducer.sendMessage(exchange, routingKey, updateBookByIdMessage);
         return Optional.of(book);

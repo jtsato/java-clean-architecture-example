@@ -15,7 +15,7 @@ import io.github.jtsato.bookstore.core.book.gateway.GetBookDocumentByBookIdGatew
 public class GetBookDocumentByBookIdDataProvider implements GetBookDocumentByBookIdGateway {
 
     @Override
-    public Optional<BookDocument> getBookDocumentByBookId(final Long bookId) {
+    public Optional<BookDocument> execute(final Long bookId) {
         return Optional.empty();
     }
 }

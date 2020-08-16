@@ -91,9 +91,9 @@ class RegisterBookUseCaseTest {
     @Test
     void successfulToRegisterBookIfNotRegistered() {
 
-        when(registerBookGateway.registerBook(mockRegisterBookGatewayIn())).thenReturn(mockRegisterBookGatewayOut());
-        when(getAuthorByIdGateway.getAuthorById(1L)).thenReturn(mockGetAuthorByIdGateway());
-        when(getBookByTitleGateway.getBookByTitle("Effective Java (2nd Edition)")).thenReturn(Optional.empty());
+        when(registerBookGateway.execute(mockRegisterBookGatewayIn())).thenReturn(mockRegisterBookGatewayOut());
+        when(getAuthorByIdGateway.execute(1L)).thenReturn(mockGetAuthorByIdGateway());
+        when(getBookByTitleGateway.execute("Effective Java (2nd Edition)")).thenReturn(Optional.empty());
         when(getLocalDateTime.now()).thenReturn(LocalDateTime.parse("2020-03-12T22:04:59.123"));
 
         final RegisterBookParameters registerBookParameters = new RegisterBookParameters(1L,
@@ -148,9 +148,9 @@ class RegisterBookUseCaseTest {
     @Test
     void failToRegisterBookIfAlreadyRegistered() {
 
-        when(registerBookGateway.registerBook(mockRegisterBookGatewayIn())).thenReturn(mockRegisterBookGatewayOut());
-        when(getAuthorByIdGateway.getAuthorById(1L)).thenReturn(mockGetAuthorByIdGateway());
-        when(getBookByTitleGateway.getBookByTitle("Effective Java (2nd Edition)")).thenReturn(mockGetBookByTitleGatewayOut());
+        when(registerBookGateway.execute(mockRegisterBookGatewayIn())).thenReturn(mockRegisterBookGatewayOut());
+        when(getAuthorByIdGateway.execute(1L)).thenReturn(mockGetAuthorByIdGateway());
+        when(getBookByTitleGateway.execute("Effective Java (2nd Edition)")).thenReturn(mockGetBookByTitleGatewayOut());
         when(getLocalDateTime.now()).thenReturn(LocalDateTime.parse("2020-03-12T22:04:59.123"));
 
         final RegisterBookParameters registerBookParameters = new RegisterBookParameters(1L,
@@ -182,9 +182,9 @@ class RegisterBookUseCaseTest {
     @Test
     void failToRegisterBookIfAuthorNotFound() {
 
-        when(registerBookGateway.registerBook(mockRegisterBookGatewayIn())).thenReturn(mockRegisterBookGatewayOut());
-        when(getAuthorByIdGateway.getAuthorById(1L)).thenReturn(Optional.empty());
-        when(getBookByTitleGateway.getBookByTitle("Joshua Bloch")).thenReturn(Optional.empty());
+        when(registerBookGateway.execute(mockRegisterBookGatewayIn())).thenReturn(mockRegisterBookGatewayOut());
+        when(getAuthorByIdGateway.execute(1L)).thenReturn(Optional.empty());
+        when(getBookByTitleGateway.execute("Joshua Bloch")).thenReturn(Optional.empty());
         when(getLocalDateTime.now()).thenReturn(LocalDateTime.parse("2020-03-12T22:04:59.123"));
 
         final RegisterBookParameters registerBookParameters = new RegisterBookParameters(1L,

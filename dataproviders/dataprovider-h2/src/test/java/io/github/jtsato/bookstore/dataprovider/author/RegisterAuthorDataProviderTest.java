@@ -36,7 +36,7 @@ class RegisterAuthorDataProviderTest {
 
         final Author newAuthor = new Author(null, "Joshua Bloch", Gender.MALE, LocalDate.parse("1961-08-28"));
 
-        final Author result = registerAuthorDataProvider.registerAuthor(newAuthor);
+        final Author result = registerAuthorDataProvider.execute(newAuthor);
 
         assertThat(result.getId()).isNotNull();
         assertThat(result.getName()).isEqualTo(newAuthor.getName());
@@ -52,7 +52,7 @@ class RegisterAuthorDataProviderTest {
 
         final Exception exception = Assertions.assertThrows(Exception.class, () -> {
             final Author newAuthor = new Author(null, null, Gender.MALE, null);
-            registerAuthorDataProvider.registerAuthor(newAuthor);
+            registerAuthorDataProvider.execute(newAuthor);
         });
 
         assertThat(exception).isInstanceOf(DataIntegrityViolationException.class);

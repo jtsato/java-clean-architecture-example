@@ -11,5 +11,5 @@ import io.github.jtsato.bookstore.core.author.domain.Author;
 @FunctionalInterface
 public interface UpdateAuthorByIdGateway {
 
-    Optional<Author> updateAuthorById(final Author author);
+    Optional<Author> execute(final Author author);
 }

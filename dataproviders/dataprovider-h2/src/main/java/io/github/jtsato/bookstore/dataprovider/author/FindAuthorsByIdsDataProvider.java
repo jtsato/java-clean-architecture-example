@@ -33,7 +33,7 @@ public class FindAuthorsByIdsDataProvider implements FindAuthorsByIdsGateway {
     private final PageMapper<Author, AuthorEntity> pageMapper = new PageMapper<>() {};
 
     @Override
-    public Page<Author> findAuthorsByIds(final List<Long> ids) {
+    public Page<Author> execute(final List<Long> ids) {
 
         final BooleanExpression predicate = QAuthorEntity.authorEntity.id.in(ids);
         final PageRequest pageRequest = PageRequestHelper.buildPageRequest(0, 1000, "id:asc");
