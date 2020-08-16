@@ -39,8 +39,15 @@ class EnumeratorUtilsTest {
         final Exception exception = Assertions.assertThrows(Exception.class, () -> EnumeratorUtils.valueOf("BLUE", Semaphore.class));
 
         assertThat(exception).isInstanceOf(InvalidEnumeratorException.class);
+        
+        final InvalidEnumeratorException invalidEnumeratorException = (InvalidEnumeratorException) exception; 
 
-        assertThat(exception.getMessage()).isNotNull();
-        assertThat(exception.getMessage()).isEqualTo("validation.enumerator.value.invalid");
+        assertThat(invalidEnumeratorException.getMessage()).isNotNull();
+        assertThat(invalidEnumeratorException.getMessage()).isEqualTo("validation.enumerator.value.invalid");
+        
+        assertThat(invalidEnumeratorException.getArgs()).isNotNull().isNotEmpty().hasSize(3);
+        assertThat(invalidEnumeratorException.getArgs()[0]).isEqualTo("BLUE");
+        assertThat(invalidEnumeratorException.getArgs()[1]).isEqualTo("Semaphore");
+        assertThat(invalidEnumeratorException.getArgs()[2]).isEqualTo("GREEN, YELLOW, RED");
     }
 }
