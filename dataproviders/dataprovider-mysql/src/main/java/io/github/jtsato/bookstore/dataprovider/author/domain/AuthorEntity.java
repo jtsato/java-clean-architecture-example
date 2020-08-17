@@ -36,7 +36,7 @@ public class AuthorEntity implements Serializable {
 
     @Access(AccessType.PROPERTY)
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "AUTHOR_ID", updatable = false, insertable = false)
     private Long id;
 

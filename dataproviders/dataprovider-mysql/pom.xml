@@ -11,10 +11,10 @@
 		<relativePath>../../pom.xml</relativePath>
 	</parent>
 
-	<artifactId>bookstore-dataprovider-h2</artifactId>
+	<artifactId>bookstore-dataprovider-mysql</artifactId>
 	<packaging>jar</packaging>
 
-	<name>Datasource [spring-data-h2]</name>
+	<name>Datasource [spring-data-mysql]</name>
 	<description>Datasource component for h2 database</description>
 
 	<properties>
@@ -96,6 +96,11 @@
 			<groupId>com.zaxxer</groupId>
 			<artifactId>HikariCP</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<scope>runtime</scope>
+		</dependency>		
 		<dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
@@ -189,9 +194,9 @@
 					<sourceDataFormats>
 						<sourceDataFormat>HTML</sourceDataFormat>
 					</sourceDataFormats>
-					<siteReportName>bookstore-dataprovider-h2</siteReportName>
+					<siteReportName>bookstore-dataprovider-mysql</siteReportName>
 					<siteReportDescription>Bookstore dataprovider mutation report</siteReportDescription>
-					<siteReportDirectory>bookstore-dataprovider-h2</siteReportDirectory>
+					<siteReportDirectory>bookstore-dataprovider-mysql</siteReportDirectory>
 					<targetClasses>
 						<param>io.github.jtsato.bookstore.dataprovider.author.*DataProvider</param>
 						<param>io.github.jtsato.bookstore.dataprovider.book.*DataProvider</param>

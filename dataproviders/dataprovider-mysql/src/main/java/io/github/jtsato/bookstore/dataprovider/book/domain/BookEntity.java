@@ -43,7 +43,7 @@ public class BookEntity implements Serializable {
 
     @Access(AccessType.PROPERTY)
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "BOOK_ID", updatable = false, insertable = false)
     private Long id;
 
