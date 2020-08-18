@@ -17,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.converter.HttpMessageNotReadableException;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.validation.BindException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -121,6 +122,14 @@ public class BookstoreExceptionHandler {
         final Collector<CharSequence, ?, String> joining = Collectors.joining(", ");
         final String message = violations.stream().map(violation -> messageSource.getMessage(violation.getMessage(), null, locale)).collect(joining);
         return buildHttpResponseStatus(HttpStatus.BAD_REQUEST, message, webRequest.getPath());
+    }
+
+    @ResponseBody
+    @ResponseStatus(HttpStatus.FORBIDDEN)
+    @ExceptionHandler(AccessDeniedException.class)
+    public HttpResponseStatus handleAccessDeniedException(final AccessDeniedException exception, final Locale locale) {
+        final String message = messageSource.getMessage("exception.access.denied", null, locale);
+        return buildHttpResponseStatus(HttpStatus.FORBIDDEN, message, webRequest.getPath());
     }
 
     @ResponseBody

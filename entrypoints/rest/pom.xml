@@ -21,14 +21,16 @@
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<java.version>11</java.version>
-		<commons.io.version>2.7</commons.io.version>
-		<springdoc.version>1.4.2</springdoc.version>
 		<maven.compiler.source>11</maven.compiler.source>
 		<maven.compiler.target>11</maven.compiler.target>
-		<pitest-maven.version>1.5.2</pitest-maven.version>
-		<pitest-junit5-plugin.version>0.12</pitest-junit5-plugin.version>
+		<commons.io.version>2.7</commons.io.version>
+		<springdoc.version>1.4.2</springdoc.version>
+		<okta.version>1.4.0</okta.version>
+		<spring-cloud.version>Hoxton.SR6</spring-cloud.version>
 		<jacoco.agent.version>0.8.5</jacoco.agent.version>
 		<jacoco-maven-plugin.version>0.8.5</jacoco-maven-plugin.version>
+		<pitest-maven.version>1.5.2</pitest-maven.version>
+		<pitest-junit5-plugin.version>0.12</pitest-junit5-plugin.version>
 		<sonar.coverage.exclusions>
 			**/src/**/core/**,
 			**/src/**/BookstoreApplication.java
@@ -122,8 +124,29 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-aop</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.okta.spring</groupId>
+			<artifactId>okta-spring-boot-starter</artifactId>
+			<version>${okta.version}</version>
+		</dependency>		
 	</dependencies>
-
+	
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-dependencies</artifactId>
+				<version>${spring-cloud.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+	
 	<build>
 		<plugins>
 			<plugin>

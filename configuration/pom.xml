@@ -14,7 +14,7 @@
 	<artifactId>bookstore-configuration</artifactId>
 	<packaging>jar</packaging>
 
-	<name>Configuration [spring-web-data-h2]</name>
+	<name>Configuration [spring-web-data-mysql]</name>
 	<description>Configuration</description>
 
 	<properties>
@@ -23,6 +23,7 @@
 		<java.version>11</java.version>
 		<maven.compiler.source>11</maven.compiler.source>
 		<maven.compiler.target>11</maven.compiler.target>
+		<archunit-junit5.version>0.13.1</archunit-junit5.version>
 		<sonar.coverage.exclusions>
 			**/src/**/configuration/**,
 			**/src/**/exception/handler/**,
@@ -43,7 +44,7 @@
 		</dependency>
 		<dependency>
 			<groupId>io.github.jtsato</groupId>
-			<artifactId>bookstore-dataprovider-h2</artifactId>
+			<artifactId>bookstore-dataprovider-mysql</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 		<dependency>
@@ -53,7 +54,7 @@
 		<dependency>
 			<groupId>com.tngtech.archunit</groupId>
 			<artifactId>archunit-junit5</artifactId>
-			<version>0.13.1</version>
+			<version>${archunit-junit5.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -96,4 +97,21 @@
 			</plugin>
 		</plugins>
 	</build>
+	<profiles>
+		<profile>
+			<id>test</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<properties>
+				<profilesActive>test</profilesActive>
+			</properties>
+		</profile>
+		<profile>
+			<id>prod</id>
+			<properties>
+				<profilesActive>prod</profilesActive>
+			</properties>
+		</profile>
+	</profiles>
 </project>

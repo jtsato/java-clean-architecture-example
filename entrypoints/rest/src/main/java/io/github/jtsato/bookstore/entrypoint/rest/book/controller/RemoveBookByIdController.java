@@ -3,6 +3,7 @@ package io.github.jtsato.bookstore.entrypoint.rest.book.controller;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,7 +29,7 @@ import lombok.RequiredArgsConstructor;
  * @author Jorge Takeshi Sato
  */
 
-
+@PreAuthorize("hasAuthority('bookstore-admin')")
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/books")

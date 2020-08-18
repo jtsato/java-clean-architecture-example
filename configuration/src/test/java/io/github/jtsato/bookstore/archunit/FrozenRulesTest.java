@@ -21,9 +21,6 @@ import io.github.jtsato.bookstore.exception.handler.BookstoreExceptionHandler;
 public class FrozenRulesTest {
 
     @ArchTest
-    static final ArchRule no_classes_should_depend_on_configuration = freeze(noClasses().should().dependOnClassesThat().resideInAPackage("..configuration.."));
-
-    @ArchTest
     static final ArchRule no_classes_should_use_the_exception_handler = freeze(noClasses().should()
                                                                                           .dependOnClassesThat()
                                                                                           .areAssignableTo(BookstoreExceptionHandler.class));

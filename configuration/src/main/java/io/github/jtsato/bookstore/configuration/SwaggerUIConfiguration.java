@@ -16,7 +16,7 @@ import io.github.jtsato.bookstore.BookstoreApplication;
 @Configuration
 @ComponentScan(basePackageClasses = BookstoreApplication.class)
 @Import(SwaggerConfiguration.class)
-public class SpringConfiguration implements WebMvcConfigurer {
+public class SwaggerUIConfiguration implements WebMvcConfigurer {
 
     @Override
     public void addResourceHandlers(final ResourceHandlerRegistry registry) {

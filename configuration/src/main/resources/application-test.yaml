@@ -1,0 +1,97 @@
+logging:
+   level:
+      io.github.jtsato.bookstore: debug
+      org.springframework.web: warn
+      io.swagger.models.parameters.AbstractSerializableParameter: error
+server:
+   http2:
+      enabled: true
+   port: ${PORT:8080}
+   error:
+      whitelabel:
+         enabled: true
+spring:
+   application:
+      name: bookstore
+   devtools:
+      restart:
+         enabled: true
+      livereload:
+         enabled: true      
+   jackson:
+      serialization:
+         write-dates-as-timestamps: false
+         fail-on-empty-beans: false
+   datasource:
+      url: jdbc:h2:mem:datajpa;DB_CLOSE_ON_EXIT=FALSE
+      username: sa
+      password: null
+      sqlScriptEncoding: UTF-8
+      hikari:
+         minimum-idle: 2
+         maximum-pool-size: 10
+         connection-timeout: 30000
+         idle-timeout: 300000
+         max-lifetime: 600000
+   jpa:
+      open-in-view: false
+      show-sql: false
+      properties:
+         hibernate:
+            dialect: org.hibernate.dialect.H2Dialect
+            generate_statistics: false
+            jdbc:
+               batch_size: 30
+               order_inserts: true
+               order_updates: true
+            cache:
+               use_second_level_cache: false
+            connection:
+               provider_disables_autocommit: false
+      hibernate:
+         ddl-auto: update
+   data:
+      rest:
+         detection-strategy: visibility
+   h2:
+      console:
+         enabled: true
+         path: /h2-console
+         settings:
+            trace: false
+            web-allow-others: false
+   rabbitmq:
+      host: localhost
+      port: 5672
+      password: guest
+      username: guest
+springdoc:
+   enabled: false
+   swagger-ui:
+      path: /swagger-ui.html
+bookstore:
+   rabbitmq:
+      exchange:
+         register-author: register-author-exchange
+         register-book: register-book-exchange
+         update-author-by-id: update-author-by-id-exchange
+         update-book-by-id: update-book-by-id-exchange
+         remove-author-by-id: remove-author-by-id-exchange
+         remove-book-by-id: remove-book-by-id-exchange
+         save-book-document: save-book-document-exchange
+      queue:
+         register-author: register-author-queue
+         register-book: register-book-queue
+         update-author-by-id: update-author-by-id-queue
+         update-book-by-id: update-book-by-id-queue
+         remove-author-by-id: remove-author-by-id-queue
+         remove-book-by-id: remove-book-by-id-queue
+         save-book-document: save-book-document-queue
+      routingkey:
+         register-author: register-author-routingkey
+         register-book: register-book-routingkey
+         update-author-by-id: update-author-by-id-routingkey
+         update-book-by-id: update-book-by-id-routingkey
+         remove-author-by-id: remove-author-by-id-routingkey
+         remove-book-by-id: remove-book-by-id-routingkey
+         save-book-document: save-book-document-routingkey
