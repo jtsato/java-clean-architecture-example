@@ -15,11 +15,8 @@ import io.github.jtsato.bookstore.core.common.paging.Pageable;
 public interface PageMapper<T, K> {
 
     default Page<T> of(final org.springframework.data.domain.Page<K> page, final Function<K, T> elementMapper) {
-
         final Pageable pageable = of(page);
-
         final List<T> content = of(page.getContent(), elementMapper);
-
         return new PageImpl<>(content, pageable);
     }
 
