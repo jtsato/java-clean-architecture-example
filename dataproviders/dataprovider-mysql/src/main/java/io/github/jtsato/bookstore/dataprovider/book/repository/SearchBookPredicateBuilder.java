@@ -35,7 +35,7 @@ public class SearchBookPredicateBuilder extends AbstractPredicateBuilderImpl<QBo
         }
 
         if (StringUtils.isNotBlank(query.getTitle())) {
-            booleanExpressions.add(entityPath.title.like(addLikeOperator(query.getTitle())));
+            booleanExpressions.add(entityPath.title.likeIgnoreCase(addLikeOperator(query.getTitle())));
         }
 
         if (query.getStartPrice() != null) {

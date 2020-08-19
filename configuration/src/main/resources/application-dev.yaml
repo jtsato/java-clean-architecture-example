@@ -28,8 +28,6 @@ spring:
       username: sa
       password: null
       sqlScriptEncoding: UTF-8
-      testWhileIdle: true
-      validationQuery: SELECT 1         
       hikari:
          minimum-idle: 2
          maximum-pool-size: 10
@@ -69,8 +67,8 @@ spring:
       password: guest
       username: guest
 springdoc:
-   enabled: false
    swagger-ui:
+      enabled: false
       path: /swagger-ui.html
 bookstore:
    rabbitmq:
@@ -100,9 +98,9 @@ bookstore:
          save-book-document: save-book-document-routingkey
 okta:
   oauth2:
-    clientId: ${OKTA_OAUTH2_CLIENT_ID}
-    clientSecret: ${OKTA_OAUTH2_CLIENT_SECRET}}
-    issuer: ${OKTA_OAUTH2_ISSUER}
+    clientId: ${OKTA_OAUTH2_CLIENT_ID:..}
+    clientSecret: ${OKTA_OAUTH2_CLIENT_SECRET:..}}
+    issuer: ${OKTA_OAUTH2_ISSUER:https://dev-507648.okta.com/oauth2/default}
     audience: api://default
     groups-claim: groups
     

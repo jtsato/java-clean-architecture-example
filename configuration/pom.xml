@@ -60,6 +60,7 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
 			<scope>runtime</scope>
+			<optional>true</optional>			
 		</dependency>
 	</dependencies>
 
@@ -97,21 +98,4 @@
 			</plugin>
 		</plugins>
 	</build>
-	<profiles>
-		<profile>
-			<id>test</id>
-			<activation>
-				<activeByDefault>true</activeByDefault>
-			</activation>
-			<properties>
-				<profilesActive>test</profilesActive>
-			</properties>
-		</profile>
-		<profile>
-			<id>prod</id>
-			<properties>
-				<profilesActive>prod</profilesActive>
-			</properties>
-		</profile>
-	</profiles>
 </project>

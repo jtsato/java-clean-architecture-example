@@ -1,3 +1,3 @@
 spring:
    profiles:
-      active: ${ENV:test}
+      active: dev
