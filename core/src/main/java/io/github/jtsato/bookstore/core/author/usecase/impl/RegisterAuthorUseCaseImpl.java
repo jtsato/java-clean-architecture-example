@@ -34,9 +34,7 @@ public class RegisterAuthorUseCaseImpl implements RegisterAuthorUseCase {
         checkDuplicatedNameViolation(parameters.getName());
 
         final LocalDate birthdate = LocalDate.parse(parameters.getBirthdate());
-
         final Gender gender = EnumeratorUtils.valueOf(parameters.getGender(), Gender.class);
-
         final Author author = new Author(null, parameters.getName(), gender, birthdate);
 
         return registerAuthorGateway.execute(author);
