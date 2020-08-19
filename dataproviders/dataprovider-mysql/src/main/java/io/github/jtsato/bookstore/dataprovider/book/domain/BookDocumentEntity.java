@@ -36,7 +36,7 @@ public class BookDocumentEntity implements Serializable {
 
     @Access(AccessType.PROPERTY)
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "BOOK_DOCUMENT_ID", updatable = false, insertable = false)
     private Long id;
 

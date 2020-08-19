@@ -17,7 +17,8 @@ spring:
       restart:
          enabled: false
       livereload:
-         enabled: false      
+         enabled: false
+      add-properties: false
    jackson:
       serialization:
          write-dates-as-timestamps: false
@@ -40,8 +41,7 @@ spring:
       show-sql: false
       properties:
          hibernate:
-            dialect: org.hibernate.dialect.MySQL5Dialect
-            naming-strategy: org.hibernate.cfg.ImprovedNamingStrategy
+            dialect: org.hibernate.dialect.MySQL5InnoDBDialect
             generate_statistics: false
             jdbc:
                batch_size: 30
@@ -100,8 +100,8 @@ bookstore:
          save-book-document: save-book-document-routingkey
 okta:
   oauth2:
-    clientId: 0oaqaxryprOC0cUpb4x6
-    clientSecret: 4tbTPHdWTvswl88eA41Evay1uBUWvbphMK0962yf
-    issuer: https://dev-507648.okta.com/oauth2/default
+    clientId: ${OKTA_OAUTH2_CLIENT_ID}
+    clientSecret: ${OKTA_OAUTH2_CLIENT_SECRET}}
+    issuer: ${OKTA_OAUTH2_ISSUER}
     audience: api://default
     groups-claim: groups

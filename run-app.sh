@@ -12,6 +12,8 @@ if [ $ret -ne 0 ]; then
 exit $ret
 fi
 
+export $(cat .env | xargs)
+
 mvn spring-boot:run -f ./configuration
 
 exit
