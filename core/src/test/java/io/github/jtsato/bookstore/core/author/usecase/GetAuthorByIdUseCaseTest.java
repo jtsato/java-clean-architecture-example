@@ -25,6 +25,7 @@ import io.github.jtsato.bookstore.core.exception.NotFoundException;
  * @author Jorge Takeshi Sato
  */
 
+@DisplayName("Get Author By Id")
 class GetAuthorByIdUseCaseTest {
 
     @Mock

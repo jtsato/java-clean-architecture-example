@@ -13,6 +13,7 @@ import org.junit.jupiter.api.Test;
  * @author Jorge Takeshi Sato
  */
 
+@DisplayName("Get Local Date Time")
 class GetLocalDateTimeTest {
 
     private final GetLocalDateTime getLocalDateTime = new GetLocalDateTimeImpl();

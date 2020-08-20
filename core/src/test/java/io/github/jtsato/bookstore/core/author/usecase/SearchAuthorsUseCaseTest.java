@@ -32,6 +32,7 @@ import io.github.jtsato.bookstore.core.common.paging.Pageable;
  * @author Jorge Takeshi Sato
  */
 
+@DisplayName("Search Authors")
 class SearchAuthorsUseCaseTest {
 
     @Mock

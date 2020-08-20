@@ -28,15 +28,12 @@ public class LogExecutionTimeImpl {
     public Object logExecutionTime(final ProceedingJoinPoint joinPoint) {
 
         final StopWatch stopWatch = new StopWatch();
-
         stopWatch.start();
 
         final Object proceed = joinPoint.proceed();
-
         stopWatch.stop();
 
         final String clazzName = StringUtils.substringAfterLast(joinPoint.getSignature().getDeclaringTypeName(), ".");
-
         log.debug("LogExecutionTime    -> {} executed in {} milliseconds.", clazzName, stopWatch.getTime());
 
         return proceed;

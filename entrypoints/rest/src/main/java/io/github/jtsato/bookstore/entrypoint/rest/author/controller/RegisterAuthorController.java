@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.context.properties.bind.DefaultValue;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,6 +36,7 @@ import lombok.RequiredArgsConstructor;
  * @author Jorge Takeshi Sato
  */
 
+@PreAuthorize("hasAuthority('bookstore-admin')")
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/authors")

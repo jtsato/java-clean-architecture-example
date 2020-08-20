@@ -32,7 +32,7 @@
 
 	<modules>
 		<module>core</module>
-		<module>/dataproviders/dataprovider-h2</module>
+		<module>/dataproviders/dataprovider-mysql</module>
 		<module>/entrypoints/rest</module>
 		<module>configuration</module>
 	</modules>

@@ -17,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.converter.HttpMessageNotReadableException;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.validation.BindException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -49,14 +50,6 @@ public class BookstoreExceptionHandler {
     private WebRequest webRequest;
 
     @ResponseBody
-    @ResponseStatus(HttpStatus.NOT_FOUND)
-    @ExceptionHandler(NotFoundException.class)
-    public HttpResponseStatus handleNotFoundException(final NotFoundException exception, final Locale locale) {
-        final String message = messageSource.getMessage(exception.getMessage(), exception.getArgs(), locale);
-        return buildHttpResponseStatus(HttpStatus.NOT_FOUND, message, webRequest.getPath());
-    }
-
-    @ResponseBody
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(HttpMessageNotReadableException.class)
     public HttpResponseStatus handleHttpMessageNotReadableException(final HttpMessageNotReadableException exception, final Locale locale) {
@@ -71,6 +64,22 @@ public class BookstoreExceptionHandler {
         final Object[] args = {StringUtils.substringBetween(exception.getMessage(), "property '", "'")};
         final String message = messageSource.getMessage("exception.field.format", args, locale);
         return buildHttpResponseStatus(HttpStatus.BAD_REQUEST, message, webRequest.getPath());
+    }
+
+    @ResponseBody
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(org.hibernate.exception.ConstraintViolationException.class)
+    public HttpResponseStatus handleHibernateConstraintViolationException(final org.hibernate.exception.ConstraintViolationException exception, final Locale locale) {
+        final String message = messageSource.getMessage(exception.getMessage(), null, locale);
+        return buildHttpResponseStatus(HttpStatus.BAD_REQUEST, message, webRequest.getPath());
+    }    
+    
+    @ResponseBody
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ExceptionHandler(NotFoundException.class)
+    public HttpResponseStatus handleNotFoundException(final NotFoundException exception, final Locale locale) {
+        final String message = messageSource.getMessage(exception.getMessage(), exception.getArgs(), locale);
+        return buildHttpResponseStatus(HttpStatus.NOT_FOUND, message, webRequest.getPath());
     }
 
     @ResponseBody
@@ -121,6 +130,14 @@ public class BookstoreExceptionHandler {
         final Collector<CharSequence, ?, String> joining = Collectors.joining(", ");
         final String message = violations.stream().map(violation -> messageSource.getMessage(violation.getMessage(), null, locale)).collect(joining);
         return buildHttpResponseStatus(HttpStatus.BAD_REQUEST, message, webRequest.getPath());
+    }
+    
+    @ResponseBody
+    @ResponseStatus(HttpStatus.FORBIDDEN)
+    @ExceptionHandler(AccessDeniedException.class)
+    public HttpResponseStatus handleAccessDeniedException(final AccessDeniedException exception, final Locale locale) {
+        final String message = messageSource.getMessage("exception.access.denied", null, locale);
+        return buildHttpResponseStatus(HttpStatus.FORBIDDEN, message, webRequest.getPath());
     }
 
     @ResponseBody

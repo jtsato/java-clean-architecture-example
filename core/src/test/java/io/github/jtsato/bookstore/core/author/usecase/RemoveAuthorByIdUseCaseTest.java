@@ -38,6 +38,7 @@ import io.github.jtsato.bookstore.core.exception.NotFoundException;
  * @author Jorge Takeshi Sato
  */
 
+@DisplayName("Remove Author By Id")
 class RemoveAuthorByIdUseCaseTest {
 
     @Mock

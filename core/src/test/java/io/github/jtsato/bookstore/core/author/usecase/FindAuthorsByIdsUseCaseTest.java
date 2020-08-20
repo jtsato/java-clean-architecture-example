@@ -30,6 +30,7 @@ import io.github.jtsato.bookstore.core.exception.InvalidParameterException;
  * @author Jorge Takeshi Sato
  */
 
+@DisplayName("Find Authors By Ids")
 class FindAuthorsByIdsUseCaseTest {
 
     @Mock

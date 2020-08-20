@@ -12,6 +12,8 @@ if [ $ret -ne 0 ]; then
 exit $ret
 fi
 
-mvn spring-boot:run -f ./configuration
+export $(cat .env | xargs)
+
+mvn spring-boot:run -Dspring-boot.run.jvmArguments="-Dspring.profiles.active=prod" -f ./configuration
 
 exit

@@ -36,6 +36,7 @@ import io.github.jtsato.bookstore.core.exception.UniqueConstraintException;
  * @author Jorge Takeshi Sato
  */
 
+@DisplayName("Register Book")
 class RegisterBookUseCaseTest {
 
     @Mock
