@@ -7,6 +7,8 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 
+import com.okta.spring.boot.oauth.Okta;
+
 
 /**
  * @author Jorge Takeshi Sato
@@ -25,5 +27,7 @@ public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter {
         httpSecurity.requiresChannel().requestMatchers(request -> request.getHeader("X-Forwarded-Proto") != null).requiresSecure();
         httpSecurity.csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse());
         httpSecurity.headers().contentSecurityPolicy("script-src 'self'; report-to /csp-report-endpoint/");
+        
+        Okta.configureResourceServer401ResponseBody(httpSecurity);
     }
 }
