@@ -34,6 +34,7 @@ import io.github.jtsato.bookstore.core.exception.NotFoundException;
  * @author Jorge Takeshi Sato
  */
 
+@DisplayName("Save Book Document")
 class SaveBookDocumentUseCaseTest {
 
     @Mock

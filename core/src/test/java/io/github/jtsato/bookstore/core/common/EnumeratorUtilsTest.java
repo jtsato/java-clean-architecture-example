@@ -12,6 +12,7 @@ import io.github.jtsato.bookstore.core.exception.InvalidEnumeratorException;
  * @author Jorge Takeshi Sato
  */
 
+@DisplayName("Enumerator functions")
 class EnumeratorUtilsTest {
 
     enum Semaphore {

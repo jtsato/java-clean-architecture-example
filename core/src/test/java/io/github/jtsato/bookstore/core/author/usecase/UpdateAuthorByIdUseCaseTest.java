@@ -30,6 +30,7 @@ import io.github.jtsato.bookstore.core.exception.UniqueConstraintException;
  * @author Jorge Takeshi Sato
  */
 
+@DisplayName("Update Author By Id")
 class UpdateAuthorByIdUseCaseTest {
 
     @Mock

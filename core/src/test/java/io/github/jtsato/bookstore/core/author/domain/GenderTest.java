@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
  * @author Jorge Takeshi Sato
  */
 
+@DisplayName("Gender functions")
 class GenderTest {
 
     @DisplayName("Successful to run gender functions")
