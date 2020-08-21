@@ -1,5 +1,6 @@
 package io.github.jtsato.bookstore.core.book.usecase.parameter;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
 import javax.validation.constraints.NotBlank;
@@ -21,7 +22,9 @@ import lombok.experimental.FieldDefaults;
 @FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
 @EqualsAndHashCode(callSuper = false)
 @ToString
-public class RegisterBookParameters extends SelfValidating<RegisterBookParameters> {
+public class RegisterBookParameters extends SelfValidating<RegisterBookParameters> implements Serializable {
+
+    private static final long serialVersionUID = 9095146175697454252L;
 
     @NotNull(message = "validation.author.id.null")
     private final Long authorId;

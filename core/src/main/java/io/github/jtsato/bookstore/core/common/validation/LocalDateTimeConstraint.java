@@ -35,7 +35,6 @@ public @interface LocalDateTimeConstraint {
     @Retention(RUNTIME)
     @Documented
     @interface List {
-
         LocalDateTimeConstraint[] value();
     }
 }

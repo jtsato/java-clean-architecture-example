@@ -1,5 +1,7 @@
 package io.github.jtsato.bookstore.core.enumerator.usecase.parameter;
 
+import java.io.Serializable;
+
 import lombok.AccessLevel;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -12,7 +14,9 @@ import lombok.experimental.FieldDefaults;
 @Getter
 @FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
 @EqualsAndHashCode(callSuper = false)
-public class SearchEnumeratorsParameters {
+public class SearchEnumeratorsParameters implements Serializable {
+
+    private static final long serialVersionUID = 7178926213306656254L;
 
     private final String domain;
 

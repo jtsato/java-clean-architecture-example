@@ -1,5 +1,6 @@
 package io.github.jtsato.bookstore.core.book.usecase.parameter;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
 import org.apache.commons.lang3.tuple.ImmutablePair;
@@ -21,7 +22,9 @@ import lombok.experimental.FieldDefaults;
 @FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
 @EqualsAndHashCode(callSuper = false)
 @ToString
-public class SearchBooksParameters extends SelfValidating<SearchBooksParameters> {
+public class SearchBooksParameters extends SelfValidating<SearchBooksParameters>  implements Serializable {
+
+    private static final long serialVersionUID = 8184330828206770082L;
 
     private SearchAuthorsParameters authorParameters;
 

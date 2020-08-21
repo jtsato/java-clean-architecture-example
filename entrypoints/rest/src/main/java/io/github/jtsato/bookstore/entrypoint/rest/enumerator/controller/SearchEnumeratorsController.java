@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import io.github.jtsato.bookstore.core.enumerator.domain.Enumerator;
 import io.github.jtsato.bookstore.core.enumerator.usecase.SearchEnumeratorsUseCase;
 import io.github.jtsato.bookstore.core.enumerator.usecase.parameter.SearchEnumeratorsParameters;
+import io.github.jtsato.bookstore.entrypoint.rest.common.JsonConverter;
 import io.github.jtsato.bookstore.entrypoint.rest.common.metric.LogExecutionTime;
 import io.github.jtsato.bookstore.entrypoint.rest.enumerator.api.SearchEnumeratorsApiMethod;
 import io.github.jtsato.bookstore.entrypoint.rest.enumerator.domain.response.EnumeratorResponse;
@@ -52,9 +53,10 @@ public class SearchEnumeratorsController implements SearchEnumeratorsApiMethod {
     @GetMapping
     public List<EnumeratorResponse> execute(@RequestParam(required = false) final String domain, @RequestParam(required = false) final String key) {
 
-        log.info("Starting Controller -> SearchEnumeratorsController with domain {}, and key {}", domain, key);
-
         final SearchEnumeratorsParameters parameters = new SearchEnumeratorsParameters(StringUtils.stripToNull(domain), StringUtils.stripToNull(key));
+
+        final String jsonRequest = JsonConverter.of(parameters);
+        log.info("Starting Controller -> SearchEnumeratorsController with {}", jsonRequest);
 
         final List<Enumerator> enumerators = searchEnumeratorsUseCase.execute(parameters);
 
