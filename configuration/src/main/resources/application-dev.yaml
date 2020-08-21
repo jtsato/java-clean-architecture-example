@@ -68,7 +68,7 @@ spring:
       username: guest
 springdoc:
    swagger-ui:
-      enabled: false
+      enabled: true
       path: /swagger-ui.html
 bookstore:
    rabbitmq:
