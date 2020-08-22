@@ -34,7 +34,7 @@ public @interface LocalDateTimeConstraint {
     @Target({METHOD, FIELD, ANNOTATION_TYPE, CONSTRUCTOR, PARAMETER, TYPE_USE})
     @Retention(RUNTIME)
     @Documented
-    @interface List {
+    public @interface List {
         LocalDateTimeConstraint[] value();
     }
 }
