@@ -32,6 +32,7 @@ import io.github.jtsato.bookstore.core.author.usecase.GetAuthorByIdUseCase;
  * @author Jorge Takeshi Sato
  */
 
+@DisplayName("Get Author By Id")
 @AutoConfigureMockMvc(addFilters = false)
 @ExtendWith(SpringExtension.class)
 @WebMvcTest(controllers = GetAuthorByIdController.class)

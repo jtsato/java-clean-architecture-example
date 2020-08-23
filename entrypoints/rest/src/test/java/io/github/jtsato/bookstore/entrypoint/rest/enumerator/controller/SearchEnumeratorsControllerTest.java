@@ -38,6 +38,7 @@ import io.github.jtsato.bookstore.entrypoint.rest.enumerator.mapper.SearchEnumer
  * @author Jorge Takeshi Sato
  */
 
+@DisplayName("Search Enumerators")
 @AutoConfigureMockMvc(addFilters = false)
 @ExtendWith(SpringExtension.class)
 @WebMvcTest(controllers = SearchEnumeratorsController.class)

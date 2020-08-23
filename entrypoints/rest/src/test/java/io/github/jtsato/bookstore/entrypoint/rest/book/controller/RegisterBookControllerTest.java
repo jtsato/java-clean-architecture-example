@@ -40,6 +40,7 @@ import io.github.jtsato.bookstore.entrypoint.rest.book.domain.request.RegisterBo
  * @author Jorge Takeshi Sato
  */
 
+@DisplayName("Register Book")
 @AutoConfigureMockMvc(addFilters = false)
 @ExtendWith(SpringExtension.class)
 @WebMvcTest(controllers = RegisterBookController.class)

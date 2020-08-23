@@ -33,6 +33,7 @@ import io.github.jtsato.bookstore.core.book.usecase.RemoveBookByIdUseCase;
  * @author Jorge Takeshi Sato
  */
 
+@DisplayName("Remove Book By Id")
 @AutoConfigureMockMvc(addFilters = false)
 @ExtendWith(SpringExtension.class)
 @WebMvcTest(controllers = RemoveBookByIdController.class)

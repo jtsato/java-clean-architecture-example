@@ -38,6 +38,7 @@ import io.github.jtsato.bookstore.core.common.paging.Pageable;
  * @author Jorge Takeshi Sato
  */
 
+@DisplayName("Search Authors")
 @AutoConfigureMockMvc(addFilters = false)
 @ExtendWith(SpringExtension.class)
 @WebMvcTest(controllers = SearchAuthorsController.class)

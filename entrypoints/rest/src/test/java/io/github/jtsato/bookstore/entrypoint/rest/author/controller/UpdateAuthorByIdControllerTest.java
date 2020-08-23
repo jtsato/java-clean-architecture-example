@@ -37,6 +37,7 @@ import io.github.jtsato.bookstore.entrypoint.rest.author.domain.request.UpdateAu
  * @author Jorge Takeshi Sato
  */
 
+@DisplayName("Update Author By Id")
 @AutoConfigureMockMvc(addFilters = false)
 @ExtendWith(SpringExtension.class)
 @WebMvcTest(controllers = UpdateAuthorByIdController.class)

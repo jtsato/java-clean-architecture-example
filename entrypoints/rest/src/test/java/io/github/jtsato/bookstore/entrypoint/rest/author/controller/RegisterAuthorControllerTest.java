@@ -37,6 +37,7 @@ import io.github.jtsato.bookstore.entrypoint.rest.author.domain.request.Register
  * @author Jorge Takeshi Sato
  */
 
+@DisplayName("Register Author")
 @AutoConfigureMockMvc(addFilters = false)
 @ExtendWith(SpringExtension.class)
 @WebMvcTest(controllers = RegisterAuthorController.class)

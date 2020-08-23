@@ -40,6 +40,7 @@ import io.github.jtsato.bookstore.entrypoint.rest.book.domain.request.UpdateBook
  * @author Jorge Takeshi Sato
  */
 
+@DisplayName("Update Book By Id")
 @AutoConfigureMockMvc(addFilters = false)
 @ExtendWith(SpringExtension.class)
 @WebMvcTest(controllers = UpdateBookByIdController.class)

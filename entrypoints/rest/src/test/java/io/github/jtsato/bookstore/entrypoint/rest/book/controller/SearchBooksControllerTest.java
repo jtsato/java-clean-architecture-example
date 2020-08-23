@@ -43,6 +43,7 @@ import io.github.jtsato.bookstore.core.common.paging.Pageable;
  * @author Jorge Takeshi Sato
  */
 
+@DisplayName("Search Books")
 @AutoConfigureMockMvc(addFilters = false)
 @ExtendWith(SpringExtension.class)
 @WebMvcTest(controllers = SearchBooksController.class)

@@ -42,6 +42,7 @@ import io.github.jtsato.bookstore.entrypoint.rest.author.domain.request.FindAuth
  * @author Jorge Takeshi Sato
  */
 
+@DisplayName("Find Authors By Ids")
 @AutoConfigureMockMvc(addFilters = false)
 @ExtendWith(SpringExtension.class)
 @WebMvcTest(controllers = FindAuthorsByIdsController.class)

@@ -35,6 +35,7 @@ import io.github.jtsato.bookstore.core.book.usecase.parameter.SaveBookDocumentPa
  * @author Jorge Takeshi Sato
  */
 
+@DisplayName("Save Book Document")
 @AutoConfigureMockMvc(addFilters = false)
 @ExtendWith(SpringExtension.class)
 @WebMvcTest(controllers = SaveBookDocumentController.class)

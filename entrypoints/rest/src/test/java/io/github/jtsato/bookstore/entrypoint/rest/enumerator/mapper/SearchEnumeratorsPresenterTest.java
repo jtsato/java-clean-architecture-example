@@ -25,6 +25,7 @@ import io.github.jtsato.bookstore.entrypoint.rest.enumerator.domain.response.Enu
  * @author Jorge Takeshi Sato
  */
 
+@DisplayName("Search Enumerators Presenter")
 class SearchEnumeratorsPresenterTest {
 
     @Mock
