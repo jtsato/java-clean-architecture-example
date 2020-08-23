@@ -63,6 +63,8 @@ public class LayerDependencyRulesTest {
                                                                                                             "com.querydsl..",
                                                                                                             "com.cosium.spring..",
                                                                                                             "org.apache.commons..",
+                                                                                                            "com.p6spy.engine.logging..",
+                                                                                                            "org.hibernate.engine..",
                                                                                                             "java..");
 
     @ArchTest

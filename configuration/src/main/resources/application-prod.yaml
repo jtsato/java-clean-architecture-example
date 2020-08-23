@@ -24,10 +24,11 @@ spring:
          write-dates-as-timestamps: false
          fail-on-empty-beans: false
    datasource:
-      url: jdbc:mysql://localhost:3306/db?useSSL=false
+      url: jdbc:p6spy:mysql://localhost:3306/db?useSSL=false
       username: bookstore
       password: bookstore
       sqlScriptEncoding: UTF-8
+      driver-class-name: com.p6spy.engine.spy.P6SpyDriver
       hikari:
          minimum-idle: 2
          maximum-pool-size: 10
