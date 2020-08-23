@@ -36,7 +36,7 @@ public class PrettySqlFormat implements MessageFormattingStrategy {
         }
 
         final String rawSQL = StringUtils.stripToEmpty(sql).toLowerCase(Locale.ROOT);
-        final Boolean shouldUseDDL = StringUtils.startsWithAny(rawSQL, "create", "alter", "comment");
+        final boolean shouldUseDDL = StringUtils.startsWithAny(rawSQL, "create", "alter", "comment");
         final String formated = shouldUseDDL ? FormatStyle.DDL.getFormatter().format(sql) : FormatStyle.BASIC.getFormatter().format(sql);
         return "\nPrettySqlFormat(P6Spy SQL,Hibernate format):" + formated;
     }
