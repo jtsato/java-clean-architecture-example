@@ -22,6 +22,7 @@ import io.github.jtsato.bookstore.dataprovider.book.repository.BookRepository;
  * @author Jorge Takeshi Sato
  */
 
+@DisplayName("Update Book By Id")
 @DataJpaTest
 @Import({UpdateBookByIdDataProvider.class, GetAuthorByIdDataProvider.class})
 @Sql("UpdateBookByIdDataProviderTest.sql")

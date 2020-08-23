@@ -20,6 +20,7 @@ import io.github.jtsato.bookstore.dataprovider.author.repository.AuthorRepositor
  * @author Jorge Takeshi Sato
  */
 
+@DisplayName("Register Author")
 @DataJpaTest
 @Import({RegisterAuthorDataProvider.class})
 class RegisterAuthorDataProviderTest {

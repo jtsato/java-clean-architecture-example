@@ -18,6 +18,7 @@ import io.github.jtsato.bookstore.dataprovider.author.repository.AuthorRepositor
  * @author Jorge Takeshi Sato
  */
 
+@DisplayName("Get Author By Name")
 @DataJpaTest
 @Import({GetAuthorByNameDataProvider.class})
 @Sql("GetAuthorByNameDataProviderTest.sql")

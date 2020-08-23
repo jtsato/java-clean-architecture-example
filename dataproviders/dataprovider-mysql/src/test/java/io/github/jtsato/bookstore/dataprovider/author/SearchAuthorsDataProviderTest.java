@@ -22,6 +22,7 @@ import io.github.jtsato.bookstore.dataprovider.author.repository.AuthorRepositor
  * @author Jorge Takeshi Sato
  */
 
+@DisplayName("Search Authors")
 @DataJpaTest
 @Import({SearchAuthorsDataProvider.class})
 @Sql("SearchAuthorsDataProviderTest.sql")

@@ -11,6 +11,7 @@ import org.springframework.data.domain.Sort;
  * @author Jorge Takeshi Sato
  */
 
+@DisplayName("Page Request Helper")
 class PageRequestHelperTest {
 
     @DisplayName("Successful to build page request if there is no parameters")

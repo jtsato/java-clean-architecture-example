@@ -13,6 +13,7 @@ import com.p6spy.engine.spy.appender.MessageFormattingStrategy;
  * @author Jorge Takeshi Sato
  */
 
+@DisplayName("Pretty Sql Format")
 class PrettySqlFormatTest {
 
     @DisplayName("Successful to prettify SELECT SQL if it is supplied")

@@ -24,6 +24,7 @@ import io.github.jtsato.bookstore.dataprovider.book.repository.BookRepository;
  * @author Jorge Takeshi Sato
  */
 
+@DisplayName("Search Books")
 @DataJpaTest
 @Import({SearchBooksDataProvider.class})
 @Sql("SearchBooksDataProviderTest.sql")

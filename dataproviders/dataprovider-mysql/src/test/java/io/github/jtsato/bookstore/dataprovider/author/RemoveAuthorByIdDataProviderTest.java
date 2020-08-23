@@ -18,6 +18,7 @@ import io.github.jtsato.bookstore.dataprovider.author.repository.AuthorRepositor
  * @author Jorge Takeshi Sato
  */
 
+@DisplayName("Remove Author By Id")
 @DataJpaTest
 @Import({RemoveAuthorByIdDataProvider.class})
 @Sql("RemoveAuthorByIdDataProviderTest.sql")

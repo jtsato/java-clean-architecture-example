@@ -19,6 +19,7 @@ import io.github.jtsato.bookstore.dataprovider.book.repository.BookDocumentRepos
  * @author Jorge Takeshi Sato
  */
 
+@DisplayName("Save Book Document")
 @DataJpaTest
 @Import({SaveBookDocumentDataProvider.class})
 class SaveBookDocumentDataProviderTest {
