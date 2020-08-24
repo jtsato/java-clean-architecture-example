@@ -9,7 +9,7 @@ server:
    port: ${PORT:8081}
    error:
       whitelabel:
-         enabled: false
+         enabled: true
 spring:
    application:
       name: bookstore
@@ -69,7 +69,7 @@ spring:
       username: guest
 springdoc:
    swagger-ui:
-      enabled: false
+      enabled: true
       path: /swagger-ui.html
 bookstore:
    rabbitmq:
