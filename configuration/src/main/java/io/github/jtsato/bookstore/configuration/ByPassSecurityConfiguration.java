@@ -10,7 +10,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
  * @author Jorge Takeshi Sato  
  */
 
-@Profile({"test","dev"})
+@Profile({"test", "dev"})
 @Configuration
 @EnableWebSecurity
 public class ByPassSecurityConfiguration extends WebSecurityConfigurerAdapter {
