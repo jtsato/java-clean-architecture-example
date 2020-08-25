@@ -38,6 +38,6 @@ public class RemoveBookByIdUseCaseImpl implements RemoveBookByIdUseCase {
 
         final Optional<Book> optional = removeBookByIdGateway.execute(id);
 
-        return optional.orElseThrow(() -> new NotFoundException("validation.book.id.notfound", id));
+        return optional.orElseThrow(() -> new NotFoundException("validation.book.id.notfound", String.valueOf(id)));
     }
 }

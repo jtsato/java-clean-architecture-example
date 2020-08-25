@@ -56,12 +56,12 @@ public class UpdateBookByIdUseCaseImpl implements UpdateBookByIdUseCase {
                                    getLocalDateTime.now());
 
         final Optional<Book> optional = updateBookGateway.execute(book);
-        return optional.orElseThrow(() -> new NotFoundException("validation.book.id.notfound", parameters.getId()));
+        return optional.orElseThrow(() -> new NotFoundException("validation.book.id.notfound", String.valueOf(parameters.getId())));
     }
 
     private Author getAuthorAndValidate(final Long authorId) {
         final Optional<Author> optional = getAuthorByIdGateway.execute(authorId);
-        return optional.orElseThrow(() -> new NotFoundException("validation.author.id.notfound", authorId));
+        return optional.orElseThrow(() -> new NotFoundException("validation.author.id.notfound", String.valueOf(authorId)));
     }
 
     private void checkDuplicatedTitleViolation(final Long bookId, final String bookTitle) {

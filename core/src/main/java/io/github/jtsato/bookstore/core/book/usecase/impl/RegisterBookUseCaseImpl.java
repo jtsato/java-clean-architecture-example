@@ -60,7 +60,7 @@ public class RegisterBookUseCaseImpl implements RegisterBookUseCase {
 
     private Author getAuthorAndValidate(final Long authorId) {
         final Optional<Author> optional = getAuthorByIdGateway.execute(authorId);
-        return optional.orElseThrow(() -> new NotFoundException("validation.author.id.notfound", authorId));
+        return optional.orElseThrow(() -> new NotFoundException("validation.author.id.notfound", String.valueOf(authorId)));
     }
 
     private void checkDuplicatedTitleViolation(final String title) {

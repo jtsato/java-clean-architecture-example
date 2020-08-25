@@ -56,7 +56,7 @@ public class SaveBookDocumentUseCaseImpl implements SaveBookDocumentUseCase {
         final Optional<Book> optional = getBookByIdGateway.execute(bookId);
 
         if (optional.isEmpty()) {
-            throw new NotFoundException("validation.book.id.notfound", bookId);
+            throw new NotFoundException("validation.book.id.notfound", String.valueOf(bookId));
         }
     }
 
