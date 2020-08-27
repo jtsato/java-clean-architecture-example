@@ -24,7 +24,7 @@ class PrettySqlFormatTest {
 
         final int connectionId = 1;
         final String now = "2020-08-23 00:27:44";
-        long elapsed = 100L;
+        final long elapsed = 100L;
         final String category = Category.STATEMENT.getName();
         final String prepared = null;
         final String sql = "select id, name from table where id is not null and name like '%dummy%'";
@@ -57,7 +57,7 @@ class PrettySqlFormatTest {
 
         final int connectionId = 1;
         final String now = "2020-08-23 00:27:44";
-        long elapsed = 100L;
+        final long elapsed = 100L;
         final String category = Category.STATEMENT.getName();
         final String prepared = null;
         final String sql = "create table dummy (id bigint, name varchar(255) not null, creation_date timestamp not null, update_date timestamp not null, primary key (id));";
@@ -80,7 +80,7 @@ class PrettySqlFormatTest {
         assertThat(result[7]).isEqualTo("        primary key (id)");
         assertThat(result[8]).isEqualTo("    );");
     }
-    
+
     @DisplayName("Successful to prettify SQL if it is not supplied")
     @Test
     void successfulToPrettifySQLIfItIsNotSupplied() {
@@ -89,7 +89,7 @@ class PrettySqlFormatTest {
 
         final int connectionId = 1;
         final String now = "2020-08-23 00:27:44";
-        long elapsed = 100L;
+        final long elapsed = 100L;
         final String category = Category.STATEMENT.getName();
         final String prepared = null;
         final String sql = " ";
@@ -102,7 +102,7 @@ class PrettySqlFormatTest {
         assertThat(result).hasSize(1);
         assertThat(result[0]).isEqualTo(String.format("%s|%dms|%s|connection %d|", now, elapsed, category, connectionId));
     }
-    
+
     @DisplayName("Successful to prettify SQL if category is not statment")
     @Test
     void successfulToPrettifySqlIfCategoryIsNotStatement() {
@@ -110,7 +110,7 @@ class PrettySqlFormatTest {
         final MessageFormattingStrategy prettySqlFormat = new PrettySqlFormat();
 
         final String now = "2020-08-23 00:27:44";
-        long elapsed = 0L;
+        final long elapsed = 0L;
         final String category = Category.COMMIT.getName();
         final String prepared = null;
         final String sql = "commit";
