@@ -7,6 +7,7 @@ import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.context.jdbc.Sql;
@@ -17,16 +18,18 @@ import io.github.jtsato.bookstore.core.author.usecase.parameter.SearchAuthorsPar
 import io.github.jtsato.bookstore.core.common.paging.Page;
 import io.github.jtsato.bookstore.core.common.paging.Pageable;
 import io.github.jtsato.bookstore.dataprovider.author.repository.AuthorRepository;
+import io.github.jtsato.bookstore.dataprovider.common.ContainersContextConfiguration;
 
 /**
  * @author Jorge Takeshi Sato
  */
 
 @DisplayName("Search Authors")
+@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @DataJpaTest
 @Import({SearchAuthorsDataProvider.class})
 @Sql("SearchAuthorsDataProviderTest.sql")
-class SearchAuthorsDataProviderTest {
+class SearchAuthorsDataProviderTest extends ContainersContextConfiguration {
 
     @Autowired
     private SearchAuthorsDataProvider searchAuthorsDataProvider;

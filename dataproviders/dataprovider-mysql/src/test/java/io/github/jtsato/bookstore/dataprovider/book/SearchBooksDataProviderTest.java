@@ -9,6 +9,7 @@ import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.context.jdbc.Sql;
@@ -18,17 +19,20 @@ import io.github.jtsato.bookstore.core.book.domain.Book;
 import io.github.jtsato.bookstore.core.book.usecase.parameter.SearchBooksParameters;
 import io.github.jtsato.bookstore.core.common.paging.Page;
 import io.github.jtsato.bookstore.core.common.paging.Pageable;
+import io.github.jtsato.bookstore.dataprovider.book.domain.BookEntity;
 import io.github.jtsato.bookstore.dataprovider.book.repository.BookRepository;
+import io.github.jtsato.bookstore.dataprovider.common.ContainersContextConfiguration;
 
 /**
  * @author Jorge Takeshi Sato
  */
 
 @DisplayName("Search Books")
+@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @DataJpaTest
 @Import({SearchBooksDataProvider.class})
 @Sql("SearchBooksDataProviderTest.sql")
-class SearchBooksDataProviderTest {
+class SearchBooksDataProviderTest extends ContainersContextConfiguration {
 
     @Autowired
     private SearchBooksDataProvider searchBooksDataProvider;
@@ -55,6 +59,8 @@ class SearchBooksDataProviderTest {
         assertThat(page).isNotNull();
 
         final List<Book> books = page.getContent();
+        
+        bookRepository.findAll().stream().map(BookEntity::getCreationDate).forEach(System.out::println);
 
         assertThat(books).isNotNull().isNotEmpty();
 

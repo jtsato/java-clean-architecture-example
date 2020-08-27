@@ -7,22 +7,25 @@ import java.util.Optional;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.context.jdbc.Sql;
 
 import io.github.jtsato.bookstore.core.author.domain.Author;
 import io.github.jtsato.bookstore.dataprovider.author.repository.AuthorRepository;
+import io.github.jtsato.bookstore.dataprovider.common.ContainersContextConfiguration;
 
 /**
  * @author Jorge Takeshi Sato
  */
 
 @DisplayName("Get Author By Name")
+@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @DataJpaTest
 @Import({GetAuthorByNameDataProvider.class})
 @Sql("GetAuthorByNameDataProviderTest.sql")
-class GetAuthorByNameDataProviderTest {
+class GetAuthorByNameDataProviderTest extends ContainersContextConfiguration {
 
     @Autowired
     private GetAuthorByNameDataProvider getAuthorByNameDataProvider;

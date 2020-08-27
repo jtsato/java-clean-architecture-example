@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.Import;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -15,15 +16,17 @@ import org.springframework.dao.DataIntegrityViolationException;
 import io.github.jtsato.bookstore.core.author.domain.Author;
 import io.github.jtsato.bookstore.core.author.domain.Gender;
 import io.github.jtsato.bookstore.dataprovider.author.repository.AuthorRepository;
+import io.github.jtsato.bookstore.dataprovider.common.ContainersContextConfiguration;
 
 /**
  * @author Jorge Takeshi Sato
  */
 
 @DisplayName("Register Author")
+@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @DataJpaTest
 @Import({RegisterAuthorDataProvider.class})
-class RegisterAuthorDataProviderTest {
+class RegisterAuthorDataProviderTest extends ContainersContextConfiguration {
 
     @Autowired
     private RegisterAuthorDataProvider registerAuthorDataProvider;

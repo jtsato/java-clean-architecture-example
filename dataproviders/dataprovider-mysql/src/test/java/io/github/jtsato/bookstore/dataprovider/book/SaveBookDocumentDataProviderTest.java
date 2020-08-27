@@ -8,21 +8,24 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.Import;
 import org.springframework.dao.DataIntegrityViolationException;
 
 import io.github.jtsato.bookstore.core.book.domain.BookDocument;
 import io.github.jtsato.bookstore.dataprovider.book.repository.BookDocumentRepository;
+import io.github.jtsato.bookstore.dataprovider.common.ContainersContextConfiguration;
 
 /**
  * @author Jorge Takeshi Sato
  */
 
 @DisplayName("Save Book Document")
+@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @DataJpaTest
 @Import({SaveBookDocumentDataProvider.class})
-class SaveBookDocumentDataProviderTest {
+class SaveBookDocumentDataProviderTest extends ContainersContextConfiguration {
 
     @Autowired
     private SaveBookDocumentDataProvider saveBookDocumentDataProvider;

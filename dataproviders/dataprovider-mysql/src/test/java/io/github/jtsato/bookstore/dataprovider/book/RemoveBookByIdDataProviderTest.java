@@ -7,22 +7,25 @@ import java.util.Optional;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.context.jdbc.Sql;
 
 import io.github.jtsato.bookstore.core.book.domain.Book;
 import io.github.jtsato.bookstore.dataprovider.book.repository.BookRepository;
+import io.github.jtsato.bookstore.dataprovider.common.ContainersContextConfiguration;
 
 /**
  * @author Jorge Takeshi Sato
  */
 
 @DisplayName("Remove Book By Id")
+@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @DataJpaTest
 @Import({RemoveBookByIdDataProvider.class})
 @Sql("RemoveBookByIdDataProviderTest.sql")
-class RemoveBookByIdDataProviderTest {
+class RemoveBookByIdDataProviderTest extends ContainersContextConfiguration {
 
     @Autowired
     private RemoveBookByIdDataProvider removeBookByIdDataProvider;
