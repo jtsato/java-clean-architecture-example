@@ -19,7 +19,6 @@ import io.github.jtsato.bookstore.core.book.domain.Book;
 import io.github.jtsato.bookstore.core.book.usecase.parameter.SearchBooksParameters;
 import io.github.jtsato.bookstore.core.common.paging.Page;
 import io.github.jtsato.bookstore.core.common.paging.Pageable;
-import io.github.jtsato.bookstore.dataprovider.book.domain.BookEntity;
 import io.github.jtsato.bookstore.dataprovider.book.repository.BookRepository;
 import io.github.jtsato.bookstore.dataprovider.common.ContainersContextConfiguration;
 
@@ -60,8 +59,6 @@ class SearchBooksDataProviderTest extends ContainersContextConfiguration {
 
         final List<Book> books = page.getContent();
         
-        bookRepository.findAll().stream().map(BookEntity::getCreationDate).forEach(System.out::println);
-
         assertThat(books).isNotNull().isNotEmpty();
 
         final Pageable pageable = page.getPageable();
