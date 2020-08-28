@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
  */
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-public class UpdateBookByIdPresenter {
+public final class UpdateBookByIdPresenter {
 
     public static UpdateBookByIdResponse of(final Book book) {
         return new UpdateBookByIdResponse(book.getId(),

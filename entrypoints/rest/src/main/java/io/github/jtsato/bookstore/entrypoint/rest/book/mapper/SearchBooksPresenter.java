@@ -17,7 +17,7 @@ import lombok.NoArgsConstructor;
  */
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-public class SearchBooksPresenter {
+public final class SearchBooksPresenter {
 
     public static SearchBooksResponse of(final Page<Book> page) {
         final List<Book> books = page.getContent();

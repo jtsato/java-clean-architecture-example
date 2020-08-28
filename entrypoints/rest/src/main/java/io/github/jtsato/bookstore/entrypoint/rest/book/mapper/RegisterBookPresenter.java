@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
  */
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-public class RegisterBookPresenter {
+public final class RegisterBookPresenter {
 
     public static RegisterBookResponse of(final Book book) {
         return new RegisterBookResponse(book.getId(),

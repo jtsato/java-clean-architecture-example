@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
  */
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-public class SaveBookDocumentPresenter {
+public final class SaveBookDocumentPresenter {
 
     public static SaveBookDocumentResponse of(final BookDocument bookDocument) {
         return new SaveBookDocumentResponse(bookDocument.getId(),

@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
  */
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-public class SearchAuthorsPresenter {
+public final class SearchAuthorsPresenter {
 
     public static SearchAuthorsResponse of(final Page<Author> page) {
         final List<Author> authors = page.getContent();

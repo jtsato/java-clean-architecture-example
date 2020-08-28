@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
  */
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-public class GetBookByIdPresenter {
+public final class GetBookByIdPresenter {
 
     public static GetBookByIdResponse of(final Book book) {
         return new GetBookByIdResponse(book.getId(),

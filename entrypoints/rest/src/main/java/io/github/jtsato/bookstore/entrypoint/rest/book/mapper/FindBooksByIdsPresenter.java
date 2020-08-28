@@ -17,7 +17,7 @@ import lombok.NoArgsConstructor;
  */
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-public class FindBooksByIdsPresenter {
+public final class FindBooksByIdsPresenter {
 
     public static FindBooksByIdsResponse of(final Page<Book> page) {
 
