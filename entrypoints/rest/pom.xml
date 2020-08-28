@@ -33,7 +33,7 @@
 		<pitest-junit5-plugin.version>0.12</pitest-junit5-plugin.version>
 		<sonar.coverage.exclusions>
 			**/src/**/core/**,
-			**/src/**/BookstoreApplication.java
+			**/src/**/BookstoreRestApplication.java
 		</sonar.coverage.exclusions>
 	</properties>
 

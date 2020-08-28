@@ -7,10 +7,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @author Jorge Takeshi Sato
  */
 
-@SpringBootApplication(scanBasePackageClasses = {BookstoreApplication.class})
-public class BookstoreApplication {
+@SpringBootApplication(scanBasePackageClasses = {BookstoreRestApplication.class})
+public class BookstoreRestApplication {
 
     public static void main(final String[] args) {
-        SpringApplication.run(BookstoreApplication.class);
+        SpringApplication.run(BookstoreRestApplication.class);
     }
 }
