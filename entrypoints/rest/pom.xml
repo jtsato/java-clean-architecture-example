@@ -25,7 +25,6 @@
 		<maven.compiler.target>11</maven.compiler.target>
 		<commons.io.version>2.7</commons.io.version>
 		<springdoc.version>1.4.2</springdoc.version>
-		<okta.version>1.4.0</okta.version>
 		<spring-cloud.version>Hoxton.SR6</spring-cloud.version>
 		<jacoco.agent.version>0.8.5</jacoco.agent.version>
 		<jacoco-maven-plugin.version>0.8.5</jacoco-maven-plugin.version>
@@ -132,11 +131,6 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>com.okta.spring</groupId>
-			<artifactId>okta-spring-boot-starter</artifactId>
-			<version>${okta.version}</version>
 		</dependency>
 	</dependencies>
 
