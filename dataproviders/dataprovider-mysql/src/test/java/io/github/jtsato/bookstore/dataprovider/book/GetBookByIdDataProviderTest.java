@@ -15,7 +15,6 @@ import org.testcontainers.junit.jupiter.Testcontainers;
 
 import io.github.jtsato.bookstore.core.book.domain.Book;
 import io.github.jtsato.bookstore.dataprovider.book.repository.BookRepository;
-import io.github.jtsato.bookstore.dataprovider.common.ContainersContextConfiguration;
 
 
 /**
@@ -28,7 +27,7 @@ import io.github.jtsato.bookstore.dataprovider.common.ContainersContextConfigura
 @Testcontainers
 @Import({GetBookByIdDataProvider.class})
 @Sql("GetBookByIdDataProviderTest.sql")
-class GetBookByIdDataProviderTest extends ContainersContextConfiguration {
+class GetBookByIdDataProviderTest {
 
     @Autowired
     private GetBookByIdDataProvider getBookByIdDataProvider;

@@ -2,6 +2,7 @@ package io.github.jtsato.bookstore.dataprovider.author;
 
 import java.util.List;
 
+import org.mapstruct.factory.Mappers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -27,10 +28,12 @@ import io.github.jtsato.bookstore.dataprovider.common.PageRequestHelper;
 @Service
 public class FindAuthorsByIdsDataProvider implements FindAuthorsByIdsGateway {
 
+    private final PageMapper<Author, AuthorEntity> pageMapper = new PageMapper<>() {};
+    
+    private final AuthorMapper authorMapper = Mappers.getMapper(AuthorMapper.class);
+    
     @Autowired
     AuthorRepository authorRepository;
-
-    private final PageMapper<Author, AuthorEntity> pageMapper = new PageMapper<>() {};
 
     @Override
     public Page<Author> execute(final List<Long> ids) {
@@ -40,6 +43,6 @@ public class FindAuthorsByIdsDataProvider implements FindAuthorsByIdsGateway {
 
         final org.springframework.data.domain.Page<AuthorEntity> page = authorRepository.findAll(predicate, pageRequest);
 
-        return pageMapper.of(page, AuthorMapper::of);
+        return pageMapper.of(page, authorMapper::of);
     }
 }

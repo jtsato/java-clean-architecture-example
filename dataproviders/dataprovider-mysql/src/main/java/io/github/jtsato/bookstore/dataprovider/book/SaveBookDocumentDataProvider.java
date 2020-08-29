@@ -1,5 +1,6 @@
 package io.github.jtsato.bookstore.dataprovider.book;
 
+import org.mapstruct.factory.Mappers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,12 +19,14 @@ import io.github.jtsato.bookstore.dataprovider.book.repository.BookDocumentRepos
 @Service
 public class SaveBookDocumentDataProvider implements SaveBookDocumentGateway {
 
+    private final BookDocumentMapper bookDocumentMapper = Mappers.getMapper(BookDocumentMapper.class);
+    
     @Autowired
     BookDocumentRepository bookDocumentRepository;
 
     @Override
     public BookDocument execute(final BookDocument bookDocument) {
-        final BookDocumentEntity bookDocumentEntity = BookDocumentMapper.of(bookDocument);
-        return BookDocumentMapper.of(bookDocumentRepository.saveAndFlush(bookDocumentEntity));
+        final BookDocumentEntity bookDocumentEntity = bookDocumentMapper.of(bookDocument);
+        return bookDocumentMapper.of(bookDocumentRepository.saveAndFlush(bookDocumentEntity));
     }
 }

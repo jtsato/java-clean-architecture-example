@@ -65,6 +65,7 @@ public class LayerDependencyRulesTest {
                                                                                                             "org.apache.commons..",
                                                                                                             "com.p6spy.engine.logging..",
                                                                                                             "org.hibernate.engine..",
+                                                                                                            "org.mapstruct..",
                                                                                                             "java..");
 
     @ArchTest
@@ -76,8 +77,9 @@ public class LayerDependencyRulesTest {
                                                                                                       "..domain..",
                                                                                                       "..response..",
                                                                                                       "..core.common..",
-                                                                                                      "java..",
-                                                                                                      "org.springframework..");
+                                                                                                      "org.mapstruct..",
+                                                                                                      "org.springframework..",
+                                                                                                      "java..");
 
     @ArchTest
     static final ArchRule core_domains_should_only_access_themselves_ = classes().that()

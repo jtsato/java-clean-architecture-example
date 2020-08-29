@@ -14,7 +14,6 @@ import org.springframework.test.context.jdbc.Sql;
 
 import io.github.jtsato.bookstore.core.author.domain.Author;
 import io.github.jtsato.bookstore.dataprovider.author.repository.AuthorRepository;
-import io.github.jtsato.bookstore.dataprovider.common.ContainersContextConfiguration;
 
 /**
  * @author Jorge Takeshi Sato
@@ -25,7 +24,7 @@ import io.github.jtsato.bookstore.dataprovider.common.ContainersContextConfigura
 @DataJpaTest
 @Import({GetAuthorByNameDataProvider.class})
 @Sql("GetAuthorByNameDataProviderTest.sql")
-class GetAuthorByNameDataProviderTest extends ContainersContextConfiguration {
+class GetAuthorByNameDataProviderTest {
 
     @Autowired
     private GetAuthorByNameDataProvider getAuthorByNameDataProvider;

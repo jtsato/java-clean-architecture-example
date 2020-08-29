@@ -19,7 +19,6 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
 import io.github.jtsato.bookstore.dataprovider.author.domain.AuthorEntity;
-import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -60,7 +59,6 @@ public class BookEntity implements Serializable {
     @Column(name = "AVAILABLE", nullable = false)
     private Boolean available;
 
-    @Setter(value = AccessLevel.NONE)
     @Column(name = "CREATION_DATE", nullable = false)
     private LocalDateTime creationDate;
 

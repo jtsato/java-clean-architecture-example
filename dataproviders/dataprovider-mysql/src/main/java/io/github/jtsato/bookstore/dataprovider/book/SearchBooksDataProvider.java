@@ -1,6 +1,7 @@
 package io.github.jtsato.bookstore.dataprovider.book;
 
 import org.apache.commons.lang3.StringUtils;
+import org.mapstruct.factory.Mappers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -29,6 +30,8 @@ import io.github.jtsato.bookstore.dataprovider.common.PageRequestHelper;
 @Transactional(readOnly = true)
 @Service
 public class SearchBooksDataProvider implements SearchBooksGateway {
+    
+    private final BookMapper bookMapper = Mappers.getMapper(BookMapper.class);
 
     @Autowired
     BookRepository bookRepository;
@@ -44,7 +47,7 @@ public class SearchBooksDataProvider implements SearchBooksGateway {
 
         final org.springframework.data.domain.Page<BookEntity> page = bookRepository.findAll(predicate, pageRequest, entityGraph);
 
-        return pageMapper.of(page, BookMapper::of);
+        return pageMapper.of(page, bookMapper::of);
     }
 
     private String sanitizeOrderBy(final String orderBy) {

@@ -14,7 +14,6 @@ import javax.persistence.Lob;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
-import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -59,7 +58,6 @@ public class BookDocumentEntity implements Serializable {
     @Column(name = "CONTENT")
     private String content;
 
-    @Setter(value = AccessLevel.NONE)
     @Column(name = "CREATION_DATE", nullable = false)
     private LocalDateTime creationDate;
 

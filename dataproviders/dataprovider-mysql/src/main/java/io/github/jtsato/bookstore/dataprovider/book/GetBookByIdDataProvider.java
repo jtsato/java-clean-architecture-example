@@ -2,6 +2,7 @@ package io.github.jtsato.bookstore.dataprovider.book;
 
 import java.util.Optional;
 
+import org.mapstruct.factory.Mappers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,12 +23,14 @@ import io.github.jtsato.bookstore.dataprovider.book.repository.BookRepository;
 @Service
 public class GetBookByIdDataProvider implements GetBookByIdGateway {
 
+    private final BookMapper bookMapper = Mappers.getMapper(BookMapper.class);
+    
     @Autowired
     BookRepository bookRepository;
 
     @Override
     public Optional<Book> execute(final Long id) {
         final Optional<BookEntity> optional = bookRepository.findById(id, EntityGraphUtils.fromAttributePaths("author"));
-        return optional.map(BookMapper::of);
+        return optional.map(bookMapper::of);
     }
 }

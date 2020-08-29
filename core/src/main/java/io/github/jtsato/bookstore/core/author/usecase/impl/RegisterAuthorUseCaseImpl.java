@@ -6,6 +6,8 @@ import java.util.Optional;
 import javax.inject.Named;
 import javax.validation.Valid;
 
+import org.apache.commons.lang3.StringUtils;
+
 import io.github.jtsato.bookstore.core.author.domain.Author;
 import io.github.jtsato.bookstore.core.author.domain.Gender;
 import io.github.jtsato.bookstore.core.author.gateway.GetAuthorByNameGateway;
@@ -35,7 +37,7 @@ public class RegisterAuthorUseCaseImpl implements RegisterAuthorUseCase {
 
         final LocalDate birthdate = LocalDate.parse(parameters.getBirthdate());
         final Gender gender = EnumeratorUtils.valueOf(parameters.getGender(), Gender.class);
-        final Author author = new Author(null, parameters.getName(), gender, birthdate);
+        final Author author = new Author(null, StringUtils.stripToNull(parameters.getName()), gender, birthdate);
 
         return registerAuthorGateway.execute(author);
     }

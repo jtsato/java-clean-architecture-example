@@ -4,6 +4,8 @@ import java.util.Optional;
 
 import javax.inject.Named;
 
+import org.apache.commons.lang3.StringUtils;
+
 import io.github.jtsato.bookstore.core.author.domain.Author;
 import io.github.jtsato.bookstore.core.author.gateway.GetAuthorByIdGateway;
 import io.github.jtsato.bookstore.core.book.domain.Book;
@@ -49,7 +51,7 @@ public class RegisterBookUseCaseImpl implements RegisterBookUseCase {
 
         final Book book = new Book(null,
                                    author,
-                                   parameters.getTitle(),
+                                   StringUtils.stripToNull(parameters.getTitle()),
                                    parameters.getPrice(),
                                    parameters.getAvailable(),
                                    getLocalDateTime.now(),

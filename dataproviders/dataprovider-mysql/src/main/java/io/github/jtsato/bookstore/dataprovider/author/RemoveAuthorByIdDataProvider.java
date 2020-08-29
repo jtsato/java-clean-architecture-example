@@ -2,6 +2,7 @@ package io.github.jtsato.bookstore.dataprovider.author;
 
 import java.util.Optional;
 
+import org.mapstruct.factory.Mappers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,6 +21,8 @@ import io.github.jtsato.bookstore.dataprovider.author.repository.AuthorRepositor
 @Service
 public class RemoveAuthorByIdDataProvider implements RemoveAuthorByIdGateway {
 
+    private final AuthorMapper authorMapper = Mappers.getMapper(AuthorMapper.class);
+
     @Autowired
     AuthorRepository authorRepository;
 
@@ -30,7 +33,7 @@ public class RemoveAuthorByIdDataProvider implements RemoveAuthorByIdGateway {
     }
 
     private Author removeAuthorEntity(final AuthorEntity authorEntity) {
-        final Author author = AuthorMapper.of(authorEntity);
+        final Author author = authorMapper.of(authorEntity);
         authorRepository.delete(authorEntity);
         return author;
     }

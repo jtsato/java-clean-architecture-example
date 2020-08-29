@@ -2,6 +2,7 @@ package io.github.jtsato.bookstore.dataprovider.author;
 
 import java.util.Optional;
 
+import org.mapstruct.factory.Mappers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,6 +21,8 @@ import io.github.jtsato.bookstore.dataprovider.author.repository.AuthorRepositor
 @Service
 public class UpdateAuthorByIdDataProvider implements UpdateAuthorByIdGateway {
 
+    private final AuthorMapper authorMapper = Mappers.getMapper(AuthorMapper.class);
+
     @Autowired
     AuthorRepository authorRepository;
 
@@ -33,6 +36,6 @@ public class UpdateAuthorByIdDataProvider implements UpdateAuthorByIdGateway {
         authorEntity.setName(author.getName());
         authorEntity.setBirthdate(author.getBirthdate());
         authorEntity.setGender(author.getGender().name());
-        return AuthorMapper.of(authorRepository.saveAndFlush(authorEntity));
+        return authorMapper.of(authorRepository.saveAndFlush(authorEntity));
     }
 }

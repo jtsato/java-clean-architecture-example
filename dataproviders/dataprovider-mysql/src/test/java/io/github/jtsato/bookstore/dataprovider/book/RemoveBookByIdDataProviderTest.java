@@ -14,7 +14,6 @@ import org.springframework.test.context.jdbc.Sql;
 
 import io.github.jtsato.bookstore.core.book.domain.Book;
 import io.github.jtsato.bookstore.dataprovider.book.repository.BookRepository;
-import io.github.jtsato.bookstore.dataprovider.common.ContainersContextConfiguration;
 
 /**
  * @author Jorge Takeshi Sato
@@ -25,7 +24,7 @@ import io.github.jtsato.bookstore.dataprovider.common.ContainersContextConfigura
 @DataJpaTest
 @Import({RemoveBookByIdDataProvider.class})
 @Sql("RemoveBookByIdDataProviderTest.sql")
-class RemoveBookByIdDataProviderTest extends ContainersContextConfiguration {
+class RemoveBookByIdDataProviderTest {
 
     @Autowired
     private RemoveBookByIdDataProvider removeBookByIdDataProvider;

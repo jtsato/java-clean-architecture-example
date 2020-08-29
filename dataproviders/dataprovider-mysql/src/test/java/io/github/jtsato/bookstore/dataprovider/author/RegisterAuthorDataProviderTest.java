@@ -16,7 +16,6 @@ import org.springframework.dao.DataIntegrityViolationException;
 import io.github.jtsato.bookstore.core.author.domain.Author;
 import io.github.jtsato.bookstore.core.author.domain.Gender;
 import io.github.jtsato.bookstore.dataprovider.author.repository.AuthorRepository;
-import io.github.jtsato.bookstore.dataprovider.common.ContainersContextConfiguration;
 
 /**
  * @author Jorge Takeshi Sato
@@ -26,7 +25,7 @@ import io.github.jtsato.bookstore.dataprovider.common.ContainersContextConfigura
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @DataJpaTest
 @Import({RegisterAuthorDataProvider.class})
-class RegisterAuthorDataProviderTest extends ContainersContextConfiguration {
+class RegisterAuthorDataProviderTest {
 
     @Autowired
     private RegisterAuthorDataProvider registerAuthorDataProvider;

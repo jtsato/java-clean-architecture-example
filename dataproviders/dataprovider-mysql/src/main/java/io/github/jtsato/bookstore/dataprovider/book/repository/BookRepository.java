@@ -16,5 +16,5 @@ import io.github.jtsato.bookstore.dataprovider.book.domain.BookEntity;
 @Repository
 public interface BookRepository extends EntityGraphJpaRepository<BookEntity, Long>, EntityGraphQuerydslPredicateExecutor<BookEntity> {
 
-    Optional<BookEntity> findByTitle(final String title);
+    Optional<BookEntity> findByTitleIgnoreCase(final String title);
 }

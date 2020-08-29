@@ -20,7 +20,6 @@ import io.github.jtsato.bookstore.core.book.usecase.parameter.SearchBooksParamet
 import io.github.jtsato.bookstore.core.common.paging.Page;
 import io.github.jtsato.bookstore.core.common.paging.Pageable;
 import io.github.jtsato.bookstore.dataprovider.book.repository.BookRepository;
-import io.github.jtsato.bookstore.dataprovider.common.ContainersContextConfiguration;
 
 /**
  * @author Jorge Takeshi Sato
@@ -31,7 +30,7 @@ import io.github.jtsato.bookstore.dataprovider.common.ContainersContextConfigura
 @DataJpaTest
 @Import({SearchBooksDataProvider.class})
 @Sql("SearchBooksDataProviderTest.sql")
-class SearchBooksDataProviderTest extends ContainersContextConfiguration {
+class SearchBooksDataProviderTest {
 
     @Autowired
     private SearchBooksDataProvider searchBooksDataProvider;

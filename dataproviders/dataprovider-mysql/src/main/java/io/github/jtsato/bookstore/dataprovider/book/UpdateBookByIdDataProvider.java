@@ -2,6 +2,7 @@ package io.github.jtsato.bookstore.dataprovider.book;
 
 import java.util.Optional;
 
+import org.mapstruct.factory.Mappers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,6 +21,8 @@ import io.github.jtsato.bookstore.dataprovider.book.repository.BookRepository;
 @Transactional
 @Service
 public class UpdateBookByIdDataProvider implements UpdateBookByIdGateway {
+    
+    private final BookMapper bookMapper = Mappers.getMapper(BookMapper.class);
 
     @Autowired
     BookRepository bookRepository;
@@ -39,15 +42,14 @@ public class UpdateBookByIdDataProvider implements UpdateBookByIdGateway {
         bookEntity.setPrice(book.getPrice());
         bookEntity.setAvailable(book.getAvailable());
         bookEntity.setUpdateDate(book.getUpdateDate());
-        return BookMapper.of(bookRepository.saveAndFlush(bookEntity));
+        return bookMapper.of(bookRepository.saveAndFlush(bookEntity));
     }
 
     private void updateAuthor(final Book book, final BookEntity bookEntity) {
         final Long currentAuthorId = bookEntity.getAuthor().getId();
         final Long newAuthorId = book.getAuthor().getId();
-        if (newAuthorId.equals(currentAuthorId)) {
-            return;
+        if (!newAuthorId.equals(currentAuthorId)) {
+            authorRepository.findById(newAuthorId).ifPresent(bookEntity::setAuthor);
         }
-        authorRepository.findById(newAuthorId).ifPresent(bookEntity::setAuthor);
     }
 }

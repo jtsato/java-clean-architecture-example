@@ -17,7 +17,6 @@ import io.github.jtsato.bookstore.core.book.domain.Book;
 import io.github.jtsato.bookstore.core.common.paging.Page;
 import io.github.jtsato.bookstore.core.common.paging.Pageable;
 import io.github.jtsato.bookstore.dataprovider.book.repository.BookRepository;
-import io.github.jtsato.bookstore.dataprovider.common.ContainersContextConfiguration;
 
 /**
  * @author Jorge Takeshi Sato
@@ -28,7 +27,7 @@ import io.github.jtsato.bookstore.dataprovider.common.ContainersContextConfigura
 @DataJpaTest
 @Import({FindBooksByIdsDataProvider.class})
 @Sql("FindBooksByIdsDataProviderTest.sql")
-class FindBooksByIdsDataProviderTest extends ContainersContextConfiguration {
+class FindBooksByIdsDataProviderTest {
 
     @Autowired
     private FindBooksByIdsDataProvider findBooksByIdsDataProvider;

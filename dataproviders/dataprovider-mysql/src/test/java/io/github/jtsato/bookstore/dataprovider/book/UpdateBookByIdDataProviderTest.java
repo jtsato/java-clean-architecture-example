@@ -18,7 +18,6 @@ import io.github.jtsato.bookstore.core.author.domain.Author;
 import io.github.jtsato.bookstore.core.book.domain.Book;
 import io.github.jtsato.bookstore.dataprovider.author.GetAuthorByIdDataProvider;
 import io.github.jtsato.bookstore.dataprovider.book.repository.BookRepository;
-import io.github.jtsato.bookstore.dataprovider.common.ContainersContextConfiguration;
 
 /**
  * @author Jorge Takeshi Sato
@@ -29,7 +28,7 @@ import io.github.jtsato.bookstore.dataprovider.common.ContainersContextConfigura
 @DataJpaTest
 @Import({UpdateBookByIdDataProvider.class, GetAuthorByIdDataProvider.class})
 @Sql("UpdateBookByIdDataProviderTest.sql")
-class UpdateBookByIdDataProviderTest extends ContainersContextConfiguration {
+class UpdateBookByIdDataProviderTest {
 
     @Autowired
     private UpdateBookByIdDataProvider updateBookByIdDataProvider;

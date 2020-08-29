@@ -16,7 +16,6 @@ import org.springframework.test.context.jdbc.Sql;
 import io.github.jtsato.bookstore.core.author.domain.Author;
 import io.github.jtsato.bookstore.core.author.domain.Gender;
 import io.github.jtsato.bookstore.dataprovider.author.repository.AuthorRepository;
-import io.github.jtsato.bookstore.dataprovider.common.ContainersContextConfiguration;
 
 /**
  * @author Jorge Takeshi Sato
@@ -27,7 +26,7 @@ import io.github.jtsato.bookstore.dataprovider.common.ContainersContextConfigura
 @DataJpaTest
 @Import({UpdateAuthorByIdDataProvider.class})
 @Sql("UpdateAuthorByIdDataProviderTest.sql")
-class UpdateAuthorByIdDataProviderTest extends ContainersContextConfiguration {
+class UpdateAuthorByIdDataProviderTest {
 
     @Autowired
     private UpdateAuthorByIdDataProvider updateAuthorByIdDataProvider;

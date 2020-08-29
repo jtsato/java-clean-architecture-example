@@ -15,7 +15,6 @@ import org.springframework.dao.DataIntegrityViolationException;
 
 import io.github.jtsato.bookstore.core.book.domain.BookDocument;
 import io.github.jtsato.bookstore.dataprovider.book.repository.BookDocumentRepository;
-import io.github.jtsato.bookstore.dataprovider.common.ContainersContextConfiguration;
 
 /**
  * @author Jorge Takeshi Sato
@@ -25,7 +24,7 @@ import io.github.jtsato.bookstore.dataprovider.common.ContainersContextConfigura
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @DataJpaTest
 @Import({SaveBookDocumentDataProvider.class})
-class SaveBookDocumentDataProviderTest extends ContainersContextConfiguration {
+class SaveBookDocumentDataProviderTest {
 
     @Autowired
     private SaveBookDocumentDataProvider saveBookDocumentDataProvider;
