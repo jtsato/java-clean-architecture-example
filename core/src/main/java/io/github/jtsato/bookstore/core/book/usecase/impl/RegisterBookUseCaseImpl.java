@@ -51,7 +51,7 @@ public class RegisterBookUseCaseImpl implements RegisterBookUseCase {
 
         final Book book = new Book(null,
                                    author,
-                                   StringUtils.stripToNull(parameters.getTitle()),
+                                   StringUtils.stripToEmpty(parameters.getTitle()),
                                    parameters.getPrice(),
                                    parameters.getAvailable(),
                                    getLocalDateTime.now(),

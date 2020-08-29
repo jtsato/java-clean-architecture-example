@@ -37,7 +37,7 @@ public class RegisterAuthorUseCaseImpl implements RegisterAuthorUseCase {
 
         final LocalDate birthdate = LocalDate.parse(parameters.getBirthdate());
         final Gender gender = EnumeratorUtils.valueOf(parameters.getGender(), Gender.class);
-        final Author author = new Author(null, StringUtils.stripToNull(parameters.getName()), gender, birthdate);
+        final Author author = new Author(null, StringUtils.stripToEmpty(parameters.getName()), gender, birthdate);
 
         return registerAuthorGateway.execute(author);
     }

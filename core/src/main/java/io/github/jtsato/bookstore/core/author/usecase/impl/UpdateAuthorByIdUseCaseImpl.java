@@ -5,6 +5,8 @@ import java.util.Optional;
 
 import javax.inject.Named;
 
+import org.apache.commons.lang3.StringUtils;
+
 import io.github.jtsato.bookstore.core.author.domain.Author;
 import io.github.jtsato.bookstore.core.author.domain.Gender;
 import io.github.jtsato.bookstore.core.author.gateway.GetAuthorByNameGateway;
@@ -34,10 +36,8 @@ public class UpdateAuthorByIdUseCaseImpl implements UpdateAuthorByIdUseCase {
         checkDuplicatedNameViolation(parameters.getId(), parameters.getName());
 
         final LocalDate birthdate = LocalDate.parse(parameters.getBirthdate());
-
         final Gender gender = EnumeratorUtils.valueOf(parameters.getGender(), Gender.class);
-
-        final Author author = new Author(parameters.getId(), parameters.getName(), gender, birthdate);
+        final Author author = new Author(parameters.getId(), StringUtils.stripToEmpty(parameters.getName()), gender, birthdate);
 
         final Optional<Author> optional = updateAuthorGateway.execute(author);
 
