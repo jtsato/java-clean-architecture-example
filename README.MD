@@ -28,6 +28,6 @@
     * Unit Testing: [`JUnit5`](https://junit.org/junit5/docs/current/user-guide/) 
     * Mocking: [`Mockito`](https://site.mockito.org/)
     * Mutation: Testing [`PIT Mutation Testing`](https://pitest.org/)
-    * Testcontainers: [`Testcontainers`](https://www.testcontainers.org/)
+    * Integration Testing: [`Testcontainers`](https://www.testcontainers.org/)
     * Coverage: [`Jacoco`](https://www.jacoco.org)
     * Architecture Testing: [`ArchUnit`](https://www.archunit.org/)
