@@ -14,7 +14,7 @@
 	<artifactId>bookstore-configuration</artifactId>
 	<packaging>jar</packaging>
 
-	<name>Configuration [spring-web-data-mysql]</name>
+	<name>Configuration</name>
 	<description>Configuration</description>
 
 	<properties>
