@@ -16,7 +16,7 @@ import io.github.jtsato.bookstore.core.common.paging.Page;
 import io.github.jtsato.bookstore.dataprovider.author.domain.AuthorEntity;
 import io.github.jtsato.bookstore.dataprovider.author.domain.QAuthorEntity;
 import io.github.jtsato.bookstore.dataprovider.author.mapper.AuthorMapper;
-import io.github.jtsato.bookstore.dataprovider.author.repository.AuthorPredicateBuilder;
+import io.github.jtsato.bookstore.dataprovider.author.repository.SearchAuthorsPredicateBuilder;
 import io.github.jtsato.bookstore.dataprovider.author.repository.AuthorRepository;
 import io.github.jtsato.bookstore.dataprovider.common.PageMapper;
 import io.github.jtsato.bookstore.dataprovider.common.PageRequestHelper;
@@ -40,7 +40,7 @@ public class SearchAuthorsDataProvider implements SearchAuthorsGateway {
     public Page<Author> execute(final SearchAuthorsParameters parameters, final Integer pageNumber, final Integer size, final String orderBy) {
 
         final PageRequest pageRequest = PageRequestHelper.buildPageRequest(pageNumber, size, sanitizeOrderBy(orderBy));
-        final BooleanBuilder predicate = new AuthorPredicateBuilder(QAuthorEntity.authorEntity).buildBooleanBuilder(parameters);
+        final BooleanBuilder predicate = new SearchAuthorsPredicateBuilder(QAuthorEntity.authorEntity).buildBooleanBuilder(parameters);
 
         final org.springframework.data.domain.Page<AuthorEntity> page = authorRepository.findAll(predicate, pageRequest);
 

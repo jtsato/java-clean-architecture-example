@@ -10,7 +10,7 @@ import org.apache.commons.lang3.StringUtils;
 import com.querydsl.core.types.dsl.BooleanExpression;
 
 import io.github.jtsato.bookstore.core.book.usecase.parameter.SearchBooksParameters;
-import io.github.jtsato.bookstore.dataprovider.author.repository.AuthorPredicateBuilder;
+import io.github.jtsato.bookstore.dataprovider.author.repository.SearchAuthorsPredicateBuilder;
 import io.github.jtsato.bookstore.dataprovider.book.domain.QBookEntity;
 import io.github.jtsato.bookstore.dataprovider.common.predicate.AbstractPredicateBuilderImpl;
 
@@ -18,9 +18,9 @@ import io.github.jtsato.bookstore.dataprovider.common.predicate.AbstractPredicat
  * @author Jorge Takeshi Sato
  */
 
-public class SearchBookPredicateBuilder extends AbstractPredicateBuilderImpl<QBookEntity, SearchBooksParameters> {
+public class SearchBooksPredicateBuilder extends AbstractPredicateBuilderImpl<QBookEntity, SearchBooksParameters> {
 
-    public SearchBookPredicateBuilder(final QBookEntity entityPath) {
+    public SearchBooksPredicateBuilder(final QBookEntity entityPath) {
         super(entityPath);
     }
 
@@ -29,9 +29,9 @@ public class SearchBookPredicateBuilder extends AbstractPredicateBuilderImpl<QBo
 
         final List<BooleanExpression> booleanExpressions = new LinkedList<>();
 
-        if (query.getAuthorParameters() != null) {
-            final AuthorPredicateBuilder authorPredicateBuilder = new AuthorPredicateBuilder(entityPath.author);
-            booleanExpressions.addAll(authorPredicateBuilder.buildBooleanExpressions(query.getAuthorParameters()));
+        if (query.getSearchAuthorsParameters() != null) {
+            final SearchAuthorsPredicateBuilder searchAuthorsPredicateBuilder = new SearchAuthorsPredicateBuilder(entityPath.author);
+            booleanExpressions.addAll(searchAuthorsPredicateBuilder.buildBooleanExpressions(query.getSearchAuthorsParameters()));
         }
 
         if (StringUtils.isNotBlank(query.getTitle())) {

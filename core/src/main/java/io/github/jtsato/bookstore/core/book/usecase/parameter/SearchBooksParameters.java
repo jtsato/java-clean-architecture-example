@@ -26,7 +26,7 @@ public class SearchBooksParameters extends SelfValidating<SearchBooksParameters>
 
     private static final long serialVersionUID = 8184330828206770082L;
 
-    private SearchAuthorsParameters authorParameters;
+    private SearchAuthorsParameters searchAuthorsParameters;
 
     private String title;
 
@@ -48,13 +48,13 @@ public class SearchBooksParameters extends SelfValidating<SearchBooksParameters>
     @LocalDateTimeConstraint(message = "validation.book.end.creation.date.invalid")
     private String endUpdateDate;
 
-    public SearchBooksParameters(final SearchAuthorsParameters authorParameters,
+    public SearchBooksParameters(final SearchAuthorsParameters searchAuthorsParameters,
                                  final String title,
                                  final ImmutablePair<BigDecimal, BigDecimal> priceRange,
                                  final Boolean available,
                                  final ImmutablePair<String, String> creationDateRange,
                                  final ImmutablePair<String, String> updateDateRange) {
-        this.authorParameters = authorParameters;
+        this.searchAuthorsParameters = searchAuthorsParameters;
         this.title = title;
         this.startPrice = priceRange.getLeft();
         this.endPrice = priceRange.getRight();

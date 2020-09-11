@@ -19,9 +19,9 @@ import io.github.jtsato.bookstore.dataprovider.common.predicate.AbstractPredicat
  * @author Jorge Takeshi Sato
  */
 
-public class AuthorPredicateBuilder extends AbstractPredicateBuilderImpl<QAuthorEntity, SearchAuthorsParameters> {
+public class SearchAuthorsPredicateBuilder extends AbstractPredicateBuilderImpl<QAuthorEntity, SearchAuthorsParameters> {
 
-    public AuthorPredicateBuilder(final QAuthorEntity entityPath) {
+    public SearchAuthorsPredicateBuilder(final QAuthorEntity entityPath) {
         super(entityPath);
     }
 

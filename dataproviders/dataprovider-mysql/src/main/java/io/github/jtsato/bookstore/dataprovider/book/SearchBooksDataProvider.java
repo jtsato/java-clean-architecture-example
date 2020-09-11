@@ -19,7 +19,7 @@ import io.github.jtsato.bookstore.dataprovider.book.domain.BookEntity;
 import io.github.jtsato.bookstore.dataprovider.book.domain.QBookEntity;
 import io.github.jtsato.bookstore.dataprovider.book.mapper.BookMapper;
 import io.github.jtsato.bookstore.dataprovider.book.repository.BookRepository;
-import io.github.jtsato.bookstore.dataprovider.book.repository.SearchBookPredicateBuilder;
+import io.github.jtsato.bookstore.dataprovider.book.repository.SearchBooksPredicateBuilder;
 import io.github.jtsato.bookstore.dataprovider.common.PageMapper;
 import io.github.jtsato.bookstore.dataprovider.common.PageRequestHelper;
 
@@ -42,7 +42,7 @@ public class SearchBooksDataProvider implements SearchBooksGateway {
     public Page<Book> execute(final SearchBooksParameters parameters, final Integer pageNumber, final Integer size, final String orderBy) {
 
         final PageRequest pageRequest = PageRequestHelper.buildPageRequest(pageNumber, size, sanitizeOrderBy(orderBy));
-        final BooleanBuilder predicate = new SearchBookPredicateBuilder(QBookEntity.bookEntity).buildBooleanBuilder(parameters);
+        final BooleanBuilder predicate = new SearchBooksPredicateBuilder(QBookEntity.bookEntity).buildBooleanBuilder(parameters);
         final EntityGraph entityGraph = EntityGraphUtils.fromAttributePaths("author");
 
         final org.springframework.data.domain.Page<BookEntity> page = bookRepository.findAll(predicate, pageRequest, entityGraph);
