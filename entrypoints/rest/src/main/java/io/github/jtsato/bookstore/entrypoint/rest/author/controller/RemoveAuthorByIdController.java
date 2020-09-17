@@ -47,6 +47,6 @@ public class RemoveAuthorByIdController implements RemoveAuthorByIdApiMethod {
 
         log.info("Starting Controller -> RemoveAuthorByIdController with {}", id);
 
-        removeAuthorByIdUseCase.removeAuthorById(id);
+        removeAuthorByIdUseCase.execute(id);
     }
 }

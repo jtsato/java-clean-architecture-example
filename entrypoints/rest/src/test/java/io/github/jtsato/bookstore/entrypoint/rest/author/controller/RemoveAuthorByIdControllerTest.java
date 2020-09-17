@@ -47,14 +47,14 @@ class RemoveAuthorByIdControllerTest {
     void successfulRemoveAuthorByIdIfFound()
         throws Exception {
 
-        when(removeAuthorByIdUseCase.removeAuthorById(1L)).thenReturn(mockRemoveAuthorByIdUseCaseReturn());
+        when(removeAuthorByIdUseCase.execute(1L)).thenReturn(mockRemoveAuthorByIdUseCaseReturn());
 
         mockMvc.perform(delete("/authors/{id}", 1L).contentType(MediaType.APPLICATION_JSON_VALUE).accept(MediaType.APPLICATION_JSON_VALUE))
                .andDo(print())
                .andExpect(status().isNoContent())
                .andExpect(content().string(""));
 
-        verify(removeAuthorByIdUseCase, times(1)).removeAuthorById(1L);
+        verify(removeAuthorByIdUseCase, times(1)).execute(1L);
         verifyNoMoreInteractions(removeAuthorByIdUseCase);
     }
 

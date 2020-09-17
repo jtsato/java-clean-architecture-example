@@ -10,5 +10,4 @@ import io.github.jtsato.bookstore.core.book.domain.Book;
 public interface RegisterBookGateway {
 
     Book execute(final Book book);
-
 }

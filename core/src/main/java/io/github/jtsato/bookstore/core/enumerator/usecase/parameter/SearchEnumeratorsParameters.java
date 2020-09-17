@@ -18,9 +18,9 @@ public class SearchEnumeratorsParameters implements Serializable {
 
     private static final long serialVersionUID = 7178926213306656254L;
 
-    private final String domain;
+    private String domain;
 
-    private final String key;
+    private String key;
 
     public SearchEnumeratorsParameters(final String domain, final String key) {
         this.domain = domain;

@@ -2,6 +2,8 @@ package io.github.jtsato.bookstore.dataprovider.book.repository;
 
 import java.util.Optional;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Repository;
 
 import com.cosium.spring.data.jpa.entity.graph.domain.EntityGraph;
@@ -18,4 +20,6 @@ import io.github.jtsato.bookstore.dataprovider.book.domain.BookEntity;
 public interface BookRepository extends EntityGraphJpaRepository<BookEntity, Long>, EntityGraphQuerydslPredicateExecutor<BookEntity> {
 
     Optional<BookEntity> findByTitleIgnoreCase(final String title, final EntityGraph entityGraph);
+    
+    Page<BookEntity> findByAuthorId(final Long authorId, final PageRequest pageRequest);
 }

@@ -1,5 +1,7 @@
 package io.github.jtsato.bookstore.core.book.usecase.impl;
 
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 import javax.inject.Named;
@@ -49,13 +51,12 @@ public class RegisterBookUseCaseImpl implements RegisterBookUseCase {
 
         checkDuplicatedTitleViolation(parameters.getTitle());
 
-        final Book book = new Book(null,
-                                   author,
-                                   StringUtils.stripToEmpty(parameters.getTitle()),
-                                   parameters.getPrice(),
-                                   parameters.getAvailable(),
-                                   getLocalDateTime.now(),
-                                   getLocalDateTime.now());
+        final String title = StringUtils.stripToEmpty(parameters.getTitle());
+        final BigDecimal price = parameters.getPrice();
+        final Boolean available = parameters.getAvailable();
+        final LocalDateTime creationDate = getLocalDateTime.now();
+        final LocalDateTime updateDate = getLocalDateTime.now();
+        final Book book = new Book(null, author, title, price, available, creationDate, updateDate);
 
         return registerBookGateway.execute(book);
     }

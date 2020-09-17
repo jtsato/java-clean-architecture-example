@@ -7,19 +7,12 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.cosium.spring.data.jpa.entity.graph.domain.EntityGraph;
-import com.cosium.spring.data.jpa.entity.graph.domain.EntityGraphUtils;
-import com.querydsl.core.BooleanBuilder;
-
 import io.github.jtsato.bookstore.core.book.domain.Book;
-import io.github.jtsato.bookstore.core.book.gateway.SearchBooksGateway;
-import io.github.jtsato.bookstore.core.book.usecase.parameter.SearchBooksParameters;
+import io.github.jtsato.bookstore.core.book.gateway.SearchBooksByAuthorIdGateway;
 import io.github.jtsato.bookstore.core.common.paging.Page;
 import io.github.jtsato.bookstore.dataprovider.book.domain.BookEntity;
-import io.github.jtsato.bookstore.dataprovider.book.domain.QBookEntity;
 import io.github.jtsato.bookstore.dataprovider.book.mapper.BookMapper;
 import io.github.jtsato.bookstore.dataprovider.book.repository.BookRepository;
-import io.github.jtsato.bookstore.dataprovider.book.repository.SearchBooksPredicateBuilder;
 import io.github.jtsato.bookstore.dataprovider.common.PageMapper;
 import io.github.jtsato.bookstore.dataprovider.common.PageRequestHelper;
 
@@ -29,22 +22,20 @@ import io.github.jtsato.bookstore.dataprovider.common.PageRequestHelper;
 
 @Transactional(readOnly = true)
 @Service
-public class SearchBooksDataProvider implements SearchBooksGateway {
+public class SearchBooksByAuthorIdDataProvider implements SearchBooksByAuthorIdGateway {
     
     @Autowired
     BookRepository bookRepository;
 
-    private final BookMapper bookMapper = Mappers.getMapper(BookMapper.class);
     private final PageMapper<Book, BookEntity> pageMapper = new PageMapper<>() {};
+    private final BookMapper bookMapper = Mappers.getMapper(BookMapper.class);
 
     @Override
-    public Page<Book> execute(final SearchBooksParameters parameters, final Integer pageNumber, final Integer size, final String orderBy) {
+    public Page<Book> execute(final Long authorId, final Integer pageNumber, final Integer size, final String orderBy) {
 
         final PageRequest pageRequest = PageRequestHelper.buildPageRequest(pageNumber, size, sanitizeOrderBy(orderBy));
-        final BooleanBuilder predicate = new SearchBooksPredicateBuilder(QBookEntity.bookEntity).buildBooleanBuilder(parameters);
-        final EntityGraph entityGraph = EntityGraphUtils.fromAttributePaths("author");
-
-        final org.springframework.data.domain.Page<BookEntity> page = bookRepository.findAll(predicate, pageRequest, entityGraph);
+    	
+        final org.springframework.data.domain.Page<BookEntity> page = bookRepository.findByAuthorId(authorId, pageRequest);
 
         return pageMapper.of(page, bookMapper::of);
     }

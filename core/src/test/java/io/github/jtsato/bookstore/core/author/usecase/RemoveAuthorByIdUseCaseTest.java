@@ -12,7 +12,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
-import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -24,10 +23,8 @@ import io.github.jtsato.bookstore.core.author.domain.Author;
 import io.github.jtsato.bookstore.core.author.domain.Gender;
 import io.github.jtsato.bookstore.core.author.gateway.RemoveAuthorByIdGateway;
 import io.github.jtsato.bookstore.core.author.usecase.impl.RemoveAuthorByIdUseCaseImpl;
-import io.github.jtsato.bookstore.core.author.usecase.parameter.SearchAuthorsParameters;
 import io.github.jtsato.bookstore.core.book.domain.Book;
-import io.github.jtsato.bookstore.core.book.gateway.SearchBooksGateway;
-import io.github.jtsato.bookstore.core.book.usecase.parameter.SearchBooksParameters;
+import io.github.jtsato.bookstore.core.book.gateway.SearchBooksByAuthorIdGateway;
 import io.github.jtsato.bookstore.core.common.paging.Page;
 import io.github.jtsato.bookstore.core.common.paging.PageImpl;
 import io.github.jtsato.bookstore.core.common.paging.Pageable;
@@ -45,10 +42,10 @@ class RemoveAuthorByIdUseCaseTest {
     private final RemoveAuthorByIdGateway removeAuthorByIdGateway = Mockito.mock(RemoveAuthorByIdGateway.class);
 
     @Mock
-    private final SearchBooksGateway searchBooksGateway = Mockito.mock(SearchBooksGateway.class);
+    private final SearchBooksByAuthorIdGateway searchBooksByAuthorIdGateway = Mockito.mock(SearchBooksByAuthorIdGateway.class);
 
     @InjectMocks
-    private final RemoveAuthorByIdUseCase removeAuthorByIdUseCase = new RemoveAuthorByIdUseCaseImpl(removeAuthorByIdGateway, searchBooksGateway);
+    private final RemoveAuthorByIdUseCase removeAuthorByIdUseCase = new RemoveAuthorByIdUseCaseImpl(removeAuthorByIdGateway, searchBooksByAuthorIdGateway);
 
     @DisplayName("Fail to remove an author by id if parameters are not valid")
     @Test
@@ -56,7 +53,7 @@ class RemoveAuthorByIdUseCaseTest {
 
         when(removeAuthorByIdGateway.execute(null)).thenReturn(null);
 
-        final Exception exception = Assertions.assertThrows(Exception.class, () -> removeAuthorByIdUseCase.removeAuthorById(null));
+        final Exception exception = Assertions.assertThrows(Exception.class, () -> removeAuthorByIdUseCase.execute(null));
 
         assertThat(exception).isInstanceOf(InvalidParameterException.class);
         final InvalidParameterException invalidParameterException = (InvalidParameterException) exception;
@@ -68,15 +65,10 @@ class RemoveAuthorByIdUseCaseTest {
     void successfulToRemoveAuthorByIdIfFound() {
 
         when(removeAuthorByIdGateway.execute(1L)).thenReturn(mockRemoveAuthorByIdGatewayOut());
-        final SearchAuthorsParameters authorsParameters = new SearchAuthorsParameters(1L, null, null, null, null);
-        final ImmutablePair<BigDecimal, BigDecimal> prices = new ImmutablePair<>(null, null);
-        final ImmutablePair<String, String> creationDates = new ImmutablePair<>(null, null);
-        final ImmutablePair<String, String> updateDates = new ImmutablePair<>(null, null);
-        final SearchBooksParameters parameters = new SearchBooksParameters(authorsParameters, null, prices, null, creationDates, updateDates);
         final Page<Book> emptyBookPage = new PageImpl<>(Collections.emptyList(), new Pageable(0, 0, 0, 0L, 0));
-        when(searchBooksGateway.execute(parameters, 0, 1, null)).thenReturn(emptyBookPage);
+        when(searchBooksByAuthorIdGateway.execute(1L, 0, 1, "id:asc")).thenReturn(emptyBookPage);
 
-        final Author author = removeAuthorByIdUseCase.removeAuthorById(1L);
+        final Author author = removeAuthorByIdUseCase.execute(1L);
 
         assertThat(author.getId()).isEqualTo(1L);
         assertThat(author.getName()).isEqualTo("Joshua Bloch");
@@ -93,15 +85,9 @@ class RemoveAuthorByIdUseCaseTest {
     void failToRemoveAuthorByIdIfNotFound() {
 
         when(removeAuthorByIdGateway.execute(1L)).thenReturn(Optional.empty());
-        final SearchAuthorsParameters authorsParameters = new SearchAuthorsParameters(1L, null, null, null, null);
-        final ImmutablePair<BigDecimal, BigDecimal> prices = new ImmutablePair<>(null, null);
-        final ImmutablePair<String, String> creationDates = new ImmutablePair<>(null, null);
-        final ImmutablePair<String, String> updateDates = new ImmutablePair<>(null, null);
-        final SearchBooksParameters parameters = new SearchBooksParameters(authorsParameters, null, prices, null, creationDates, updateDates);
-        final Page<Book> emptyBooksPage = mockEmptyBooksPage();
-        when(searchBooksGateway.execute(parameters, 0, 1, null)).thenReturn(emptyBooksPage);
+        when(searchBooksByAuthorIdGateway.execute(1L, 0, 1, "id:asc")).thenReturn(mockEmptyBooksPage());
 
-        final Exception exception = Assertions.assertThrows(Exception.class, () -> removeAuthorByIdUseCase.removeAuthorById(1L));
+        final Exception exception = Assertions.assertThrows(Exception.class, () -> removeAuthorByIdUseCase.execute(1L));
 
         assertThat(exception).isInstanceOf(NotFoundException.class);
         final NotFoundException notFoundException = (NotFoundException) exception;
@@ -118,15 +104,10 @@ class RemoveAuthorByIdUseCaseTest {
     void failToRemoveAuthorByIdIfHasBooksAssociated() {
 
         when(removeAuthorByIdGateway.execute(1L)).thenReturn(mockRemoveAuthorByIdGatewayOut());
-        final SearchAuthorsParameters authorsParameters = new SearchAuthorsParameters(1L, null, null, null, null);
-        final ImmutablePair<BigDecimal, BigDecimal> prices = new ImmutablePair<>(null, null);
-        final ImmutablePair<String, String> creationDates = new ImmutablePair<>(null, null);
-        final ImmutablePair<String, String> updateDates = new ImmutablePair<>(null, null);
-        final SearchBooksParameters parameters = new SearchBooksParameters(authorsParameters, null, prices, null, creationDates, updateDates);
         final Page<Book> bookPage = mockPageWithOneBook();
-        when(searchBooksGateway.execute(parameters, 0, 1, null)).thenReturn(bookPage);
+        when(searchBooksByAuthorIdGateway.execute(1L, 0, 1, "id:asc")).thenReturn(bookPage);
 
-        final Exception exception = Assertions.assertThrows(Exception.class, () -> removeAuthorByIdUseCase.removeAuthorById(1L));
+        final Exception exception = Assertions.assertThrows(Exception.class, () -> removeAuthorByIdUseCase.execute(1L));
 
         assertThat(exception.getMessage()).isNotNull();
         assertThat(exception.getMessage()).isEqualTo("validation.author.with.books.removal");
