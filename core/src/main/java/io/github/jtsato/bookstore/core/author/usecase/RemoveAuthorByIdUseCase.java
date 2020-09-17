@@ -9,5 +9,5 @@ import io.github.jtsato.bookstore.core.author.domain.Author;
 @FunctionalInterface
 public interface RemoveAuthorByIdUseCase {
 
-    Author removeAuthorById(final Long id);
+    Author execute(final Long id);
 }
