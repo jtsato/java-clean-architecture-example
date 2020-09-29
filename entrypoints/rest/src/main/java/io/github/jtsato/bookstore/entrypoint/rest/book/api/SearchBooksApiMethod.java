@@ -4,7 +4,7 @@ import org.springdoc.core.converters.models.PageableAsQueryParam;
 import org.springframework.data.domain.Pageable;
 
 import io.github.jtsato.bookstore.entrypoint.rest.book.domain.request.SearchBooksRequest;
-import io.github.jtsato.bookstore.entrypoint.rest.book.domain.response.SearchBooksResponse;
+import io.github.jtsato.bookstore.entrypoint.rest.book.domain.response.SearchBooksWrapperResponse;
 import io.github.jtsato.bookstore.entrypoint.rest.common.HttpStatusConstants;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -85,5 +85,5 @@ public interface SearchBooksApiMethod {
                            @ApiResponse(responseCode = HttpStatusConstants.INTERNAL_SERVER_ERROR_500,
                                         description = HttpStatusConstants.INTERNAL_SERVER_ERROR_500_MESSAGE),})
 
-    SearchBooksResponse execute(@Parameter(hidden = true) final Pageable pageable, @Parameter(hidden = true) final SearchBooksRequest searchBooksRequest);
+    SearchBooksWrapperResponse execute(@Parameter(hidden = true) final Pageable pageable, @Parameter(hidden = true) final SearchBooksRequest searchBooksRequest);
 }

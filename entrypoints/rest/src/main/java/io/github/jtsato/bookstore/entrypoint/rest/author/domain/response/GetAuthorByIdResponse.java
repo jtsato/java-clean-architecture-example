@@ -17,10 +17,7 @@ public class GetAuthorByIdResponse implements Serializable {
     private static final long serialVersionUID = -8133045476467957735L;
 
     private final Long id;
-
     private final String name;
-
     private final String gender;
-
     private final LocalDate birthdate;
 }

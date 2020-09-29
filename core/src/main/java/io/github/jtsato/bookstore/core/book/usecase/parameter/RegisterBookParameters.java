@@ -32,12 +32,12 @@ public class RegisterBookParameters extends SelfValidating<RegisterBookParameter
     @NotBlank(message = "validation.book.title.blank")
     private final String title;
 
+    @NotNull(message = "validation.book.available.null")
+    private final Boolean available;
+
     @NotNull(message = "validation.book.price.null")
     @PositiveOrZero(message = "validation.book.price.negative")
     private final BigDecimal price;
-
-    @NotNull(message = "validation.book.available.null")
-    private final Boolean available;
 
     public RegisterBookParameters(final Long authorId, final String title, final BigDecimal price, final Boolean available) {
         this.authorId = authorId;

@@ -51,7 +51,6 @@ public class GetBookByIdController implements GetBookByIdApiMethod {
         log.info("Starting Controller -> GetBookByIdController with {}", id);
 
         final Book book = getBookByIdUseCase.execute(id);
-
         return GetBookByIdPresenter.of(book);
     }
 }

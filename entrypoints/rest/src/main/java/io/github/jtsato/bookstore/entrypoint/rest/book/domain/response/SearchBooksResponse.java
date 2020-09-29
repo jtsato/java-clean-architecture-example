@@ -1,17 +1,27 @@
 package io.github.jtsato.bookstore.entrypoint.rest.book.domain.response;
 
-import java.util.List;
+import java.io.Serializable;
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
-import io.github.jtsato.bookstore.core.common.paging.PageImpl;
-import io.github.jtsato.bookstore.core.common.paging.Pageable;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 
 /**
  * @author Jorge Takeshi Sato
  */
 
-public class SearchBooksResponse extends PageImpl<SearchBooksInnerResponse> {
+@Getter
+@AllArgsConstructor
+public class SearchBooksResponse implements Serializable {
 
-    public SearchBooksResponse(final List<SearchBooksInnerResponse> content, final Pageable pageable) {
-        super(content, pageable);
-    }
+    private static final long serialVersionUID = 8114419514719050282L;
+
+    private final Long id;
+    private final SearchBooksAuthorResponse author;
+    private final String title;
+    private final BigDecimal price;
+    private final Boolean available;
+    private final LocalDateTime creationDate;
+    private final LocalDateTime updateDate;
 }

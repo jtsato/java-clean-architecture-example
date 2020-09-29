@@ -22,7 +22,7 @@ import io.github.jtsato.bookstore.core.common.paging.Page;
 import io.github.jtsato.bookstore.entrypoint.rest.book.api.SearchBooksApiMethod;
 import io.github.jtsato.bookstore.entrypoint.rest.book.domain.request.SearchBooksAuthorRequest;
 import io.github.jtsato.bookstore.entrypoint.rest.book.domain.request.SearchBooksRequest;
-import io.github.jtsato.bookstore.entrypoint.rest.book.domain.response.SearchBooksResponse;
+import io.github.jtsato.bookstore.entrypoint.rest.book.domain.response.SearchBooksWrapperResponse;
 import io.github.jtsato.bookstore.entrypoint.rest.book.mapper.SearchBooksPresenter;
 import io.github.jtsato.bookstore.entrypoint.rest.common.JsonConverter;
 import io.github.jtsato.bookstore.entrypoint.rest.common.metric.LogExecutionTime;
@@ -56,27 +56,33 @@ public class SearchBooksController implements SearchBooksApiMethod {
     @LogExecutionTime
     @ResponseStatus(HttpStatus.OK)
     @GetMapping
-    public SearchBooksResponse execute(final Pageable pageable, @DefaultValue final SearchBooksRequest request) {
+    public SearchBooksWrapperResponse execute(final Pageable pageable, @DefaultValue final SearchBooksRequest searchBooksRequest) {
 
-        final String jsonRequest = JsonConverter.of(request);
+        final String jsonRequest = JsonConverter.of(searchBooksRequest);
         log.info("Starting Controller -> SearchBooksController with {}", jsonRequest);
 
-        final SearchBooksParameters parameters = buildSearchBooksParameters(request);
+        final SearchBooksParameters parameters = buildSearchBooksParameters(searchBooksRequest);
         final Page<Book> books = searchBooksUseCase.execute(parameters, pageable.getPageNumber(), pageable.getPageSize(), pageable.getSort().toString());
 
         return SearchBooksPresenter.of(books);
     }
 
-    private SearchBooksParameters buildSearchBooksParameters(final SearchBooksRequest request) {
-        final SearchAuthorsParameters authorParameters = buildAuthorParameters(request);
-        final ImmutablePair<BigDecimal, BigDecimal> priceRange = new ImmutablePair<>(request.getStartPrice(), request.getEndPrice());
-        final ImmutablePair<String, String> creationDateRange = new ImmutablePair<>(request.getStartCreationDate(), request.getEndCreationDate());
-        final ImmutablePair<String, String> updateDateRange = new ImmutablePair<>(request.getStartUpdateDate(), request.getEndUpdateDate());
-        return new SearchBooksParameters(authorParameters, request.getTitle(), priceRange, request.getAvailable(), creationDateRange, updateDateRange);
+    private SearchBooksParameters buildSearchBooksParameters(final SearchBooksRequest searchBooksRequest) {
+        final SearchAuthorsParameters searchAuthorsParameters = buildAuthorParameters(searchBooksRequest.getAuthor());
+        final String title = searchBooksRequest.getTitle();
+        final Boolean available = searchBooksRequest.getAvailable();
+        final ImmutablePair<BigDecimal, BigDecimal> priceRange = new ImmutablePair<>(searchBooksRequest.getStartPrice(), searchBooksRequest.getEndPrice());
+        final ImmutablePair<String, String> creationDateRange = new ImmutablePair<>(searchBooksRequest.getStartCreationDate(), searchBooksRequest.getEndCreationDate());
+        final ImmutablePair<String, String> updateDateRange = new ImmutablePair<>(searchBooksRequest.getStartUpdateDate(), searchBooksRequest.getEndUpdateDate());
+        return new SearchBooksParameters(searchAuthorsParameters, title, priceRange, available, creationDateRange, updateDateRange);
     }
 
-    private SearchAuthorsParameters buildAuthorParameters(final SearchBooksRequest searchBooksRequest) {
-        final SearchBooksAuthorRequest author = searchBooksRequest.getAuthor();
-        return new SearchAuthorsParameters(author.getId(), author.getName(), author.getGender(), author.getStartBirthdate(), author.getEndBirthdate());
+    private SearchAuthorsParameters buildAuthorParameters(final SearchBooksAuthorRequest searchBooksAuthorRequest) {
+        final Long id = searchBooksAuthorRequest.getId();
+        final String name = searchBooksAuthorRequest.getName();
+        final String gender = searchBooksAuthorRequest.getGender();
+        final String startBirthdate = searchBooksAuthorRequest.getStartBirthdate();
+        final String endBirthDate = searchBooksAuthorRequest.getEndBirthdate();
+        return new SearchAuthorsParameters(id, name, gender, startBirthdate, endBirthDate);
     }
 }

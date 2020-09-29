@@ -1,5 +1,7 @@
 package io.github.jtsato.bookstore.core.book.usecase.impl;
 
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 import javax.inject.Named;
@@ -49,13 +51,12 @@ public class UpdateBookByIdUseCaseImpl implements UpdateBookByIdUseCase {
 
         checkDuplicatedTitleViolation(parameters.getId(), parameters.getTitle());
 
-        final Book book = new Book(parameters.getId(),
-                                   author,
-                                   StringUtils.stripToEmpty(parameters.getTitle()),
-                                   parameters.getPrice(),
-                                   parameters.getAvailable(),
-                                   null,
-                                   getLocalDateTime.now());
+        final Long id = parameters.getId();
+        final String title = StringUtils.stripToEmpty(parameters.getTitle());
+        final BigDecimal price = parameters.getPrice();
+        final Boolean available = parameters.getAvailable();
+        final LocalDateTime updateDate = getLocalDateTime.now();
+        final Book book = new Book(id, author, title, price, available, null, updateDate);
 
         final Optional<Book> optional = updateBookGateway.execute(book);
         return optional.orElseThrow(() -> new NotFoundException("validation.book.id.notfound", String.valueOf(parameters.getId())));

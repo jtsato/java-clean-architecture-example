@@ -16,7 +16,7 @@ public final class GetBookByIdPresenter {
 
     public static GetBookByIdResponse of(final Book book) {
         return new GetBookByIdResponse(book.getId(),
-                                       of(book.getAuthor()),
+                                    of(book.getAuthor()),
                                        book.getTitle(),
                                        book.getPrice(),
                                        book.getAvailable(),
@@ -25,6 +25,6 @@ public final class GetBookByIdPresenter {
     }
 
     private static GetBookByIdAuthorResponse of(final Author author) {
-        return new GetBookByIdAuthorResponse(author.getId(), author.getName(), author.getGender().toString(), author.getBirthdate());
+        return new GetBookByIdAuthorResponse(author.getId(), author.getName(), author.getGender().name(), author.getBirthdate());
     }
 }

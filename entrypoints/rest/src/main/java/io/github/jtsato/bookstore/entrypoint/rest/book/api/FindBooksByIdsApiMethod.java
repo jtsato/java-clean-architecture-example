@@ -1,7 +1,7 @@
 package io.github.jtsato.bookstore.entrypoint.rest.book.api;
 
 import io.github.jtsato.bookstore.entrypoint.rest.book.domain.request.FindBooksByIdsRequest;
-import io.github.jtsato.bookstore.entrypoint.rest.book.domain.response.FindBooksByIdsResponse;
+import io.github.jtsato.bookstore.entrypoint.rest.book.domain.response.FindBooksByIdsWrapperResponse;
 import io.github.jtsato.bookstore.entrypoint.rest.common.HttpStatusConstants;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -33,5 +33,5 @@ public interface FindBooksByIdsApiMethod {
                            @ApiResponse(responseCode = HttpStatusConstants.INTERNAL_SERVER_ERROR_500,
                                         description = HttpStatusConstants.INTERNAL_SERVER_ERROR_500_MESSAGE),})
 
-    FindBooksByIdsResponse execute(final FindBooksByIdsRequest findBooksByIdsRequest);
+    FindBooksByIdsWrapperResponse execute(final FindBooksByIdsRequest findBooksByIdsRequest);
 }

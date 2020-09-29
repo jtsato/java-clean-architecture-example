@@ -16,7 +16,7 @@ public final class UpdateBookByIdPresenter {
 
     public static UpdateBookByIdResponse of(final Book book) {
         return new UpdateBookByIdResponse(book.getId(),
-                                          of(book.getAuthor()),
+                                       of(book.getAuthor()),
                                           book.getTitle(),
                                           book.getPrice(),
                                           book.getAvailable(),

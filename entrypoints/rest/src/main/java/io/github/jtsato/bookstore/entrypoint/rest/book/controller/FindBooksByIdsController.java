@@ -16,7 +16,7 @@ import io.github.jtsato.bookstore.core.book.usecase.FindBooksByIdsUseCase;
 import io.github.jtsato.bookstore.core.common.paging.Page;
 import io.github.jtsato.bookstore.entrypoint.rest.book.api.FindBooksByIdsApiMethod;
 import io.github.jtsato.bookstore.entrypoint.rest.book.domain.request.FindBooksByIdsRequest;
-import io.github.jtsato.bookstore.entrypoint.rest.book.domain.response.FindBooksByIdsResponse;
+import io.github.jtsato.bookstore.entrypoint.rest.book.domain.response.FindBooksByIdsWrapperResponse;
 import io.github.jtsato.bookstore.entrypoint.rest.book.mapper.FindBooksByIdsPresenter;
 import io.github.jtsato.bookstore.entrypoint.rest.common.JsonConverter;
 import io.github.jtsato.bookstore.entrypoint.rest.common.metric.LogExecutionTime;
@@ -50,7 +50,7 @@ public class FindBooksByIdsController implements FindBooksByIdsApiMethod {
     @LogExecutionTime
     @ResponseStatus(HttpStatus.OK)
     @PostMapping("/findByIds")
-    public FindBooksByIdsResponse execute(@RequestBody @DefaultValue final FindBooksByIdsRequest request) {
+    public FindBooksByIdsWrapperResponse execute(@RequestBody @DefaultValue final FindBooksByIdsRequest request) {
 
         final String jsonRequest = JsonConverter.of(request);
         log.info("Starting Controller -> FindBooksByIdsController with {}", jsonRequest);

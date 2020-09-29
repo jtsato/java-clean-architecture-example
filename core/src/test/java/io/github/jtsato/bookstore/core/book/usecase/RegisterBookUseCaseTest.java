@@ -31,7 +31,6 @@ import io.github.jtsato.bookstore.core.common.GetLocalDateTime;
 import io.github.jtsato.bookstore.core.exception.NotFoundException;
 import io.github.jtsato.bookstore.core.exception.UniqueConstraintException;
 
-
 /**
  * @author Jorge Takeshi Sato
  */

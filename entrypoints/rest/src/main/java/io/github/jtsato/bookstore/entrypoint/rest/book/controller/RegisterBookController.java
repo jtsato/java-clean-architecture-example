@@ -61,7 +61,6 @@ public class RegisterBookController implements RegisterBookApiMethod {
                                                                              request.getAvailable());
 
         final Book book = registerBookUseCase.execute(parameters);
-
         return RegisterBookPresenter.of(book);
     }
 }
