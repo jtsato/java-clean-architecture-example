@@ -15,12 +15,8 @@ import io.github.jtsato.bookstore.dataprovider.common.SequenceGeneratorService;
 @Component
 public class AuthorModelListener extends AbstractMongoEventListener<AuthorEntity> {
 
+    @Autowired
 	private SequenceGeneratorService sequenceGenerator;
-
-	@Autowired
-	public AuthorModelListener(SequenceGeneratorService sequenceGenerator) {
-		this.sequenceGenerator = sequenceGenerator;
-	}
 
 	@Override
 	public void onBeforeConvert(BeforeConvertEvent<AuthorEntity> event) {

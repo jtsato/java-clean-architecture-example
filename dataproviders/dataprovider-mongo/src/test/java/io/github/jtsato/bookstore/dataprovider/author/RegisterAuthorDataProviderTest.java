@@ -41,8 +41,8 @@ class RegisterAuthorDataProviderTest {
     void initialize() {
         authorRepository.deleteAll();
         assertThat(authorRepository.count()).isZero();
-    }    
-    
+    }
+
     @DisplayName("Successful to register author if parameters are valid")
     @Test
     void successfulToRegisterAuthorIfParametersAreValid() {
