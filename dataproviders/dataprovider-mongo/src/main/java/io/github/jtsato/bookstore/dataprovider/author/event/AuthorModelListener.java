@@ -24,7 +24,7 @@ public class AuthorModelListener extends AbstractMongoEventListener<AuthorEntity
 
 	@Override
 	public void onBeforeConvert(BeforeConvertEvent<AuthorEntity> event) {
-		if (event.getSource().getAuthorId() < 1) {
+		if (event.getSource().getAuthorId() == null) {
 			event.getSource().setAuthorId(sequenceGenerator.generateSequence(AuthorEntity.SEQUENCE_NAME));
 		}
 	}

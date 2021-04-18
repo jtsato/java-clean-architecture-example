@@ -5,20 +5,21 @@ import static org.assertj.core.api.Assertions.assertThat;
 import java.time.LocalDate;
 
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.data.mongo.DataMongoTest;
 import org.springframework.context.annotation.Import;
-//import org.springframework.boot.test.autoconfigure.data.mongo.DataMongoTest;
 import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import io.github.jtsato.bookstore.core.author.domain.Author;
 import io.github.jtsato.bookstore.core.author.domain.Gender;
+import io.github.jtsato.bookstore.dataprovider.author.event.AuthorModelListener;
 import io.github.jtsato.bookstore.dataprovider.author.repository.AuthorRepository;
+import io.github.jtsato.bookstore.dataprovider.common.SequenceGeneratorService;
 
 /**
  * @author Jorge Takeshi Sato
@@ -27,8 +28,7 @@ import io.github.jtsato.bookstore.dataprovider.author.repository.AuthorRepositor
 @DisplayName("Register Author")
 @ExtendWith(SpringExtension.class)
 @DataMongoTest
-@Import({RegisterAuthorDataProvider.class})
-@DirtiesContext
+@Import({AuthorModelListener.class, SequenceGeneratorService.class, RegisterAuthorDataProvider.class})
 class RegisterAuthorDataProviderTest {
 
     @Autowired
@@ -37,6 +37,12 @@ class RegisterAuthorDataProviderTest {
     @Autowired
     private AuthorRepository authorRepository;
 
+    @BeforeEach
+    void initialize() {
+        authorRepository.deleteAll();
+        assertThat(authorRepository.count()).isZero();
+    }    
+    
     @DisplayName("Successful to register author if parameters are valid")
     @Test
     void successfulToRegisterAuthorIfParametersAreValid() {

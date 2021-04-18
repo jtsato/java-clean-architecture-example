@@ -24,7 +24,7 @@ public class BookModelListener extends AbstractMongoEventListener<BookEntity> {
 
     @Override
     public void onBeforeConvert(BeforeConvertEvent<BookEntity> event) {
-        if (event.getSource().getBookId() < 1) {
+        if (event.getSource().getBookId() == null) {
             event.getSource().setBookId(sequenceGenerator.generateSequence(BookEntity.SEQUENCE_NAME));
         }
     }
