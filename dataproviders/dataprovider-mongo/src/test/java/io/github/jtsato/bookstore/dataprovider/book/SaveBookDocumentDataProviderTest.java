@@ -7,11 +7,12 @@ import java.time.LocalDateTime;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.boot.test.autoconfigure.data.mongo.DataMongoTest;
 import org.springframework.context.annotation.Import;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import io.github.jtsato.bookstore.core.book.domain.BookDocument;
 import io.github.jtsato.bookstore.dataprovider.book.repository.BookDocumentRepository;
@@ -21,8 +22,8 @@ import io.github.jtsato.bookstore.dataprovider.book.repository.BookDocumentRepos
  */
 
 @DisplayName("Save Book Document")
-@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-@DataJpaTest
+@ExtendWith(SpringExtension.class)
+@DataMongoTest
 @Import({SaveBookDocumentDataProvider.class})
 class SaveBookDocumentDataProviderTest {
 

@@ -13,7 +13,12 @@ import io.github.jtsato.bookstore.dataprovider.author.domain.AuthorEntity;
  */
 
 @Repository
-public interface AuthorRepository extends MongoRepository<AuthorEntity, Long>, QuerydslPredicateExecutor<AuthorEntity> {
+public interface AuthorRepository extends MongoRepository<AuthorEntity, String>, QuerydslPredicateExecutor<AuthorEntity> {
 
-    Optional<AuthorEntity> findByName(final String name);
+	Optional<AuthorEntity> findByAuthorId(final Long authorId);
+
+	Optional<AuthorEntity> findByName(final String name);
+	
+	Optional<AuthorEntity> findByBooksBookId(final Long bookId);
+
 }

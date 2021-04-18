@@ -8,11 +8,11 @@ import java.util.List;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.boot.test.autoconfigure.data.mongo.DataMongoTest;
 import org.springframework.context.annotation.Import;
-import org.springframework.test.context.jdbc.Sql;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import io.github.jtsato.bookstore.core.author.usecase.parameter.SearchAuthorsParameters;
 import io.github.jtsato.bookstore.core.book.domain.Book;
@@ -26,10 +26,9 @@ import io.github.jtsato.bookstore.dataprovider.book.repository.BookRepository;
  */
 
 @DisplayName("Search Books")
-@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-@DataJpaTest
+@DataMongoTest
+@ExtendWith(SpringExtension.class)
 @Import({SearchBooksDataProvider.class})
-@Sql("SearchBooksDataProviderTest.sql")
 class SearchBooksDataProviderTest {
 
     @Autowired

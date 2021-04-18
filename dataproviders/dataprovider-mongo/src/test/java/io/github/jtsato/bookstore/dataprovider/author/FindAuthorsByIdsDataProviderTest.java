@@ -7,11 +7,11 @@ import java.util.List;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.boot.test.autoconfigure.data.mongo.DataMongoTest;
 import org.springframework.context.annotation.Import;
-import org.springframework.test.context.jdbc.Sql;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import io.github.jtsato.bookstore.core.author.domain.Author;
 import io.github.jtsato.bookstore.core.common.paging.Page;
@@ -22,10 +22,9 @@ import io.github.jtsato.bookstore.dataprovider.author.repository.AuthorRepositor
  */
 
 @DisplayName("Find Authors By Ids")
-@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-@DataJpaTest
+@ExtendWith(SpringExtension.class)
+@DataMongoTest
 @Import({FindAuthorsByIdsDataProvider.class})
-@Sql("FindAuthorsByIdsDataProviderTest.sql")
 class FindAuthorsByIdsDataProviderTest {
 
     @Autowired

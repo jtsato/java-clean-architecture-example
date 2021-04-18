@@ -9,10 +9,11 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.mongo.embedded.EmbeddedMongoAutoConfiguration;
 import org.springframework.boot.test.autoconfigure.data.mongo.DataMongoTest;
+import org.springframework.context.annotation.Import;
 //import org.springframework.boot.test.autoconfigure.data.mongo.DataMongoTest;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import io.github.jtsato.bookstore.core.author.domain.Author;
@@ -24,15 +25,10 @@ import io.github.jtsato.bookstore.dataprovider.author.repository.AuthorRepositor
  */
 
 @DisplayName("Register Author")
-// @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-// @Import({RegisterAuthorDataProvider.class})
-// @DataMongoTest(excludeAutoConfiguration = EmbeddedMongoAutoConfiguration.class)
-
-// @ContextConfiguration(classes = BookstoreApplication.class)
-@DataMongoTest(excludeAutoConfiguration= {EmbeddedMongoAutoConfiguration.class})
 @ExtendWith(SpringExtension.class)
-// @DirtiesContext
-
+@DataMongoTest
+@Import({RegisterAuthorDataProvider.class})
+@DirtiesContext
 class RegisterAuthorDataProviderTest {
 
     @Autowired

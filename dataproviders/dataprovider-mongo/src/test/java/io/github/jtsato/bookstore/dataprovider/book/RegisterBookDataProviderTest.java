@@ -4,32 +4,38 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.test.autoconfigure.data.mongo.DataMongoTest;
 import org.springframework.context.annotation.Import;
+import org.springframework.core.io.Resource;
 import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.test.context.jdbc.Sql;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import io.github.jtsato.bookstore.core.author.domain.Author;
 import io.github.jtsato.bookstore.core.book.domain.Book;
 import io.github.jtsato.bookstore.dataprovider.author.GetAuthorByIdDataProvider;
+import io.github.jtsato.bookstore.dataprovider.author.domain.AuthorEntity;
+import io.github.jtsato.bookstore.dataprovider.author.repository.AuthorRepository;
 import io.github.jtsato.bookstore.dataprovider.book.repository.BookRepository;
+import io.github.jtsato.bookstore.dataprovider.common.YamlLoader;
 
 /**
  * @author Jorge Takeshi Sato
  */
 
 @DisplayName("Register Book")
-@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-@DataJpaTest
+@ExtendWith(SpringExtension.class)
+@DataMongoTest
 @Import({RegisterBookDataProvider.class, GetAuthorByIdDataProvider.class})
-@Sql("RegisterBookDataProviderTest.sql")
 class RegisterBookDataProviderTest {
 
     @Autowired
@@ -40,10 +46,26 @@ class RegisterBookDataProviderTest {
 
     @Autowired
     private BookRepository bookRepository;
+    
+    @Autowired
+    private AuthorRepository authorRepository;
+    
+    @Value("classpath:io/github/jtsato/bookstore/dataprovider/book/RegisterBookDataProviderTest.yml")
+    private Resource registerBookDataProviderTestResource;
+    
+    @BeforeEach
+    void initialize() {
+    	authorRepository.deleteAll();
+    	final List<AuthorEntity> authors = YamlLoader.loadAll(AuthorEntity.class, registerBookDataProviderTestResource);
+		authorRepository.saveAll(authors);
+		assertThat(authorRepository.count()).isOne();
+    }
 
     @DisplayName("Successful to register book if parameters are valid")
     @Test
     void successfulToRegisterBookIfParametersAreValid() {
+    	
+    	initialize();
 
         final Author author = getAuthor();
 

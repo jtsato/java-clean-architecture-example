@@ -8,16 +8,20 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.querydsl.QuerydslPredicateExecutor;
 import org.springframework.stereotype.Repository;
 
+import io.github.jtsato.bookstore.dataprovider.author.domain.AuthorEntity;
 import io.github.jtsato.bookstore.dataprovider.book.domain.BookEntity;
 
 /**
- * @author Jorge Takeshi Sato
+ * @book Jorge Takeshi Sato
  */
 
 @Repository
-public interface BookRepository extends MongoRepository<BookEntity, Long>, QuerydslPredicateExecutor<BookEntity> {
+public interface BookRepository extends MongoRepository<AuthorEntity, String>, QuerydslPredicateExecutor<BookEntity> {
 
-    Optional<BookEntity> findByTitleIgnoreCase(final String title);
-    
+	Optional<BookEntity> findByBooksBookId(final Long bookId);
+
+	Optional<BookEntity> findByBooksTitleIgnoreCase(final String title);
+
     Page<BookEntity> findByAuthorId(final Long authorId, final PageRequest pageRequest);
+
 }

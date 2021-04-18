@@ -26,7 +26,7 @@ public class RegisterAuthorDataProvider implements RegisterAuthorGateway {
 
     @Override
     public Author execute(final Author author) {
-        final AuthorEntity authorEntity = authorMapper.of(author);
-        return authorMapper.of(authorRepository.save(authorEntity));
+        final AuthorEntity authorEntity = authorRepository.save(authorMapper.of(author));
+		return authorMapper.of(authorEntity);
     }
 }

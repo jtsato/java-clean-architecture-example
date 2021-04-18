@@ -4,7 +4,7 @@ import java.util.List;
 
 import javax.inject.Named;
 
-import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.collections4.CollectionUtils;
 
 import io.github.jtsato.bookstore.core.book.domain.Book;
 import io.github.jtsato.bookstore.core.book.gateway.FindBooksByIdsGateway;

@@ -22,18 +22,18 @@
 		<maven-failsafe-plugin.version>2.22.0</maven-failsafe-plugin.version>
 		<javax.inject.version>1</javax.inject.version>
 		<validation.api.version>2.0.1.Final</validation.api.version>
-		<hibernate-validator.version>6.1.2.Final</hibernate-validator.version>
-		<javax.el.version>3.0.0</javax.el.version>
-		<lombok.version>1.18.12</lombok.version>
-		<commons-lang3.version>3.9</commons-lang3.version>
-		<commons-collections.version>3.2.2</commons-collections.version>
-		<junit-jupiter-engine.version>5.6.1</junit-jupiter-engine.version>
-		<assertj-core.version>3.15.0</assertj-core.version>
-		<mockito-junit-jupiter.version>3.3.3</mockito-junit-jupiter.version>
+		<hibernate-validator.version>6.2.0.Final</hibernate-validator.version>
+		<javax.el.version>3.0.1-b12</javax.el.version>
+		<lombok.version>1.18.20</lombok.version>
+		<commons-lang3.version>3.12.0</commons-lang3.version>
+		<commons-collections4.version>4.4</commons-collections4.version>
+		<junit-jupiter-engine.version>5.8.0-M1</junit-jupiter-engine.version>
+		<assertj-core.version>3.19.0</assertj-core.version>
+		<mockito-junit-jupiter.version>3.8.0</mockito-junit-jupiter.version>
 		<pitest-maven.version>1.5.2</pitest-maven.version>
-		<pitest-junit5-plugin.version>0.12</pitest-junit5-plugin.version>
-		<jacoco.agent.version>0.8.5</jacoco.agent.version>
-		<jacoco-maven-plugin.version>0.8.5</jacoco-maven-plugin.version>
+		<pitest-junit5-plugin.version>0.14</pitest-junit5-plugin.version>
+		<jacoco.agent.version>0.8.6</jacoco.agent.version>
+		<jacoco-maven-plugin.version>0.8.6</jacoco-maven-plugin.version>
 	</properties>
 
 	<dependencies>
@@ -69,9 +69,9 @@
 			<version>${commons-lang3.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>commons-collections</groupId>
-			<artifactId>commons-collections</artifactId>
-			<version>${commons-collections.version}</version>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-collections4</artifactId>
+			<version>${commons-collections4.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.junit.jupiter</groupId>

@@ -28,7 +28,7 @@ public class GetBookByIdDataProvider implements GetBookByIdGateway {
 
     @Override
     public Optional<Book> execute(final Long id) {
-        final Optional<BookEntity> optional = bookRepository.findById(id);
+        final Optional<BookEntity> optional = bookRepository.findByBooksBookId(id);
         return optional.map(bookMapper::of);
     }
 }

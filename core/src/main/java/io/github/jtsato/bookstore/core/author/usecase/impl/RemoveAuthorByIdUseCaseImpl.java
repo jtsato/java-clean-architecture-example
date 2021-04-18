@@ -4,7 +4,7 @@ import java.util.Optional;
 
 import javax.inject.Named;
 
-import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.collections4.CollectionUtils;
 
 import io.github.jtsato.bookstore.core.author.domain.Author;
 import io.github.jtsato.bookstore.core.author.gateway.RemoveAuthorByIdGateway;

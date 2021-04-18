@@ -21,13 +21,13 @@ public class SequenceGeneratorService {
 	private MongoOperations mongoOperations;
 
 	@Autowired
-	public SequenceGeneratorService(MongoOperations mongoOperations) {
+	public SequenceGeneratorService(final MongoOperations mongoOperations) {
 		this.mongoOperations = mongoOperations;
 	}
 
-	public long generateSequence(String seqName) {
+	public long generateSequence(final String seqName) {
 
-		final DatabaseSequence counter = mongoOperations.findAndModify(query(where("_id").is(seqName)),
+		final DatabaseSequence counter = mongoOperations.findAndModify(query(where("id").is(seqName)),
 				new Update().inc("seq", 1), options().returnNew(true).upsert(true), DatabaseSequence.class);
 		
 		return !Objects.isNull(counter) ? counter.getSeq() : 1;

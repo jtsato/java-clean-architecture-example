@@ -38,7 +38,7 @@ public class FindAuthorsByIdsDataProvider implements FindAuthorsByIdsGateway {
     @Override
     public Page<Author> execute(final List<Long> ids) {
 
-        final BooleanExpression predicate = QAuthorEntity.authorEntity.id.in(ids);
+        final BooleanExpression predicate = QAuthorEntity.authorEntity.authorId.in(ids);
         final PageRequest pageRequest = PageRequestHelper.buildPageRequest(0, 1000, "id:asc");
 
         final org.springframework.data.domain.Page<AuthorEntity> page = authorRepository.findAll(predicate, pageRequest);

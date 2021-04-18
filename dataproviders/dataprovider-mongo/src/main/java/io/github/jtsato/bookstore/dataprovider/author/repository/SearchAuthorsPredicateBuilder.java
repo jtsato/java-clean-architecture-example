@@ -16,13 +16,13 @@ import io.github.jtsato.bookstore.dataprovider.author.domain.QAuthorEntity;
 import io.github.jtsato.bookstore.dataprovider.common.predicate.AbstractPredicateBuilderImpl;
 
 /**
- * @author Jorge Takeshi Sato
+ * @author Jorge Takeshi Satocd 
  */
 
 public class SearchAuthorsPredicateBuilder extends AbstractPredicateBuilderImpl<QAuthorEntity, SearchAuthorsParameters> {
 
-    public SearchAuthorsPredicateBuilder(final QAuthorEntity entityPath) {
-        super(entityPath);
+    public SearchAuthorsPredicateBuilder(final QAuthorEntity beanPath) {
+        super(beanPath);
     }
 
     @Override
@@ -31,26 +31,26 @@ public class SearchAuthorsPredicateBuilder extends AbstractPredicateBuilderImpl<
         final List<BooleanExpression> booleanExpressions = new LinkedList<>();
 
         if (query.getId() != null) {
-            booleanExpressions.add(entityPath.id.eq(query.getId()));
+            booleanExpressions.add(beanPath.authorId.eq(query.getId()));
         }
 
         if (StringUtils.isNotBlank(query.getName())) {
-            booleanExpressions.add(entityPath.name.like(addLikeOperator(query.getName())));
+            booleanExpressions.add(beanPath.name.like(addLikeOperator(query.getName())));
         }
 
         if (StringUtils.isNotBlank(query.getGender())) {
             final Gender gender = EnumeratorUtils.valueOf(query.getGender(), Gender.class);
-            booleanExpressions.add(entityPath.gender.eq(gender.name()));
+            booleanExpressions.add(beanPath.gender.eq(gender.name()));
         }
 
         if (StringUtils.isNotBlank(query.getStartBirthdateDate())) {
             final LocalDate startBirthdateDate = LocalDate.parse(query.getStartBirthdateDate(), DateTimeFormatter.ISO_DATE);
-            booleanExpressions.add(entityPath.birthdate.goe(startBirthdateDate));
+            booleanExpressions.add(beanPath.birthdate.goe(startBirthdateDate));
         }
 
         if (StringUtils.isNotBlank(query.getEndBirthdateDate())) {
             final LocalDate endBirthdateDate = LocalDate.parse(query.getEndBirthdateDate(), DateTimeFormatter.ISO_DATE);
-            booleanExpressions.add(entityPath.birthdate.loe(endBirthdateDate));
+            booleanExpressions.add(beanPath.birthdate.loe(endBirthdateDate));
         }
 
         return booleanExpressions;

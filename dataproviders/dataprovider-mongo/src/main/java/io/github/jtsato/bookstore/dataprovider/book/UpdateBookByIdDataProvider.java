@@ -21,35 +21,39 @@ import io.github.jtsato.bookstore.dataprovider.book.repository.BookRepository;
 @Transactional
 @Service
 public class UpdateBookByIdDataProvider implements UpdateBookByIdGateway {
-    
-    private final BookMapper bookMapper = Mappers.getMapper(BookMapper.class);
 
-    @Autowired
-    BookRepository bookRepository;
+	private final BookMapper bookMapper = Mappers.getMapper(BookMapper.class);
 
-    @Autowired
-    AuthorRepository authorRepository;
+	@Autowired
+	BookRepository bookRepository;
 
-    @Override
-    public Optional<Book> execute(final Book book) {
-        final Optional<BookEntity> optional = bookRepository.findById(book.getId());
-        return optional.map(bookEntity -> updateBookEntity(bookEntity, book));
-    }
+	@Autowired
+	AuthorRepository authorRepository;
 
-    private Book updateBookEntity(final BookEntity bookEntity, final Book book) {
-        updateAuthor(book, bookEntity);
-        bookEntity.setTitle(book.getTitle());
-        bookEntity.setPrice(book.getPrice());
-        bookEntity.setAvailable(book.getAvailable());
-        bookEntity.setUpdateDate(book.getUpdateDate());
-        return bookMapper.of(bookRepository.save(bookEntity));
-    }
+	@Override
+	public Optional<Book> execute(final Book book) {
+		final Optional<BookEntity> optional = bookRepository.findByBooksBookId(book.getId());
+		return optional.map(bookEntity -> updateBookEntity(bookEntity, book));
+	}
 
-    private void updateAuthor(final Book book, final BookEntity bookEntity) {
-        final Long currentAuthorId = bookEntity.getAuthor().getId();
-        final Long newAuthorId = book.getAuthor().getId();
-        if (!newAuthorId.equals(currentAuthorId)) {
-            authorRepository.findById(newAuthorId).ifPresent(bookEntity::setAuthor);
-        }
-    }
+	private Book updateBookEntity(final BookEntity bookEntity, final Book book) {
+		updateAuthorIfApplicable(book, bookEntity);
+		bookEntity.setTitle(book.getTitle());
+		bookEntity.setPrice(book.getPrice());
+		bookEntity.setAvailable(book.getAvailable());
+		bookEntity.setUpdateDate(book.getUpdateDate());
+		// return bookMapper.of(bookRepository.save(bookEntity));
+		return null;
+	}
+
+	private void updateAuthorIfApplicable(final Book book, final BookEntity bookEntity) {
+		authorRepository.findByBooksBookId(book.getId()).ifPresent(currentAuthor -> {
+			final Long currentAuthorId = currentAuthor.getAuthorId();
+			if (!book.getAuthor().getId().equals(currentAuthorId)) {
+				currentAuthor.getBooks().removeIf(element -> element.getBookId().equals(book.getId()));
+				authorRepository.findByAuthorId(book.getAuthor().getId())
+						.ifPresent(newAuthor -> newAuthor.getBooks().add(bookEntity));
+			}
+		});
+	}
 }

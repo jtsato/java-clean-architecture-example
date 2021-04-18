@@ -36,8 +36,8 @@ public class FindBooksByIdsDataProvider implements FindBooksByIdsGateway {
 
     @Override
     public Page<Book> execute(final List<Long> ids) {
-
-        final BooleanExpression predicate = QBookEntity.bookEntity.id.in(ids);
+    	
+        final BooleanExpression predicate = QBookEntity.bookEntity.bookId.in(ids);
         final PageRequest pageRequest = PageRequestHelper.buildPageRequest(0, 1000, "id:asc");
 
         final org.springframework.data.domain.Page<BookEntity> page = bookRepository.findAll(predicate, pageRequest);

@@ -28,7 +28,7 @@ public class UpdateAuthorByIdDataProvider implements UpdateAuthorByIdGateway {
 
     @Override
     public Optional<Author> execute(final Author author) {
-        final Optional<AuthorEntity> optional = authorRepository.findById(author.getId());
+        final Optional<AuthorEntity> optional = authorRepository.findByAuthorId(author.getId());
         return optional.map(authorEntity -> updateAuthorEntity(authorEntity, author));
     }
 

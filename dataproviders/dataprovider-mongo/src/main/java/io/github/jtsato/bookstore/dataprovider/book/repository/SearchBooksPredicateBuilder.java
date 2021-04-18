@@ -10,6 +10,7 @@ import org.apache.commons.lang3.StringUtils;
 import com.querydsl.core.types.dsl.BooleanExpression;
 
 import io.github.jtsato.bookstore.core.book.usecase.parameter.SearchBooksParameters;
+import io.github.jtsato.bookstore.dataprovider.author.domain.QAuthorEntity;
 import io.github.jtsato.bookstore.dataprovider.author.repository.SearchAuthorsPredicateBuilder;
 import io.github.jtsato.bookstore.dataprovider.book.domain.QBookEntity;
 import io.github.jtsato.bookstore.dataprovider.common.predicate.AbstractPredicateBuilderImpl;
@@ -20,8 +21,8 @@ import io.github.jtsato.bookstore.dataprovider.common.predicate.AbstractPredicat
 
 public class SearchBooksPredicateBuilder extends AbstractPredicateBuilderImpl<QBookEntity, SearchBooksParameters> {
 
-    public SearchBooksPredicateBuilder(final QBookEntity entityPath) {
-        super(entityPath);
+    public SearchBooksPredicateBuilder(final QBookEntity beanPath) {
+        super(beanPath);
     }
 
     @Override
@@ -30,44 +31,44 @@ public class SearchBooksPredicateBuilder extends AbstractPredicateBuilderImpl<QB
         final List<BooleanExpression> booleanExpressions = new LinkedList<>();
 
         if (query.getSearchAuthorsParameters() != null) {
-            final SearchAuthorsPredicateBuilder searchAuthorsPredicateBuilder = new SearchAuthorsPredicateBuilder(entityPath.author);
+            final SearchAuthorsPredicateBuilder searchAuthorsPredicateBuilder = new SearchAuthorsPredicateBuilder(QAuthorEntity.authorEntity);
             booleanExpressions.addAll(searchAuthorsPredicateBuilder.buildBooleanExpressions(query.getSearchAuthorsParameters()));
         }
 
         if (StringUtils.isNotBlank(query.getTitle())) {
-            booleanExpressions.add(entityPath.title.likeIgnoreCase(addLikeOperator(query.getTitle())));
+            booleanExpressions.add(beanPath.title.likeIgnoreCase(addLikeOperator(query.getTitle())));
         }
 
         if (query.getStartPrice() != null) {
-            booleanExpressions.add(entityPath.price.goe(query.getStartPrice()));
+            booleanExpressions.add(beanPath.price.goe(query.getStartPrice()));
         }
 
         if (query.getEndPrice() != null) {
-            booleanExpressions.add(entityPath.price.loe(query.getEndPrice()));
+            booleanExpressions.add(beanPath.price.loe(query.getEndPrice()));
         }
 
         if (query.getAvailable() != null) {
-            booleanExpressions.add(entityPath.available.eq(query.getAvailable()));
+            booleanExpressions.add(beanPath.available.eq(query.getAvailable()));
         }
 
         if (StringUtils.isNotBlank(query.getStartCreationDate())) {
             final LocalDateTime startCreationDate = LocalDateTime.parse(query.getStartCreationDate(), DateTimeFormatter.ISO_DATE_TIME);
-            booleanExpressions.add(entityPath.creationDate.goe(startCreationDate));
+            booleanExpressions.add(beanPath.creationDate.goe(startCreationDate));
         }
 
         if (StringUtils.isNotBlank(query.getEndCreationDate())) {
             final LocalDateTime endCreationDate = LocalDateTime.parse(query.getEndCreationDate(), DateTimeFormatter.ISO_DATE_TIME);
-            booleanExpressions.add(entityPath.creationDate.loe(endCreationDate));
+            booleanExpressions.add(beanPath.creationDate.loe(endCreationDate));
         }
 
         if (StringUtils.isNotBlank(query.getStartUpdateDate())) {
             final LocalDateTime startUpdateDate = LocalDateTime.parse(query.getStartUpdateDate(), DateTimeFormatter.ISO_DATE_TIME);
-            booleanExpressions.add(entityPath.updateDate.goe(startUpdateDate));
+            booleanExpressions.add(beanPath.updateDate.goe(startUpdateDate));
         }
 
         if (StringUtils.isNotBlank(query.getEndUpdateDate())) {
             final LocalDateTime endUpdateDate = LocalDateTime.parse(query.getEndUpdateDate(), DateTimeFormatter.ISO_DATE_TIME);
-            booleanExpressions.add(entityPath.updateDate.loe(endUpdateDate));
+            booleanExpressions.add(beanPath.updateDate.loe(endUpdateDate));
         }
 
         return booleanExpressions;

@@ -155,7 +155,7 @@ class UpdateBookByIdUseCaseTest {
         assertThat(book.getCreationDate()).isEqualTo(LocalDateTime.parse("2020-03-12T22:04:59.123"));
         assertThat(book.getUpdateDate()).isEqualTo(LocalDateTime.parse("2020-04-12T22:04:59.123"));
 
-        assertThat(book.getAuthor()).isEqualToComparingFieldByField(author);
+        assertThat(book.getAuthor()).isEqualTo(author);
     }
 
     @DisplayName("Fail to update book by id if not found")

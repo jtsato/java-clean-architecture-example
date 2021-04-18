@@ -1,18 +1,18 @@
 package io.github.jtsato.bookstore.dataprovider.common.predicate;
 
 import com.querydsl.core.BooleanBuilder;
-import com.querydsl.core.types.dsl.EntityPathBase;
+import com.querydsl.core.types.dsl.BeanPath;
 
 /**
  * @author Jorge Takeshi Sato
  */
 
-public abstract class AbstractPredicateBuilderImpl<P extends EntityPathBase<?>, Q> implements PredicateBuilder<Q> {
+public abstract class AbstractPredicateBuilderImpl<P extends BeanPath<?>, Q> implements PredicateBuilder<Q> {
 
-    protected final P entityPath;
+    protected final P beanPath;
 
-    public AbstractPredicateBuilderImpl(final P entityPath) {
-        this.entityPath = entityPath;
+    protected AbstractPredicateBuilderImpl(final P beanPath) {
+        this.beanPath = beanPath;
     }
 
     @Override

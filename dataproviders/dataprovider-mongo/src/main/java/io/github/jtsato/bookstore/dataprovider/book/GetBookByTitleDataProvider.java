@@ -28,7 +28,7 @@ public class GetBookByTitleDataProvider implements GetBookByTitleGateway {
 
     @Override
     public Optional<Book> execute(final String title) {
-        final Optional<BookEntity> optional = bookRepository.findByTitleIgnoreCase(title);
+        final Optional<BookEntity> optional = bookRepository.findByBooksTitleIgnoreCase(title);
         return optional.map(bookMapper::of);
     }
 }
