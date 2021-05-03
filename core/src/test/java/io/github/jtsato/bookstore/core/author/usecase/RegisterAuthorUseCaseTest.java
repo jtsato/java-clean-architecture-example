@@ -21,7 +21,7 @@ import io.github.jtsato.bookstore.core.author.domain.Author;
 import io.github.jtsato.bookstore.core.author.domain.Gender;
 import io.github.jtsato.bookstore.core.author.gateway.GetAuthorByNameGateway;
 import io.github.jtsato.bookstore.core.author.gateway.RegisterAuthorGateway;
-import io.github.jtsato.bookstore.core.author.usecase.impl.RegisterAuthorUseCaseImpl;
+import io.github.jtsato.bookstore.core.author.action.RegisterAuthorAction;
 import io.github.jtsato.bookstore.core.author.usecase.parameter.RegisterAuthorParameters;
 import io.github.jtsato.bookstore.core.exception.UniqueConstraintException;
 
@@ -40,7 +40,7 @@ class RegisterAuthorUseCaseTest {
     private final GetAuthorByNameGateway getAuthorByNameGateway = Mockito.mock(GetAuthorByNameGateway.class);
 
     @InjectMocks
-    private final RegisterAuthorUseCase getAuthorByIdUseCase = new RegisterAuthorUseCaseImpl(registerAuthorGateway, getAuthorByNameGateway);
+    private final RegisterAuthorUseCase getAuthorByIdUseCase = new RegisterAuthorAction(registerAuthorGateway, getAuthorByNameGateway);
 
     @DisplayName("Fail to register an author if parameters are not valid")
     @Test

@@ -20,7 +20,7 @@ import io.github.jtsato.bookstore.core.author.domain.Author;
 import io.github.jtsato.bookstore.core.author.domain.Gender;
 import io.github.jtsato.bookstore.core.book.domain.Book;
 import io.github.jtsato.bookstore.core.book.gateway.RemoveBookByIdGateway;
-import io.github.jtsato.bookstore.core.book.usecase.impl.RemoveBookByIdUseCaseImpl;
+import io.github.jtsato.bookstore.core.book.action.RemoveBookByIdAction;
 import io.github.jtsato.bookstore.core.exception.InvalidParameterException;
 import io.github.jtsato.bookstore.core.exception.NotFoundException;
 
@@ -35,7 +35,7 @@ class RemoveBookByIdUseCaseTest {
     private final RemoveBookByIdGateway removeBookByIdGateway = Mockito.mock(RemoveBookByIdGateway.class);
 
     @InjectMocks
-    private final RemoveBookByIdUseCase removeBookByIdUseCase = new RemoveBookByIdUseCaseImpl(removeBookByIdGateway);
+    private final RemoveBookByIdUseCase removeBookByIdUseCase = new RemoveBookByIdAction(removeBookByIdGateway);
 
     @DisplayName("Fail to remove an Book by id if parameters are not valid")
     @Test

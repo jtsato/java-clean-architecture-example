@@ -20,7 +20,7 @@ import org.mockito.Mockito;
 import io.github.jtsato.bookstore.core.author.domain.Author;
 import io.github.jtsato.bookstore.core.author.domain.Gender;
 import io.github.jtsato.bookstore.core.author.gateway.FindAuthorsByIdsGateway;
-import io.github.jtsato.bookstore.core.author.usecase.impl.FindAuthorsByIdsUseCaseImpl;
+import io.github.jtsato.bookstore.core.author.action.FindAuthorsByIdsAction;
 import io.github.jtsato.bookstore.core.common.paging.Page;
 import io.github.jtsato.bookstore.core.common.paging.PageImpl;
 import io.github.jtsato.bookstore.core.common.paging.Pageable;
@@ -37,7 +37,7 @@ class FindAuthorsByIdsUseCaseTest {
     private final FindAuthorsByIdsGateway findAuthorsByIdsGateway = Mockito.mock(FindAuthorsByIdsGateway.class);
 
     @InjectMocks
-    private final FindAuthorsByIdsUseCase findAuthorsByIdsUseCase = new FindAuthorsByIdsUseCaseImpl(findAuthorsByIdsGateway);
+    private final FindAuthorsByIdsUseCase findAuthorsByIdsUseCase = new FindAuthorsByIdsAction(findAuthorsByIdsGateway);
 
     @DisplayName("Fail to find authors by IDs if parameters are not valid")
     @Test

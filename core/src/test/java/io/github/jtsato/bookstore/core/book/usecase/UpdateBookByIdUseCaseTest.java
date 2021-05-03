@@ -25,7 +25,7 @@ import io.github.jtsato.bookstore.core.author.gateway.GetAuthorByIdGateway;
 import io.github.jtsato.bookstore.core.book.domain.Book;
 import io.github.jtsato.bookstore.core.book.gateway.GetBookByTitleGateway;
 import io.github.jtsato.bookstore.core.book.gateway.UpdateBookByIdGateway;
-import io.github.jtsato.bookstore.core.book.usecase.impl.UpdateBookByIdUseCaseImpl;
+import io.github.jtsato.bookstore.core.book.action.UpdateBookByIdAction;
 import io.github.jtsato.bookstore.core.book.usecase.parameter.UpdateBookByIdParameters;
 import io.github.jtsato.bookstore.core.common.GetLocalDateTime;
 import io.github.jtsato.bookstore.core.exception.NotFoundException;
@@ -51,7 +51,7 @@ class UpdateBookByIdUseCaseTest {
     private final GetLocalDateTime getLocalDateTime = Mockito.mock(GetLocalDateTime.class);
 
     @InjectMocks
-    private final UpdateBookByIdUseCase updateBookByIdUseCase = new UpdateBookByIdUseCaseImpl(updateBookByIdGateway,
+    private final UpdateBookByIdUseCase updateBookByIdUseCase = new UpdateBookByIdAction(updateBookByIdGateway,
                                                                                               getAuthorByIdGateway,
                                                                                               getBookByTitleGateway,
                                                                                               getLocalDateTime);

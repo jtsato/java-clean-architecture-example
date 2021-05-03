@@ -162,8 +162,8 @@
 					<siteReportDescription>Bookstore core mutation report</siteReportDescription>
 					<siteReportDirectory>bookstore-core</siteReportDirectory>
 					<targetClasses>
-						<param>io.github.jtsato.bookstore.core.author.usecase.impl.*UseCaseImpl</param>
-						<param>io.github.jtsato.bookstore.core.book.usecase.impl.*UseCaseImpl</param>
+						<param>io.github.jtsato.bookstore.core.author.action.*Action</param>
+						<param>io.github.jtsato.bookstore.core.book.action.*Action</param>
 					</targetClasses>
 					<targetTests>
 						<param>io.github.jtsato.bookstore.core.author.usecase.*UseCaseTest</param>

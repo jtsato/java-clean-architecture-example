@@ -8,7 +8,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import io.github.jtsato.bookstore.core.enumerator.domain.Enumerator;
-import io.github.jtsato.bookstore.core.enumerator.usecase.impl.SearchEnumeratorsUseCaseImpl;
+import io.github.jtsato.bookstore.core.enumerator.action.SearchEnumeratorsAction;
 import io.github.jtsato.bookstore.core.enumerator.usecase.parameter.SearchEnumeratorsParameters;
 
 /**
@@ -18,7 +18,7 @@ import io.github.jtsato.bookstore.core.enumerator.usecase.parameter.SearchEnumer
 @DisplayName("Search Enumerators")
 class SearchEnumeratorsUseCaseTest {
 
-    private final SearchEnumeratorsUseCase getBookByIdUseCase = new SearchEnumeratorsUseCaseImpl();
+    private final SearchEnumeratorsUseCase getBookByIdUseCase = new SearchEnumeratorsAction();
 
     @DisplayName("Successful to search enumerators if exist")
     @Test

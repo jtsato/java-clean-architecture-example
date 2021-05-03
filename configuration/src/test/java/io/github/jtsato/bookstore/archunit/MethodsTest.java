@@ -33,7 +33,7 @@ public class MethodsTest {
 
     @ArchTest
     static ArchRule code_units_in_DataProvider_layer_should_be_Transactional = classes().that()
-                                                                                        .resideInAPackage("..dataprovider")
+                                                                                        .resideInAPackage("..infra..")
                                                                                         .should()
                                                                                         .beAnnotatedWith(Transactional.class);
 }

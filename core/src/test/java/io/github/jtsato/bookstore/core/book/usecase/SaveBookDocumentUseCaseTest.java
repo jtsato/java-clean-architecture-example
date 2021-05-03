@@ -25,7 +25,7 @@ import io.github.jtsato.bookstore.core.book.domain.BookDocument;
 import io.github.jtsato.bookstore.core.book.gateway.GetBookByIdGateway;
 import io.github.jtsato.bookstore.core.book.gateway.GetBookDocumentByBookIdGateway;
 import io.github.jtsato.bookstore.core.book.gateway.SaveBookDocumentGateway;
-import io.github.jtsato.bookstore.core.book.usecase.impl.SaveBookDocumentUseCaseImpl;
+import io.github.jtsato.bookstore.core.book.action.SaveBookDocumentAction;
 import io.github.jtsato.bookstore.core.book.usecase.parameter.SaveBookDocumentParameters;
 import io.github.jtsato.bookstore.core.common.GetLocalDateTime;
 import io.github.jtsato.bookstore.core.exception.NotFoundException;
@@ -50,7 +50,7 @@ class SaveBookDocumentUseCaseTest {
     private final GetLocalDateTime getLocalDateTime = Mockito.mock(GetLocalDateTime.class);
 
     @InjectMocks
-    private final SaveBookDocumentUseCase getBookDocumentByBookIdUseCase = new SaveBookDocumentUseCaseImpl(saveBookDocumentGateway,
+    private final SaveBookDocumentUseCase getBookDocumentByBookIdUseCase = new SaveBookDocumentAction(saveBookDocumentGateway,
                                                                                                            getBookByIdGateway,
                                                                                                            getBookDocumentByBookIdGateway,
                                                                                                            getLocalDateTime);

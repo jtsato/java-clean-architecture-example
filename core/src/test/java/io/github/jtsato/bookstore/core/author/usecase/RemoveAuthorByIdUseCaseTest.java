@@ -22,7 +22,7 @@ import org.mockito.Mockito;
 import io.github.jtsato.bookstore.core.author.domain.Author;
 import io.github.jtsato.bookstore.core.author.domain.Gender;
 import io.github.jtsato.bookstore.core.author.gateway.RemoveAuthorByIdGateway;
-import io.github.jtsato.bookstore.core.author.usecase.impl.RemoveAuthorByIdUseCaseImpl;
+import io.github.jtsato.bookstore.core.author.action.RemoveAuthorByIdAction;
 import io.github.jtsato.bookstore.core.book.domain.Book;
 import io.github.jtsato.bookstore.core.book.gateway.SearchBooksByAuthorIdGateway;
 import io.github.jtsato.bookstore.core.common.paging.Page;
@@ -45,7 +45,7 @@ class RemoveAuthorByIdUseCaseTest {
     private final SearchBooksByAuthorIdGateway searchBooksByAuthorIdGateway = Mockito.mock(SearchBooksByAuthorIdGateway.class);
 
     @InjectMocks
-    private final RemoveAuthorByIdUseCase removeAuthorByIdUseCase = new RemoveAuthorByIdUseCaseImpl(removeAuthorByIdGateway, searchBooksByAuthorIdGateway);
+    private final RemoveAuthorByIdUseCase removeAuthorByIdUseCase = new RemoveAuthorByIdAction(removeAuthorByIdGateway, searchBooksByAuthorIdGateway);
 
     @DisplayName("Fail to remove an author by id if parameters are not valid")
     @Test

@@ -22,7 +22,7 @@ import org.mockito.Mockito;
 import io.github.jtsato.bookstore.core.author.domain.Author;
 import io.github.jtsato.bookstore.core.author.domain.Gender;
 import io.github.jtsato.bookstore.core.author.gateway.SearchAuthorsGateway;
-import io.github.jtsato.bookstore.core.author.usecase.impl.SearchAuthorsUseCaseImpl;
+import io.github.jtsato.bookstore.core.author.action.SearchAuthorsAction;
 import io.github.jtsato.bookstore.core.author.usecase.parameter.SearchAuthorsParameters;
 import io.github.jtsato.bookstore.core.common.paging.Page;
 import io.github.jtsato.bookstore.core.common.paging.PageImpl;
@@ -39,7 +39,7 @@ class SearchAuthorsUseCaseTest {
     private final SearchAuthorsGateway searchAuthorsGateway = Mockito.mock(SearchAuthorsGateway.class);
 
     @InjectMocks
-    private final SearchAuthorsUseCase searchAuthorsUseCase = new SearchAuthorsUseCaseImpl(searchAuthorsGateway);
+    private final SearchAuthorsUseCase searchAuthorsUseCase = new SearchAuthorsAction(searchAuthorsGateway);
 
 
     @DisplayName("Fail to search authors with inconsistent parameters")

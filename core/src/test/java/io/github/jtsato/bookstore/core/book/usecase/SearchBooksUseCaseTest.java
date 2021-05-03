@@ -25,7 +25,7 @@ import io.github.jtsato.bookstore.core.author.domain.Author;
 import io.github.jtsato.bookstore.core.author.domain.Gender;
 import io.github.jtsato.bookstore.core.book.domain.Book;
 import io.github.jtsato.bookstore.core.book.gateway.SearchBooksGateway;
-import io.github.jtsato.bookstore.core.book.usecase.impl.SearchBooksUseCaseImpl;
+import io.github.jtsato.bookstore.core.book.action.SearchBooksAction;
 import io.github.jtsato.bookstore.core.book.usecase.parameter.SearchBooksParameters;
 import io.github.jtsato.bookstore.core.common.paging.Page;
 import io.github.jtsato.bookstore.core.common.paging.PageImpl;
@@ -42,7 +42,7 @@ class SearchBooksUseCaseTest {
     private final SearchBooksGateway searchBooksGateway = Mockito.mock(SearchBooksGateway.class);
 
     @InjectMocks
-    private final SearchBooksUseCase searchBooksUseCase = new SearchBooksUseCaseImpl(searchBooksGateway);
+    private final SearchBooksUseCase searchBooksUseCase = new SearchBooksAction(searchBooksGateway);
 
     @DisplayName("Fail to search books with inconsistent parameters")
     @Test

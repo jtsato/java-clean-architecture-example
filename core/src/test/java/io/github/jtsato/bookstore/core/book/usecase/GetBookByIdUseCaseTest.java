@@ -20,7 +20,7 @@ import io.github.jtsato.bookstore.core.author.domain.Author;
 import io.github.jtsato.bookstore.core.author.domain.Gender;
 import io.github.jtsato.bookstore.core.book.domain.Book;
 import io.github.jtsato.bookstore.core.book.gateway.GetBookByIdGateway;
-import io.github.jtsato.bookstore.core.book.usecase.impl.GetBookByIdUseCaseImpl;
+import io.github.jtsato.bookstore.core.book.action.GetBookByIdAction;
 import io.github.jtsato.bookstore.core.exception.InvalidParameterException;
 import io.github.jtsato.bookstore.core.exception.NotFoundException;
 
@@ -35,7 +35,7 @@ class GetBookByIdUseCaseTest {
     private final GetBookByIdGateway getBookByIdGateway = Mockito.mock(GetBookByIdGateway.class);
 
     @InjectMocks
-    private final GetBookByIdUseCase getBookByIdUseCase = new GetBookByIdUseCaseImpl(getBookByIdGateway);
+    private final GetBookByIdUseCase getBookByIdUseCase = new GetBookByIdAction(getBookByIdGateway);
 
     @DisplayName("Fail to get an book by id if parameters are not valid")
     @Test

@@ -23,7 +23,7 @@ import io.github.jtsato.bookstore.core.author.domain.Author;
 import io.github.jtsato.bookstore.core.author.domain.Gender;
 import io.github.jtsato.bookstore.core.book.domain.Book;
 import io.github.jtsato.bookstore.core.book.gateway.FindBooksByIdsGateway;
-import io.github.jtsato.bookstore.core.book.usecase.impl.FindBooksByIdsUseCaseImpl;
+import io.github.jtsato.bookstore.core.book.action.FindBooksByIdsAction;
 import io.github.jtsato.bookstore.core.common.paging.Page;
 import io.github.jtsato.bookstore.core.common.paging.PageImpl;
 import io.github.jtsato.bookstore.core.common.paging.Pageable;
@@ -40,7 +40,7 @@ class FindBooksByIdsUseCaseTest {
     private final FindBooksByIdsGateway findBooksByIdsGateway = Mockito.mock(FindBooksByIdsGateway.class);
 
     @InjectMocks
-    private final FindBooksByIdsUseCase findBooksByIdsUseCase = new FindBooksByIdsUseCaseImpl(findBooksByIdsGateway);
+    private final FindBooksByIdsUseCase findBooksByIdsUseCase = new FindBooksByIdsAction(findBooksByIdsGateway);
 
     @DisplayName("Fail to find books by IDs if parameters are not valid")
     @Test

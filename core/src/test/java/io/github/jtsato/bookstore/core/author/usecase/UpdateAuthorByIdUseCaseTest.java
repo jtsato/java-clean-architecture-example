@@ -21,7 +21,7 @@ import io.github.jtsato.bookstore.core.author.domain.Author;
 import io.github.jtsato.bookstore.core.author.domain.Gender;
 import io.github.jtsato.bookstore.core.author.gateway.GetAuthorByNameGateway;
 import io.github.jtsato.bookstore.core.author.gateway.UpdateAuthorByIdGateway;
-import io.github.jtsato.bookstore.core.author.usecase.impl.UpdateAuthorByIdUseCaseImpl;
+import io.github.jtsato.bookstore.core.author.action.UpdateAuthorByIdAction;
 import io.github.jtsato.bookstore.core.author.usecase.parameter.UpdateAuthorByIdParameters;
 import io.github.jtsato.bookstore.core.exception.NotFoundException;
 import io.github.jtsato.bookstore.core.exception.UniqueConstraintException;
@@ -40,7 +40,7 @@ class UpdateAuthorByIdUseCaseTest {
     private final GetAuthorByNameGateway getAuthorByNameGateway = Mockito.mock(GetAuthorByNameGateway.class);
 
     @InjectMocks
-    private final UpdateAuthorByIdUseCase updateAuthorByIdUseCase = new UpdateAuthorByIdUseCaseImpl(updateAuthorByIdGateway, getAuthorByNameGateway);
+    private final UpdateAuthorByIdUseCase updateAuthorByIdUseCase = new UpdateAuthorByIdAction(updateAuthorByIdGateway, getAuthorByNameGateway);
 
     @DisplayName("Fail to update an author if parameters are not valid")
     @Test

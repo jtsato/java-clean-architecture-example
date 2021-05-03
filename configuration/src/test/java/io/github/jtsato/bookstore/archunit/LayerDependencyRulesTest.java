@@ -27,8 +27,8 @@ public class LayerDependencyRulesTest {
                                                                                       .should()
                                                                                       .onlyAccessClassesThat()
                                                                                       .resideInAnyPackage("..controller..",
-                                                                                                          "..usecase..",
-                                                                                                          "..core.exception..",
+			                                                                                              "..usecase..",
+			                                                                                              "..core.exception..",
                                                                                                           "..mapper..",
                                                                                                           "..rest..",
                                                                                                           "org.springframework..",
@@ -42,6 +42,7 @@ public class LayerDependencyRulesTest {
                                                                                    .should()
                                                                                    .onlyAccessClassesThat()
                                                                                    .resideInAnyPackage("..usecase..",
+                                                                                		    		   "..action..",
                                                                                                        "..gateway..",
                                                                                                        "..domain..",
                                                                                                        "..core..exception..",
@@ -50,11 +51,11 @@ public class LayerDependencyRulesTest {
                                                                                                        "java..");
 
     @ArchTest
-    static final ArchRule dataproviders_should_only_access_specific_packages = classes().that()
-                                                                                        .resideInAPackage("..dataprovider..")
+    static final ArchRule infra_should_only_access_specific_packages = classes().that()
+                                                                                        .resideInAPackage("..infra..")
                                                                                         .should()
                                                                                         .onlyAccessClassesThat()
-                                                                                        .resideInAnyPackage("..dataprovider..",
+                                                                                        .resideInAnyPackage("..infra..",
                                                                                                             "..usecase.parameter..",
                                                                                                             "..core..gateway..",
                                                                                                             "..core..domain..",
@@ -92,28 +93,28 @@ public class LayerDependencyRulesTest {
     // catches only violations by real accesses, i.e. accessing a field, calling a method
 
     @ArchTest
-    static final ArchRule usecases_should_only_be_accessed_by_controllers = classes().that()
-                                                                                     .resideInAPackage("..usecase.impl..")
+    static final ArchRule usecases_should_only_be_accessed_by_any_package = classes().that()
+                                                                                     .resideInAPackage("..usecase..")
                                                                                      .should()
                                                                                      .onlyBeAccessed()
                                                                                      .byAnyPackage("..usecase..",
+                                                                                    		       "..action..",
+                                                                                    		 	   "..infra..repository..",
                                                                                                    "..configuration..",
                                                                                                    "..controller..",
                                                                                                    "..gateway..");
 
     @ArchTest
-    static final ArchRule gateways_should_only_be_accessed_by_usecases = classes().that()
-                                                                                  .resideInAPackage("..gateway..")
-                                                                                  .should()
-                                                                                  .onlyBeAccessed()
-                                                                                  .byAnyPackage("..usecase..");
+    static final ArchRule gateways_should_only_be_accessed_by_action = classes().that().resideInAPackage("..gateway..")
+                                                                                      .should()
+                                                                                      .onlyBeAccessed()
+                                                                                      .byAnyPackage("..action..");
 
     @ArchTest
-    static final ArchRule dataproviders_should_only_be_accessed_by_usecases_or_other_dataproviders = classes().that()
-                                                                                                              .resideInAPackage("..dataprovider..")
-                                                                                                              .should()
-                                                                                                              .onlyBeAccessed()
-                                                                                                              .byAnyPackage("..dataprovider..", "..usecase..");
+    static final ArchRule infra_should_only_be_accessed_by_usecases_or_other_infra = classes().that().resideInAPackage("..infra..")
+                                                                                                     .should()
+                                                                                                     .onlyBeAccessed()
+                                                                                                     .byAnyPackage("..infra..", "..usecase..");
 
     // 'dependOn' catches a wider variety of violations, e.g. having fields of type, having method parameters of type, extending type ...
 
@@ -158,8 +159,8 @@ public class LayerDependencyRulesTest {
                                                                                                .should()
                                                                                                .onlyHaveDependentClassesThat()
                                                                                                .resideInAnyPackage("..configuration..",
-                                                                                                                   "..usecase..",
-                                                                                                                   "..dataprovider..");
+                                                                                                                   "..action..",
+                                                                                                                   "..infra..");
 
     @ArchTest
     static final ArchRule usecases_should_only_depend_on_specific_packages = classes().that()
