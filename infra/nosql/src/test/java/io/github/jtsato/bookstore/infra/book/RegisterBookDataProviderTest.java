@@ -22,7 +22,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import io.github.jtsato.bookstore.core.author.domain.Author;
 import io.github.jtsato.bookstore.core.book.domain.Book;
-import io.github.jtsato.bookstore.infra.author.GetAuthorByIdDataProvider;
+import io.github.jtsato.bookstore.infra.author.GetAuthorByIdProvider;
 import io.github.jtsato.bookstore.infra.author.domain.AuthorEntity;
 import io.github.jtsato.bookstore.infra.author.repository.AuthorRepository;
 import io.github.jtsato.bookstore.infra.book.repository.BookRepository;
@@ -35,14 +35,14 @@ import io.github.jtsato.bookstore.infra.common.YamlLoader;
 @DisplayName("Register Book")
 @ExtendWith(SpringExtension.class)
 @DataMongoTest
-@Import({RegisterBookDataProvider.class, GetAuthorByIdDataProvider.class})
-class RegisterBookDataProviderTest {
+@Import({RegisterBookProvider.class, GetAuthorByIdProvider.class})
+class RegisterBookProviderTest {
 
     @Autowired
-    private RegisterBookDataProvider registerBookDataProvider;
+    private RegisterBookProvider registerBookProvider;
 
     @Autowired
-    private GetAuthorByIdDataProvider getAuthorByIdDataProvider;
+    private GetAuthorByIdProvider getAuthorByIdProvider;
 
     @Autowired
     private BookRepository bookRepository;
@@ -50,13 +50,13 @@ class RegisterBookDataProviderTest {
     @Autowired
     private AuthorRepository authorRepository;
     
-    @Value("classpath:io/github/jtsato/bookstore/dataprovider/book/RegisterBookDataProviderTest.yml")
-    private Resource registerBookDataProviderTestResource;
+    @Value("classpath:io/github/jtsato/bookstore/dataprovider/book/RegisterBookProviderTest.yml")
+    private Resource registerBookProviderTestResource;
     
     @BeforeEach
     void initialize() {
     	authorRepository.deleteAll();
-    	final List<AuthorEntity> authors = YamlLoader.loadAll(AuthorEntity.class, registerBookDataProviderTestResource);
+    	final List<AuthorEntity> authors = YamlLoader.loadAll(AuthorEntity.class, registerBookProviderTestResource);
 		authorRepository.saveAll(authors);
 		assertThat(authorRepository.count()).isOne();
     }
@@ -77,7 +77,7 @@ class RegisterBookDataProviderTest {
                                       LocalDateTime.parse("2020-03-12T22:04:59.123"),
                                       LocalDateTime.parse("2020-04-12T22:04:59.123"));
 
-        final Book result = registerBookDataProvider.execute(newBook);
+        final Book result = registerBookProvider.execute(newBook);
 
         assertThat(result.getId()).isNotNull();
         assertThat(result.getTitle()).isEqualTo(newBook.getTitle());
@@ -90,7 +90,7 @@ class RegisterBookDataProviderTest {
 
     private Author getAuthor() {
 
-        final Optional<Author> optional = getAuthorByIdDataProvider.execute(1L);
+        final Optional<Author> optional = getAuthorByIdProvider.execute(1L);
 
         assertThat(optional).isPresent();
 
@@ -103,7 +103,7 @@ class RegisterBookDataProviderTest {
 
         final Book book = new Book(null, getAuthor(), null, null, null, null, null);
 
-        final Exception exception = Assertions.assertThrows(Exception.class, () -> registerBookDataProvider.execute(book));
+        final Exception exception = Assertions.assertThrows(Exception.class, () -> registerBookProvider.execute(book));
 
         assertThat(exception).isInstanceOf(DataIntegrityViolationException.class);
     }

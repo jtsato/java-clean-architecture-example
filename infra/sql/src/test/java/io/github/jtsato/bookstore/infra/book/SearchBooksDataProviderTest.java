@@ -28,12 +28,12 @@ import io.github.jtsato.bookstore.infra.book.repository.BookRepository;
 @DisplayName("Search Books")
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @DataJpaTest
-@Import({SearchBooksDataProvider.class})
-@Sql("SearchBooksDataProviderTest.sql")
-class SearchBooksDataProviderTest {
+@Import({SearchBooksProvider.class})
+@Sql("SearchBooksProviderTest.sql")
+class SearchBooksProviderTest {
 
     @Autowired
-    private SearchBooksDataProvider searchBooksDataProvider;
+    private SearchBooksProvider searchBooksProvider;
 
     @Autowired
     private BookRepository bookRepository;
@@ -52,7 +52,7 @@ class SearchBooksDataProviderTest {
 
         final SearchBooksParameters parameters = new SearchBooksParameters(searchAuthorsParameters, title, prices, Boolean.FALSE, creationDates, updateDates);
 
-        final Page<Book> page = searchBooksDataProvider.execute(parameters, null, null, null);
+        final Page<Book> page = searchBooksProvider.execute(parameters, null, null, null);
 
         assertThat(page).isNotNull();
 
@@ -88,7 +88,7 @@ class SearchBooksDataProviderTest {
 
         final String orderBy = "creationDate,title:desc";
 
-        final Page<Book> page = searchBooksDataProvider.execute(parameters, 0, -1, orderBy);
+        final Page<Book> page = searchBooksProvider.execute(parameters, 0, -1, orderBy);
 
         assertThat(page).isNotNull();
 
@@ -119,7 +119,7 @@ class SearchBooksDataProviderTest {
         final SearchBooksParameters parameters = new SearchBooksParameters(null, null, prices, null, creationDates, updateDates);
         final String orderBy = "UNSORTED";
 
-        final Page<Book> page = searchBooksDataProvider.execute(parameters, 1, 3, orderBy);
+        final Page<Book> page = searchBooksProvider.execute(parameters, 1, 3, orderBy);
 
         assertThat(page.getContent()).isNotEmpty();
 
@@ -157,7 +157,7 @@ class SearchBooksDataProviderTest {
         final SearchBooksParameters parameters = new SearchBooksParameters(null, null, prices, null, creationDates, updateDates);
         final String orderBy = "creationDate:asc";
 
-        final Page<Book> page = searchBooksDataProvider.execute(parameters, 1, 3, orderBy);
+        final Page<Book> page = searchBooksProvider.execute(parameters, 1, 3, orderBy);
 
         assertThat(page.getContent()).isNotEmpty();
 

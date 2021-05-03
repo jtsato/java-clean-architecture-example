@@ -45,7 +45,7 @@
 		</dependency>
 		<dependency>
 			<groupId>io.github.jtsato</groupId>
-			<artifactId>sql</artifactId>
+			<artifactId>bookstore-sql</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 		<dependency>

@@ -18,7 +18,7 @@ import org.springframework.test.context.jdbc.Sql;
 
 import io.github.jtsato.bookstore.core.author.domain.Author;
 import io.github.jtsato.bookstore.core.book.domain.Book;
-import io.github.jtsato.bookstore.infra.author.GetAuthorByIdDataProvider;
+import io.github.jtsato.bookstore.infra.author.GetAuthorByIdProvider;
 import io.github.jtsato.bookstore.infra.book.repository.BookRepository;
 
 /**
@@ -28,15 +28,15 @@ import io.github.jtsato.bookstore.infra.book.repository.BookRepository;
 @DisplayName("Register Book")
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @DataJpaTest
-@Import({RegisterBookDataProvider.class, GetAuthorByIdDataProvider.class})
-@Sql("RegisterBookDataProviderTest.sql")
-class RegisterBookDataProviderTest {
+@Import({RegisterBookProvider.class, GetAuthorByIdProvider.class})
+@Sql("RegisterBookProviderTest.sql")
+class RegisterBookProviderTest {
 
     @Autowired
-    private RegisterBookDataProvider registerBookDataProvider;
+    private RegisterBookProvider registerBookProvider;
 
     @Autowired
-    private GetAuthorByIdDataProvider getAuthorByIdDataProvider;
+    private GetAuthorByIdProvider getAuthorByIdProvider;
 
     @Autowired
     private BookRepository bookRepository;
@@ -55,7 +55,7 @@ class RegisterBookDataProviderTest {
                                       LocalDateTime.parse("2020-03-12T22:04:59.123"),
                                       LocalDateTime.parse("2020-04-12T22:04:59.123"));
 
-        final Book result = registerBookDataProvider.execute(newBook);
+        final Book result = registerBookProvider.execute(newBook);
 
         assertThat(result.getId()).isNotNull();
         assertThat(result.getTitle()).isEqualTo(newBook.getTitle());
@@ -68,7 +68,7 @@ class RegisterBookDataProviderTest {
 
     private Author getAuthor() {
 
-        final Optional<Author> optional = getAuthorByIdDataProvider.execute(1L);
+        final Optional<Author> optional = getAuthorByIdProvider.execute(1L);
 
         assertThat(optional).isPresent();
 
@@ -81,7 +81,7 @@ class RegisterBookDataProviderTest {
 
         final Book book = new Book(null, getAuthor(), null, null, null, null, null);
 
-        final Exception exception = Assertions.assertThrows(Exception.class, () -> registerBookDataProvider.execute(book));
+        final Exception exception = Assertions.assertThrows(Exception.class, () -> registerBookProvider.execute(book));
 
         assertThat(exception).isInstanceOf(DataIntegrityViolationException.class);
     }

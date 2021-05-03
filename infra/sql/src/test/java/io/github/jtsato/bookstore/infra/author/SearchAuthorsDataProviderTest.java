@@ -26,12 +26,12 @@ import io.github.jtsato.bookstore.infra.author.repository.AuthorRepository;
 @DisplayName("Search Authors")
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @DataJpaTest
-@Import({SearchAuthorsDataProvider.class})
-@Sql("SearchAuthorsDataProviderTest.sql")
-class SearchAuthorsDataProviderTest {
+@Import({SearchAuthorsProvider.class})
+@Sql("SearchAuthorsProviderTest.sql")
+class SearchAuthorsProviderTest {
 
     @Autowired
-    private SearchAuthorsDataProvider searchAuthorsDataProvider;
+    private SearchAuthorsProvider searchAuthorsProvider;
 
     @Autowired
     private AuthorRepository authorRepository;
@@ -49,7 +49,7 @@ class SearchAuthorsDataProviderTest {
 
         final String orderBy = "name:desc,gender:asc";
 
-        final Page<Author> page = searchAuthorsDataProvider.execute(parameters, null, null, orderBy);
+        final Page<Author> page = searchAuthorsProvider.execute(parameters, null, null, orderBy);
 
         assertThat(page).isNotNull();
 
@@ -80,7 +80,7 @@ class SearchAuthorsDataProviderTest {
 
         final SearchAuthorsParameters parameters = new SearchAuthorsParameters(null, name, gender, startBirthdateDate, endBirthdateDate);
 
-        final Page<Author> page = searchAuthorsDataProvider.execute(parameters, 0, -1, null);
+        final Page<Author> page = searchAuthorsProvider.execute(parameters, 0, -1, null);
 
         assertThat(page).isNotNull();
 
@@ -108,7 +108,7 @@ class SearchAuthorsDataProviderTest {
 
         final String orderBy = "UNSORTED";
 
-        final Page<Author> page = searchAuthorsDataProvider.execute(parameters, 1, 3, orderBy);
+        final Page<Author> page = searchAuthorsProvider.execute(parameters, 1, 3, orderBy);
 
         assertThat(page).isNotNull();
 
@@ -141,7 +141,7 @@ class SearchAuthorsDataProviderTest {
 
         final String orderBy = "birthdate:asc";
 
-        final Page<Author> page = searchAuthorsDataProvider.execute(parameters, 1, 3, orderBy);
+        final Page<Author> page = searchAuthorsProvider.execute(parameters, 1, 3, orderBy);
 
         assertThat(page).isNotNull();
 

@@ -24,11 +24,11 @@ import io.github.jtsato.bookstore.infra.author.repository.AuthorRepository;
 @DisplayName("Register Author")
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @DataJpaTest
-@Import({RegisterAuthorDataProvider.class})
-class RegisterAuthorDataProviderTest {
+@Import({RegisterAuthorProvider.class})
+class RegisterAuthorProviderTest {
 
     @Autowired
-    private RegisterAuthorDataProvider registerAuthorDataProvider;
+    private RegisterAuthorProvider registerAuthorProvider;
 
     @Autowired
     private AuthorRepository authorRepository;
@@ -39,7 +39,7 @@ class RegisterAuthorDataProviderTest {
 
         final Author newAuthor = new Author(null, "Joshua Bloch", Gender.MALE, LocalDate.parse("1961-08-28"));
 
-        final Author result = registerAuthorDataProvider.execute(newAuthor);
+        final Author result = registerAuthorProvider.execute(newAuthor);
 
         assertThat(result.getId()).isNotNull();
         assertThat(result.getName()).isEqualTo(newAuthor.getName());
@@ -55,7 +55,7 @@ class RegisterAuthorDataProviderTest {
 
         final Exception exception = Assertions.assertThrows(Exception.class, () -> {
             final Author newAuthor = new Author(null, null, Gender.MALE, null);
-            registerAuthorDataProvider.execute(newAuthor);
+            registerAuthorProvider.execute(newAuthor);
         });
 
         assertThat(exception).isInstanceOf(DataIntegrityViolationException.class);

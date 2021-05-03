@@ -11,11 +11,11 @@
 		<relativePath>../../pom.xml</relativePath>
 	</parent>
 
-	<artifactId>sql</artifactId>
+	<artifactId>bookstore-sql</artifactId>
 	<packaging>jar</packaging>
 
-	<name>Datasource [sql]</name>
-	<description>Datasource component for mysql database</description>
+	<name>Infra [spring-boot-starter-data-jpa]</name>
+	<description>Infra component for SQL database</description>
 
 	<properties>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>

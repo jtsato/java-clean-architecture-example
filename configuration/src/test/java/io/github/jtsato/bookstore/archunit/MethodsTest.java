@@ -32,8 +32,10 @@ public class MethodsTest {
                                                                                                        .beAnnotatedWith(ResponseStatus.class);
 
     @ArchTest
-    static ArchRule code_units_in_DataProvider_layer_should_be_Transactional = classes().that()
+    static ArchRule code_units_in_Provider_layer_should_be_Transactional = classes().that()
                                                                                         .resideInAPackage("..infra..")
+                                                                                        .and()
+                                                                                        .haveNameMatching(".*Provider")
                                                                                         .should()
                                                                                         .beAnnotatedWith(Transactional.class);
 }

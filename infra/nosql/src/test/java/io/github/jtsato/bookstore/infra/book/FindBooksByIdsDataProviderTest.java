@@ -25,11 +25,11 @@ import io.github.jtsato.bookstore.infra.book.repository.BookRepository;
 @DisplayName("Find Books By Ids")
 @DataMongoTest
 @ExtendWith(SpringExtension.class)
-@Import({FindBooksByIdsDataProvider.class})
-class FindBooksByIdsDataProviderTest {
+@Import({FindBooksByIdsProvider.class})
+class FindBooksByIdsProviderTest {
 
     @Autowired
-    private FindBooksByIdsDataProvider findBooksByIdsDataProvider;
+    private FindBooksByIdsProvider findBooksByIdsProvider;
 
     @Autowired
     private BookRepository bookRepository;
@@ -40,7 +40,7 @@ class FindBooksByIdsDataProviderTest {
 
         final List<Long> ids = Arrays.asList(1L, 2L);
 
-        final Page<Book> pageOfBooks = findBooksByIdsDataProvider.execute(ids);
+        final Page<Book> pageOfBooks = findBooksByIdsProvider.execute(ids);
 
         assertThat(pageOfBooks).isNotNull();
 
@@ -66,7 +66,7 @@ class FindBooksByIdsDataProviderTest {
 
         final List<Long> ids = Arrays.asList(5L, 6L);
 
-        final Page<Book> pageOfBooks = findBooksByIdsDataProvider.execute(ids);
+        final Page<Book> pageOfBooks = findBooksByIdsProvider.execute(ids);
 
         assertThat(pageOfBooks).isNotNull();
 

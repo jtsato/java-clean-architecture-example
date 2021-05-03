@@ -22,11 +22,11 @@ import io.github.jtsato.bookstore.infra.author.repository.AuthorRepository;
 @DisplayName("Get Author By Name")
 @ExtendWith(SpringExtension.class)
 @DataMongoTest
-@Import({GetAuthorByNameDataProvider.class})
-class GetAuthorByNameDataProviderTest {
+@Import({GetAuthorByNameProvider.class})
+class GetAuthorByNameProviderTest {
 
     @Autowired
-    private GetAuthorByNameDataProvider getAuthorByNameDataProvider;
+    private GetAuthorByNameProvider getAuthorByNameProvider;
 
     @Autowired
     private AuthorRepository authorRepository;
@@ -35,7 +35,7 @@ class GetAuthorByNameDataProviderTest {
     @Test
     void successfulToGetAuthorByNameIfFound() {
 
-        final Optional<Author> optional = getAuthorByNameDataProvider.execute("Cay S. Horstmann");
+        final Optional<Author> optional = getAuthorByNameProvider.execute("Cay S. Horstmann");
 
         assertThat(optional).isPresent();
         assertThat(authorRepository.count()).isEqualTo(2);
@@ -45,7 +45,7 @@ class GetAuthorByNameDataProviderTest {
     @Test
     void failToGetAuthorByNameIfNotFound() {
 
-        final Optional<Author> optional = getAuthorByNameDataProvider.execute("Robert Cecil Martin");
+        final Optional<Author> optional = getAuthorByNameProvider.execute("Robert Cecil Martin");
 
         assertThat(optional).isNotPresent();
         assertThat(authorRepository.count()).isEqualTo(2);

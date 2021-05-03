@@ -22,12 +22,12 @@ import io.github.jtsato.bookstore.infra.book.repository.BookRepository;
 @DisplayName("Get Book By Title")
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @DataJpaTest
-@Import({GetBookByTitleDataProvider.class})
-@Sql("GetBookByTitleDataProviderTest.sql")
-class GetBookByTitleDataProviderTest {
+@Import({GetBookByTitleProvider.class})
+@Sql("GetBookByTitleProviderTest.sql")
+class GetBookByTitleProviderTest {
 
     @Autowired
-    private GetBookByTitleDataProvider getBookByTitleDataProvider;
+    private GetBookByTitleProvider getBookByTitleProvider;
 
     @Autowired
     private BookRepository authorRepository;
@@ -36,7 +36,7 @@ class GetBookByTitleDataProviderTest {
     @Test
     void successfulToGetBookByTitleIfFound() {
 
-        final Optional<Book> optional = getBookByTitleDataProvider.execute("Effective Java");
+        final Optional<Book> optional = getBookByTitleProvider.execute("Effective Java");
 
         assertThat(optional).isPresent();
         assertThat(authorRepository.count()).isEqualTo(3);
@@ -46,7 +46,7 @@ class GetBookByTitleDataProviderTest {
     @Test
     void failToGetAuthorByTitleIfNotFound() {
 
-        final Optional<Book> optional = getBookByTitleDataProvider.execute("Effective Java (2nd Edition)");
+        final Optional<Book> optional = getBookByTitleProvider.execute("Effective Java (2nd Edition)");
 
         assertThat(optional).isNotPresent();
         assertThat(authorRepository.count()).isEqualTo(3);

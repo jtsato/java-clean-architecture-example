@@ -11,11 +11,11 @@
 		<relativePath>../../pom.xml</relativePath>
 	</parent>
 
-	<artifactId>dataprovider-mongo</artifactId>
+	<artifactId>bookstore-nosql</artifactId>
 	<packaging>jar</packaging>
 
-	<name>Datasource [spring-data-mongo]</name>
-	<description>Datasource component for mongo database</description>
+	<name>Infra [spring-boot-starter-data-mongodb]</name>
+	<description>Infra component for NoSQL database</description>
 
 	<properties>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>

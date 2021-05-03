@@ -22,11 +22,11 @@ import io.github.jtsato.bookstore.infra.book.repository.BookRepository;
 @DisplayName("Get Book Document By Book Id")
 @DataMongoTest
 @ExtendWith(SpringExtension.class)
-@Import({GetBookDocumentByBookIdDataProvider.class})
-class GetBookDocumentByBookIdDataProviderTest {
+@Import({GetBookDocumentByBookIdProvider.class})
+class GetBookDocumentByBookIdProviderTest {
 
     @Autowired
-    private GetBookDocumentByBookIdDataProvider getBookDocumentByBookIdDataProvider;
+    private GetBookDocumentByBookIdProvider getBookDocumentByBookIdProvider;
 
     @Autowired
     private BookRepository authorRepository;
@@ -35,7 +35,7 @@ class GetBookDocumentByBookIdDataProviderTest {
     @Test
     void successfulToGetBookDocumentByBookIdIfFound() {
 
-        final Optional<BookDocument> optional = getBookDocumentByBookIdDataProvider.execute(1L);
+        final Optional<BookDocument> optional = getBookDocumentByBookIdProvider.execute(1L);
 
         assertThat(optional).isPresent();
         assertThat(authorRepository.count()).isEqualTo(1);
@@ -45,7 +45,7 @@ class GetBookDocumentByBookIdDataProviderTest {
     @Test
     void failToGetAuthorByTitleIfNotFound() {
 
-        final Optional<BookDocument> optional = getBookDocumentByBookIdDataProvider.execute(2L);
+        final Optional<BookDocument> optional = getBookDocumentByBookIdProvider.execute(2L);
 
         assertThat(optional).isNotPresent();
         assertThat(authorRepository.count()).isEqualTo(1);

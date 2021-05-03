@@ -24,11 +24,11 @@ import io.github.jtsato.bookstore.infra.book.repository.BookDocumentRepository;
 @DisplayName("Save Book Document")
 @ExtendWith(SpringExtension.class)
 @DataMongoTest
-@Import({SaveBookDocumentDataProvider.class})
-class SaveBookDocumentDataProviderTest {
+@Import({SaveBookDocumentProvider.class})
+class SaveBookDocumentProviderTest {
 
     @Autowired
-    private SaveBookDocumentDataProvider saveBookDocumentDataProvider;
+    private SaveBookDocumentProvider saveBookDocumentProvider;
 
     @Autowired
     private BookDocumentRepository bookDocumentRepository;
@@ -47,7 +47,7 @@ class SaveBookDocumentDataProviderTest {
                                                            LocalDateTime.parse("2020-03-12T22:04:59.123"),
                                                            LocalDateTime.parse("2020-04-12T22:04:59.123"));
 
-        final BookDocument result = saveBookDocumentDataProvider.execute(bookDocument);
+        final BookDocument result = saveBookDocumentProvider.execute(bookDocument);
 
         assertThat(result.getBookId()).isEqualTo(1L);
         assertThat(result.getContentType()).isEqualTo("text/plain");
@@ -67,7 +67,7 @@ class SaveBookDocumentDataProviderTest {
 
         final BookDocument bookDocument = new BookDocument(null, null, null, null, null, null, null, null, null);
 
-        final Exception exception = Assertions.assertThrows(Exception.class, () -> saveBookDocumentDataProvider.execute(bookDocument));
+        final Exception exception = Assertions.assertThrows(Exception.class, () -> saveBookDocumentProvider.execute(bookDocument));
 
         assertThat(exception).isInstanceOf(DataIntegrityViolationException.class);
     }

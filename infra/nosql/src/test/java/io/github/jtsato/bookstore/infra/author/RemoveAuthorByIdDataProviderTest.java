@@ -22,11 +22,11 @@ import io.github.jtsato.bookstore.infra.author.repository.AuthorRepository;
 @DisplayName("Remove Author By Id")
 @ExtendWith(SpringExtension.class)
 @DataMongoTest
-@Import({RemoveAuthorByIdDataProvider.class})
-class RemoveAuthorByIdDataProviderTest {
+@Import({RemoveAuthorByIdProvider.class})
+class RemoveAuthorByIdProviderTest {
 
     @Autowired
-    private RemoveAuthorByIdDataProvider removeAuthorByIdDataProvider;
+    private RemoveAuthorByIdProvider removeAuthorByIdProvider;
 
     @Autowired
     private AuthorRepository authorRepository;
@@ -35,7 +35,7 @@ class RemoveAuthorByIdDataProviderTest {
     @Test
     void successfulToRemoveAuthorByIdIfFound() {
 
-        final Optional<Author> optional = removeAuthorByIdDataProvider.execute(3L);
+        final Optional<Author> optional = removeAuthorByIdProvider.execute(3L);
 
         assertThat(optional).isPresent();
         assertThat(authorRepository.count()).isEqualTo(2);
@@ -45,7 +45,7 @@ class RemoveAuthorByIdDataProviderTest {
     @Test
     void failToRemoveAuthorByIdIfNotFound() {
 
-        final Optional<Author> optional = removeAuthorByIdDataProvider.execute(4L);
+        final Optional<Author> optional = removeAuthorByIdProvider.execute(4L);
 
         assertThat(optional).isNotPresent();
         assertThat(authorRepository.count()).isEqualTo(3);

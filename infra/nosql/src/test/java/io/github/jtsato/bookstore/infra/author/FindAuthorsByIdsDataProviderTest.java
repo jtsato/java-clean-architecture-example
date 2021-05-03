@@ -24,11 +24,11 @@ import io.github.jtsato.bookstore.infra.author.repository.AuthorRepository;
 @DisplayName("Find Authors By Ids")
 @ExtendWith(SpringExtension.class)
 @DataMongoTest
-@Import({FindAuthorsByIdsDataProvider.class})
-class FindAuthorsByIdsDataProviderTest {
+@Import({FindAuthorsByIdsProvider.class})
+class FindAuthorsByIdsProviderTest {
 
     @Autowired
-    private FindAuthorsByIdsDataProvider findAuthorsByIdsDataProvider;
+    private FindAuthorsByIdsProvider findAuthorsByIdsProvider;
 
     @Autowired
     private AuthorRepository authorRepository;
@@ -39,7 +39,7 @@ class FindAuthorsByIdsDataProviderTest {
 
         final List<Long> ids = Arrays.asList(1L, 2L);
 
-        final Page<Author> pageOfAuthors = findAuthorsByIdsDataProvider.execute(ids);
+        final Page<Author> pageOfAuthors = findAuthorsByIdsProvider.execute(ids);
 
         assertThat(pageOfAuthors).isNotNull();
         assertThat(pageOfAuthors.getContent()).isNotNull().isNotEmpty();
@@ -53,7 +53,7 @@ class FindAuthorsByIdsDataProviderTest {
 
         final List<Long> ids = Arrays.asList(3L, 4L);
 
-        final Page<Author> pageOfAuthors = findAuthorsByIdsDataProvider.execute(ids);
+        final Page<Author> pageOfAuthors = findAuthorsByIdsProvider.execute(ids);
 
         assertThat(pageOfAuthors).isNotNull();
         assertThat(pageOfAuthors.getContent()).isNotNull().isEmpty();

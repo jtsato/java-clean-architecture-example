@@ -11,11 +11,11 @@
 		<relativePath>../../pom.xml</relativePath>
 	</parent>
 
-	<artifactId>amqp</artifactId>
+	<artifactId>bookstore-amqp</artifactId>
 	<packaging>jar</packaging>
 
-	<name>Datasource [amqp]</name>
-	<description>Datasource component for h2 rabbitmq</description>
+	<name>Infra [spring-boot-starter-amqp]</name>
+	<description>Infra component for AMQP</description>	
 
 	<properties>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>

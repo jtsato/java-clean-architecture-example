@@ -24,11 +24,11 @@ import io.github.jtsato.bookstore.infra.author.repository.AuthorRepository;
 @DisplayName("Update Author By Id")
 @ExtendWith(SpringExtension.class)
 @DataMongoTest
-@Import({UpdateAuthorByIdDataProvider.class})
-class UpdateAuthorByIdDataProviderTest {
+@Import({UpdateAuthorByIdProvider.class})
+class UpdateAuthorByIdProviderTest {
 
     @Autowired
-    private UpdateAuthorByIdDataProvider updateAuthorByIdDataProvider;
+    private UpdateAuthorByIdProvider updateAuthorByIdProvider;
 
     @Autowired
     private AuthorRepository authorRepository;
@@ -51,7 +51,7 @@ class UpdateAuthorByIdDataProviderTest {
 
     private Author updateAuthorById(final Author author) {
 
-        final Optional<Author> optional = updateAuthorByIdDataProvider.execute(author);
+        final Optional<Author> optional = updateAuthorByIdProvider.execute(author);
 
         assertThat(optional).isPresent();
 
@@ -62,7 +62,7 @@ class UpdateAuthorByIdDataProviderTest {
     @Test
     void failToUpdateAuthorByIdIfNotFound() {
 
-        final Optional<Author> optional = updateAuthorByIdDataProvider.execute(new Author(5L, null, Gender.MALE, null));
+        final Optional<Author> optional = updateAuthorByIdProvider.execute(new Author(5L, null, Gender.MALE, null));
 
         assertThat(optional).isNotPresent();
     }

@@ -16,7 +16,7 @@ import org.springframework.test.context.jdbc.Sql;
 
 import io.github.jtsato.bookstore.core.author.domain.Author;
 import io.github.jtsato.bookstore.core.book.domain.Book;
-import io.github.jtsato.bookstore.infra.author.GetAuthorByIdDataProvider;
+import io.github.jtsato.bookstore.infra.author.GetAuthorByIdProvider;
 import io.github.jtsato.bookstore.infra.book.repository.BookRepository;
 
 /**
@@ -26,15 +26,15 @@ import io.github.jtsato.bookstore.infra.book.repository.BookRepository;
 @DisplayName("Update Book By Id")
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @DataJpaTest
-@Import({UpdateBookByIdDataProvider.class, GetAuthorByIdDataProvider.class})
-@Sql("UpdateBookByIdDataProviderTest.sql")
-class UpdateBookByIdDataProviderTest {
+@Import({UpdateBookByIdProvider.class, GetAuthorByIdProvider.class})
+@Sql("UpdateBookByIdProviderTest.sql")
+class UpdateBookByIdProviderTest {
 
     @Autowired
-    private UpdateBookByIdDataProvider updateBookByIdDataProvider;
+    private UpdateBookByIdProvider updateBookByIdProvider;
 
     @Autowired
-    private GetAuthorByIdDataProvider getAuthorByIdDataProvider;
+    private GetAuthorByIdProvider getAuthorByIdProvider;
 
     @Autowired
     private BookRepository bookRepository;
@@ -91,7 +91,7 @@ class UpdateBookByIdDataProviderTest {
 
     private Book updateBookById(final Book candidate) {
 
-        final Optional<Book> optional = updateBookByIdDataProvider.execute(candidate);
+        final Optional<Book> optional = updateBookByIdProvider.execute(candidate);
 
         assertThat(optional).isPresent();
 
@@ -100,7 +100,7 @@ class UpdateBookByIdDataProviderTest {
 
     private Author getAuthor(final Long authorId) {
 
-        final Optional<Author> optional = getAuthorByIdDataProvider.execute(authorId);
+        final Optional<Author> optional = getAuthorByIdProvider.execute(authorId);
 
         assertThat(optional).isPresent();
 
@@ -113,7 +113,7 @@ class UpdateBookByIdDataProviderTest {
 
         final Book update = new Book(5L, getAuthor(2L), null, null, null, null, null);
 
-        final Optional<Book> optional = updateBookByIdDataProvider.execute(update);
+        final Optional<Book> optional = updateBookByIdProvider.execute(update);
 
         assertThat(optional).isNotPresent();
     }

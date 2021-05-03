@@ -25,12 +25,12 @@ import io.github.jtsato.bookstore.infra.book.repository.BookRepository;
 @DisplayName("Find Books By Ids")
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @DataJpaTest
-@Import({FindBooksByIdsDataProvider.class})
-@Sql("FindBooksByIdsDataProviderTest.sql")
-class FindBooksByIdsDataProviderTest {
+@Import({FindBooksByIdsProvider.class})
+@Sql("FindBooksByIdsProviderTest.sql")
+class FindBooksByIdsProviderTest {
 
     @Autowired
-    private FindBooksByIdsDataProvider findBooksByIdsDataProvider;
+    private FindBooksByIdsProvider findBooksByIdsProvider;
 
     @Autowired
     private BookRepository bookRepository;
@@ -41,7 +41,7 @@ class FindBooksByIdsDataProviderTest {
 
         final List<Long> ids = Arrays.asList(1L, 2L);
 
-        final Page<Book> pageOfBooks = findBooksByIdsDataProvider.execute(ids);
+        final Page<Book> pageOfBooks = findBooksByIdsProvider.execute(ids);
 
         assertThat(pageOfBooks).isNotNull();
 
@@ -67,7 +67,7 @@ class FindBooksByIdsDataProviderTest {
 
         final List<Long> ids = Arrays.asList(5L, 6L);
 
-        final Page<Book> pageOfBooks = findBooksByIdsDataProvider.execute(ids);
+        final Page<Book> pageOfBooks = findBooksByIdsProvider.execute(ids);
 
         assertThat(pageOfBooks).isNotNull();
 

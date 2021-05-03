@@ -24,12 +24,12 @@ import io.github.jtsato.bookstore.infra.author.repository.AuthorRepository;
 @DisplayName("Find Authors By Ids")
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @DataJpaTest
-@Import({FindAuthorsByIdsDataProvider.class})
-@Sql("FindAuthorsByIdsDataProviderTest.sql")
-class FindAuthorsByIdsDataProviderTest {
+@Import({FindAuthorsByIdsProvider.class})
+@Sql("FindAuthorsByIdsProviderTest.sql")
+class FindAuthorsByIdsProviderTest {
 
     @Autowired
-    private FindAuthorsByIdsDataProvider findAuthorsByIdsDataProvider;
+    private FindAuthorsByIdsProvider findAuthorsByIdsProvider;
 
     @Autowired
     private AuthorRepository authorRepository;
@@ -40,7 +40,7 @@ class FindAuthorsByIdsDataProviderTest {
 
         final List<Long> ids = Arrays.asList(1L, 2L);
 
-        final Page<Author> pageOfAuthors = findAuthorsByIdsDataProvider.execute(ids);
+        final Page<Author> pageOfAuthors = findAuthorsByIdsProvider.execute(ids);
 
         assertThat(pageOfAuthors).isNotNull();
         assertThat(pageOfAuthors.getContent()).isNotNull().isNotEmpty();
@@ -54,7 +54,7 @@ class FindAuthorsByIdsDataProviderTest {
 
         final List<Long> ids = Arrays.asList(3L, 4L);
 
-        final Page<Author> pageOfAuthors = findAuthorsByIdsDataProvider.execute(ids);
+        final Page<Author> pageOfAuthors = findAuthorsByIdsProvider.execute(ids);
 
         assertThat(pageOfAuthors).isNotNull();
         assertThat(pageOfAuthors.getContent()).isNotNull().isEmpty();

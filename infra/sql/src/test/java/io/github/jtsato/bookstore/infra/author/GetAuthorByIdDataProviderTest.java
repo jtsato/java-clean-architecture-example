@@ -22,12 +22,12 @@ import io.github.jtsato.bookstore.infra.author.repository.AuthorRepository;
 @DisplayName("Get Author By Id")
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @DataJpaTest
-@Import({GetAuthorByIdDataProvider.class})
-@Sql("GetAuthorByIdDataProviderTest.sql")
-class GetAuthorByIdDataProviderTest {
+@Import({GetAuthorByIdProvider.class})
+@Sql("GetAuthorByIdProviderTest.sql")
+class GetAuthorByIdProviderTest {
 
     @Autowired
-    private GetAuthorByIdDataProvider getAuthorByIdDataProvider;
+    private GetAuthorByIdProvider getAuthorByIdProvider;
 
     @Autowired
     private AuthorRepository authorRepository;
@@ -36,7 +36,7 @@ class GetAuthorByIdDataProviderTest {
     @Test
     void successfulToGetAuthorByIdIfFound() {
 
-        final Optional<Author> optional = getAuthorByIdDataProvider.execute(1L);
+        final Optional<Author> optional = getAuthorByIdProvider.execute(1L);
 
         assertThat(optional).isPresent();
         assertThat(authorRepository.count()).isOne();
@@ -46,7 +46,7 @@ class GetAuthorByIdDataProviderTest {
     @Test
     void failToGetAuthorByIdIfNotFound() {
 
-        final Optional<Author> optional = getAuthorByIdDataProvider.execute(2L);
+        final Optional<Author> optional = getAuthorByIdProvider.execute(2L);
 
         assertThat(optional).isNotPresent();
         assertThat(authorRepository.count()).isOne();

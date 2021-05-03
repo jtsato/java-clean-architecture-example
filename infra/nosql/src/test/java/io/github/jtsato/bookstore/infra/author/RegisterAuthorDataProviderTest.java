@@ -28,11 +28,11 @@ import io.github.jtsato.bookstore.infra.common.SequenceGeneratorService;
 @DisplayName("Register Author")
 @ExtendWith(SpringExtension.class)
 @DataMongoTest
-@Import({AuthorModelListener.class, SequenceGeneratorService.class, RegisterAuthorDataProvider.class})
-class RegisterAuthorDataProviderTest {
+@Import({AuthorModelListener.class, SequenceGeneratorService.class, RegisterAuthorProvider.class})
+class RegisterAuthorProviderTest {
 
     @Autowired
-    private RegisterAuthorDataProvider registerAuthorDataProvider;
+    private RegisterAuthorProvider registerAuthorProvider;
 
     @Autowired
     private AuthorRepository authorRepository;
@@ -49,7 +49,7 @@ class RegisterAuthorDataProviderTest {
 
         final Author newAuthor = new Author(null, "Joshua Bloch", Gender.MALE, LocalDate.parse("1961-08-28"));
 
-        final Author result = registerAuthorDataProvider.execute(newAuthor);
+        final Author result = registerAuthorProvider.execute(newAuthor);
 
         assertThat(result.getId()).isNotNull();
         assertThat(result.getName()).isEqualTo(newAuthor.getName());
@@ -65,7 +65,7 @@ class RegisterAuthorDataProviderTest {
 
         final Exception exception = Assertions.assertThrows(Exception.class, () -> {
             final Author newAuthor = new Author(null, null, Gender.MALE, null);
-            registerAuthorDataProvider.execute(newAuthor);
+            registerAuthorProvider.execute(newAuthor);
         });
 
         assertThat(exception).isInstanceOf(DataIntegrityViolationException.class);
