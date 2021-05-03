@@ -11,7 +11,7 @@ public abstract class AbstractPredicateBuilderImpl<P extends EntityPathBase<?>, 
 
     protected final P entityPath;
 
-    public AbstractPredicateBuilderImpl(final P entityPath) {
+    protected AbstractPredicateBuilderImpl(final P entityPath) {
         this.entityPath = entityPath;
     }
 

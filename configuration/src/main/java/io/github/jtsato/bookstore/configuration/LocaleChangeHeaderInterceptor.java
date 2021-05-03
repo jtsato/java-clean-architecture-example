@@ -19,16 +19,14 @@ public class LocaleChangeHeaderInterceptor extends LocaleChangeInterceptor {
 
         final String newLocale = request.getHeader(getParamName());
 
-        if (newLocale == null) {
-            return true;
+        if (newLocale != null) {
+            final LocaleResolver localeResolver = RequestContextUtils.getLocaleResolver(request);
+            if (localeResolver == null) {
+                throw new IllegalStateException("No LocaleResolver found: not in a DispatcherServlet request?");
+            }
+            setNewLocale(request, response, newLocale, localeResolver);
         }
 
-        final LocaleResolver localeResolver = RequestContextUtils.getLocaleResolver(request);
-        if (localeResolver == null) {
-            throw new IllegalStateException("No LocaleResolver found: not in a DispatcherServlet request?");
-        }
-
-        setNewLocale(request, response, newLocale, localeResolver);
         return true;
     }
 
