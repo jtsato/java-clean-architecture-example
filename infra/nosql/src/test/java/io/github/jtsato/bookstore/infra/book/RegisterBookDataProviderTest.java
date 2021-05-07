@@ -50,7 +50,7 @@ class RegisterBookProviderTest {
     @Autowired
     private AuthorRepository authorRepository;
     
-    @Value("classpath:io/github/jtsato/bookstore/dataprovider/book/RegisterBookProviderTest.yml")
+    @Value("classpath:io/github/jtsato/bookstore/infra/book/RegisterBookProviderTest.yml")
     private Resource registerBookProviderTestResource;
     
     @BeforeEach

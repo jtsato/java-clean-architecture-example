@@ -17,10 +17,10 @@ import io.github.jtsato.bookstore.infra.service.DispatcherAmqpProducer;
 @Service
 public class SaveBookDocumentProvider implements SaveBookDocumentGateway {
 
-    @Value("${bookstore.rabbitmq.exchange.save-book-document}")
+    @Value("${bookstore.amqp.exchange.save-book-document}")
     private String exchange;
 
-    @Value("${bookstore.rabbitmq.routingkey.save-book-document}")
+    @Value("${bookstore.amqp.routingkey.save-book-document}")
     private String routingKey;
 
     @Autowired

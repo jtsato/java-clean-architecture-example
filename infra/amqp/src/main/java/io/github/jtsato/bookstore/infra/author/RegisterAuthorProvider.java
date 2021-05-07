@@ -17,10 +17,10 @@ import io.github.jtsato.bookstore.infra.service.DispatcherAmqpProducer;
 @Service
 public class RegisterAuthorProvider implements RegisterAuthorGateway {
 
-    @Value("${bookstore.rabbitmq.exchange.register-author}")
+    @Value("${bookstore.amqp.exchange.register-author}")
     private String exchange;
 
-    @Value("${bookstore.rabbitmq.routingkey.register-author}")
+    @Value("${bookstore.amqp.routingkey.register-author}")
     private String routingKey;
 
     @Autowired

@@ -119,16 +119,16 @@
 					<sourceDataFormats>
 						<sourceDataFormat>HTML</sourceDataFormat>
 					</sourceDataFormats>
-					<siteReportName>bookstore-dataprovider-rabbitmq</siteReportName>
-					<siteReportDescription>Bookstore dataprovider mutation report</siteReportDescription>
-					<siteReportDirectory>bookstore-dataprovider-rabbitmq</siteReportDirectory>
+					<siteReportName>bookstore-infra-amqp</siteReportName>
+					<siteReportDescription>Bookstore infra mutation report</siteReportDescription>
+					<siteReportDirectory>bookstore-infra-amqp</siteReportDirectory>
 					<targetClasses>
-						<param>io.github.jtsato.bookstore.infra.author.*DataProvider</param>
-						<param>io.github.jtsato.bookstore.infra.book.*DataProvider</param>
+						<param>io.github.jtsato.bookstore.infra.author.*Provider</param>
+						<param>io.github.jtsato.bookstore.infra.book.*Provider</param>
 					</targetClasses>
 					<targetTests>
-						<param>io.github.jtsato.bookstore.infra.author.*DataProviderTest</param>
-						<param>io.github.jtsato.bookstore.infra.book.*DataProviderTest</param>
+						<param>io.github.jtsato.bookstore.infra.author.*ProviderTest</param>
+						<param>io.github.jtsato.bookstore.infra.book.*ProviderTest</param>
 					</targetTests>
 				</configuration>
 				<dependencies>

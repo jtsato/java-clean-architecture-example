@@ -17,10 +17,10 @@ import io.github.jtsato.bookstore.infra.service.DispatcherAmqpProducer;
 @Service
 public class RemoveAuthorByIdProvider implements RemoveAuthorByIdGateway {
 
-    @Value("${bookstore.rabbitmq.exchange.remove-author-by-id}")
+    @Value("${bookstore.amqp.exchange.remove-author-by-id}")
     private String exchange;
 
-    @Value("${bookstore.rabbitmq.routingkey.remove-author-by-id}")
+    @Value("${bookstore.amqp.routingkey.remove-author-by-id}")
     private String routingKey;
 
     @Autowired

@@ -38,7 +38,7 @@ public class DispatcherAmqpProducer {
             log.info("Starting AMQP: exchange: {}, routingKey: {}, message: {}", exchange, routingKey, message);
             rabbitTemplate.convertAndSend(object);
         } catch (final JsonProcessingException exception) {
-            log.error("RabbitMQService: Exception: {}", exception.getMessage());
+            log.error("sendMessage: Exception: {}", exception.getMessage());
         }
     }
 }
