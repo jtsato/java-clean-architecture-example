@@ -10,8 +10,8 @@ import com.cosium.spring.data.jpa.entity.graph.repository.support.EntityGraphJpa
  * @author Jorge Takeshi Sato
  */
 
-@EnableJpaRepositories(basePackageClasses = BookstoreApplication.class, repositoryFactoryBeanClass = EntityGraphJpaRepositoryFactoryBean.class)
 @SpringBootApplication
+@EnableJpaRepositories(basePackageClasses = BookstoreApplication.class, repositoryFactoryBeanClass = EntityGraphJpaRepositoryFactoryBean.class)
 public class BookstoreApplication {
 
     public static void main(final String[] args) {

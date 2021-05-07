@@ -19,7 +19,11 @@ import io.github.jtsato.bookstore.infra.book.domain.BookEntity;
 @Repository
 public interface BookRepository extends EntityGraphJpaRepository<BookEntity, Long>, EntityGraphQuerydslPredicateExecutor<BookEntity> {
 
+    Optional<BookEntity> findById(final Long id, final EntityGraph entityGraph);
+
+    Page<BookEntity> findByAuthorId(final Long authorId, final EntityGraph entityGraph, final PageRequest pageRequest);
+
     Optional<BookEntity> findByTitleIgnoreCase(final String title, final EntityGraph entityGraph);
-    
-    Page<BookEntity> findByAuthorId(final Long authorId, final PageRequest pageRequest);
+
+    Optional<BookEntity> findByAvailable(final Boolean available, final EntityGraph entityGraph);
 }
