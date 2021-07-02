@@ -32,4 +32,8 @@
     * Coverage: [`Jacoco`](https://www.jacoco.org)
     * Architecture Testing: [`ArchUnit`](https://www.archunit.org/)
 
+<<<<<<< HEAD
     <iframe width="768" height="432" src="https://miro.com/app/live-embed/o9J_lAkls_w=/?moveToViewport=-75976,-27878,2039,1469" frameBorder="0" scrolling="no" allowFullScreen></iframe>
+=======
+<iframe width="768" height="432" src="https://miro.com/app/live-embed/o9J_lAkls_w=/?moveToViewport=-75976,-27878,2039,1469" frameBorder="0" scrolling="no" allowFullScreen></iframe>
+>>>>>>> e29c17154d3370d5675bbc1640d236b9f72e0858
