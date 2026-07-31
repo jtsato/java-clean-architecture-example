@@ -758,7 +758,7 @@ http POST :8081/books authorId=73 title='New Kids Turbo' price=15.13 available=f
 http POST :8081/books authorId=77 title='Tipping the Velvet' price=79.78 available=true Accept-Language:pt_BR 'Authorization:'"$token"'' 
 http POST :8081/books authorId=10 title='Hot Millions' price=68.33 available=false Accept-Language:pt_BR 'Authorization:'"$token"'' 
 http POST :8081/books authorId=70 title='Conspirator, The' price=67.8 available=false Accept-Language:pt_BR 'Authorization:'"$token"'' 
-http POST :8081/books authorId=90 title='On the Double ' price=53.09 available=true Accept-Language:pt_BR 'Authorization:'"$token"'' 
+http POST :8081/books authorId=90 title='On the Double' price=53.09 available=true Accept-Language:pt_BR 'Authorization:'"$token"''
 http POST :8081/books authorId=95 title='Duelist (Hyeongsa)' price=15.01 available=false Accept-Language:pt_BR 'Authorization:'"$token"'' 
 http POST :8081/books authorId=14 title='In Cold Blood' price=23.31 available=true Accept-Language:pt_BR 'Authorization:'"$token"'' 
 http POST :8081/books authorId=52 title='Young Victoria, The' price=77.41 available=false Accept-Language:pt_BR 'Authorization:'"$token"'' 

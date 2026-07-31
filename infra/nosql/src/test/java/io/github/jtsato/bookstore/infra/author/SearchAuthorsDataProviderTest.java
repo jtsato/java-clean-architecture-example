@@ -42,7 +42,7 @@ class SearchAuthorsProviderTest {
         final String name = "Robert Cecil Martin";
         final String gender = Gender.MALE.name();
         final String startBirthdateDate = "1952-12-04";
-        final String endBirthdateDate = "1952-12-06";
+        final String endBirthdateDate = "1952-12-05";
 
         final SearchAuthorsParameters parameters = new SearchAuthorsParameters(null, name, gender, startBirthdateDate, endBirthdateDate);
 

@@ -8,7 +8,7 @@ import org.springframework.security.config.annotation.web.configurers.HeadersCon
 import org.springframework.security.web.SecurityFilterChain;
 
 /**
- * @author Jorge Takeshi Sato  
+ * @author Jorge Takeshi Sato
  */
 
 @Profile({"test", "dev"})

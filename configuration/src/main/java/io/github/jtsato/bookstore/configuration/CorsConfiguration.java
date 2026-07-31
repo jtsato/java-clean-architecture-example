@@ -13,7 +13,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Component;
 
 /**
- * @author Jorge Takeshi Sato  
+ * @author Jorge Takeshi Sato
  */
 
 @Component

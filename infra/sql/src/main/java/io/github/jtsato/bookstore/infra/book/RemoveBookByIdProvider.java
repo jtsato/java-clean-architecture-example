@@ -14,7 +14,7 @@ import io.github.jtsato.bookstore.infra.book.repository.BookRepository;
 import lombok.RequiredArgsConstructor;
 
 /**
- * @author Jorge Takeshi Sato 
+ * @author Jorge Takeshi Sato
  */
 
 @Transactional

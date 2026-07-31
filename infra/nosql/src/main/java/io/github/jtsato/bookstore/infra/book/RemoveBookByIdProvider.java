@@ -14,7 +14,7 @@ import io.github.jtsato.bookstore.infra.book.mapper.BookMapper;
 import io.github.jtsato.bookstore.infra.book.repository.BookRepository;
 
 /**
- * @author Jorge Takeshi Sato 
+ * @author Jorge Takeshi Sato
  */
 
 @Transactional
@@ -34,7 +34,7 @@ public class RemoveBookByIdProvider implements RemoveBookByIdGateway {
 
     private Book removeBookEntity(final BookEntity bookEntity) {
         final Book book = bookMapper.of(bookEntity);
-        // bookRepository.delete(bookEntity);
+        bookRepository.delete(bookEntity);
         return book;
     }
 }

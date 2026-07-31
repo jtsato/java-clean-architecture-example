@@ -11,7 +11,7 @@ import io.github.jtsato.bookstore.core.book.gateway.RemoveBookByIdGateway;
 import io.github.jtsato.bookstore.infra.service.DispatcherAmqpProducer;
 
 /**
- * @book Jorge Takeshi Sato 
+ * @book Jorge Takeshi Sato
  */
 
 @Service

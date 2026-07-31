@@ -42,8 +42,7 @@ public class UpdateBookByIdProvider implements UpdateBookByIdGateway {
 		bookEntity.setPrice(book.getPrice());
 		bookEntity.setAvailable(book.getAvailable());
 		bookEntity.setUpdateDate(book.getUpdateDate());
-		// return bookMapper.of(bookRepository.save(bookEntity));
-		return null;
+		return bookMapper.of;
 	}
 
 	private void updateAuthorIfApplicable(final Book book, final BookEntity bookEntity) {
