@@ -24,6 +24,9 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<java.version>21</java.version>
 		<maven.compiler.release>21</maven.compiler.release>
+		<sonar.organization>jtsato</sonar.organization>
+		<sonar.projectKey>jtsato_java-clean-architecture-example</sonar.projectKey>
+		<sonar.projectName>Java Clean Architecture Example</sonar.projectName>
 		<pitest-maven.version>1.19.11</pitest-maven.version>
 		<pitest-junit5-plugin.version>1.2.2</pitest-junit5-plugin.version>
 	</properties>
@@ -51,6 +54,11 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-failsafe-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.sonarsource.scanner.maven</groupId>
+				<artifactId>sonar-maven-plugin</artifactId>
+				<version>5.7.0.6970</version>
 			</plugin>
 			<plugin>
 				<groupId>org.pitest</groupId>

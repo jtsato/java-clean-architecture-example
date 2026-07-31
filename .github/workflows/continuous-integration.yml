@@ -47,7 +47,7 @@ jobs:
         if: ${{ env.SONAR_TOKEN != '' }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: mvn -B org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.token="$SONAR_TOKEN" -Dsonar.projectKey=io.github.jtsato:bookstore-application
+        run: mvn -B sonar:sonar -Dsonar.token="$SONAR_TOKEN"
 
       - name: SonarCloud not configured
         if: ${{ env.SONAR_TOKEN == '' }}
