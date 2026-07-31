@@ -11,14 +11,19 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
+  pages: write
+  id-token: write
 
 concurrency:
-  group: mutation-testing
+  group: pages
   cancel-in-progress: false
 
 jobs:
   mutation-testing:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
 
     steps:
@@ -49,15 +54,14 @@ jobs:
           cp -R infra/sql/target/mutation-report/. docs/mutation-reports/sql/
           cp -R entrypoints/rest/target/mutation-report/. docs/mutation-reports/rest/
 
-      - name: Commit mutation reports
-        run: |
-          git pull --rebase origin main
-          git add docs/mutation-reports
-          if git diff --cached --quiet; then
-            echo "No mutation report changes to commit"
-            exit 0
-          fi
-          git config user.email "action@github.com"
-          git config user.name "GitHub Actions"
-          git commit -m "docs(testing): update mutation reports"
-          git push origin main
+      - name: Set up GitHub Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload mutation reports
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: docs/mutation-reports
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v5

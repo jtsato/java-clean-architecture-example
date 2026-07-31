@@ -42,7 +42,7 @@ mvn -pl core pitest:mutationCoverage
 
 The **Continuous Testing** workflow calls the reusable **SonarCloud Analysis** workflow after the build succeeds. The Sonar workflow can also be started manually from GitHub Actions.
 
-The **Mutation Testing** workflow runs on weekdays at 03:30 UTC (and manually on demand), analyzes `core`, `infra/sql` and `entrypoints/rest`, then commits the PIT HTML reports to `docs/mutation-reports` on `main`.
+The **Mutation Testing** workflow runs PIT from the project root on weekdays at 03:30 UTC (and manually on demand), then publishes the HTML reports from `docs/mutation-reports` to GitHub Pages.
 
 ## Technology Stack
 
