@@ -3,7 +3,6 @@ package io.github.jtsato.bookstore.infra.author;
 import java.util.List;
 
 import org.mapstruct.factory.Mappers;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,6 +16,7 @@ import io.github.jtsato.bookstore.infra.author.domain.AuthorEntity;
 import io.github.jtsato.bookstore.infra.author.domain.QAuthorEntity;
 import io.github.jtsato.bookstore.infra.author.mapper.AuthorMapper;
 import io.github.jtsato.bookstore.infra.author.repository.AuthorRepository;
+import lombok.RequiredArgsConstructor;
 import io.github.jtsato.bookstore.infra.common.PageMapper;
 import io.github.jtsato.bookstore.infra.common.PageRequestHelper;
 
@@ -26,14 +26,14 @@ import io.github.jtsato.bookstore.infra.common.PageRequestHelper;
 
 @Transactional(readOnly = true)
 @Service
+@RequiredArgsConstructor
 public class FindAuthorsByIdsProvider implements FindAuthorsByIdsGateway {
 
     private final PageMapper<Author, AuthorEntity> pageMapper = new PageMapper<>() {};
     
     private final AuthorMapper authorMapper = Mappers.getMapper(AuthorMapper.class);
     
-    @Autowired
-    AuthorRepository authorRepository;
+    private final AuthorRepository authorRepository;
 
     @Override
     public Page<Author> execute(final List<Long> ids) {

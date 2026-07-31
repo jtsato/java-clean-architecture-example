@@ -1,6 +1,7 @@
 package io.github.jtsato.bookstore.exception.handler;
 
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.List;
 import java.util.Locale;
 import java.util.stream.Collectors;
@@ -9,7 +10,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.hibernate.exception.ConstraintViolationException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.converter.HttpMessageNotReadableException;
@@ -34,11 +34,14 @@ public class GlobalExceptionHandler {
 
     private static final Logger log = LogManager.getLogger(GlobalExceptionHandler.class);
 
-    @Autowired
-    private MessageSource messageSource;
+    private final MessageSource messageSource;
 
-    @Autowired
-    private WebRequest webRequest;
+    private final WebRequest webRequest;
+
+    public GlobalExceptionHandler(final MessageSource messageSource, final WebRequest webRequest) {
+        this.messageSource = messageSource;
+        this.webRequest = webRequest;
+    }
 
     @ResponseBody
     @ResponseStatus(HttpStatus.BAD_REQUEST)
@@ -92,6 +95,6 @@ public class GlobalExceptionHandler {
     }
 
     public static HttpResponseStatus buildHttpResponseStatus(final HttpStatus httpStatus, final String message, final String path) {
-        return new HttpResponseStatus(LocalDateTime.now(), httpStatus.value(), httpStatus.getReasonPhrase(), message, path);
+        return new HttpResponseStatus(LocalDateTime.now(ZoneId.systemDefault()), httpStatus.value(), httpStatus.getReasonPhrase(), message, path);
     }
 }

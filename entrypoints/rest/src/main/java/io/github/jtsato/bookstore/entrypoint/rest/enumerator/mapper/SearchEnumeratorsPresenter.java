@@ -1,7 +1,6 @@
 package io.github.jtsato.bookstore.entrypoint.rest.enumerator.mapper;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
@@ -22,7 +21,7 @@ public class SearchEnumeratorsPresenter {
     private final MessageSource messageSource;
 
     public List<EnumeratorResponse> of(final List<Enumerator> enumerators) {
-        return enumerators.stream().map(this::of).collect(Collectors.toList());
+        return enumerators.stream().map(this::of).toList();
     }
 
     private EnumeratorResponse of(final Enumerator enumerator) {

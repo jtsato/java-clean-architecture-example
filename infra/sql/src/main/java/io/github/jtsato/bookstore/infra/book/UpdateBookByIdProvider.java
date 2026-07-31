@@ -3,7 +3,6 @@ package io.github.jtsato.bookstore.infra.book;
 import java.util.Optional;
 
 import org.mapstruct.factory.Mappers;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -13,6 +12,7 @@ import io.github.jtsato.bookstore.infra.author.repository.AuthorRepository;
 import io.github.jtsato.bookstore.infra.book.domain.BookEntity;
 import io.github.jtsato.bookstore.infra.book.mapper.BookMapper;
 import io.github.jtsato.bookstore.infra.book.repository.BookRepository;
+import lombok.RequiredArgsConstructor;
 
 /**
  * @author Jorge Takeshi Sato
@@ -20,15 +20,14 @@ import io.github.jtsato.bookstore.infra.book.repository.BookRepository;
 
 @Transactional
 @Service
+@RequiredArgsConstructor
 public class UpdateBookByIdProvider implements UpdateBookByIdGateway {
     
     private final BookMapper bookMapper = Mappers.getMapper(BookMapper.class);
 
-    @Autowired
-    BookRepository bookRepository;
+    private final BookRepository bookRepository;
 
-    @Autowired
-    AuthorRepository authorRepository;
+    private final AuthorRepository authorRepository;
 
     @Override
     public Optional<Book> execute(final Book book) {

@@ -1,6 +1,7 @@
 package io.github.jtsato.bookstore.exception.handler;
 
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.Locale;
 import java.util.Set;
 import java.util.stream.Collector;
@@ -9,7 +10,6 @@ import java.util.stream.Collectors;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.ConstraintViolationException;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -32,11 +32,14 @@ import io.github.jtsato.bookstore.entrypoint.rest.common.WebRequest;
 @RestControllerAdvice
 public class BookstoreExceptionHandler {
 
-    @Autowired
-    private MessageSource messageSource;
+    private final MessageSource messageSource;
 
-    @Autowired
-    private WebRequest webRequest;
+    private final WebRequest webRequest;
+
+    public BookstoreExceptionHandler(final MessageSource messageSource, final WebRequest webRequest) {
+        this.messageSource = messageSource;
+        this.webRequest = webRequest;
+    }
 
     @ResponseBody
     @ResponseStatus(HttpStatus.NOT_FOUND)
@@ -88,6 +91,6 @@ public class BookstoreExceptionHandler {
     }
 
     public static HttpResponseStatus buildHttpResponseStatus(final HttpStatus httpStatus, final String message, final String path) {
-        return new HttpResponseStatus(LocalDateTime.now(), httpStatus.value(), httpStatus.getReasonPhrase(), message, path);
+        return new HttpResponseStatus(LocalDateTime.now(ZoneId.systemDefault()), httpStatus.value(), httpStatus.getReasonPhrase(), message, path);
     }
 }

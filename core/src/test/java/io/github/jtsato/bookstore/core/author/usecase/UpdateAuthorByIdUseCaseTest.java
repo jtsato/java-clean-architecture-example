@@ -2,6 +2,7 @@ package io.github.jtsato.bookstore.core.author.usecase;
 
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import java.time.LocalDate;
@@ -15,7 +16,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 
 import io.github.jtsato.bookstore.core.author.domain.Author;
 import io.github.jtsato.bookstore.core.author.domain.Gender;
@@ -34,10 +34,10 @@ import io.github.jtsato.bookstore.core.exception.UniqueConstraintException;
 class UpdateAuthorByIdUseCaseTest {
 
     @Mock
-    private final UpdateAuthorByIdGateway updateAuthorByIdGateway = Mockito.mock(UpdateAuthorByIdGateway.class);
+    private final UpdateAuthorByIdGateway updateAuthorByIdGateway = mock(UpdateAuthorByIdGateway.class);
 
     @Mock
-    private final GetAuthorByNameGateway getAuthorByNameGateway = Mockito.mock(GetAuthorByNameGateway.class);
+    private final GetAuthorByNameGateway getAuthorByNameGateway = mock(GetAuthorByNameGateway.class);
 
     @InjectMocks
     private final UpdateAuthorByIdUseCase updateAuthorByIdUseCase = new UpdateAuthorByIdAction(updateAuthorByIdGateway, getAuthorByNameGateway);

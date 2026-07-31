@@ -2,7 +2,6 @@ package io.github.jtsato.bookstore.infra.common;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.domain.PageRequest;
@@ -41,9 +40,9 @@ public class PageRequestHelper {
 
         final List<String> parameters = Arrays.stream(StringUtils.split(orderBy, FIELD_DELIMITER))
                                               .map(element -> StringUtils.substringBefore(element, DELIMITER))
-                                              .collect(Collectors.toList());
+                                              .toList();
 
-        return Sort.by(parameters.stream().map(propertyName -> getOrder(propertyName, orderBy)).collect(Collectors.toList()));
+        return Sort.by(parameters.stream().map(propertyName -> getOrder(propertyName, orderBy)).toList());
     }
 
     private static Order getOrder(final String propertyName, final String orderBy) {

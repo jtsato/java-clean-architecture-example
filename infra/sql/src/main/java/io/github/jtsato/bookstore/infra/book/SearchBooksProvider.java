@@ -2,7 +2,6 @@ package io.github.jtsato.bookstore.infra.book;
 
 import org.apache.commons.lang3.StringUtils;
 import org.mapstruct.factory.Mappers;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,6 +20,7 @@ import io.github.jtsato.bookstore.infra.book.mapper.BookMapper;
 import io.github.jtsato.bookstore.infra.book.repository.BookRepository;
 import io.github.jtsato.bookstore.infra.book.repository.SearchBooksPredicateBuilder;
 import io.github.jtsato.bookstore.infra.common.PageMapper;
+import lombok.RequiredArgsConstructor;
 import io.github.jtsato.bookstore.infra.common.PageRequestHelper;
 
 /**
@@ -29,10 +29,10 @@ import io.github.jtsato.bookstore.infra.common.PageRequestHelper;
 
 @Transactional(readOnly = true)
 @Service
+@RequiredArgsConstructor
 public class SearchBooksProvider implements SearchBooksGateway {
     
-    @Autowired
-    BookRepository bookRepository;
+    private final BookRepository bookRepository;
 
     private final BookMapper bookMapper = Mappers.getMapper(BookMapper.class);
     private final PageMapper<Book, BookEntity> pageMapper = new PageMapper<>() {};

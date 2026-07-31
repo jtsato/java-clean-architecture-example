@@ -1,7 +1,6 @@
 package io.github.jtsato.bookstore.infra.author;
 
 import org.mapstruct.factory.Mappers;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -10,6 +9,7 @@ import io.github.jtsato.bookstore.core.author.gateway.RegisterAuthorGateway;
 import io.github.jtsato.bookstore.infra.author.domain.AuthorEntity;
 import io.github.jtsato.bookstore.infra.author.mapper.AuthorMapper;
 import io.github.jtsato.bookstore.infra.author.repository.AuthorRepository;
+import lombok.RequiredArgsConstructor;
 
 /**
  * @author Jorge Takeshi Sato
@@ -17,12 +17,12 @@ import io.github.jtsato.bookstore.infra.author.repository.AuthorRepository;
 
 @Transactional
 @Service
+@RequiredArgsConstructor
 public class RegisterAuthorProvider implements RegisterAuthorGateway {
 
     private final AuthorMapper authorMapper = Mappers.getMapper(AuthorMapper.class);
     
-    @Autowired
-    AuthorRepository authorRepository;
+    private final AuthorRepository authorRepository;
 
     @Override
     public Author execute(final Author author) {

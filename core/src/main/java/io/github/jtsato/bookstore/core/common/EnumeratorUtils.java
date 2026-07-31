@@ -4,7 +4,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
-import java.util.stream.Collectors;
 
 import io.github.jtsato.bookstore.core.exception.InvalidEnumeratorException;
 import lombok.AccessLevel;
@@ -25,7 +24,7 @@ public class EnumeratorUtils {
     }
 
     private static <T extends Enum<T>> List<String> getValues(final List<T> values) {
-        return values.stream().map(T::toString).collect(Collectors.toList());
+        return values.stream().map(T::toString).toList();
     }
 
     private static Supplier<? extends InvalidEnumeratorException> throwIllegalArgumentException(final String enumClass,

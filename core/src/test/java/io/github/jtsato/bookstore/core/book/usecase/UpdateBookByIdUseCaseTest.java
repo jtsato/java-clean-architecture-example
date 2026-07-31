@@ -2,6 +2,7 @@ package io.github.jtsato.bookstore.core.book.usecase;
 
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import java.math.BigDecimal;
@@ -17,7 +18,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 
 import io.github.jtsato.bookstore.core.author.domain.Author;
 import io.github.jtsato.bookstore.core.author.domain.Gender;
@@ -39,16 +39,16 @@ import io.github.jtsato.bookstore.core.exception.UniqueConstraintException;
 class UpdateBookByIdUseCaseTest {
 
     @Mock
-    private final UpdateBookByIdGateway updateBookByIdGateway = Mockito.mock(UpdateBookByIdGateway.class);
+    private final UpdateBookByIdGateway updateBookByIdGateway = mock(UpdateBookByIdGateway.class);
 
     @Mock
-    private final GetAuthorByIdGateway getAuthorByIdGateway = Mockito.mock(GetAuthorByIdGateway.class);
+    private final GetAuthorByIdGateway getAuthorByIdGateway = mock(GetAuthorByIdGateway.class);
 
     @Mock
-    private final GetBookByTitleGateway getBookByTitleGateway = Mockito.mock(GetBookByTitleGateway.class);
+    private final GetBookByTitleGateway getBookByTitleGateway = mock(GetBookByTitleGateway.class);
 
     @Mock
-    private final GetLocalDateTime getLocalDateTime = Mockito.mock(GetLocalDateTime.class);
+    private final GetLocalDateTime getLocalDateTime = mock(GetLocalDateTime.class);
 
     @InjectMocks
     private final UpdateBookByIdUseCase updateBookByIdUseCase = new UpdateBookByIdAction(updateBookByIdGateway,
@@ -102,7 +102,7 @@ class UpdateBookByIdUseCaseTest {
 
         when(updateBookByIdGateway.execute(mockUpdateBookByIdGatewayIn())).thenReturn(mockUpdateBookByIdGatewayOut());
         when(getAuthorByIdGateway.execute(1L)).thenReturn(mockGetAuthorByIdGateway());
-        when(getBookByTitleGateway.execute("Effective Java (2nd Edition)")).thenReturn(mockGetBookByTitleGatewayWithSameId());
+        when(getBookByTitleGateway.execute("Effective Java (2nd Edition)")).thenReturn(mockUpdateBookByIdGatewayOut());
 
         updateBookById();
     }
@@ -213,24 +213,13 @@ class UpdateBookByIdUseCaseTest {
                                     LocalDateTime.parse("2020-04-12T22:04:59.123")));
     }
 
-    private Optional<Book> mockGetBookByTitleGatewayWithSameId() {
-        final Author author = new Author(1L, "Joshua Bloch", Gender.MALE, LocalDate.parse("1961-08-28"));
-        return Optional.of(new Book(1L,
-                                    author,
-                                    "Effective Java (2nd Edition)",
-                                    BigDecimal.valueOf(10.00),
-                                    Boolean.TRUE,
-                                    LocalDateTime.parse("2020-03-12T22:04:59.123"),
-                                    LocalDateTime.parse("2020-04-12T22:04:59.123")));
-    }
-
     @DisplayName("Fail to update book by id if author no found")
     @Test
     void failToUpdateBookByIdIfAuthorNotFound() {
 
         when(updateBookByIdGateway.execute(mockUpdateBookByIdGatewayIn())).thenReturn(mockUpdateBookByIdGatewayOut());
         when(getAuthorByIdGateway.execute(1L)).thenReturn(Optional.empty());
-        when(getBookByTitleGateway.execute("Effective Java (2nd Edition)")).thenReturn(mockGetBookByTitleGatewayWithSameId());
+        when(getBookByTitleGateway.execute("Effective Java (2nd Edition)")).thenReturn(mockUpdateBookByIdGatewayOut());
 
         final UpdateBookByIdParameters parameters = new UpdateBookByIdParameters(1L,
                                                                                  1L,

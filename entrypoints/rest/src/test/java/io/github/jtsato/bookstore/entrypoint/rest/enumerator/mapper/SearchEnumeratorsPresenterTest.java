@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.ArgumentMatchers.isNull;
 import static org.mockito.ArgumentMatchers.nullable;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
@@ -14,7 +15,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.springframework.context.MessageSource;
 
 import io.github.jtsato.bookstore.core.author.domain.Gender;
@@ -29,7 +29,7 @@ import io.github.jtsato.bookstore.entrypoint.rest.enumerator.domain.response.Enu
 class SearchEnumeratorsPresenterTest {
 
     @Mock
-    private final MessageSource messageSource = Mockito.mock(MessageSource.class);
+    private final MessageSource messageSource = mock(MessageSource.class);
 
     @InjectMocks
     private final SearchEnumeratorsPresenter presenter = new SearchEnumeratorsPresenter(messageSource);
@@ -43,7 +43,7 @@ class SearchEnumeratorsPresenterTest {
 
         final List<EnumeratorResponse> responses = presenter.of(dummyEnumerators());
         assertThat(responses).isNotNull().isNotEmpty();
-        assertThat(responses.size()).isEqualTo(2);
+        assertThat(responses).hasSize(2);
 
         final EnumeratorResponse response1 = responses.get(0);
         assertThat(response1).isNotNull();

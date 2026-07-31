@@ -2,6 +2,7 @@ package io.github.jtsato.bookstore.core.author.usecase;
 
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import java.math.BigDecimal;
@@ -17,7 +18,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 
 import io.github.jtsato.bookstore.core.author.domain.Author;
 import io.github.jtsato.bookstore.core.author.domain.Gender;
@@ -39,10 +39,10 @@ import io.github.jtsato.bookstore.core.exception.NotFoundException;
 class RemoveAuthorByIdUseCaseTest {
 
     @Mock
-    private final RemoveAuthorByIdGateway removeAuthorByIdGateway = Mockito.mock(RemoveAuthorByIdGateway.class);
+    private final RemoveAuthorByIdGateway removeAuthorByIdGateway = mock(RemoveAuthorByIdGateway.class);
 
     @Mock
-    private final SearchBooksByAuthorIdGateway searchBooksByAuthorIdGateway = Mockito.mock(SearchBooksByAuthorIdGateway.class);
+    private final SearchBooksByAuthorIdGateway searchBooksByAuthorIdGateway = mock(SearchBooksByAuthorIdGateway.class);
 
     @InjectMocks
     private final RemoveAuthorByIdUseCase removeAuthorByIdUseCase = new RemoveAuthorByIdAction(removeAuthorByIdGateway, searchBooksByAuthorIdGateway);

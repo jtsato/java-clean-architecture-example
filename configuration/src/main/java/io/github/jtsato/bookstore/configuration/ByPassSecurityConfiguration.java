@@ -4,6 +4,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configurers.HeadersConfigurer.FrameOptionsConfig;
 import org.springframework.security.web.SecurityFilterChain;
 
 /**
@@ -15,11 +16,11 @@ import org.springframework.security.web.SecurityFilterChain;
 public class ByPassSecurityConfiguration {
 
     @Bean
-    SecurityFilterChain securityFilterChain(final HttpSecurity httpSecurity) throws Exception {
+    SecurityFilterChain securityFilterChain(final HttpSecurity httpSecurity) {
         httpSecurity
             .csrf(csrf -> csrf.disable())
             .authorizeHttpRequests(authorize -> authorize.anyRequest().permitAll())
-            .headers(headers -> headers.frameOptions(frameOptions -> frameOptions.sameOrigin()));
+            .headers(headers -> headers.frameOptions(FrameOptionsConfig::sameOrigin));
         return httpSecurity.build();
     }
 }

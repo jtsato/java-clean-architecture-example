@@ -2,6 +2,7 @@ package io.github.jtsato.bookstore.core.author.usecase;
 
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import java.time.LocalDate;
@@ -17,7 +18,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 
 import io.github.jtsato.bookstore.core.author.domain.Author;
 import io.github.jtsato.bookstore.core.author.domain.Gender;
@@ -36,7 +36,7 @@ import io.github.jtsato.bookstore.core.common.paging.Pageable;
 class SearchAuthorsUseCaseTest {
 
     @Mock
-    private final SearchAuthorsGateway searchAuthorsGateway = Mockito.mock(SearchAuthorsGateway.class);
+    private final SearchAuthorsGateway searchAuthorsGateway = mock(SearchAuthorsGateway.class);
 
     @InjectMocks
     private final SearchAuthorsUseCase searchAuthorsUseCase = new SearchAuthorsAction(searchAuthorsGateway);
@@ -84,7 +84,7 @@ class SearchAuthorsUseCaseTest {
         final List<Author> authors = pageOfAuthors.getContent();
 
         assertThat(authors).isNotNull().isNotEmpty();
-        assertThat(authors.size()).isOne();
+        assertThat(authors).hasSize(1);
 
         final Author author = authors.get(0);
 

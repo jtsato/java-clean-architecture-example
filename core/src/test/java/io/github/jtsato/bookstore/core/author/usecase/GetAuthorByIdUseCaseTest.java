@@ -2,6 +2,7 @@ package io.github.jtsato.bookstore.core.author.usecase;
 
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import java.time.LocalDate;
@@ -12,7 +13,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 
 import io.github.jtsato.bookstore.core.author.domain.Author;
 import io.github.jtsato.bookstore.core.author.domain.Gender;
@@ -29,7 +29,7 @@ import io.github.jtsato.bookstore.core.exception.NotFoundException;
 class GetAuthorByIdUseCaseTest {
 
     @Mock
-    private final GetAuthorByIdGateway getAuthorByIdGateway = Mockito.mock(GetAuthorByIdGateway.class);
+    private final GetAuthorByIdGateway getAuthorByIdGateway = mock(GetAuthorByIdGateway.class);
 
     @InjectMocks
     private final GetAuthorByIdUseCase getAuthorByIdUseCase = new GetAuthorByIdAction(getAuthorByIdGateway);

@@ -3,7 +3,6 @@ package io.github.jtsato.bookstore.core.enumerator.action;
 import java.util.Arrays;
 import java.util.List;
 import java.util.function.Predicate;
-import java.util.stream.Collectors;
 
 import jakarta.inject.Named;
 
@@ -34,7 +33,7 @@ public class SearchEnumeratorsAction implements SearchEnumeratorsUseCase {
     @Override
     public List<Enumerator> execute(final SearchEnumeratorsParameters parameters) {
         final Predicate<? super Enumerator> filter = enumerator -> compare(enumerator, parameters.getDomain(), parameters.getKey());
-        return getAllEnumerators().stream().filter(filter).collect(Collectors.toList());
+        return getAllEnumerators().stream().filter(filter).toList();
     }
 
     private boolean compare(final Enumerator enumerator, final String domain, final String key) {
@@ -45,7 +44,7 @@ public class SearchEnumeratorsAction implements SearchEnumeratorsUseCase {
 
     private List<Enumerator> getAllEnumerators() {
         final List<Gender> genders = Arrays.asList(Gender.values());
-        return genders.stream().map(this::buildEnumerator).collect(Collectors.toList());
+        return genders.stream().map(this::buildEnumerator).toList();
     }
 
     private Enumerator buildEnumerator(final Gender element) {

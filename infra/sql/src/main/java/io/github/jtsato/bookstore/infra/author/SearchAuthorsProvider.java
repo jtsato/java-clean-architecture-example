@@ -2,7 +2,6 @@ package io.github.jtsato.bookstore.infra.author;
 
 import org.apache.commons.lang3.StringUtils;
 import org.mapstruct.factory.Mappers;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,6 +18,7 @@ import io.github.jtsato.bookstore.infra.author.mapper.AuthorMapper;
 import io.github.jtsato.bookstore.infra.author.repository.SearchAuthorsPredicateBuilder;
 import io.github.jtsato.bookstore.infra.author.repository.AuthorRepository;
 import io.github.jtsato.bookstore.infra.common.PageMapper;
+import lombok.RequiredArgsConstructor;
 import io.github.jtsato.bookstore.infra.common.PageRequestHelper;
 
 /**
@@ -27,14 +27,14 @@ import io.github.jtsato.bookstore.infra.common.PageRequestHelper;
 
 @Transactional(readOnly = true)
 @Service
+@RequiredArgsConstructor
 public class SearchAuthorsProvider implements SearchAuthorsGateway {
 
     private final PageMapper<Author, AuthorEntity> pageMapper = new PageMapper<>() {};
 
     private final AuthorMapper authorMapper = Mappers.getMapper(AuthorMapper.class);
 
-    @Autowired
-    AuthorRepository authorRepository;
+    private final AuthorRepository authorRepository;
 
     @Override
     public Page<Author> execute(final SearchAuthorsParameters parameters, final Integer pageNumber, final Integer size, final String orderBy) {

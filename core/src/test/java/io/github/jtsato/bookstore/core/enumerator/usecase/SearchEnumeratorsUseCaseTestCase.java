@@ -28,7 +28,7 @@ class SearchEnumeratorsUseCaseTest {
         final List<Enumerator> enumerators = getBookByIdUseCase.execute(parameters);
 
         assertThat(enumerators).isNotNull().isNotEmpty();
-        assertThat(enumerators.size()).isEqualTo(2);
+        assertThat(enumerators).hasSize(2);
     }
 
     @DisplayName("Successful to search enumerators if domain exist")
@@ -39,7 +39,7 @@ class SearchEnumeratorsUseCaseTest {
         final List<Enumerator> enumerators = getBookByIdUseCase.execute(parameters);
 
         assertThat(enumerators).isNotNull().isNotEmpty();
-        assertThat(enumerators.size()).isEqualTo(2);
+        assertThat(enumerators).hasSize(2);
     }
 
     @DisplayName("Successful to search enumerators if domain and key exist")
@@ -50,7 +50,7 @@ class SearchEnumeratorsUseCaseTest {
         final List<Enumerator> enumerators = getBookByIdUseCase.execute(parameters);
 
         assertThat(enumerators).isNotNull().isNotEmpty();
-        assertThat(enumerators.size()).isOne();
+        assertThat(enumerators).hasSize(1);
     }
 
     @DisplayName("Successful to search enumerators if domain do not exist")

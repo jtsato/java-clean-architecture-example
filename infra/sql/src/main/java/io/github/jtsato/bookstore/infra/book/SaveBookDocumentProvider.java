@@ -1,7 +1,6 @@
 package io.github.jtsato.bookstore.infra.book;
 
 import org.mapstruct.factory.Mappers;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -10,6 +9,7 @@ import io.github.jtsato.bookstore.core.book.gateway.SaveBookDocumentGateway;
 import io.github.jtsato.bookstore.infra.book.domain.BookDocumentEntity;
 import io.github.jtsato.bookstore.infra.book.mapper.BookDocumentMapper;
 import io.github.jtsato.bookstore.infra.book.repository.BookDocumentRepository;
+import lombok.RequiredArgsConstructor;
 
 /**
  * @author Jorge Takeshi Sato
@@ -17,12 +17,12 @@ import io.github.jtsato.bookstore.infra.book.repository.BookDocumentRepository;
 
 @Transactional
 @Service
+@RequiredArgsConstructor
 public class SaveBookDocumentProvider implements SaveBookDocumentGateway {
 
     private final BookDocumentMapper bookDocumentMapper = Mappers.getMapper(BookDocumentMapper.class);
     
-    @Autowired
-    BookDocumentRepository bookDocumentRepository;
+    private final BookDocumentRepository bookDocumentRepository;
 
     @Override
     public BookDocument execute(final BookDocument bookDocument) {
