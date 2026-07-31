@@ -1,11 +1,11 @@
 # Example of a Java Clean Architecture Implementation 
 
-![Java CI with Maven](https://github.com/jtsato/java-clean-architecture-example/workflows/Java%20CI%20with%20Maven/badge.svg)
-[![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=io.github.jtsato%3Abookstore-application&metric=ncloc)](https://sonarcloud.io/dashboard?id=io.github.jtsato%3Abookstore-application)
-[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=io.github.jtsato%3Abookstore-application&metric=coverage)](https://sonarcloud.io/dashboard?id=io.github.jtsato%3Abookstore-application)
-[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=io.github.jtsato%3Abookstore-application&metric=security_rating)](https://sonarcloud.io/dashboard?id=io.github.jtsato%3Abookstore-application)
-[![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=io.github.jtsato%3Abookstore-application&metric=reliability_rating)](https://sonarcloud.io/dashboard?id=io.github.jtsato%3Abookstore-application)
-[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=io.github.jtsato%3Abookstore-application&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=io.github.jtsato%3Abookstore-application)
+[![Continuous Integration](https://github.com/jtsato/java-clean-architecture-example/actions/workflows/continuous-integration.yml/badge.svg?branch=main)](https://github.com/jtsato/java-clean-architecture-example/actions/workflows/continuous-integration.yml)
+[![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=jtsato_java-clean-architecture-example&metric=ncloc)](https://sonarcloud.io/summary/new_code?id=jtsato_java-clean-architecture-example)
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=jtsato_java-clean-architecture-example&metric=coverage)](https://sonarcloud.io/summary/new_code?id=jtsato_java-clean-architecture-example)
+[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=jtsato_java-clean-architecture-example&metric=security_rating)](https://sonarcloud.io/summary/new_code?id=jtsato_java-clean-architecture-example)
+[![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=jtsato_java-clean-architecture-example&metric=reliability_rating)](https://sonarcloud.io/summary/new_code?id=jtsato_java-clean-architecture-example)
+[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=jtsato_java-clean-architecture-example&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=jtsato_java-clean-architecture-example)
 
 ## Prerequisites
 
