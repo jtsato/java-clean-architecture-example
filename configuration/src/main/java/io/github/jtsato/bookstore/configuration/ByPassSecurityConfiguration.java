@@ -18,7 +18,6 @@ public class ByPassSecurityConfiguration {
     @Bean
     SecurityFilterChain securityFilterChain(final HttpSecurity httpSecurity) {
         httpSecurity
-            .csrf(csrf -> csrf.disable())
             .authorizeHttpRequests(authorize -> authorize.anyRequest().permitAll())
             .headers(headers -> headers.frameOptions(FrameOptionsConfig::sameOrigin));
         return httpSecurity.build();
