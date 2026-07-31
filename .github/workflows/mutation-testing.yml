@@ -43,7 +43,7 @@ jobs:
 
       - name: Publish mutation reports
         run: |
-          rm -rf docs/mutation-reports
+          rm -rf docs/mutation-reports/core docs/mutation-reports/sql docs/mutation-reports/rest
           mkdir -p docs/mutation-reports/core docs/mutation-reports/sql docs/mutation-reports/rest
           cp -R core/target/mutation-report/. docs/mutation-reports/core/
           cp -R infra/sql/target/mutation-report/. docs/mutation-reports/sql/
