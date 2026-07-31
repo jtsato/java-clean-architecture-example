@@ -19,9 +19,12 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.boot.webmvc.test.autoconfigure.AutoConfigureMockMvc;
+import org.springframework.boot.webmvc.test.autoconfigure.WebMvcTest;
+import org.springframework.boot.test.context.TestConfiguration;
+import org.springframework.context.annotation.Import;
+import org.springframework.data.web.config.EnableSpringDataWebSupport;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
@@ -42,12 +45,18 @@ import io.github.jtsato.bookstore.core.common.paging.Pageable;
 @AutoConfigureMockMvc(addFilters = false)
 @ExtendWith(SpringExtension.class)
 @WebMvcTest(controllers = SearchAuthorsController.class)
+@Import(SearchAuthorsControllerTest.SpringDataWebConfiguration.class)
 class SearchAuthorsControllerTest {
+
+    @TestConfiguration(proxyBeanMethods = false)
+    @EnableSpringDataWebSupport
+    static class SpringDataWebConfiguration {
+    }
 
     @Autowired
     private MockMvc mockMvc;
 
-    @MockBean
+    @MockitoBean
     private SearchAuthorsUseCase searchAuthorsUseCase;
 
     @DisplayName("Successful search authors if found")
@@ -60,7 +69,7 @@ class SearchAuthorsControllerTest {
 
         final String queryParameters = "page=1&size=3&sort=name,asc&name=John&gender=MALE&startBirthdate=1960-01-01&endBirthdate=1980-12-31";
 
-        mockMvc.perform(get(String.format("/authors/?%s", queryParameters)).contentType(MediaType.APPLICATION_JSON_VALUE)
+        mockMvc.perform(get(String.format("/authors?%s", queryParameters)).contentType(MediaType.APPLICATION_JSON_VALUE)
                                                                            .accept(MediaType.APPLICATION_JSON_VALUE))
                .andDo(print())
                .andExpect(status().isOk())

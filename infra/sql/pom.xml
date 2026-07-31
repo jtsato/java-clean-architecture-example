@@ -23,7 +23,7 @@
 		<java.version>21</java.version>
 		<maven.compiler.release>21</maven.compiler.release>
 		<lombok.version>1.18.40</lombok.version>
-		<spring-data-jpa-entity-graph.version>3.5.0</spring-data-jpa-entity-graph.version>
+		<spring-data-jpa-entity-graph.version>4.0.4</spring-data-jpa-entity-graph.version>
 		<p6spy.version>3.9.1</p6spy.version>
 		<jakarta.el.version>5.0.0-M1</jakarta.el.version>
 		<pitest-maven.version>1.19.11</pitest-maven.version>
@@ -31,6 +31,7 @@
 		<testcontainers.version>1.21.3</testcontainers.version>
 		<jacoco.version>0.8.13</jacoco.version>
 		<mapstruct.version>1.6.3</mapstruct.version>
+		<lombok-mapstruct-binding.version>0.2.0</lombok-mapstruct-binding.version>
 		<querydsl.version>5.1.0</querydsl.version>
 		<sonar.coverage.exclusions>
 			**/src/**/core/**,
@@ -57,6 +58,11 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa-test</artifactId>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
@@ -162,13 +168,7 @@
 					<execution>
 						<id>default-instrument</id>
 						<goals>
-							<goal>instrument</goal>
-						</goals>
-					</execution>
-					<execution>
-						<id>default-restore-instrumented-classes</id>
-						<goals>
-							<goal>restore-instrumented-classes</goal>
+							<goal>prepare-agent</goal>
 						</goals>
 					</execution>
 					<execution>
@@ -203,10 +203,15 @@
                             <artifactId>mapstruct-processor</artifactId>
 							<version>${mapstruct.version}</version>
                         </path>
-                        <path>
-                            <groupId>org.projectlombok</groupId>
-                            <artifactId>lombok</artifactId>
+						<path>
+							<groupId>org.projectlombok</groupId>
+							<artifactId>lombok</artifactId>
 							<version>${lombok.version}</version>
+						</path>
+						<path>
+							<groupId>org.projectlombok</groupId>
+							<artifactId>lombok-mapstruct-binding</artifactId>
+							<version>${lombok-mapstruct-binding.version}</version>
 						</path>
 						<path>
 							<groupId>com.querydsl</groupId>

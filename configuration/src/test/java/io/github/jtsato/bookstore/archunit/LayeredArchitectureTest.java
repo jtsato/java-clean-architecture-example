@@ -20,6 +20,7 @@ public class LayeredArchitectureTest {
 
     @ArchTest
     static final ArchRule layer_dependencies_are_respected = layeredArchitecture()
+                                                                                  .consideringAllDependencies()
 
                                                                                   .layer("Configurations")
                                                                                   .definedBy("..configuration..")

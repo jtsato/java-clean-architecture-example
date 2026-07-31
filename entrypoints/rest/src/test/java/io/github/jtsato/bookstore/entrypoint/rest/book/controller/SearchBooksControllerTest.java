@@ -22,9 +22,12 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.boot.webmvc.test.autoconfigure.AutoConfigureMockMvc;
+import org.springframework.boot.webmvc.test.autoconfigure.WebMvcTest;
+import org.springframework.boot.test.context.TestConfiguration;
+import org.springframework.context.annotation.Import;
+import org.springframework.data.web.config.EnableSpringDataWebSupport;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
@@ -47,12 +50,18 @@ import io.github.jtsato.bookstore.core.common.paging.Pageable;
 @AutoConfigureMockMvc(addFilters = false)
 @ExtendWith(SpringExtension.class)
 @WebMvcTest(controllers = SearchBooksController.class)
+@Import(SearchBooksControllerTest.SpringDataWebConfiguration.class)
 class SearchBooksControllerTest {
+
+    @TestConfiguration(proxyBeanMethods = false)
+    @EnableSpringDataWebSupport
+    static class SpringDataWebConfiguration {
+    }
 
     @Autowired
     private MockMvc mockMvc;
 
-    @MockBean
+    @MockitoBean
     private SearchBooksUseCase searchBooksUseCase;
 
     @DisplayName("Successful search books if found")
@@ -70,7 +79,7 @@ class SearchBooksControllerTest {
 
         final String queryParameters = "page=1&size=3&sort=title,asc&title=Effective Java&author.id=1&startCreationDate=2020-02-29T00:00:00&endCreationDate=2020-02-29T23:59:59";
 
-        mockMvc.perform(get(String.format("/books/?%s", queryParameters)).contentType(MediaType.APPLICATION_JSON_VALUE)
+        mockMvc.perform(get(String.format("/books?%s", queryParameters)).contentType(MediaType.APPLICATION_JSON_VALUE)
                                                                          .accept(MediaType.APPLICATION_JSON_VALUE))
                .andDo(print())
                .andExpect(status().isOk())

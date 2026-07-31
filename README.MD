@@ -9,11 +9,11 @@
 
 ## Prerequisites
 
-* JDK 11
+* JDK 21
 * This project uses Lombok, so enable annotation processing in your IDE
 
 ## Technology Stack
-* Language: [`Java 11`](https://www.java.com/) 
+* Language: [`Java 21`](https://www.java.com/)
 * Compilation: [`Maven`](https://maven.apache.org/)
 * Framework: [`SpringBoot`](https://spring.io/projects/spring-boot)
 * Database: [`H2`](http://h2database.com/) [`MySQL`](https://www.mysql.com/)

@@ -20,9 +20,9 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.boot.webmvc.test.autoconfigure.AutoConfigureMockMvc;
+import org.springframework.boot.webmvc.test.autoconfigure.WebMvcTest;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
@@ -47,10 +47,10 @@ class SearchEnumeratorsControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
-    @MockBean
+    @MockitoBean
     private SearchEnumeratorsUseCase searchEnumeratorsUseCase;
 
-    @MockBean
+    @MockitoBean
     private SearchEnumeratorsPresenter searchEnumeratorsPresenter;
 
     @DisplayName("Successful search books if found")
@@ -62,7 +62,7 @@ class SearchEnumeratorsControllerTest {
         when(searchEnumeratorsUseCase.execute(parameters)).thenReturn(mockSearchEnumeratorsUseCaseReturn());
         when(searchEnumeratorsPresenter.of(mockSearchEnumeratorsUseCaseReturn())).thenReturn(mockSearchEnumeratorsPresenterReturn());
 
-        mockMvc.perform(get(String.format("/enumerators/?%s", StringUtils.EMPTY)).contentType(MediaType.APPLICATION_JSON_VALUE)
+        mockMvc.perform(get(String.format("/enumerators?%s", StringUtils.EMPTY)).contentType(MediaType.APPLICATION_JSON_VALUE)
                                                                                  .accept(MediaType.APPLICATION_JSON_VALUE))
                .andDo(print())
                .andExpect(status().isOk())

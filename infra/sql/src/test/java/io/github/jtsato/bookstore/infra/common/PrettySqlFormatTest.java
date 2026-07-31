@@ -73,7 +73,7 @@ class PrettySqlFormatTest {
         assertThat(result[0]).isEqualTo(String.format("%s|%dms|%s|connection %d|", now, elapsed, category, connectionId));
         assertThat(result[1]).isEqualTo("PrettySqlFormat(P6Spy SQL,Hibernate format):");
         assertThat(result[2]).isEqualTo("    create table dummy (");
-        assertThat(result[3]).isEqualTo("       id bigint,");
+        assertThat(result[3]).isEqualTo("        id bigint,");
         assertThat(result[4]).isEqualTo("        name varchar(255) not null,");
         assertThat(result[5]).isEqualTo("        creation_date timestamp not null,");
         assertThat(result[6]).isEqualTo("        update_date timestamp not null,");
