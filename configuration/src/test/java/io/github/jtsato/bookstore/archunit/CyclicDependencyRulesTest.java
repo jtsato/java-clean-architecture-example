@@ -13,9 +13,8 @@ import io.github.jtsato.bookstore.BookstoreApplication;
 
 /**
  * @author Jorge Takeshi Sato
- *
  * This class was based on the example available in the archunit repository in
- * https://github.com/TNG/ArchUnit-Examples/tree/master/example-junit5
+ * <a href="https://github.com/TNG/ArchUnit-Examples/tree/master/example-junit5">...</a>
  */
 
 @AnalyzeClasses(packagesOf = BookstoreApplication.class)

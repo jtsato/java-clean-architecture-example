@@ -45,9 +45,9 @@ class FindBooksByIdsProviderTest {
 
         assertThat(pageOfBooks).isNotNull();
 
-        final List<Book> Books = pageOfBooks.getContent();
+        final List<Book> books = pageOfBooks.getContent();
 
-        assertThat(Books).isNotNull().isNotEmpty();
+        assertThat(books).isNotNull().isNotEmpty();
 
         final Pageable pageable = pageOfBooks.getPageable();
 
@@ -71,9 +71,9 @@ class FindBooksByIdsProviderTest {
 
         assertThat(pageOfBooks).isNotNull();
 
-        final List<Book> Books = pageOfBooks.getContent();
+        final List<Book> books = pageOfBooks.getContent();
 
-        assertThat(Books).isNotNull().isEmpty();
+        assertThat(books).isNotNull().isEmpty();
 
         final Pageable pageable = pageOfBooks.getPageable();
 

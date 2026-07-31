@@ -42,8 +42,7 @@ class SearchEnumeratorsPresenterTest {
         when(messageSource.getMessage(eq(Gender.FEMALE.getMessageKey()), isNull(), nullable(Locale.class))).thenReturn("Female");
 
         final List<EnumeratorResponse> responses = presenter.of(dummyEnumerators());
-        assertThat(responses).isNotNull().isNotEmpty();
-        assertThat(responses).hasSize(2);
+        assertThat(responses).isNotNull().isNotEmpty().hasSize(2);
 
         final EnumeratorResponse response1 = responses.get(0);
         assertThat(response1).isNotNull();

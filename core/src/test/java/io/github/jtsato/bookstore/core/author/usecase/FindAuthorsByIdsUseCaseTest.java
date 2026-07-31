@@ -76,8 +76,7 @@ class FindAuthorsByIdsUseCaseTest {
 
         final List<Author> authors = pageOfAuthors.getContent();
 
-        assertThat(authors).isNotNull().isNotEmpty();
-        assertThat(authors).hasSize(1);
+        assertThat(authors).isNotNull().isNotEmpty().hasSize(1);
 
         final Author author = authors.get(0);
 
@@ -162,8 +161,7 @@ class FindAuthorsByIdsUseCaseTest {
 
         final List<Author> authors = pageOfAuthors.getContent();
 
-        assertThat(authors).isNotNull().isNotEmpty();
-        assertThat(authors).hasSize(1);
+        assertThat(authors).isNotNull().isNotEmpty().hasSize(1);
 
         final Author author = authors.get(0);
 

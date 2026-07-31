@@ -79,10 +79,9 @@ class FindBooksByIdsUseCaseTest {
 
         final List<Book> books = pageOfBooks.getContent();
 
-        assertThat(books).isNotNull().isNotEmpty();
-        assertThat(books).hasSize(1);
+        assertThat(books).isNotNull().isNotEmpty().hasSize(1);
 
-        final Book book = books.get(0);
+        final Book book = books.getFirst();
 
         assertThat(book.getId()).isEqualTo(1L);
         assertThat(book.getTitle()).isEqualTo("Effective Java (2nd Edition)");
@@ -182,8 +181,7 @@ class FindBooksByIdsUseCaseTest {
 
         final List<Book> books = pageOfBooks.getContent();
 
-        assertThat(books).isNotNull().isNotEmpty();
-        assertThat(books).hasSize(1);
+        assertThat(books).isNotNull().isNotEmpty().hasSize(1);
 
         final Book book = books.get(0);
 

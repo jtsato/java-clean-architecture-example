@@ -40,6 +40,10 @@ Run mutation testing for the business module:
 mvn -pl core pitest:mutationCoverage
 ```
 
+The **Continuous Testing** workflow calls the reusable **SonarCloud Analysis** workflow after the build succeeds. The Sonar workflow can also be started manually from GitHub Actions.
+
+The **Mutation Testing** workflow runs on weekdays at 03:30 UTC (and manually on demand), analyzes `core`, `infra/sql` and `entrypoints/rest`, then commits the PIT HTML reports to `docs/mutation-reports` on `main`.
+
 ## Technology Stack
 
 - Language: [`Java 21`](https://www.java.com/)

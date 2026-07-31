@@ -88,8 +88,7 @@ class SearchBooksUseCaseTest {
 
         final List<Book> books = pageOfBooks.getContent();
 
-        assertThat(books).isNotNull().isNotEmpty();
-        assertThat(books).hasSize(1);
+        assertThat(books).isNotNull().isNotEmpty().hasSize(1);
 
         final Book book = books.get(0);
 

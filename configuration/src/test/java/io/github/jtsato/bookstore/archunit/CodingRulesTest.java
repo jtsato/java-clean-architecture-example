@@ -20,16 +20,15 @@ import io.github.jtsato.bookstore.BookstoreApplication;
 
 /**
  * @author Jorge Takeshi Sato
- *
  * This class was based on the example available in the archunit repository in
- * https://github.com/TNG/ArchUnit-Examples/tree/master/example-junit5
+ * <a href="https://github.com/TNG/ArchUnit-Examples/tree/master/example-junit5">...</a>
  */
 
 @AnalyzeClasses(packagesOf = BookstoreApplication.class)
 public class CodingRulesTest {
 
     @ArchTest
-    private final ArchRule no_access_to_standard_streams = NO_CLASSES_SHOULD_ACCESS_STANDARD_STREAMS;
+    private final ArchRule noAccessToStandardStreams = NO_CLASSES_SHOULD_ACCESS_STANDARD_STREAMS;
 
     @ArchTest
     private void no_access_to_standard_streams_as_method(final JavaClasses classes) {
@@ -37,13 +36,13 @@ public class CodingRulesTest {
     }
 
     @ArchTest
-    private final ArchRule no_generic_exceptions = NO_CLASSES_SHOULD_THROW_GENERIC_EXCEPTIONS;
+    private final ArchRule noGenericExceptions = NO_CLASSES_SHOULD_THROW_GENERIC_EXCEPTIONS;
 
     @ArchTest
-    private final ArchRule no_java_util_logging = NO_CLASSES_SHOULD_USE_JAVA_UTIL_LOGGING;
+    private final ArchRule noJavaUtilLogging = NO_CLASSES_SHOULD_USE_JAVA_UTIL_LOGGING;
 
     @ArchTest
-    private final ArchRule loggers_should_be_private_static_final = fields().that()
+    private final ArchRule loggersShouldBePrivateStaticFinal = fields().that()
                                                                             .haveRawType(Logger.class)
                                                                             .should()
                                                                             .bePrivate()
@@ -54,7 +53,7 @@ public class CodingRulesTest {
                                                                             .because("we agreed on this convention");
 
     @ArchTest
-    private final ArchRule no_jodatime = NO_CLASSES_SHOULD_USE_JODATIME;
+    private final ArchRule noJodaTime = NO_CLASSES_SHOULD_USE_JODATIME;
 
     @ArchTest
     static final ArchRule no_classes_should_access_standard_streams_or_throw_generic_exceptions = CompositeArchRule.of(NO_CLASSES_SHOULD_ACCESS_STANDARD_STREAMS)
