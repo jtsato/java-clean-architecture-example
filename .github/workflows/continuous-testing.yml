@@ -31,16 +31,16 @@ jobs:
           java -version
           mvn -v
 
-      - name: Build and test core layer
+      - name: Build and Test Core Layer
         run: mvn -B clean verify -pl core
 
-      - name: Build and test infrastructure layer
+      - name: Build and Test Infrastructure Layer
         run: mvn -B verify -pl infra/sql -am
 
-      - name: Build and test entrypoint layer
+      - name: Build and Test Entrypoint Layer
         run: mvn -B verify -pl entrypoints/rest -am
 
-      - name: Build and test configuration layer
+      - name: Build and Test Configuration Layer
         run: mvn -B verify -pl configuration -am
 
   sonar-analysis:

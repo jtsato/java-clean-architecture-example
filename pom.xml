@@ -28,6 +28,7 @@
 		<sonar.projectKey>jtsato_java-clean-architecture-example</sonar.projectKey>
 		<sonar.host.url>https://sonarcloud.io</sonar.host.url>
 		<sonar.projectName>Java Clean Architecture Example</sonar.projectName>
+		<sonar.exclusions>docs/**</sonar.exclusions>
 		<pitest-maven.version>1.25.8</pitest-maven.version>
 		<pitest-junit5-plugin.version>1.2.3</pitest-junit5-plugin.version>
 	</properties>
