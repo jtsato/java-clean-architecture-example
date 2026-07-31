@@ -1,0 +1,69 @@
+name: Mutation Testing
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - .github/workflows/mutation-testing.yml
+  schedule:
+    - cron: '30 3 * * 1-5'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: mutation-testing
+  cancel-in-progress: false
+
+jobs:
+  mutation-testing:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout main
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@c1e323688fd81a25caa38c78aa6df2d33d3e20d9 # v4.8.0
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+
+      - name: Build modules
+        run: mvn -B -DskipTests clean install
+
+      - name: Mutation testing - core
+        run: mvn -B -pl core pitest:mutationCoverage
+
+      - name: Mutation testing - SQL infrastructure
+        run: mvn -B -pl infra/sql pitest:mutationCoverage
+
+      - name: Mutation testing - REST entry point
+        run: mvn -B -pl entrypoints/rest pitest:mutationCoverage
+
+      - name: Publish mutation reports
+        run: |
+          rm -rf docs/mutation-reports
+          mkdir -p docs/mutation-reports/core docs/mutation-reports/sql docs/mutation-reports/rest
+          cp -R core/target/mutation-report/. docs/mutation-reports/core/
+          cp -R infra/sql/target/mutation-report/. docs/mutation-reports/sql/
+          cp -R entrypoints/rest/target/mutation-report/. docs/mutation-reports/rest/
+
+      - name: Commit mutation reports
+        run: |
+          git pull --rebase origin main
+          git add docs/mutation-reports
+          if git diff --cached --quiet; then
+            echo "No mutation report changes to commit"
+            exit 0
+          fi
+          git config user.email "action@github.com"
+          git config user.name "GitHub Actions"
+          git commit -m "docs(testing): update mutation reports"
+          git push origin main

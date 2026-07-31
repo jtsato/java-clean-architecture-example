@@ -1,16 +1,18 @@
-name: Continuous Integration
+name: SonarCloud Analysis
 
 on:
-  push:
-    branches:
-      - main
-  pull_request:
-    types: [opened, synchronize, reopened]
-
+  workflow_call:
+    secrets:
+      SONAR_TOKEN:
+        required: false
   workflow_dispatch:
 
+permissions:
+  contents: read
+  pull-requests: read
+
 jobs:
-  build-and-test:
+  analyze:
     runs-on: ubuntu-latest
     env:
       SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
@@ -19,19 +21,14 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
         with:
-          fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
+          fetch-depth: 0
 
       - name: Set up JDK 21
         uses: actions/setup-java@c1e323688fd81a25caa38c78aa6df2d33d3e20d9 # v4.8.0
         with:
-          distribution: 'temurin'
+          distribution: temurin
           java-version: '21'
           cache: maven
-
-      - name: Show versions
-        run: | 
-          java -version
-          mvn -v
 
       - name: Cache SonarCloud packages
         uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4.3.0
@@ -40,14 +37,11 @@ jobs:
           key: ${{ runner.os }}-sonar
           restore-keys: ${{ runner.os }}-sonar
 
-      - name: Build and test
-        run: mvn -B clean verify
-
-      - name: Run SonarCloud Scan
+      - name: Build, test and analyze
         if: ${{ env.SONAR_TOKEN != '' }}
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: mvn -B sonar:sonar -Dsonar.token="$SONAR_TOKEN"
+          GITHUB_TOKEN: ${{ github.token }}
+        run: mvn -B clean verify sonar:sonar -Dsonar.token="$SONAR_TOKEN"
 
       - name: SonarCloud not configured
         if: ${{ env.SONAR_TOKEN == '' }}

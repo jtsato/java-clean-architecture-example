@@ -22,11 +22,11 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<java.version>21</java.version>
 		<maven.compiler.release>21</maven.compiler.release>
-		<commons.io.version>2.18.0</commons.io.version>
+		<commons.io.version>2.22.0</commons.io.version>
 		<springdoc.version>3.0.3</springdoc.version>
-		<jacoco.version>0.8.13</jacoco.version>
-		<pitest-maven.version>1.19.11</pitest-maven.version>
-		<pitest-junit5-plugin.version>1.2.2</pitest-junit5-plugin.version>
+		<jacoco.version>0.8.15</jacoco.version>
+		<pitest-maven.version>1.25.8</pitest-maven.version>
+		<pitest-junit5-plugin.version>1.2.3</pitest-junit5-plugin.version>
 		<sonar.coverage.exclusions>
 			**/src/**/core/**,
 			**/src/**/BookstoreRestApplication.java

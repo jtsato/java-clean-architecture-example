@@ -24,13 +24,13 @@
 		<maven.compiler.release>21</maven.compiler.release>
 		<jakarta.inject.version>2.0.1</jakarta.inject.version>
 		<jakarta.validation-api.version>3.1.1</jakarta.validation-api.version>
-		<hibernate-validator.version>9.0.1.Final</hibernate-validator.version>
+		<hibernate-validator.version>9.1.3.Final</hibernate-validator.version>
 		<jakarta.el.version>5.0.0-M1</jakarta.el.version>
-		<jacoco.version>0.8.13</jacoco.version>
+		<jacoco.version>0.8.15</jacoco.version>
 		<commons-collections4.version>4.5.0</commons-collections4.version>
 		<junit-jupiter-engine.version>6.0.3</junit-jupiter-engine.version>
 		<assertj-core.version>3.27.3</assertj-core.version>
-		<mockito-junit-jupiter.version>5.17.0</mockito-junit-jupiter.version>
+		<mockito-junit-jupiter.version>5.23.0</mockito-junit-jupiter.version>
 	</properties>
 
 	<dependencies>
