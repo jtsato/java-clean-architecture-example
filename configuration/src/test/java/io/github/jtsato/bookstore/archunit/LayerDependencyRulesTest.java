@@ -126,7 +126,7 @@ public class LayerDependencyRulesTest {
                                                                                   .resideInAnyPackage("..core..",
                                                                                                       "org.apache.commons..",
                                                                                                       "lombok..",
-                                                                                                      "javax..",
+																  "jakarta..",
                                                                                                       "java..");
 
     @ArchTest
@@ -170,6 +170,6 @@ public class LayerDependencyRulesTest {
                                                                                       .resideInAnyPackage("..core..",
                                                                                                           "org.apache.commons..",
                                                                                                           "lombok..",
-                                                                                                          "javax..",
+																  "jakarta..",
                                                                                                           "java..");
 }

@@ -4,9 +4,14 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>io.github.jtsato</groupId>
+	<parent>
+		<groupId>io.github.jtsato</groupId>
+		<artifactId>bookstore-application</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+		<relativePath>../pom.xml</relativePath>
+	</parent>
+
 	<artifactId>bookstore-core</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
 	<name>Business</name>
@@ -15,37 +20,29 @@
 	<properties>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<java.version>11</java.version>
-		<maven.compiler.source>11</maven.compiler.source>
-		<maven.compiler.target>11</maven.compiler.target>
-		<maven-surefire-plugin.version>2.22.0</maven-surefire-plugin.version>
-		<maven-failsafe-plugin.version>2.22.0</maven-failsafe-plugin.version>
-		<javax.inject.version>1</javax.inject.version>
-		<validation.api.version>2.0.1.Final</validation.api.version>
-		<hibernate-validator.version>6.2.0.Final</hibernate-validator.version>
-		<javax.el.version>3.0.1-b12</javax.el.version>
-		<lombok.version>1.18.20</lombok.version>
-		<commons-lang3.version>3.12.0</commons-lang3.version>
-		<commons-collections4.version>4.4</commons-collections4.version>
-		<junit-jupiter-engine.version>5.8.0-M1</junit-jupiter-engine.version>
-		<assertj-core.version>3.19.0</assertj-core.version>
-		<mockito-junit-jupiter.version>3.8.0</mockito-junit-jupiter.version>
-		<pitest-maven.version>1.5.2</pitest-maven.version>
-		<pitest-junit5-plugin.version>0.14</pitest-junit5-plugin.version>
-		<jacoco.agent.version>0.8.6</jacoco.agent.version>
-		<jacoco-maven-plugin.version>0.8.6</jacoco-maven-plugin.version>
+		<java.version>21</java.version>
+		<maven.compiler.release>21</maven.compiler.release>
+		<jakarta.inject.version>2.0.1</jakarta.inject.version>
+		<jakarta.validation-api.version>3.1.1</jakarta.validation-api.version>
+		<hibernate-validator.version>9.0.1.Final</hibernate-validator.version>
+		<jakarta.el.version>5.0.0-M1</jakarta.el.version>
+		<jacoco.version>0.8.13</jacoco.version>
+		<commons-collections4.version>4.5.0</commons-collections4.version>
+		<junit-jupiter-engine.version>6.0.3</junit-jupiter-engine.version>
+		<assertj-core.version>3.27.3</assertj-core.version>
+		<mockito-junit-jupiter.version>5.17.0</mockito-junit-jupiter.version>
 	</properties>
 
 	<dependencies>
 		<dependency>
-			<groupId>javax.inject</groupId>
-			<artifactId>javax.inject</artifactId>
-			<version>${javax.inject.version}</version>
+			<groupId>jakarta.inject</groupId>
+			<artifactId>jakarta.inject-api</artifactId>
+			<version>${jakarta.inject.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>javax.validation</groupId>
-			<artifactId>validation-api</artifactId>
-			<version>${validation.api.version}</version>
+			<groupId>jakarta.validation</groupId>
+			<artifactId>jakarta.validation-api</artifactId>
+			<version>${jakarta.validation-api.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.hibernate.validator</groupId>
@@ -54,8 +51,8 @@
 		</dependency>
 		<dependency>
 			<groupId>org.glassfish</groupId>
-			<artifactId>javax.el</artifactId>
-			<version>${javax.el.version}</version>
+			<artifactId>jakarta.el</artifactId>
+			<version>${jakarta.el.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.projectlombok</groupId>
@@ -100,16 +97,30 @@
 			<groupId>org.jacoco</groupId>
 			<artifactId>org.jacoco.agent</artifactId>
 			<classifier>runtime</classifier>
-			<version>${jacoco.agent.version}</version>
+			<version>${jacoco.version}</version>
 		</dependency>
 	</dependencies>
 
 	<build>
 		<plugins>
 			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<release>${maven.compiler.release}</release>
+					<annotationProcessorPaths>
+						<path>
+							<groupId>org.projectlombok</groupId>
+							<artifactId>lombok</artifactId>
+							<version>1.18.46</version>
+						</path>
+					</annotationProcessorPaths>
+				</configuration>
+			</plugin>
+			<plugin>
 				<groupId>org.jacoco</groupId>
 				<artifactId>jacoco-maven-plugin</artifactId>
-				<version>${jacoco-maven-plugin.version}</version>
+				<version>${jacoco.version}</version>
 				<executions>
 					<execution>
 						<id>default-instrument</id>
@@ -129,12 +140,37 @@
 							<goal>report</goal>
 						</goals>
 					</execution>
+					<execution>
+						<id>coverage-check</id>
+						<phase>verify</phase>
+						<goals>
+							<goal>check</goal>
+						</goals>
+						<configuration>
+							<rules>
+								<rule>
+									<element>BUNDLE</element>
+									<limits>
+										<limit>
+											<counter>LINE</counter>
+											<value>COVEREDRATIO</value>
+											<minimum>1.0</minimum>
+										</limit>
+										<limit>
+											<counter>BRANCH</counter>
+											<value>COVEREDRATIO</value>
+											<minimum>1.0</minimum>
+										</limit>
+									</limits>
+								</rule>
+							</rules>
+						</configuration>
+					</execution>
 				</executions>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
-				<version>${maven-surefire-plugin.version}</version>
 				<configuration>
 					<systemPropertyVariables>
 						<jacoco-agent.destfile>target/jacoco.exec</jacoco-agent.destfile>
@@ -144,7 +180,6 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-failsafe-plugin</artifactId>
-				<version>${maven-failsafe-plugin.version}</version>
 			</plugin>
 			<plugin>
 				<groupId>org.pitest</groupId>

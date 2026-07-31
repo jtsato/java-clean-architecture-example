@@ -7,8 +7,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.cosium.spring.data.jpa.entity.graph.domain.EntityGraph;
-import com.cosium.spring.data.jpa.entity.graph.domain.EntityGraphUtils;
+import com.cosium.spring.data.jpa.entity.graph.domain2.EntityGraph;
+import com.cosium.spring.data.jpa.entity.graph.domain2.DynamicEntityGraph;
 import com.querydsl.core.BooleanBuilder;
 
 import io.github.jtsato.bookstore.core.book.domain.Book;
@@ -42,7 +42,7 @@ public class SearchBooksProvider implements SearchBooksGateway {
 
         final PageRequest pageRequest = PageRequestHelper.buildPageRequest(pageNumber, size, sanitizeOrderBy(orderBy));
         final BooleanBuilder predicate = new SearchBooksPredicateBuilder(QBookEntity.bookEntity).buildBooleanBuilder(parameters);
-        final EntityGraph entityGraph = EntityGraphUtils.fromAttributePaths("author");
+        final EntityGraph entityGraph = DynamicEntityGraph.loading(java.util.List.of("author"));
 
         final org.springframework.data.domain.Page<BookEntity> page = bookRepository.findAll(predicate, pageRequest, entityGraph);
 

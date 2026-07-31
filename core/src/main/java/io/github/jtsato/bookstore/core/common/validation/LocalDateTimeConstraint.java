@@ -12,8 +12,8 @@ import java.lang.annotation.Documented;
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
-import javax.validation.Constraint;
-import javax.validation.Payload;
+import jakarta.validation.Constraint;
+import jakarta.validation.Payload;
 
 /**
  * @author Jorge Takeshi Sato
@@ -25,7 +25,7 @@ import javax.validation.Payload;
 @Retention(RUNTIME)
 public @interface LocalDateTimeConstraint {
 
-    String message() default "{javax.validation.constraints.LocalDateTime.message}";
+    String message() default "{jakarta.validation.constraints.LocalDateTime.message}";
 
     Class<?>[] groups() default {};
 

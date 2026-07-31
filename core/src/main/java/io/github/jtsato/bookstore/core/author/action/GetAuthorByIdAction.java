@@ -2,7 +2,7 @@ package io.github.jtsato.bookstore.core.author.action;
 
 import java.util.Optional;
 
-import javax.inject.Named;
+import jakarta.inject.Named;
 
 import io.github.jtsato.bookstore.core.author.domain.Author;
 import io.github.jtsato.bookstore.core.author.gateway.GetAuthorByIdGateway;

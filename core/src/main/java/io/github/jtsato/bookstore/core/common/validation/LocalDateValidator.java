@@ -3,8 +3,8 @@ package io.github.jtsato.bookstore.core.common.validation;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-import javax.validation.ConstraintValidator;
-import javax.validation.ConstraintValidatorContext;
+import jakarta.validation.ConstraintValidator;
+import jakarta.validation.ConstraintValidatorContext;
 
 /**
  * @author Jorge Takeshi Sato

@@ -20,21 +20,18 @@
 	<properties>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<java.version>11</java.version>
-		<maven.compiler.source>11</maven.compiler.source>
-		<maven.compiler.target>11</maven.compiler.target>
-		<lombok.version>1.18.12</lombok.version>
-		<commons-lang3.version>3.9</commons-lang3.version>
-		<spring-data-jpa-entity-graph.version>2.4.2</spring-data-jpa-entity-graph.version>
+		<java.version>21</java.version>
+		<maven.compiler.release>21</maven.compiler.release>
+		<lombok.version>1.18.40</lombok.version>
+		<spring-data-jpa-entity-graph.version>3.5.0</spring-data-jpa-entity-graph.version>
 		<p6spy.version>3.9.1</p6spy.version>
-		<javax.el.version>3.0.1-b12</javax.el.version>
-		<pitest-maven.version>1.5.2</pitest-maven.version>
-		<pitest-junit5-plugin.version>0.14</pitest-junit5-plugin.version>
-		<testcontainers.version>1.14.3</testcontainers.version>		
-		<jacoco.agent.version>0.8.6</jacoco.agent.version>
-		<jacoco-maven-plugin.version>0.8.6</jacoco-maven-plugin.version>
-		<apt-maven-plugin.version>1.1.3</apt-maven-plugin.version>
-		<mapstruct.version>1.4.2.Final</mapstruct.version>		
+		<jakarta.el.version>5.0.0-M1</jakarta.el.version>
+		<pitest-maven.version>1.19.11</pitest-maven.version>
+		<pitest-junit5-plugin.version>1.2.2</pitest-junit5-plugin.version>
+		<testcontainers.version>1.21.3</testcontainers.version>
+		<jacoco.version>0.8.13</jacoco.version>
+		<mapstruct.version>1.6.3</mapstruct.version>
+		<querydsl.version>5.1.0</querydsl.version>
 		<sonar.coverage.exclusions>
 			**/src/**/core/**,
 			**/src/**/BookstoreApplication.java
@@ -83,8 +80,8 @@
 		</dependency>
 		<dependency>
 			<groupId>org.glassfish</groupId>
-			<artifactId>javax.el</artifactId>
-			<version>${javax.el.version}</version>
+			<artifactId>jakarta.el</artifactId>
+			<version>${jakarta.el.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.commons</groupId>
@@ -95,8 +92,8 @@
 			<artifactId>HikariCP</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>mysql</groupId>
-			<artifactId>mysql-connector-java</artifactId>
+			<groupId>com.mysql</groupId>
+			<artifactId>mysql-connector-j</artifactId>
 			<scope>runtime</scope>
 		</dependency>
 		<dependency>
@@ -117,14 +114,19 @@
 		<dependency>
 			<groupId>com.querydsl</groupId>
 			<artifactId>querydsl-jpa</artifactId>
+			<version>${querydsl.version}</version>
+			<classifier>jakarta</classifier>
 		</dependency>
 		<dependency>
 			<groupId>com.querydsl</groupId>
 			<artifactId>querydsl-mongodb</artifactId>
+			<version>${querydsl.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.querydsl</groupId>
 			<artifactId>querydsl-apt</artifactId>
+			<version>${querydsl.version}</version>
+			<classifier>jakarta</classifier>
 		</dependency>
 		<dependency>
 			<groupId>com.cosium.spring.data</groupId>
@@ -155,7 +157,7 @@
 			<plugin>
 				<groupId>org.jacoco</groupId>
 				<artifactId>jacoco-maven-plugin</artifactId>
-				<version>${jacoco-maven-plugin.version}</version>
+				<version>${jacoco.version}</version>
 				<executions>
 					<execution>
 						<id>default-instrument</id>
@@ -194,38 +196,32 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
-                    <source>${maven.compiler.source}</source>
-                    <target>${maven.compiler.target}</target>
+					<release>${maven.compiler.release}</release>
                     <annotationProcessorPaths>
                         <path>
                             <groupId>org.mapstruct</groupId>
                             <artifactId>mapstruct-processor</artifactId>
-                            <version>${mapstruct.version}</version>
+							<version>${mapstruct.version}</version>
                         </path>
                         <path>
                             <groupId>org.projectlombok</groupId>
                             <artifactId>lombok</artifactId>
-                            <version>${lombok.version}</version>
-                        </path>
+							<version>${lombok.version}</version>
+						</path>
+						<path>
+							<groupId>com.querydsl</groupId>
+							<artifactId>querydsl-apt</artifactId>
+							<version>${querydsl.version}</version>
+							<classifier>jakarta</classifier>
+						</path>
+						<path>
+							<groupId>jakarta.persistence</groupId>
+							<artifactId>jakarta.persistence-api</artifactId>
+							<version>3.2.0</version>
+						</path>
                     </annotationProcessorPaths>
                 </configuration>
             </plugin>
-			<plugin>
-				<groupId>com.mysema.maven</groupId>
-				<artifactId>apt-maven-plugin</artifactId>
-				<version>${apt-maven-plugin.version}</version>
-				<executions>
-					<execution>
-						<goals>
-							<goal>process</goal>
-						</goals>
-						<configuration>
-							<outputDirectory>target/generated-sources/java</outputDirectory>
-							<processor>com.querydsl.apt.jpa.JPAAnnotationProcessor,lombok.launch.AnnotationProcessorHider$AnnotationProcessor</processor>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
 			<plugin>
 				<groupId>org.pitest</groupId>
 				<artifactId>pitest-maven</artifactId>

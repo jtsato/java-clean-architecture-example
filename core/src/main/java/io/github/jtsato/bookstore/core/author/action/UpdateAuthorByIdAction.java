@@ -3,7 +3,7 @@ package io.github.jtsato.bookstore.core.author.action;
 import java.time.LocalDate;
 import java.util.Optional;
 
-import javax.inject.Named;
+import jakarta.inject.Named;
 
 import org.apache.commons.lang3.StringUtils;
 

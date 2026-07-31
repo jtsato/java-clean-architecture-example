@@ -2,7 +2,7 @@ package io.github.jtsato.bookstore.core.common;
 
 import java.time.LocalDateTime;
 
-import javax.inject.Named;
+import jakarta.inject.Named;
 
 /**
  * @author Jorge Takeshi Sato

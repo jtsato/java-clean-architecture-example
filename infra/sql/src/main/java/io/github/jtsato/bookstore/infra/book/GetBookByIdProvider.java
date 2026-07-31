@@ -7,8 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.cosium.spring.data.jpa.entity.graph.domain.EntityGraph;
-import com.cosium.spring.data.jpa.entity.graph.domain.EntityGraphUtils;
+import com.cosium.spring.data.jpa.entity.graph.domain2.EntityGraph;
+import com.cosium.spring.data.jpa.entity.graph.domain2.DynamicEntityGraph;
 
 import io.github.jtsato.bookstore.core.book.domain.Book;
 import io.github.jtsato.bookstore.core.book.gateway.GetBookByIdGateway;
@@ -31,7 +31,7 @@ public class GetBookByIdProvider implements GetBookByIdGateway {
 
     @Override
     public Optional<Book> execute(final Long id) {
-        final EntityGraph entityGraph = EntityGraphUtils.fromAttributePaths("author");
+        final EntityGraph entityGraph = DynamicEntityGraph.loading(java.util.List.of("author"));
         final Optional<BookEntity> optional = bookRepository.findById(id, entityGraph);
         return optional.map(bookMapper::of);
     }

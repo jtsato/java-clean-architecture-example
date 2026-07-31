@@ -2,8 +2,8 @@ package io.github.jtsato.bookstore.core.book.usecase.parameter;
 
 import java.io.Serializable;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 import io.github.jtsato.bookstore.core.common.validation.SelfValidating;
 import lombok.AccessLevel;

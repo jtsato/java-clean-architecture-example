@@ -1,11 +1,11 @@
 package io.github.jtsato.bookstore.configuration;
 
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Profile;
-import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.builders.WebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.Customizer;
+import org.springframework.security.web.SecurityFilterChain;
 
 import com.okta.spring.boot.oauth.Okta;
 
@@ -15,19 +15,14 @@ import com.okta.spring.boot.oauth.Okta;
 
 @Profile({"uat", "prod"})
 @Configuration
-@EnableGlobalMethodSecurity(prePostEnabled = true)
-public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter {
+public class SpringSecurityConfiguration {
 
-    @Override
-    protected void configure(final HttpSecurity httpSecurity)
-        throws Exception {
-        httpSecurity.authorizeRequests().anyRequest().authenticated().and().oauth2ResourceServer().jwt();
+    @Bean
+    SecurityFilterChain securityFilterChain(final HttpSecurity httpSecurity) throws Exception {
+        httpSecurity
+            .authorizeHttpRequests(authorize -> authorize.anyRequest().authenticated())
+            .oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults()));
         Okta.configureResourceServer401ResponseBody(httpSecurity);
-    }
-
-    @Override
-    public void configure(final WebSecurity web)
-        throws Exception {
-        web.ignoring().antMatchers("/v3/api-docs/**", "/swagger-ui.html", "/swagger-ui/**");
+        return httpSecurity.build();
     }
 }

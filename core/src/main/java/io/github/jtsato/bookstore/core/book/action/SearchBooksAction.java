@@ -1,6 +1,6 @@
 package io.github.jtsato.bookstore.core.book.action;
 
-import javax.inject.Named;
+import jakarta.inject.Named;
 
 import io.github.jtsato.bookstore.core.book.domain.Book;
 import io.github.jtsato.bookstore.core.book.gateway.SearchBooksGateway;

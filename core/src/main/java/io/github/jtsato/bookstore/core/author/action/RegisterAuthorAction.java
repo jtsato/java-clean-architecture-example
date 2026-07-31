@@ -3,8 +3,8 @@ package io.github.jtsato.bookstore.core.author.action;
 import java.time.LocalDate;
 import java.util.Optional;
 
-import javax.inject.Named;
-import javax.validation.Valid;
+import jakarta.inject.Named;
+import jakarta.validation.Valid;
 
 import org.apache.commons.lang3.StringUtils;
 

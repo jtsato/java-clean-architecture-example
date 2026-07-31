@@ -2,9 +2,9 @@ package io.github.jtsato.bookstore.configuration;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
+import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.web.SecurityFilterChain;
 
 /**
  * @author Jorge Takeshi Sato  
@@ -12,13 +12,14 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 
 @Profile({"test", "dev"})
 @Configuration
-@EnableWebSecurity
-public class ByPassSecurityConfiguration extends WebSecurityConfigurerAdapter {
+public class ByPassSecurityConfiguration {
 
-    @Override
-    protected void configure(final HttpSecurity httpSecurity)
-        throws Exception {
-        httpSecurity.csrf().disable().authorizeRequests().antMatchers("/**").permitAll().anyRequest().anonymous();
-        httpSecurity.headers().frameOptions().sameOrigin();
+    @Bean
+    SecurityFilterChain securityFilterChain(final HttpSecurity httpSecurity) throws Exception {
+        httpSecurity
+            .csrf(csrf -> csrf.disable())
+            .authorizeHttpRequests(authorize -> authorize.anyRequest().permitAll())
+            .headers(headers -> headers.frameOptions(frameOptions -> frameOptions.sameOrigin()));
+        return httpSecurity.build();
     }
 }

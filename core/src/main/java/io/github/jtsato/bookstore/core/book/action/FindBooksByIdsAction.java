@@ -2,7 +2,7 @@ package io.github.jtsato.bookstore.core.book.action;
 
 import java.util.List;
 
-import javax.inject.Named;
+import jakarta.inject.Named;
 
 import org.apache.commons.collections4.CollectionUtils;
 

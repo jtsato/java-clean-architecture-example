@@ -1,6 +1,6 @@
 package io.github.jtsato.bookstore.entrypoint.rest.author.api;
 
-import org.springdoc.core.converters.models.PageableAsQueryParam;
+import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.data.domain.Pageable;
 
 import io.github.jtsato.bookstore.entrypoint.rest.author.domain.request.SearchAuthorsRequest;
@@ -30,7 +30,7 @@ public interface SearchAuthorsApiMethod {
                in = ParameterIn.HEADER,
                description = "Represents a specific geographical, political, or cultural region. Language & Country.")
 
-    @PageableAsQueryParam
+    @ParameterObject
 
     @Parameter(in = ParameterIn.QUERY,
                name = "id",
